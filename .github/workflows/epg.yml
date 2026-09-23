@@ -2,6 +2,12 @@ name: Update EPG
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - config/channels.xml
+      - scripts/validate_guide.py
+      - .github/workflows/epg.yml
   schedule:
     - cron: "0 4 * * *"
 
