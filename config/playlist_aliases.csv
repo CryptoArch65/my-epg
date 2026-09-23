@@ -1,0 +1,144 @@
+playlist_tvg_id,guide_id,display_name
+BHT.1.ba (src05),BHT1.ba,|BIH| BHT 1 HD
+FTV.HD.(BIH).ba (src05),Federalnatelevizija.ba,|BIH| FTV HD
+obn.ba,OBN.ba,|BIH| OBN HD
+Hayat HD.ba (src09),Hayat.ba,|BIH| HAYAT BiH HD
+FaceHD.ba,FACETV.ba,|BIH| FACE TV HD
+RTRS.rs,RTRSTV.ba,|BIH| RTRS HD
+N1BiH.ba (src01),N1.ba,|BIH| N1 INFO
+TVSarajevo.ba (src01),TVSA.ba,|BIH| TV SARAJEVO
+HRTTV1.hr,HRT1.hr,|HR| HRT 1 HD
+HRTTV2.hr,HRT2.hr,|HR| HRT 2 HD
+novatv.hr,NovaTV.hr,|HR| NOVA TV HD
+RTLTelevizija.hr,RTL.hr,|HR| RTL HD
+RTL2HR.hr (src09),RTL2.hr,|HR| RTL 2 HD
+rts1.rs,RTS1.rs,|SRB| RTS 1 HD
+RTS.3.HD.rs (src05),RTS3.rs,|SRB| RTS 3
+RTSMuzika.rs (src01),RTSMuzika.rs,|SRB| RTS MUZIKA
+Prva HD (SR).rs,Prva.rs,|SRB| PRVA TV HD
+Prva World,PrvaWorld.rs,|SRB| PRVA WORLD HD
+prva-max.sr,PrvaMax.rs,|SRB| PRVA MAX HD
+b92,B92.rs,|SRB| B92
+informertv.rs,InformerTV.rs,|SRB| INFORMER
+Hype TV,HypeTV.rs,|SRB| HYPE TV
+happytv,Happy.rs,|SRB| HAPPY TV HD
+pinkplus.rs,PinkPlus.rs,PINK PLUS
+pinkfilm.rs,PinkFilm.rs,PINK FILM
+pinkfamily.rs,PinkFamily.rs,PINK FAMILY
+pinkaction.rs,PinkAction.rs,PINK ACTION
+pinkmovies.rs,PinkMovies.rs,PINK MOVIES
+pinkwestern.rs,PinkWestern.rs,PINK WESTERN
+pinkclassic.rs,PinkClassic.rs,PINK CLASSIC
+pinkpremium.rs,PinkPremium.rs,PINK PREMIUM
+pinkthriller.rs,PinkThriller.rs,PINK THRILLER
+pinkscifi.rs,PinkSciFiFantasy.rs,PINK SCI-FI & FANTASY
+pinkcrime&mystery.rs,PinkCrimeMystery.rs,PINK CRIME & MYSTERY
+pinkcomedy.rs,PinkComedy.rs,PINK COMEDY
+pinkwcinema.rs,PinkWorldCinema.rs,PINK WORLD CINEMA
+pinkhorror.rs,PinkHorror.rs,PINK HORROR
+pinkromance.rs,PinkRomance.rs,PINK ROMANCE
+pinkkoncert.rs,PinkKoncert.rs,PINK KONCERT
+pinkshow.rs,PinkShow.rs,PINK SHOW
+pinkfashion.rs,PinkFashion.rs,PINK FASHION
+pinkworld.rs,PinkWorld.rs,PINK WORLD
+pinkstyle.rs,PinkStyle.rs,PINK STYLE
+ArenaSport1.ba (src01),ArenaSport1.ba,|BH| ARENA SPORT 1
+Arena Sport 2 HD.ba (src09),ArenaSport2.ba,|BH| ARENA SPORT 2
+Arenasport 03.ba (src09),ArenaSport3.ba,|BH| ARENA SPORT 3
+arenasport6.ba,iptv#ch-arena-sport-6,|BH| ARENA SPORT 6
+maxsport1.hr,311616552052,|HR| MAX SPORT 1 HD
+maxsport2.hr,311620648169,|HR| MAX SPORT 2
+arenasport1.hr,ArenaSport1.hr@SD,|HR| ARENA SPORT 1 HD
+arenasport2.hr,ArenaSport2.hr@SD,|HR| ARENA SPORT 2 HD
+arenasport3.hr,ArenaSport3.hr@SD,|HR| ARENA SPORT 3 HD
+arenasport4.hr,ArenaSport4.hr@SD,|HR| ARENA SPORT 4  HD
+arenasport5.hr,ArenaSport5.hr@SD,|HR| ARENA SPORT 5 HD
+arenasport6.hr,ArenaSport6.hr@SD,|HR| ARENA SPORT 6
+arenasport7.hr,ArenaSport7.hr@SD,|HR| ARENA SPORT 7
+arenasport8.hr,ArenaSport8.hr@SD,|HR| ARENA SPORT 8
+arenasport9.hr,ArenaSport9.hr@SD,|HR| ARENA SPORT 9
+arenasport10.hr,ArenaSport10.hr@SD,|HR| ARENA SPORT 10
+eurosport1.rs,eurosport_1,|SR| EURO SPORT 1
+eurosport2.rs,eurosport_2,|SR| EURO SPORT 2
+ArenaSportPremium1.rs (src01),ArenaSport1Premium.rs@SD,|SR| ARENA 1 PREMIUM HD
+Arena.PREMIUM.2.rs (src05),ArenaSport2Premium.rs@SD,|SR| ARENA 2 PREMIUM HD
+ArenaSportPremium3.rs (src01),ArenaSport3Premium.rs@SD,|SR| ARENA 3 PREMIUM HD
+Arena.PREMIUM.4.rs (src05),ArenaSport4Premium.rs@SD,|SR| ARENA 4 PREMIUM
+Arena.PREMIUM.5.rs (src05),ArenaSport5Premium.rs@SD,|SR| ARENA 5 PREMIUM
+arenasport1.rs,ArenaSport1.rs@SD,|SR| ARENA SPORT 1 HD
+arenasport2.rs,ArenaSport2.rs@SD,|SR| ARENA SPORT 2 HD
+arenasport3.rs,ArenaSport3.rs@SD,|SR| ARENA SPORT 3 HD
+arenasport4.rs,ArenaSport4.rs@SD,|SR| ARENA SPORT 4 HD
+arenapremium1.rs,ArenaSport5.rs@SD,|SR| ARENA SPORT 5 HD
+arenasport6.rs,ArenaSport6.rs@SD,|SR| ARENA SPORT 6
+arenasport7.rs,ArenaSport7.rs@SD,|SR| ARENA SPORT 7
+arenasport8.rs,ArenaSport8.rs@SD,|SR| ARENA SPORT 8
+arenafight.rs,ArenaFight.rs,|SR| ARENA FIGHT
+arenasport1x2.rs,ArenaSport1x2.rs@SD,|SR| ARENA SPORT 1x2
+arenaesport.rs,ArenaEsport.rs,|SR| ARENA E SPORT
+Arena.Tenis.rs (src05),ArenaSportTenis.rs@SD,|SR| ARENA TENIS
+Animal.Planet.HD.(RS).rs (src05),animal_planet,ANIMAL PLANET ᴴᴰ
+Discovery.Channel.HD.(RS).rs (src05),DiscoveryChannel.rs,DISCOVERY CHANNEL ᴴᴰ
+H2.hr,276767784233,History 2 ᴴᴰ
+ViasatHistory.hr (src01),435380776371,Viasat History
+bbcearth.ba,iptv#ch-bbc-earth-hd,BBC Earth
+docubox.ba,iptv#ch-140-docubox-hd,Docubox
+24kitchen.ba,iptv#ch-153-24-kitchen,24 KITCHEN ᴴᴰ
+foodnetwork.ba,iptv#ch-451-food-network,FOOD NETWORK
+tlc.ba,iptv#ch-127-tlc,TLC
+crime&investigation.bh,276771368119,CRIME INVESTIGATION ᴴᴰ
+davincilearning.bh,276770856271,Da Vinci
+hgtv.ba,iptv#ch-444-hgtv,HGTV
+DOX TV,iptv#ch-404-dox-tv,DOX TV
+balkantrip.ba,iptv#ch-461-balkan-trip-hd,BALKAN TRIP
+dokutv.ba,DokuTV.hr,Doku TV HD
+hbo.hr,276767784251,HBO
+hbo2.hr,276771368141,HBO 2 HD
+hbo3.hr,276767784254,HBO 3
+cinestarpremiere1.hr,CineStarTVPremiere1.hr,Cinestar TV Premiere 1 ᴴᴰ
+cinestarpremiere2.hr,CineStarTVPremiere2.hr,Cinestar TV Premiere 2 ᴴᴰ
+cinestartv2.hr,CineStarTV2.hr,CineStar TV 2
+CineStar.TV.Action.and.Thriller.hr (src05),CineStarTVAction.hr,CineStar TV Action and Thriller
+cinestaraction&thriller.hr,CineStarTVAction.hr,CineStar TV Action and Thriller ᴴᴰ ➁
+CineStar.TV.Fantasy.HD.(BIH).ba (src05),CineStarTVFantasy.hr,CINESTAR FANTASY ᴴᴰ
+cinestartvfantasy.hr,CineStarTVFantasy.hr,Cinestar Fantasy
+cinestartvcomedy&family.bh,CineStarTVComedy.hr,CineStar TV Comedy and Family ᴴᴰ ➁
+cinemax.hr,276770344388,CINEMAX ᴴᴰ ➁
+cinemax2.hr,276767784259,Cinemax 2
+star.rs,276770856295,STAR CHANNEL
+starlife.hr,276771368133,STAR Life ᴴᴰ ➁
+starcrime.hr,276770856280,STAR Crime
+starmovies.hr,276770344385,STAR Movies ᴴᴰ ➁
+amc.hr,485655592331,AMC ᴴᴰ ➁
+epicdrama.hr,276771368146,EPIC DRAMA
+klasiktv.hr,Klasik.hr,KLASIK TV
+kinotv.hr,KinoTV.hr,Kino TV HD
+tv1000.hr,338257448306,Viasat Kino Balkan
+superstar2.ba,iptv#ch-442-superstar-2,SUPERSTAR TV 2
+superstar3.ba,iptv#ch-superstar-3-hd,SUPERSTAR TV 3
+filmboxpremium.hr,iptv#ch-286-filmbox-premium,FILMBOX PREMIUM HD
+filmboxarthouse.ba,iptv#ch-124-filmbox-arthouse,FILMBOX ARTHOUSE
+filmboxextra.hr,iptv#ch-120-filmbox-extra,Filmbox Extra
+filmboxstars.hr,iptv#ch-122-filmbox-stars,Filmbox Stars
+eurocinema1.ba,iptv#ch-euro-cinema-1,Euro Cinema 1
+eurocinema2.ba,iptv#ch-euro-cinema-2,Euro Cinema 2
+eurocinema3.ba,iptv#ch-euro-cinema-3,Euro Cinema 3
+eurocinema4.ba,iptv#ch-euro-cinema-4,Euro Cinema 4
+City.Play.(BIH).ba (src05),iptv#ch-208-city-play,CityPLAY
+PinkFolk1.hr (src09),PinkFolk1.rs,PINK FOLK 1
+Pink.Folk.2.(BIH).ba (src05),PinkFolk2.rs,PINK FOLK 2
+Pink.Music.(BIH).ba (src05),PinkMusic.rs,PINK MUSIC
+Pink.Music.2.(BIH).ba (src05),PinkMusic2.rs,PINK MUSIC 2
+HayatMusic.ba (src01),HayatMusic.ba,HAYAT MUSIC
+toxictv.ba,iptv#ch-407-toxic-tv,TOXIC TV
+Jugoton.hr (src05),282239016175,JUGOTON
+pink&roll.bh,PinknRoll.rs,PINK & ROLL
+pinkhits.ba,PinkHits.rs,PINK HITS 1
+pinkhits2.ba,PinkHits2.rs,PINK HITS 2
+balkanika.ba,338256424367,BALKANIKA
+Bravo.Music.(BIH).ba (src05),iptv#ch-206-bravo-music,BRAVO MUSIC
+babytv.hr,276770344366,BABY TV
+minitv.hr,MiniTV.hr,MINI
+nickelodeon.hr,Nickelodeon.hr,NICKELODEON
+rtlkockica.hr,RTLKockica.hr,RTL KOCKICA
+nicktoons.hr,276770344376,NickToons
