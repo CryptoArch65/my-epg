@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
   schedule:
-    - cron: '30 3 * * *'
+    - cron: "0 4 * * *"
 
 permissions:
   contents: write
@@ -30,21 +30,63 @@ jobs:
         working-directory: epg
         run: npm install
 
-      - name: Generate EPG
+      - name: Create guides directory
+        run: |
+          mkdir -p guides
+
+      - name: Generate Telemach EPG
         working-directory: epg
         run: |
           npm run grab --- \
-            --sites=epg.telemach.ba,maxtv.hrvatskitelekom.hr,mtel.ba,mts.rs,tvarenasport.com,tvarenasport.hr \
-            --output=../guide.xml
+            --sites=epg.telemach.ba \
+            --output=../guides/epg.telemach.ba.xml
 
-      - name: Remap EPG IDs
+      - name: Generate Hrvatski Telekom EPG
+        working-directory: epg
         run: |
-          python3 scripts/remap_epg.py guide.xml mappings.json
+          npm run grab --- \
+            --sites=maxtv.hrvatskitelekom.hr \
+            --output=../guides/maxtv.hrvatskitelekom.hr.xml
+
+      - name: Generate m:tel EPG
+        working-directory: epg
+        run: |
+          npm run grab --- \
+            --sites=mtel.ba \
+            --output=../guides/mtel.ba.xml
+
+      - name: Generate mts EPG
+        working-directory: epg
+        run: |
+          npm run grab --- \
+            --sites=mts.rs \
+            --output=../guides/mts.rs.xml
+
+      - name: Generate Arena Sport EPG
+        working-directory: epg
+        run: |
+          npm run grab --- \
+            --sites=tvarenasport.com \
+            --output=../guides/tvarenasport.com.xml
+
+      - name: Generate Arena Sport HR EPG
+        working-directory: epg
+        run: |
+          npm run grab --- \
+            --sites=tvarenasport.hr \
+            --output=../guides/tvarenasport.hr.xml
+
+      - name: Normalize and merge EPG
+        run: |
+          python3 scripts/normalize_epg.py
 
       - name: Commit guide.xml
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add guide.xml
+
           git commit -m "Update EPG" || echo "No changes"
+
           git push
