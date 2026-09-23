@@ -1,0 +1,45 @@
+name: Test selected EPG
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - config/channels.xml
+      - scripts/validate_guide.py
+      - .github/workflows/epg.yml
+      - .github/workflows/epg-pr.yml
+
+permissions:
+  contents: read
+
+jobs:
+  test-epg:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+
+    steps:
+      - name: Checkout proposed changes
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Clone iptv-org/epg
+        run: git clone --depth 1 https://github.com/iptv-org/epg.git epg
+
+      - name: Install grabber dependencies
+        working-directory: epg
+        run: npm ci
+
+      - name: Grab selected channels
+        working-directory: epg
+        run: |
+          npm run grab --- \
+            --channels=../config/channels.xml \
+            --output=../guide.new.xml \
+            --maxConnections=4
+
+      - name: Validate proposed guide
+        run: python3 scripts/validate_guide.py config/channels.xml guide.new.xml
