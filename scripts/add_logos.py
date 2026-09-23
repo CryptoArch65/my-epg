@@ -11,9 +11,9 @@ CHANNELS_URL = "https://iptv-org.github.io/api/channels.json"
 LOGOS_URL = "https://iptv-org.github.io/api/logos.json"
 
 
-# ---------------------------------------------------------
-# SOURCE -> preferred country
-# ---------------------------------------------------------
+# =========================================================
+# SOURCE -> COUNTRY
+# =========================================================
 
 SOURCE_COUNTRY = {
     "telemach.ba": "ba",
@@ -25,14 +25,19 @@ SOURCE_COUNTRY = {
 }
 
 
-# ---------------------------------------------------------
-# Explicit aliases
+# =========================================================
+# EXPLICIT ALIASES
 #
-# These are used when the IPTV provider name is different
-# from the official iptv-org channel name.
-# ---------------------------------------------------------
+# IMPORTANT:
+# These override generic name matching.
+# =========================================================
 
 ALIASES = {
+
+    # ---------------------------------------------
+    # Bosnia and Herzegovina
+    # ---------------------------------------------
+
     "bht 1": "BHT1.ba",
     "bht 1 hd": "BHT1.ba",
     "bht1": "BHT1.ba",
@@ -41,37 +46,112 @@ ALIASES = {
     "ftv": "Federalnatelevizija.ba",
     "ftv hd": "Federalnatelevizija.ba",
     "federalna tv": "Federalnatelevizija.ba",
-    "federalna televizija": "Federalnatelevizija.ba",
     "federalna tv hd": "Federalnatelevizija.ba",
+    "federalna televizija": "Federalnatelevizija.ba",
+
+    "n1 hd bh bih": "N1.ba",
+    "n1 bih": "N1.ba",
+    "n1 info bih": "N1.ba",
+    "n1": "N1.ba",
+
+    # ---------------------------------------------
+    # Croatian
+    # ---------------------------------------------
 
     "hrt 1": "HRT1.hr",
     "hrt 1 hd": "HRT1.hr",
     "hrt1": "HRT1.hr",
     "hrt1 hd": "HRT1.hr",
 
-    "arena sport 1 bih": "ArenaSport1.ba",
-    "arena sport 1 bosna i hercegovina": "ArenaSport1.ba",
+    # ---------------------------------------------
+    # Arena Sport
+    # ---------------------------------------------
 
-    "arena sport 1 hr": "ArenaSport1.hr",
-    "arena sport 1 hrvatska": "ArenaSport1.hr",
+    "arena sport 1 bih":
+        "ArenaSport1.ba",
 
-    "arena sport 1 premium": "ArenaSport1Premium.rs",
-    "arena sport 1 premium srbija": "ArenaSport1Premium.rs",
+    "arena sport 1 bosna i hercegovina":
+        "ArenaSport1.ba",
 
-    "cinestar tv 1 serbia": "CineStarTV1.rs",
-    "cinestar tv 1 slovenia": "CineStarTV1.si",
+    "arena sport 1 hr":
+        "ArenaSport1.hr",
+
+    "arena sport 1 hrvatska":
+        "ArenaSport1.hr",
+
+    # ---------------------------------------------
+    # CineStar
+    # ---------------------------------------------
+
+    "cinestar tv 1 serbia":
+        "CineStarTV1.rs",
+
+    "cinestar tv 1 slovenia":
+        "CineStarTV1.si",
 }
 
 
-# ---------------------------------------------------------
-# Text normalization
-# ---------------------------------------------------------
+# =========================================================
+# MANUAL CHANNEL MAP
+#
+# These are intentionally explicit because these names
+# are ambiguous internationally.
+#
+# If an ID does not exist in the current iptv-org data,
+# the script will NOT use a random alternative.
+# =========================================================
+
+MANUAL_MAP = {
+
+    # ---------------------------------------------
+    # Bosnia
+    # ---------------------------------------------
+
+    "rtrs":
+        "RTRS.ba",
+
+    "rtrs hd":
+        "RTRS.ba",
+
+    "face hd":
+        "FaceTV.ba",
+
+    "face tv":
+        "FaceTV.ba",
+
+    "sk 2 hd sr bih":
+        "SportKlub2.ba",
+
+    "sk 3 hd sr bih":
+        "SportKlub3.ba",
+
+    "sk 4 hd sr bih":
+        "SportKlub4.ba",
+
+    "sk golf hd sr":
+        "SportKlubGolf.ba",
+
+    "tlc hd bih":
+        "TLC.ba",
+
+    "alfa sarajevo":
+        "AlfaTV.ba",
+}
+
+
+# =========================================================
+# NORMALIZATION
+# =========================================================
 
 def normalize(text):
+
     if not text:
         return ""
 
-    text = unicodedata.normalize("NFKD", text)
+    text = unicodedata.normalize(
+        "NFKD",
+        text
+    )
 
     text = "".join(
         c for c in text
@@ -80,41 +160,58 @@ def normalize(text):
 
     text = text.lower()
 
-    text = text.replace("&", " and ")
+    text = text.replace(
+        "&",
+        " and "
+    )
 
-    # Remove country / technical suffixes
+    # Country / regional markers
     text = re.sub(
-        r"\((sr\/bih|bih|me|hr|rs|srb|cg|slovenia|serbia|croatia)\)",
+        r"\((sr\/bih|bih|me|hr|rs|srb|cg|"
+        r"slovenia|serbia|croatia)\)",
         " ",
         text,
         flags=re.IGNORECASE
     )
 
+    # HD/SD/UHD markers
     text = re.sub(
         r"\b(uhd|fhd|hd|sd)\b",
         " ",
         text
     )
 
-    # Replace punctuation with spaces
-    text = re.sub(r"[^a-z0-9]+", " ", text)
+    # Everything else -> spaces
+    text = re.sub(
+        r"[^a-z0-9]+",
+        " ",
+        text
+    )
 
-    text = re.sub(r"\s+", " ", text).strip()
+    text = re.sub(
+        r"\s+",
+        " ",
+        text
+    ).strip()
 
     return text
 
 
-# ---------------------------------------------------------
-# Download JSON
-# ---------------------------------------------------------
+# =========================================================
+# DOWNLOAD JSON
+# =========================================================
 
 def load_json(url):
-    print(f"Downloading {url}")
+
+    print(
+        f"Downloading {url}"
+    )
 
     request = urllib.request.Request(
         url,
         headers={
-            "User-Agent": "CryptoArch65/my-epg"
+            "User-Agent":
+                "CryptoArch65/my-epg"
         }
     )
 
@@ -126,75 +223,115 @@ def load_json(url):
         return json.load(response)
 
 
-# ---------------------------------------------------------
-# Build channel database
-# ---------------------------------------------------------
+# =========================================================
+# CHANNEL DATABASE
+# =========================================================
 
-def build_channel_map(channels):
-    channel_map = {}
+def build_channel_database(channels):
+
+    database = {}
 
     for channel in channels:
 
-        channel_id = channel.get("id")
+        channel_id = channel.get(
+            "id"
+        )
 
         if not channel_id:
             continue
 
         names = []
 
-        name = channel.get("name")
+        name = channel.get(
+            "name"
+        )
 
         if name:
             names.append(name)
 
         names.extend(
-            channel.get("alt_names", [])
+            channel.get(
+                "alt_names",
+                []
+            )
         )
+
+        country = (
+            channel.get("country")
+            or ""
+        ).lower()
 
         for value in names:
 
-            key = normalize(value)
+            key = normalize(
+                value
+            )
 
             if not key:
                 continue
 
-            channel_map.setdefault(
+            database.setdefault(
                 key,
                 []
-            ).append(channel_id)
+            ).append(
+                {
+                    "id":
+                        channel_id,
 
-    return channel_map
+                    "country":
+                        country,
+
+                    "name":
+                        name or "",
+
+                    "alt_names":
+                        channel.get(
+                            "alt_names",
+                            []
+                        )
+                }
+            )
+
+    return database
 
 
-# ---------------------------------------------------------
-# Build logo database
-# ---------------------------------------------------------
+# =========================================================
+# LOGO DATABASE
+# =========================================================
 
-def build_logo_map(logos):
+def build_logo_database(logos):
 
-    logo_map = {}
+    database = {}
 
     for logo in logos:
 
-        if not logo.get("in_use"):
+        if not logo.get(
+            "in_use"
+        ):
             continue
 
-        channel_id = logo.get("channel")
-        url = logo.get("url")
+        channel_id = logo.get(
+            "channel"
+        )
+
+        url = logo.get(
+            "url"
+        )
 
         if not channel_id or not url:
             continue
 
         score = 0
 
-        # Prefer logos without a feed because these are
-        # usually the general channel logo.
-        if not logo.get("feed"):
+        # General channel logo
+        if not logo.get(
+            "feed"
+        ):
             score += 50
 
-        # Prefer SVG, then PNG.
         fmt = (
-            logo.get("format") or ""
+            logo.get("format")
+            or ""
         ).upper()
 
         if fmt == "SVG":
@@ -206,46 +343,101 @@ def build_logo_map(logos):
         elif fmt == "WEBP":
             score += 80
 
-        # Prefer larger images.
-        width = logo.get("width") or 0
+        elif fmt == "JPG":
+            score += 70
+
+        width = (
+            logo.get("width")
+            or 0
+        )
 
         score += min(
             width,
             2000
         ) / 1000
 
-        existing = logo_map.get(channel_id)
+        current = database.get(
+            channel_id
+        )
 
         if (
-            existing is None
-            or score > existing["score"]
+            current is None
+            or score > current["score"]
         ):
-            logo_map[channel_id] = {
+
+            database[channel_id] = {
                 "url": url,
                 "score": score
             }
 
-    return logo_map
+    return database
 
 
-# ---------------------------------------------------------
-# Find exact / alias match
-# ---------------------------------------------------------
+# =========================================================
+# SOURCE FROM NORMALIZED GUIDE ID
+# =========================================================
 
-def find_channel_id(
-    display_name,
-    source,
-    channel_map
+def get_source(channel_id):
+
+    for suffix in SOURCE_COUNTRY:
+
+        if channel_id.endswith(
+            "." + suffix
+        ):
+            return suffix
+
+    return None
+
+
+# =========================================================
+# SAFE COUNTRY MATCH
+# =========================================================
+
+def country_match(
+    candidates,
+    country
 ):
 
-    original = display_name.strip()
+    if not country:
+        return []
+
+    return [
+        item
+        for item in candidates
+        if item["country"] == country
+    ]
+
+
+# =========================================================
+# FIND CHANNEL
+# =========================================================
+
+def find_channel(
+    display_name,
+    source,
+    database
+):
 
     normalized = normalize(
-        original
+        display_name
     )
 
     # -----------------------------------------------------
-    # 1. Explicit alias
+    # 1. Explicit manual map
+    # -----------------------------------------------------
+
+    manual_id = MANUAL_MAP.get(
+        normalized
+    )
+
+    if manual_id:
+        return (
+            manual_id,
+            "MANUAL"
+        )
+
+    # -----------------------------------------------------
+    # 2. Explicit aliases
     # -----------------------------------------------------
 
     alias_id = ALIASES.get(
@@ -253,127 +445,96 @@ def find_channel_id(
     )
 
     if alias_id:
-        return alias_id, "ALIAS"
-
-    # -----------------------------------------------------
-    # 2. Source-aware special cases
-    # -----------------------------------------------------
-
-    if normalized == "arena sport 1":
-
-        country = SOURCE_COUNTRY.get(
-            source
+        return (
+            alias_id,
+            "ALIAS"
         )
 
-        if country == "ba":
-            return "ArenaSport1.ba", "SOURCE"
-
-        if country == "hr":
-            return "ArenaSport1.hr", "SOURCE"
-
-        if country == "rs":
-            # Prefer normal Serbian Arena Sport 1
-            # if present in channels.json.
-            candidates = channel_map.get(
-                "arena sport 1",
-                []
-            )
-
-            for cid in candidates:
-
-                if cid.endswith(".rs"):
-                    return cid, "SOURCE"
-
     # -----------------------------------------------------
-    # 3. Exact name match
+    # 3. Exact name candidates
     # -----------------------------------------------------
 
-    candidates = channel_map.get(
+    candidates = database.get(
         normalized,
         []
     )
 
     if not candidates:
-        return None, None
+        return (
+            None,
+            None
+        )
 
-    # If only one candidate exists,
-    # use it immediately.
-    if len(candidates) == 1:
-        return candidates[0], "EXACT"
-
-    # -----------------------------------------------------
-    # 4. Prefer country matching source
-    # -----------------------------------------------------
-
-    preferred_country = SOURCE_COUNTRY.get(
-        source
+    source_country = (
+        SOURCE_COUNTRY.get(
+            source
+        )
+        if source
+        else None
     )
 
-    if preferred_country:
-
-        for cid in candidates:
-
-            if cid.lower().endswith(
-                "." + preferred_country
-            ):
-                return cid, "COUNTRY"
-
     # -----------------------------------------------------
-    # 5. Otherwise return first candidate
-    # -----------------------------------------------------
-
-    return candidates[0], "EXACT"
-
-
-# ---------------------------------------------------------
-# Special fallback for CineStar
-# ---------------------------------------------------------
-
-def cinestar_fallback(
-    display_name,
-    source,
-    channel_map
-):
-
-    normalized = normalize(
-        display_name
-    )
-
-    if normalized != "cinestar tv 1":
-        return None, None
-
-    # For a BIH CineStar channel, iptv-org currently
-    # does not provide a dedicated CineStarTV1.ba ID.
+    # 4. COUNTRY MUST WIN
     #
-    # Use Croatian version for Croatian/BiH EPG sources,
-    # otherwise Serbian version.
-    if source in (
-        "telemach.ba",
-        "mtel.ba",
-    ):
-        return "CineStarTV1.hr", "CINESTAR-FALLBACK"
+    # This prevents:
+    #
+    # TLC -> TLC.fr / TLC.in / TLC.nl
+    #
+    # when source is Bosnia.
+    # -----------------------------------------------------
 
-    if source == "mts.rs":
-        return "CineStarTV1.rs", "CINESTAR-FALLBACK"
+    country_candidates = country_match(
+        candidates,
+        source_country
+    )
 
-    return None, None
+    if len(country_candidates) == 1:
+
+        return (
+            country_candidates[0]["id"],
+            "COUNTRY"
+        )
+
+    if len(country_candidates) > 1:
+
+        # Multiple channels in same country.
+        # Do NOT guess.
+        return (
+            None,
+            None
+        )
+
+    # -----------------------------------------------------
+    # 5. If source country does not exist,
+    # DO NOT use a random international channel.
+    # -----------------------------------------------------
+
+    return (
+        None,
+        None
+    )
 
 
-# ---------------------------------------------------------
-# Main
-# ---------------------------------------------------------
+# =========================================================
+# MAIN
+# =========================================================
 
 def main():
 
     print()
-    print("==============================================")
-    print(" IPTV-ORG LOGO PROCESSOR")
-    print("==============================================")
-    print()
+    print(
+        "=============================================="
+    )
 
-    # -----------------------------------------------------
-    # Download current iptv-org data
-    # -----------------------------------------------------
+    print(
+        " IPTV-ORG SAFE LOGO PROCESSOR"
+    )
+
+    print(
+        "=============================================="
+    )
+
+    print()
 
     channels = load_json(
         CHANNELS_URL
@@ -384,38 +545,38 @@ def main():
     )
 
     print(
-        f"Channels loaded: {len(channels)}"
+        f"Channels loaded: "
+        f"{len(channels)}"
     )
 
     print(
-        f"Logo records loaded: {len(logos)}"
+        f"Logo records loaded: "
+        f"{len(logos)}"
     )
 
-    # -----------------------------------------------------
-    # Build lookup tables
-    # -----------------------------------------------------
-
-    channel_map = build_channel_map(
-        channels
+    channel_database = (
+        build_channel_database(
+            channels
+        )
     )
 
-    logo_map = build_logo_map(
-        logos
-    )
-
-    print(
-        f"Channel names indexed: {len(channel_map)}"
+    logo_database = (
+        build_logo_database(
+            logos
+        )
     )
 
     print(
-        f"Active logos indexed: {len(logo_map)}"
+        f"Channel names indexed: "
+        f"{len(channel_database)}"
+    )
+
+    print(
+        f"Active logos indexed: "
+        f"{len(logo_database)}"
     )
 
     print()
-
-    # -----------------------------------------------------
-    # Load guide.xml
-    # -----------------------------------------------------
 
     tree = ET.parse(
         GUIDE_FILE
@@ -425,11 +586,7 @@ def main():
 
     found = 0
     missing = 0
-    replaced = 0
-
-    # -----------------------------------------------------
-    # Process channels
-    # -----------------------------------------------------
+    removed = 0
 
     for channel in root.findall(
         "channel"
@@ -440,7 +597,7 @@ def main():
             default=""
         ).strip()
 
-        channel_id = channel.get(
+        guide_id = channel.get(
             "id",
             ""
         )
@@ -448,22 +605,12 @@ def main():
         if not display_name:
             continue
 
-        # -------------------------------------------------
-        # Determine source from our normalized EPG ID
-        # -------------------------------------------------
-
-        source = None
-
-        for suffix in SOURCE_COUNTRY:
-
-            if channel_id.endswith(
-                "." + suffix
-            ):
-                source = suffix
-                break
+        source = get_source(
+            guide_id
+        )
 
         # -------------------------------------------------
-        # Remove old/source-specific icon
+        # REMOVE OLD LOGO
         # -------------------------------------------------
 
         old_icon = channel.find(
@@ -471,36 +618,25 @@ def main():
         )
 
         if old_icon is not None:
+
             channel.remove(
                 old_icon
             )
 
-            replaced += 1
+            removed += 1
 
         # -------------------------------------------------
-        # Find iptv-org channel
+        # FIND IPTV-ORG CHANNEL
         # -------------------------------------------------
 
-        iptv_id, match_type = find_channel_id(
+        iptv_id, match_type = find_channel(
             display_name,
             source,
-            channel_map
+            channel_database
         )
 
         # -------------------------------------------------
-        # CineStar special fallback
-        # -------------------------------------------------
-
-        if not iptv_id:
-
-            iptv_id, match_type = cinestar_fallback(
-                display_name,
-                source,
-                channel_map
-            )
-
-        # -------------------------------------------------
-        # No channel found
+        # NO SAFE MATCH
         # -------------------------------------------------
 
         if not iptv_id:
@@ -508,17 +644,18 @@ def main():
             missing += 1
 
             print(
-                f"NO MATCH | {display_name} | "
+                f"NO SAFE MATCH | "
+                f"{display_name} | "
                 f"source={source}"
             )
 
             continue
 
         # -------------------------------------------------
-        # Find logo
+        # FIND LOGO
         # -------------------------------------------------
 
-        logo = logo_map.get(
+        logo = logo_database.get(
             iptv_id
         )
 
@@ -527,33 +664,37 @@ def main():
             missing += 1
 
             print(
-                f"NO LOGO  | {display_name} | "
+                f"NO LOGO | "
+                f"{display_name} | "
                 f"iptv-org={iptv_id}"
             )
 
             continue
 
         # -------------------------------------------------
-        # Add logo
+        # ADD LOGO
         # -------------------------------------------------
 
         ET.SubElement(
             channel,
             "icon",
             {
-                "src": logo["url"]
+                "src":
+                    logo["url"]
             }
         )
 
         found += 1
 
         print(
-            f"LOGO     | {display_name} | "
-            f"{iptv_id} | {match_type}"
+            f"LOGO | "
+            f"{display_name} | "
+            f"{iptv_id} | "
+            f"{match_type}"
         )
 
     # -----------------------------------------------------
-    # Save
+    # SAVE
     # -----------------------------------------------------
 
     ET.indent(
@@ -568,23 +709,34 @@ def main():
     )
 
     # -----------------------------------------------------
-    # Summary
+    # SUMMARY
     # -----------------------------------------------------
 
     print()
-    print("==============================================")
-    print(" LOGO PROCESSING COMPLETED")
-    print("==============================================")
+
+    print(
+        "=============================================="
+    )
+
+    print(
+        " SAFE LOGO PROCESSING COMPLETED"
+    )
+
     print(
         f"Logos added:       {found}"
     )
+
     print(
-        f"Without logo:      {missing}"
+        f"No safe match:     {missing}"
     )
+
     print(
-        f"Old icons removed: {replaced}"
+        f"Old icons removed: {removed}"
     )
-    print("==============================================")
+
+    print(
+        "=============================================="
+    )
 
 
 if __name__ == "__main__":
