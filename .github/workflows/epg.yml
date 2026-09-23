@@ -34,6 +34,10 @@ jobs:
             --sites=epg.telemach.ba,maxtv.hrvatskitelekom.hr,mtel.ba,mts.rs,tvarenasport.com,tvarenasport.hr \
             --output=../guide.xml
 
+      - name: Remap EPG IDs
+        run: |
+          python3 scripts/remap_epg.py guide.xml mappings.json
+
       - name: Commit guide.xml
         run: |
           git config user.name "github-actions[bot]"
