@@ -15,39 +15,39 @@
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="274913832109" lang="hr" xmltv_id="RTL.hr">RTL</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276770344334" lang="hr" xmltv_id="RTL2.hr">RTL 2</channel>
   <channel site="mts.rs" site_id="rts_1_hd" lang="bs" xmltv_id="RTS1.rs">RTS 1</channel>
-  <channel site="mts.rs" site_id="rts_2_hd" lang="bs" xmltv_id="RTS2.rs">RTS 2</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-20-rts-2" lang="bs" xmltv_id="RTS2.rs">RTS 2</channel>
   <channel site="mts.rs" site_id="rts_3_hd" lang="bs" xmltv_id="RTS3.rs">RTS 3</channel>
-  <channel site="mts.rs" site_id="rts_muzika" lang="bs" xmltv_id="RTSMuzika.rs">RTS Muzika</channel>
-  <channel site="mts.rs" site_id="prva_tv_hd" lang="bs" xmltv_id="Prva.rs">Prva</channel>
-  <channel site="mts.rs" site_id="prva_world" lang="bs" xmltv_id="PrvaWorld.rs">Prva World</channel>
-  <channel site="mts.rs" site_id="Prva%20MAX" lang="bs" xmltv_id="PrvaMax.rs">Prva MAX</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-50-rts-muzika" lang="bs" xmltv_id="RTSMuzika.rs">RTS Muzika</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-358-prva" lang="bs" xmltv_id="Prva.rs">Prva</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-361-prva-world" lang="bs" xmltv_id="PrvaWorld.rs">Prva World</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-360-prva-max" lang="bs" xmltv_id="PrvaMax.rs">Prva Max</channel>
   <channel site="mts.rs" site_id="b92" lang="bs" xmltv_id="B92.rs">B92</channel>
   <channel site="mts.rs" site_id="Informer%20TV" lang="bs" xmltv_id="InformerTV.rs">Informer TV</channel>
   <channel site="mts.rs" site_id="k1_hd" lang="bs" xmltv_id="K1.rs">K1</channel>
-  <channel site="mts.rs" site_id="hype_hd" lang="bs" xmltv_id="HypeTV.rs">Hype</channel>
-  <channel site="mts.rs" site_id="happy_tv_hd" lang="bs" xmltv_id="Happy.rs">Happy TV</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-446-hype-tv" lang="bs" xmltv_id="HypeTV.rs">Hype TV</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-6-happy-tv" lang="bs" xmltv_id="Happy.rs">Happy TV</channel>
   <channel site="mts.rs" site_id="tv_pink" lang="bs" xmltv_id="Pink.rs">TV Pink</channel>
-  <channel site="mts.rs" site_id="pink_plus" lang="bs" xmltv_id="PinkPlus.rs">Pink Plus</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-217-pink-plus" lang="bs" xmltv_id="PinkPlus.rs">PINK PLUS</channel>
   <channel site="mtel.ba" site_id="iptv#ch-288-pink-bh" lang="bs" xmltv_id="PinkBH.ba">Pink BH</channel>
-  <channel site="mts.rs" site_id="pink_film" lang="bs" xmltv_id="PinkFilm.rs">Pink Film</channel>
-  <channel site="mts.rs" site_id="pink_family" lang="bs" xmltv_id="PinkFamily.rs">Pink Family</channel>
-  <channel site="mts.rs" site_id="pink_action" lang="bs" xmltv_id="PinkAction.rs">Pink Action</channel>
-  <channel site="mts.rs" site_id="pink_movies" lang="bs" xmltv_id="PinkMovies.rs">Pink Movies</channel>
-  <channel site="mts.rs" site_id="pink_western" lang="bs" xmltv_id="PinkWestern.rs">Pink Western</channel>
-  <channel site="mts.rs" site_id="pink_classic" lang="bs" xmltv_id="PinkClassic.rs">Pink Classic</channel>
-  <channel site="mts.rs" site_id="pink_premium_hd" lang="bs" xmltv_id="PinkPremium.rs">Pink Premium</channel>
-  <channel site="mts.rs" site_id="pink_thriller" lang="bs" xmltv_id="PinkThriller.rs">Pink Thriller</channel>
-  <channel site="mts.rs" site_id="pink_sci-fi_%26_fantasy" lang="bs" xmltv_id="PinkSciFiFantasy.rs">Pink Sci-Fi &amp; Fantasy</channel>
-  <channel site="mts.rs" site_id="pink_crime_%26_mystery" lang="bs" xmltv_id="PinkCrimeMystery.rs">Pink Crime &amp; Mystery</channel>
-  <channel site="mts.rs" site_id="pink_comedy" lang="bs" xmltv_id="PinkComedy.rs">Pink Comedy</channel>
-  <channel site="mts.rs" site_id="pink_world_cinema" lang="bs" xmltv_id="PinkWorldCinema.rs">Pink World Cinema</channel>
-  <channel site="mts.rs" site_id="pink_horror" lang="bs" xmltv_id="PinkHorror.rs">Pink Horror</channel>
-  <channel site="mts.rs" site_id="pink_romance" lang="bs" xmltv_id="PinkRomance.rs">Pink Romance</channel>
-  <channel site="mts.rs" site_id="pink_koncert" lang="bs" xmltv_id="PinkKoncert.rs">Pink Koncert</channel>
-  <channel site="mts.rs" site_id="pink_show" lang="bs" xmltv_id="PinkShow.rs">Pink Show</channel>
-  <channel site="mts.rs" site_id="pink_fashion" lang="bs" xmltv_id="PinkFashion.rs">Pink Fashion</channel>
-  <channel site="mts.rs" site_id="pink_world" lang="bs" xmltv_id="PinkWorld.rs">Pink World</channel>
-  <channel site="mts.rs" site_id="pink_style" lang="bs" xmltv_id="PinkStyle.rs">Pink Style</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-164-pink-film" lang="bs" xmltv_id="PinkFilm.rs">Pink Film</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-1-pink-family" lang="bs" xmltv_id="PinkFamily.rs">Pink Family</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-131-pink-action" lang="bs" xmltv_id="PinkAction.rs">Pink Action</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-145-pink-movies" lang="bs" xmltv_id="PinkMovies.rs">Pink Movies</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-154-pink-western" lang="bs" xmltv_id="PinkWestern.rs">Pink Western</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-156-pink-classic" lang="bs" xmltv_id="PinkClassic.rs">Pink Classic</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-126-pink-premium" lang="bs" xmltv_id="PinkPremium.rs">Pink Premium</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-133-pink-thriller" lang="bs" xmltv_id="PinkThriller.rs">Pink Thriller</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-149-pink-sci-fi-fantasy" lang="bs" xmltv_id="PinkSciFiFantasy.rs">Pink Sci-Fi &amp; Fantasy</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-136-pink-crime-mystery" lang="bs" xmltv_id="PinkCrimeMystery.rs">Pink Crime &amp; Mystery</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-146-pink-comedy" lang="bs" xmltv_id="PinkComedy.rs">Pink Comedy</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-129-pink-world-cinema" lang="bs" xmltv_id="PinkWorldCinema.rs">Pink World Cinema</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-159-pink-horror" lang="bs" xmltv_id="PinkHorror.rs">Pink Horror</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-143-pink-romance" lang="bs" xmltv_id="PinkRomance.rs">Pink Romance</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-178-pink-koncert" lang="bs" xmltv_id="PinkKoncert.rs">PINK KONCERT</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-216-pink-show" lang="bs" xmltv_id="PinkShow.rs">PINK SHOW</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-151-pink-fashion" lang="bs" xmltv_id="PinkFashion.rs">Pink Fashion</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-215-pink-world" lang="bs" xmltv_id="PinkWorld.rs">PINK WORLD</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-150-pink-style" lang="bs" xmltv_id="PinkStyle.rs">Pink Style</channel>
   <channel site="mtel.ba" site_id="iptv#ch-arena-premium-1" lang="bs" xmltv_id="ArenaSportPremium1BH.ba">Arena Premium 1</channel>
   <channel site="mtel.ba" site_id="iptv#ch-arena-premium-2" lang="bs" xmltv_id="ArenaSportPremium2BH.ba">Arena Premium 2</channel>
   <channel site="mtel.ba" site_id="iptv#ch-arena-premium-3" lang="bs" xmltv_id="ArenaSportPremium3BH.ba">Arena Premium 3</channel>
@@ -84,12 +84,12 @@
   <channel site="tvarenasport.com" site_id="06" lang="sr" xmltv_id="ArenaSport6.rs@SD">Arena Sport 6 Serbia</channel>
   <channel site="tvarenasport.com" site_id="07" lang="sr" xmltv_id="ArenaSport7.rs@SD">Arena Sport 7 Serbia</channel>
   <channel site="tvarenasport.com" site_id="08" lang="sr" xmltv_id="ArenaSport8.rs@SD">Arena Sport 8 Serbia</channel>
-  <channel site="mts.rs" site_id="arena_fight_hd" lang="bs" xmltv_id="ArenaFight.rs">Arena Fight</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-465-arena-fight-hd" lang="bs" xmltv_id="ArenaFight.rs">Arena Fight HD</channel>
   <channel site="tvarenasport.com" site_id="1x2" lang="sr" xmltv_id="ArenaSport1x2.rs@SD">Arena Sport 1x2 Serbia</channel>
-  <channel site="mts.rs" site_id="arena_esport__hd" lang="bs" xmltv_id="ArenaEsport.rs">Arena Esport</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-406-arena-esport-hd" lang="bs" xmltv_id="ArenaEsport.rs">Arena Esport HD</channel>
   <channel site="tvarenasport.com" site_id="a-tenis" lang="sr" xmltv_id="ArenaSportTenis.rs@SD">Arena Sport Tenis Serbia</channel>
   <channel site="mts.rs" site_id="animal_planet" lang="bs" xmltv_id="">Animal Planet</channel>
-  <channel site="mts.rs" site_id="discovery_channel" lang="bs" xmltv_id="DiscoveryChannel.rs">Discovery Channel</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-123-discovery-channel" lang="bs" xmltv_id="DiscoveryChannel.rs">Discovery Channel</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276767784233" lang="hr" xmltv_id="">History 2</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="435380776371" lang="hr" xmltv_id="">Viasat History</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276767784232" lang="hr" xmltv_id="">Viasat Nature</channel>
@@ -156,7 +156,7 @@
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276771368129" lang="hr" xmltv_id="NickJr.hr">Nick Jr.</channel>
   <channel site="mts.rs" site_id="nickelodeon_junior" lang="bs" xmltv_id="NickJr.rs">Nickelodeon Junior</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276796967974" lang="hr" xmltv_id="Nickelodeon.hr">Nickelodeon</channel>
-  <channel site="mts.rs" site_id="pink_kids" lang="bs" xmltv_id="PinkKids.rs">Pink Kids</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-92-pink-kids" lang="bs" xmltv_id="PinkKids.rs">Pink Kids</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276767784228" lang="hr" xmltv_id="RTLKockica.hr">RTL Kockica</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276770344376" lang="hr" xmltv_id="">Nicktoons</channel>
 </channels>
