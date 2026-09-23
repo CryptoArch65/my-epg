@@ -2,16 +2,20 @@ name: Update EPG
 
 on:
   workflow_dispatch:
-
   schedule:
     - cron: "0 4 * * *"
 
 permissions:
   contents: write
 
+concurrency:
+  group: epg-refresh
+  cancel-in-progress: false
+
 jobs:
   update-epg:
     runs-on: ubuntu-latest
+    timeout-minutes: 180
 
     steps:
       - name: Checkout
@@ -23,74 +27,32 @@ jobs:
           node-version: 24
 
       - name: Clone iptv-org/epg
-        run: |
-          git clone --depth 1 https://github.com/iptv-org/epg.git epg
+        run: git clone --depth 1 https://github.com/iptv-org/epg.git epg
 
-      - name: Install dependencies
+      - name: Install grabber dependencies
         working-directory: epg
-        run: npm install
+        run: npm ci
 
-      - name: Create guides directory
-        run: |
-          mkdir -p guides
-
-      - name: Generate Telemach EPG
+      - name: Grab selected channels
         working-directory: epg
         run: |
           npm run grab --- \
-            --sites=epg.telemach.ba \
-            --output=../guides/epg.telemach.ba.xml
+            --channels=../config/channels.xml \
+            --output=../guide.new.xml \
+            --maxConnections=4
 
-      - name: Generate Hrvatski Telekom EPG
-        working-directory: epg
-        run: |
-          npm run grab --- \
-            --sites=maxtv.hrvatskitelekom.hr \
-            --output=../guides/maxtv.hrvatskitelekom.hr.xml
+      - name: Validate guide before publishing
+        run: python3 scripts/validate_guide.py config/channels.xml guide.new.xml
 
-      - name: Generate m:tel EPG
-        working-directory: epg
+      - name: Publish guide.xml
         run: |
-          npm run grab --- \
-            --sites=mtel.ba \
-            --output=../guides/mtel.ba.xml
-
-      - name: Generate mts EPG
-        working-directory: epg
-        run: |
-          npm run grab --- \
-            --sites=mts.rs \
-            --output=../guides/mts.rs.xml
-
-      - name: Generate Arena Sport EPG
-        working-directory: epg
-        run: |
-          npm run grab --- \
-            --sites=tvarenasport.com \
-            --output=../guides/tvarenasport.com.xml
-
-      - name: Generate Arena Sport HR EPG
-        working-directory: epg
-        run: |
-          npm run grab --- \
-            --sites=tvarenasport.hr \
-            --output=../guides/tvarenasport.hr.xml
-
-      - name: Normalize and merge EPG
-        run: |
-          python3 scripts/normalize_epg.py
-
-      - name: Add standard iptv-org logos
-        run: |
-          python3 scripts/add_logos.py
-
-      - name: Commit guide.xml
-        run: |
+          mv guide.new.xml guide.xml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
           git add guide.xml
-
-          git commit -m "Update EPG" || echo "No changes"
-
+          if git diff --cached --quiet; then
+            echo "Guide has not changed"
+            exit 0
+          fi
+          git commit -m "Update EPG"
           git push
