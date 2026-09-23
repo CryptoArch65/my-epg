@@ -6,6 +6,8 @@ on:
     branches: [main]
     paths:
       - config/channels.xml
+      - config/playlist_aliases.csv
+      - scripts/add_playlist_aliases.py
       - scripts/validate_guide.py
       - .github/workflows/epg.yml
   schedule:
@@ -48,7 +50,9 @@ jobs:
             --maxConnections=4
 
       - name: Validate guide before publishing
-        run: python3 scripts/validate_guide.py config/channels.xml guide.new.xml
+        run: |
+          python3 scripts/add_playlist_aliases.py guide.new.xml config/playlist_aliases.csv
+          python3 scripts/validate_guide.py config/channels.xml guide.new.xml config/playlist_aliases.csv
 
       - name: Publish guide.xml
         if: github.ref == 'refs/heads/main'
