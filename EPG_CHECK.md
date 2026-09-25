@@ -7,6 +7,7 @@ Polje `source` bira jedan od podržanih izvora:
 - `"mtel"`: IPTV vodič na `https://mtel.ba/Televizija/TV-ponuda/TV-vodic#tv-iptv`. Za svaki kanal unesi željeni `name` i puni `site_id` iz m:tel IPTV tabele, npr. `"iptv#ch-15-bht"`.
 - `"telemach"`: `https://epg.telemach.ba/`. Za svaki kanal unesi `name`, brojčani `site_id` i `country` (`"ba"` ili `"me"`).
 - `"maxtv"`: `https://mojmaxtv.hrvatskitelekom.hr/epg`. Za svaki kanal unesi `name` i brojčani `site_id` iz prethodne MAXtv Excel tabele ili [liste MAXtv kanala](https://github.com/iptv-org/epg/blob/master/sites/mojmaxtv.hrvatskitelekom.hr/mojmaxtv.hrvatskitelekom.hr.channels.xml). `country` nije potreban.
+- `"mojtv"`: [MojTV.net XMLTV](https://mojtv.net/xmltv/). Za svaki kanal unesi proizvoljni `name` i brojčani `site_id` (`kanal_id`) iz MojTV Excel tabele. `country` nije potreban.
 
 Primjer za m:tel:
 
@@ -30,7 +31,7 @@ Primjer za Telemach:
 }
 ```
 
-m:tel, Telemach i MAXtv ID-jevi nisu međusobno zamjenjivi. Polje `name` slobodno promijeni: služi za prikaz u izvještaju i ne mijenja naziv kanala u IPTV listi. `site_id` identifikuje kanal u odabranom izvoru.
+m:tel, Telemach, MAXtv i MojTV ID-jevi nisu međusobno zamjenjivi. Polje `name` slobodno promijeni: služi za prikaz u izvještaju i ne mijenja naziv kanala u IPTV listi. `site_id` identifikuje kanal u odabranom izvoru.
 
 Primjer za MAXtv:
 
@@ -45,5 +46,18 @@ Primjer za MAXtv:
 ```
 
 Za MAXtv se prikazuje vrijeme prema Hrvatskoj (`Europe/Zagreb`). Uredi `name` kako želiš, a `site_id` kopiraj kao tekst bez skraćivanja iz tabele. Jedna provjera podržava 1–20 kanala. Status `kanal nije pronađen` znači da ID više nije u trenutnoj listi MAXtv.
+
+Primjer za MojTV:
+
+```json
+{
+  "source": "mojtv",
+  "channels": [
+    { "name": "B92", "site_id": "31" }
+  ]
+}
+```
+
+Za MojTV se prikazuje vrijeme prema Srbiji (`Europe/Belgrade`). Upiši 1–20 kanala u `channels`; `name` je tvoj naziv u izvještaju, a `site_id` je broj kanala na MojTV. Prikazuju se prethodna, trenutna i sljedeća emisija kada ih izvor objavi.
 
 URL TV vodiča ne mijenja se u konfiguraciji: adresa stranice nije direktni API za emisije. Izbor `source` bira odgovarajući EPG adapter i njegov URL za podatke. Za novi domen/URL potreban je novi adapter koji razumije njegov format. Lista m:tel `site_id` iz prethodnog Excela je snimak projekta iptv-org/epg; pojedini kanali mogu biti zastarjeli ili bez podataka u aktuelnom EPG-u.

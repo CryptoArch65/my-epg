@@ -10,10 +10,12 @@ async function main() {
     await require('./check_mtel').main(config)
   } else if (config.source === 'maxtv') {
     await require('./check_maxtv').main(config)
+  } else if (config.source === 'mojtv') {
+    await require('./check_mojtv').main(config)
   } else if (config.source === 'telemach') {
     await require('./check_telemach').main({ configPath, reportBase: 'epg-check' })
   } else {
-    throw new Error('source mora biti "mtel", "telemach" ili "maxtv"; svaki drugi izvor zahtijeva svoj EPG adapter')
+    throw new Error('source mora biti "mtel", "telemach", "maxtv" ili "mojtv"; svaki drugi izvor zahtijeva svoj EPG adapter')
   }
 }
 

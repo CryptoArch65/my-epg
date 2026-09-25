@@ -10,6 +10,8 @@ on:
       - scripts/check_mtel.test.js
       - scripts/check_maxtv.js
       - scripts/check_maxtv.test.js
+      - scripts/check_mojtv.js
+      - scripts/check_mojtv.test.js
       - scripts/check_telemach.js
       - .github/workflows/epg-check.yml
   push:
@@ -21,6 +23,8 @@ on:
       - scripts/check_mtel.test.js
       - scripts/check_maxtv.js
       - scripts/check_maxtv.test.js
+      - scripts/check_mojtv.js
+      - scripts/check_mojtv.test.js
       - scripts/check_telemach.js
       - .github/workflows/epg-check.yml
 
@@ -37,7 +41,7 @@ jobs:
         with:
           node-version: 24
       - name: Provjeri konfiguraciju i odabir programa
-        run: node --test scripts/check_telemach.test.js scripts/check_mtel.test.js scripts/check_maxtv.test.js
+        run: node --test scripts/check_telemach.test.js scripts/check_mtel.test.js scripts/check_maxtv.test.js scripts/check_mojtv.test.js
       - name: Preuzmi EPG adaptere
         run: git clone --depth 1 https://github.com/iptv-org/epg.git epg
       - name: Instaliraj zavisnosti
