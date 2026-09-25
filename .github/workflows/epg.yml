@@ -67,3 +67,47 @@ jobs:
           fi
           git commit -m "Update EPG"
           git push
+
+      - name: Diagnose Arena Sport EPG in published guide
+        run: |
+          python3 - <<'PY'
+          import xml.etree.ElementTree as ET
+
+          arena_ids = [
+              "ArenaSport1.ba",
+              "ArenaSport2.ba",
+              "ArenaSport3.ba",
+              "ArenaSport4.ba",
+              "ArenaSport5BH.ba",
+              "ArenaSport6.ba",
+          ]
+
+          root = ET.parse("guide.xml").getroot()
+
+          print("=== Arena Sport EPG diagnostics ===")
+          for channel_id in arena_ids:
+              programmes = [
+                  p for p in root.findall("programme")
+                  if p.get("channel") == channel_id
+              ]
+
+              programmes.sort(key=lambda p: p.get("start", ""))
+
+              print(f"\\n{channel_id}")
+              print(f"  Programme count: {len(programmes)}")
+
+              if not programmes:
+                  print("  FIRST: NONE")
+                  print("  LAST:  NONE")
+                  continue
+
+              def describe(programme):
+                  title = programme.find("title")
+                  title_text = " ".join(title.itertext()).strip() if title is not None else "(no title)"
+                  return f"{programme.get('start', '?')} -> {programme.get('stop', '?')} | {title_text}"
+
+              print(f"  FIRST: {describe(programmes[0])}")
+              print(f"  LAST:  {describe(programmes[-1])}")
+
+          print("\\n=== End Arena Sport EPG diagnostics ===")
+          PY
