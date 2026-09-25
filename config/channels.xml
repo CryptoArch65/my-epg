@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <channels>
   <channel site="epg.telemach.ba" site_id="465" lang="hr" xmltv_id="BHT1.ba">BHT 1 HD</channel>
-  <channel site="epg.telemach.ba" site_id="1614" lang="hr" xmltv_id="Federalnatelevizija.ba">FTV HD (BIH)</channel>
+  <channel site="epg.telemach.ba" site_id="33" lang="hr" xmltv_id="Federalnatelevizija.ba">Federalna TV</channel>
   <channel site="epg.telemach.ba" site_id="30" lang="hr" xmltv_id="OBN.ba">OBN (BIH)</channel>
   <channel site="epg.telemach.ba" site_id="466" lang="hr" xmltv_id="Hayat.ba">Hayat HD</channel>
   <channel site="epg.telemach.ba" site_id="471" lang="hr" xmltv_id="FACETV.ba">Face HD</channel>
