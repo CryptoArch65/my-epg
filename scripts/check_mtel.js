@@ -47,7 +47,9 @@ function normalisePrograms(programs) {
 }
 
 function resolveLogo(product) {
-  const candidate = product?.picture?.url ?? product?.logo?.url ?? product?.image?.url ?? null
+  const images = Array.isArray(product?.images) ? product.images : []
+  const candidate = product?.picture?.url ?? product?.logo?.url ?? product?.image?.url ??
+    product?.thumbnail?.url ?? images[0]?.url ?? null
   if (!candidate || typeof candidate !== 'string') return null
   try {
     const url = new URL(candidate, 'https://mtel.ba')
@@ -108,19 +110,24 @@ async function main(config, { reportBase = 'epg-check' } = {}) {
     return getJson(url)
   }))
   if (responses.every(r => r.products.length === 0)) throw new Error('m:tel EPG vratio je praznu listu kanala')
+  // Catalog metadata may contain channel logos missing from the EPG response.
+  const catalogUrl = 'https://mtel.ba/hybris/ecommerce/b2c/v1/products/channels/search?pageSize=999&query=:relevantno:tv-kategorija:tv-iptv'
+  const catalog = await getJson(catalogUrl).then(data => new Map(data.products.map(p => [p.code, p])))
+    .catch(error => { console.warn(`m:tel katalog logotipa nije dostupan: ${error.message}`); return new Map() })
   await fs.mkdir(path.join(root, 'reports', 'logos'), { recursive: true })
   const results = []
   for (const channel of channels) {
     const code = channel.site_id.split('#')[1]
     const products = responses.map(data => data.products.find(p => p.code === code)).filter(Boolean)
-    const logoUrl = resolveLogo(products[1] ?? products[0])
+    const details = catalog.get(code)
+    const logoUrl = resolveLogo(details) ?? resolveLogo(products[1] ?? products[0])
     const logoFile = await saveLogo(logoUrl, channel.site_id)
     const programs = normalisePrograms(responses.flatMap(data => mtel.parser({
       content: JSON.stringify(data), channel
     })))
     const selected = selectPrograms(programs, now)
     const result = {
-      ...channel, source_name: products[1]?.name ?? products[0]?.name ?? null,
+      ...channel, source_name: details?.name ?? products[1]?.name ?? products[0]?.name ?? null,
       status: products.length ? (programs.length ? 'ok' : 'nema programa') : 'kanal nije pronađen',
       logo_url: logoUrl, logo_file: logoFile, ...selected
     }
