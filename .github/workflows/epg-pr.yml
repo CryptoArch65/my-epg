@@ -6,6 +6,8 @@ on:
     paths:
       - config/channels.xml
       - config/playlist_aliases.csv
+      - config/bih-source-logos.csv
+      - scripts/add_channel_logos.py
       - scripts/add_playlist_aliases.py
       - scripts/validate_guide.py
       - .github/workflows/epg.yml
@@ -45,5 +47,6 @@ jobs:
 
       - name: Validate proposed guide
         run: |
+          python3 scripts/add_channel_logos.py guide.new.xml config/bih-source-logos.csv
           python3 scripts/add_playlist_aliases.py guide.new.xml config/playlist_aliases.csv
           python3 scripts/validate_guide.py config/channels.xml guide.new.xml config/playlist_aliases.csv
