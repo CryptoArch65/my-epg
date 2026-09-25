@@ -159,4 +159,5 @@
   <channel site="mtel.ba" site_id="iptv#ch-92-pink-kids" lang="bs" xmltv_id="PinkKids.rs">Pink Kids</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276767784228" lang="hr" xmltv_id="RTLKockica.hr">RTL Kockica</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276770344376" lang="hr" xmltv_id="">Nicktoons</channel>
+  <channel site="epg.telemach.ba" site_id="498" lang="hr" xmltv_id="ArenaSport1Telemach.ba">Arena Sport 1 TEST</channel>
 </channels>
