@@ -1,0 +1,9 @@
+{
+  "channels": [
+    { "name": "OBN (BIH)", "site_id": "30", "country": "ba" },
+    { "name": "N1 HD (BH)/(BIH)", "site_id": "199", "country": "ba" },
+    { "name": "Face HD", "site_id": "471", "country": "ba" },
+    { "name": "TV Sarajevo HD (BH)", "site_id": "655", "country": "ba" },
+    { "name": "O Kanal HD", "site_id": "748", "country": "ba" }
+  ]
+}
