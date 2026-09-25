@@ -1,10 +1,8 @@
 {
-  "source": "maxtv",
+  "source": "telemach",
   "channels": [
-    { "name": "HRT 1", "site_id": "274913832105" },
-    { "name": "RTL", "site_id": "274913832109" },
-    { "name": "Nova TV", "site_id": "274914856086" },
-    { "name": "Arenasport 1", "site_id": "274914856088" },
-    { "name": "MAXtv Promo", "site_id": "276767784213" }
+    { "name": "OBN (BIH)", "site_id": "30", "country": "ba" },
+    { "name": "Federalna TV", "site_id": "33", "country": "ba" },
+    { "name": "SK 2 HD (SR/BIH)", "site_id": "67", "country": "ba" }
   ]
 }
