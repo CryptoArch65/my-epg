@@ -148,6 +148,9 @@ async function main(config, { reportBase = 'epg-check' } = {}) {
   const catalog = await getJson(catalogUrl)
   if (!Array.isArray(catalog?.channels)) throw new Error('Neočekivana MAXtv lista kanala')
   const byId = new Map(catalog.channels.map(channel => [String(channel.station_id), channel]))
+  const sample = byId.get(channels[0].site_id)
+  console.log('MAXtv logo fields:', Object.keys(sample ?? {}).join(', '),
+    JSON.stringify(Object.fromEntries(Object.entries(sample ?? {}).filter(([key]) => /logo|image|icon|poster|thumbnail/i.test(key)))))
   const missingBefore = channels.some(c => !selectPrograms(normalisePrograms(todayData, c.site_id), now).previous)
   const missingAfter = channels.some(c => !selectPrograms(normalisePrograms(todayData, c.site_id), now).next)
   // Adjacent UTC days cover broadcasts crossing midnight.
