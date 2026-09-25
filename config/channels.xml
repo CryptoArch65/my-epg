@@ -51,7 +51,7 @@
   <channel site="mtel.ba" site_id="iptv#ch-arena-premium-1" lang="bs" xmltv_id="ArenaSportPremium1BH.ba">Arena Premium 1</channel>
   <channel site="mtel.ba" site_id="iptv#ch-arena-premium-2" lang="bs" xmltv_id="ArenaSportPremium2BH.ba">Arena Premium 2</channel>
   <channel site="mtel.ba" site_id="iptv#ch-arena-premium-3" lang="bs" xmltv_id="ArenaSportPremium3BH.ba">Arena Premium 3</channel>
-  <channel site="mtel.ba" site_id="iptv#ch-53-arena-sport-1" lang="bs" xmltv_id="ArenaSport1.ba">Arena Sport 1</channel>
+  <channel site="epg.telemach.ba" site_id="2135" lang="hr" xmltv_id="ArenaSport1.ba">Arena Sport 1</channel>
   <channel site="mtel.ba" site_id="iptv#ch-54-arena-sport-2" lang="bs" xmltv_id="ArenaSport2.ba">Arena Sport 2</channel>
   <channel site="mtel.ba" site_id="iptv#ch-55-arena-sport-3" lang="bs" xmltv_id="ArenaSport3.ba">Arena Sport 3</channel>
   <channel site="mtel.ba" site_id="iptv#ch-56-arena-sport-4" lang="bs" xmltv_id="ArenaSport4.ba">Arena Sport 4</channel>
@@ -159,5 +159,4 @@
   <channel site="mtel.ba" site_id="iptv#ch-92-pink-kids" lang="bs" xmltv_id="PinkKids.rs">Pink Kids</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276767784228" lang="hr" xmltv_id="RTLKockica.hr">RTL Kockica</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276770344376" lang="hr" xmltv_id="">Nicktoons</channel>
-  <channel site="epg.telemach.ba" site_id="498" lang="hr" xmltv_id="ArenaSport1Telemach.ba">Arena Sport 1 TEST</channel>
 </channels>
