@@ -125,9 +125,9 @@ function describe(program) {
   return program ? `${escapeMarkdown(program.title)} (${formatTime(program.start)} – ${formatTime(program.stop)})` : 'Nema podataka'
 }
 
-async function main() {
+async function main({ configPath = path.join(root, 'config', 'telemach-check.json'), reportBase = 'telemach-check' } = {}) {
   loadUpstream()
-  const config = validateChannels(JSON.parse(await fs.readFile(path.join(root, 'config', 'telemach-check.json'), 'utf8')))
+  const config = validateChannels(JSON.parse(await fs.readFile(configPath, 'utf8')))
   const now = Date.now()
   await fs.mkdir(path.join(root, 'reports', 'logos'), { recursive: true })
   const headersByCountry = new Map()
@@ -173,10 +173,10 @@ async function main() {
       ''
     ])
   ].join('\n')
-  await fs.writeFile(path.join(root, 'reports', 'telemach-check.md'), report)
-  await fs.writeFile(path.join(root, 'reports', 'telemach-check.json'), JSON.stringify({ checked_at: new Date(now).toISOString(), timezone: 'Europe/Sarajevo', channels: results }, null, 2))
+  await fs.writeFile(path.join(root, 'reports', `${reportBase}.md`), report)
+  await fs.writeFile(path.join(root, 'reports', `${reportBase}.json`), JSON.stringify({ checked_at: new Date(now).toISOString(), timezone: 'Europe/Sarajevo', channels: results }, null, 2))
   console.log(`Saved ${results.length} channel checks to reports/`)
 }
 
 if (require.main === module) main().catch(error => { console.error(error.message); process.exitCode = 1 })
-module.exports = { validateChannels, selectPrograms, resolveLogo }
+module.exports = { validateChannels, selectPrograms, resolveLogo, main }
