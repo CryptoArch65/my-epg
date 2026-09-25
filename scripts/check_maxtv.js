@@ -80,7 +80,7 @@ function normalisePrograms(responses, siteId) {
 
 function resolveLogo(channel) {
   const images = Array.isArray(channel?.images) ? channel.images : []
-  const candidate = channel?.logo_image_url ?? channel?.logo_url ?? channel?.channel_logo_url ??
+  const candidate = channel?.channel_logo ?? channel?.logo_image_url ?? channel?.logo_url ?? channel?.channel_logo_url ??
     channel?.station_logo_url ?? channel?.logo?.url ?? channel?.logo?.path ??
     channel?.image?.url ?? channel?.image_url ?? images[0]?.url ?? images[0]?.path ?? null
   if (typeof candidate !== 'string' || !candidate.trim()) return null
@@ -148,9 +148,6 @@ async function main(config, { reportBase = 'epg-check' } = {}) {
   const catalog = await getJson(catalogUrl)
   if (!Array.isArray(catalog?.channels)) throw new Error('Neočekivana MAXtv lista kanala')
   const byId = new Map(catalog.channels.map(channel => [String(channel.station_id), channel]))
-  const sample = byId.get(channels[0].site_id)
-  console.log('MAXtv logo fields:', Object.keys(sample ?? {}).join(', '),
-    JSON.stringify(Object.fromEntries(Object.entries(sample ?? {}).filter(([key]) => /logo|image|icon|poster|thumbnail/i.test(key)))))
   const missingBefore = channels.some(c => !selectPrograms(normalisePrograms(todayData, c.site_id), now).previous)
   const missingAfter = channels.some(c => !selectPrograms(normalisePrograms(todayData, c.site_id), now).next)
   // Adjacent UTC days cover broadcasts crossing midnight.

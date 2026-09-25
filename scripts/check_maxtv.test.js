@@ -34,6 +34,8 @@ test('collects schedule windows across midnight without duplicate programmes', (
 })
 
 test('uses a MAXtv channel logo from the catalog', () => {
+  assert.equal(resolveLogo({ channel_logo: 'https://tv-hr-prod.yo-digital.com/prod/images/logos/hrt.PNG' }),
+    'https://tv-hr-prod.yo-digital.com/prod/images/logos/hrt.PNG')
   assert.equal(resolveLogo({ logo_image_url: '/prod/images/logos/hrt.PNG' }),
     'https://tv-hr-prod.yo-digital.com/prod/images/logos/hrt.PNG')
   assert.equal(resolveLogo({ logo_url: 'https://tv-hr-prod.yo-digital.com/rtl.png' }),
