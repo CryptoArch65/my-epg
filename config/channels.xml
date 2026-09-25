@@ -53,9 +53,9 @@
   <channel site="mtel.ba" site_id="iptv#ch-arena-premium-3" lang="bs" xmltv_id="ArenaSportPremium3BH.ba">Arena Premium 3</channel>
   <channel site="epg.telemach.ba" site_id="2135" lang="hr" xmltv_id="ArenaSport1.ba">Arena Sport 1</channel>
   <channel site="epg.telemach.ba" site_id="2134" lang="hr" xmltv_id="ArenaSport2.ba">Arena Sport 2</channel>
-  <channel site="mtel.ba" site_id="iptv#ch-55-arena-sport-3" lang="bs" xmltv_id="ArenaSport3.ba">Arena Sport 3</channel>
-  <channel site="mtel.ba" site_id="iptv#ch-56-arena-sport-4" lang="bs" xmltv_id="ArenaSport4.ba">Arena Sport 4</channel>
-  <channel site="mtel.ba" site_id="iptv#ch-arena-sport-5" lang="bs" xmltv_id="ArenaSport5BH.ba">Arena Sport 5</channel>
+  <channel site="epg.telemach.ba" site_id="2133" lang="bs" xmltv_id="ArenaSport3.ba">Arena Sport 3</channel>
+  <channel site="epg.telemach.ba" site_id="2132" lang="bs" xmltv_id="ArenaSport4.ba">Arena Sport 4</channel>
+  <channel site="epg.telemach.ba" site_id="2131" lang="bs" xmltv_id="ArenaSport5BH.ba">Arena Sport 5</channel>
   <channel site="mtel.ba" site_id="iptv#ch-arena-sport-6" lang="bs" xmltv_id="">Arena Sport 6</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="311616552052" lang="hr" xmltv_id="">MAXSport 1</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="311620648169" lang="hr" xmltv_id="">MAXSport 2</channel>
