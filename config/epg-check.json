@@ -1,0 +1,10 @@
+{
+  "source": "mtel",
+  "channels": [
+    { "name": "BHT 1", "site_id": "iptv#ch-15-bht" },
+    { "name": "RTRS", "site_id": "iptv#ch-11-rtrs" },
+    { "name": "RTS 1", "site_id": "iptv#ch-3-rts-1" },
+    { "name": "Nova BH HD", "site_id": "iptv#ch-14-nova-bh-hd" },
+    { "name": "ATV HD", "site_id": "iptv#ch-13-atv-hd" }
+  ]
+}
