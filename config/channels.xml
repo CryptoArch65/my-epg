@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
 <channels>
-  <channel site="mtel.ba" site_id="iptv#ch-283-bht-hd" lang="bs" xmltv_id="BHT1.ba">BHT 1 HD</channel>
-  <channel site="mtel.ba" site_id="iptv#ch-450-ftv-hd" lang="bs" xmltv_id="Federalnatelevizija.ba">FTV HD</channel>
-  <channel site="mtel.ba" site_id="iptv#ch-obn-hd" lang="bs" xmltv_id="OBN.ba">OBN HD</channel>
-  <channel site="mtel.ba" site_id="iptv#ch-263-hayat-hd" lang="bs" xmltv_id="Hayat.ba">Hayat HD</channel>
+  <channel site="epg.telemach.ba" site_id="465" lang="hr" xmltv_id="BHT1.ba">BHT 1 HD</channel>
+  <channel site="epg.telemach.ba" site_id="1614" lang="hr" xmltv_id="Federalnatelevizija.ba">FTV HD (BIH)</channel>
+  <channel site="epg.telemach.ba" site_id="30" lang="hr" xmltv_id="OBN.ba">OBN (BIH)</channel>
+  <channel site="epg.telemach.ba" site_id="466" lang="hr" xmltv_id="Hayat.ba">Hayat HD</channel>
   <channel site="epg.telemach.ba" site_id="471" lang="hr" xmltv_id="FACETV.ba">Face HD</channel>
   <channel site="epg.telemach.ba" site_id="748" lang="hr" xmltv_id="OKanal.ba">O Kanal HD</channel>
-  <channel site="mtel.ba" site_id="iptv#ch-11-rtrs" lang="bs" xmltv_id="RTRSTV.ba">RTRS</channel>
+  <channel site="epg.telemach.ba" site_id="31" lang="hr" xmltv_id="RTRSTV.ba">RTRS</channel>
   <channel site="epg.telemach.ba" site_id="199" lang="hr" xmltv_id="N1.ba">N1 HD (BH)/(BIH)</channel>
   <channel site="epg.telemach.ba" site_id="655" lang="hr" xmltv_id="TVSA.ba">TV Sarajevo HD (BH)</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="274913832105" lang="hr" xmltv_id="HRT1.hr">HRT 1</channel>
@@ -159,4 +159,40 @@
   <channel site="mtel.ba" site_id="iptv#ch-92-pink-kids" lang="bs" xmltv_id="PinkKids.rs">Pink Kids</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276767784228" lang="hr" xmltv_id="RTLKockica.hr">RTL Kockica</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276770344376" lang="hr" xmltv_id="">Nicktoons</channel>
+  <channel site="epg.telemach.ba" site_id="299" lang="hr" xmltv_id="Hayat2.ba">Hayat 2</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-hayat-zivot-i-stil" lang="bs" xmltv_id="HayatZivotIStil.ba">Hayat Život i Stil</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-hayat-love-box" lang="bs" xmltv_id="HayatLoveBox.ba">Hayat Love Box</channel>
+  <channel site="epg.telemach.ba" site_id="640" lang="hr" xmltv_id="NovaBH.ba">Nova BH HD (BIH)</channel>
+  <channel site="epg.telemach.ba" site_id="653" lang="hr" xmltv_id="RTRSPlus.ba">RTRS Plus</channel>
+  <channel site="epg.telemach.ba" site_id="197" lang="hr" xmltv_id="AlfaTV.ba">Alfa (Sarajevo)</channel>
+  <channel site="epg.telemach.ba" site_id="483" lang="hr" xmltv_id="CityTV.ba">City TV HD</channel>
+  <channel site="epg.telemach.ba" site_id="853" lang="hr" xmltv_id="BirTV.ba">RTV BIR HD</channel>
+  <channel site="epg.telemach.ba" site_id="485" lang="hr" xmltv_id="TVLukavac.ba">TV Lukavac</channel>
+  <channel site="epg.telemach.ba" site_id="475" lang="hr" xmltv_id="Kanal6.ba">Kanal 6</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-439-otv-valentino" lang="bs" xmltv_id="OTVValentino.ba">OTV Valentino</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-420-rtv-usk-hd" lang="bs" xmltv_id="RTVUSK.ba">RTV USK HD</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-41-herceg-tv" lang="bs" xmltv_id="HercegTV.ba">Herceg TV HD</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-televizija-m" lang="bs" xmltv_id="TelevizijaM.ba">Televizija M</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-452-svetska-srpska-tv" lang="bs" xmltv_id="RTVPulsBrcko.ba">RTV Puls Brčko distrikt BiH</channel>
+  <channel site="epg.telemach.ba" site_id="1693" lang="hr" xmltv_id="CityPlay.ba">City Play (BIH)</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-una-tv" lang="bs" xmltv_id="UnaTV.ba">UNA TV HD</channel>
+  <channel site="epg.telemach.ba" site_id="449" lang="bs" xmltv_id="BN.ba">BN</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-468-bn-2" lang="bs" xmltv_id="BN2.ba">BN 2 HD</channel>
+  <channel site="epg.telemach.ba" site_id="32" lang="bs" xmltv_id="AlternativnaTV.ba">ATV</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-17-tv-k3-hd" lang="bs" xmltv_id="TVK3.ba">TV K3 HD</channel>
+  <channel site="epg.telemach.ba" site_id="1665" lang="hr" xmltv_id="EuronewsBosnia.ba">EURONEWS BIH HD</channel>
+  <channel site="epg.telemach.ba" site_id="481" lang="hr" xmltv_id="RTVTK.ba">RTV TK</channel>
+  <channel site="epg.telemach.ba" site_id="656" lang="hr" xmltv_id="RTVZenica.ba">RTV ZENICA HD</channel>
+  <channel site="epg.telemach.ba" site_id="482" lang="hr" xmltv_id="RTVHit.ba">RTV HIT</channel>
+  <channel site="epg.telemach.ba" site_id="200" lang="hr" xmltv_id="TelevizijaHema.ba">Televizija Hema</channel>
+  <channel site="epg.telemach.ba" site_id="651" lang="hr" xmltv_id="RTVSana.ba">RTV Sana</channel>
+  <channel site="epg.telemach.ba" site_id="468" lang="hr" xmltv_id="RTVVogosca.ba">TV Vogošća HD</channel>
+  <channel site="epg.telemach.ba" site_id="469" lang="hr" xmltv_id="RTVHB.ba">RTVHB HD</channel>
+  <channel site="epg.telemach.ba" site_id="476" lang="hr" xmltv_id="NTVICKakanj.ba">NTV IC Kakanj</channel>
+  <channel site="epg.telemach.ba" site_id="479" lang="hr" xmltv_id="RTVVisoko.ba">RTV Visoko</channel>
+  <channel site="epg.telemach.ba" site_id="480" lang="hr" xmltv_id="TVBugojno.ba">TV Bugojno</channel>
+  <channel site="epg.telemach.ba" site_id="541" lang="hr" xmltv_id="PosavinaTV.ba">Posavina TV</channel>
+  <channel site="epg.telemach.ba" site_id="552" lang="hr" xmltv_id="TV5.ba">TV5 HD (BH)</channel>
+  <channel site="epg.telemach.ba" site_id="486" lang="hr" xmltv_id="MTVIgman.ba">MTV Igman HD</channel>
+  <channel site="epg.telemach.ba" site_id="675" lang="hr" xmltv_id="IzvornaTV.ba">Izvorna TV</channel>
 </channels>
