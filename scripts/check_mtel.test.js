@@ -30,5 +30,6 @@ test('combines neighboring days and selects previous/current/next once', () => {
 
 test('uses a channel logo from the IPTV product', () => {
   assert.equal(resolveLogo({ picture: { url: '/medias/bht.png' } }), 'https://mtel.ba/medias/bht.png')
+  assert.equal(resolveLogo({ images: [{ url: 'https://medias.services.mtel.ba/logo.png' }] }), 'https://medias.services.mtel.ba/logo.png')
   assert.equal(resolveLogo({}), null)
 })
