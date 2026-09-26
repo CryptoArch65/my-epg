@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tv>
+  <channel id="bht1">
+    <display-name>BHT 1 HD</display-name>
+  </channel>
+  <programme start="20260926120000 +0930" stop="20260926130000 +0930" channel="bht1">
+    <title>TEST EPG</title>
+  </programme>
+</tv>
