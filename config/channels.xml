@@ -181,6 +181,7 @@
   <channel site="epg.telemach.ba" site_id="32" lang="bs" xmltv_id="AlternativnaTV.ba">ATV</channel>
   <channel site="mtel.ba" site_id="iptv#ch-17-tv-k3-hd" lang="bs" xmltv_id="TVK3.ba">TV K3 HD</channel>
   <channel site="epg.telemach.ba" site_id="1665" lang="hr" xmltv_id="EuronewsBosnia.ba">EURONEWS BIH HD</channel>
+  <channel site="epg.telemach.ba" site_id="1523" lang="hr" xmltv_id="BujrumTV.ba">Bujrum TV (BIH)</channel>
   <channel site="epg.telemach.ba" site_id="481" lang="hr" xmltv_id="RTVTK.ba">RTV TK</channel>
   <channel site="epg.telemach.ba" site_id="656" lang="hr" xmltv_id="RTVZenica.ba">RTV ZENICA HD</channel>
   <channel site="epg.telemach.ba" site_id="482" lang="hr" xmltv_id="RTVHit.ba">RTV HIT</channel>
