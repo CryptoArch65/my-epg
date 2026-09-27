@@ -67,6 +67,11 @@ SportKlub2HRHD.hr,SportKlub2HR.hr,|HR| SPORT KLUB 2 HD
 SportKlub3HRHD.hr,SportKlub3HR.hr,|HR| SPORT KLUB 3 HD
 eurosport1.rs,eurosport_1,|SR| EURO SPORT 1
 eurosport2.rs,eurosport_2,|SR| EURO SPORT 2
+arena-sport-1-premium,ArenaSport1Premium.rs@SD,|SR| ARENA 1 PREMIUM HD
+arena-sport-2-premium,ArenaSport2Premium.rs@SD,|SR| ARENA 2 PREMIUM HD
+arena-sport-3-premium,ArenaSport3Premium.rs@SD,|SR| ARENA 3 PREMIUM HD
+arena-sport-4-premium,ArenaSport4Premium.rs@SD,|SR| ARENA 4 PREMIUM
+arena-sport-5-premium,ArenaSport5Premium.rs@SD,|SR| ARENA 5 PREMIUM
 ArenaSportPremium1.rs (src01),ArenaSport1Premium.rs@SD,|SR| ARENA 1 PREMIUM HD
 Arena.PREMIUM.2.rs (src05),ArenaSport2Premium.rs@SD,|SR| ARENA 2 PREMIUM HD
 ArenaSportPremium3.rs (src01),ArenaSport3Premium.rs@SD,|SR| ARENA 3 PREMIUM HD
@@ -76,7 +81,7 @@ arenasport1.rs,ArenaSport1.rs@SD,|SR| ARENA SPORT 1 HD
 arenasport2.rs,ArenaSport2.rs@SD,|SR| ARENA SPORT 2 HD
 arenasport3.rs,ArenaSport3.rs@SD,|SR| ARENA SPORT 3 HD
 arenasport4.rs,ArenaSport4.rs@SD,|SR| ARENA SPORT 4 HD
-arenapremium1.rs,ArenaSport5.rs@SD,|SR| ARENA SPORT 5 HD
+arenapremium1.rs,ArenaSport1Premium.rs@SD,|SR| ARENA 1 PREMIUM
 arenasport6.rs,ArenaSport6.rs@SD,|SR| ARENA SPORT 6
 arenasport7.rs,ArenaSport7.rs@SD,|SR| ARENA SPORT 7
 arenasport8.rs,ArenaSport8.rs@SD,|SR| ARENA SPORT 8
