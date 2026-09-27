@@ -8,16 +8,19 @@ import sys
 import xml.etree.ElementTree as ET
 
 # All configured sources must produce programmes before the guide is published.
-KNOWN_EMPTY_SITES = set()
+KNOWN_EMPTY_SITES = {"m1film.hr/family"}  # Broadcaster publishes a logo but no Family schedule.
 
 
-def main(config_path, guide_path, alias_path=None):
+def main(config_path, guide_path, alias_path=None, extra_config_path=None):
     config = ET.parse(config_path).getroot()
     if config.tag != "channels":
         raise ValueError("Expected <channels> in channel configuration")
 
     expected = {}
-    for channel in config.findall("channel"):
+    extra = ET.parse(extra_config_path).getroot() if extra_config_path else None
+    if extra is not None and extra.tag != "channels":
+        raise ValueError("Expected <channels> in extra channel configuration")
+    for channel in list(config.findall("channel")) + (list(extra.findall("channel")) if extra is not None else []):
         site = channel.get("site")
         channel_id = channel.get("xmltv_id") or channel.get("site_id")
         if not site or not channel_id:
@@ -108,6 +111,6 @@ def main(config_path, guide_path, alias_path=None):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) not in (3, 4):
-        raise SystemExit("Usage: validate_guide.py config/channels.xml guide.new.xml [config/playlist_aliases.csv]")
+    if len(sys.argv) not in (3, 4, 5):
+        raise SystemExit("Usage: validate_guide.py config/channels.xml guide.new.xml [aliases.csv] [film-channels.xml]")
     main(*sys.argv[1:])
