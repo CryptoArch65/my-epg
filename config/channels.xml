@@ -98,6 +98,11 @@
   <channel site="tvarenasport.com" site_id="06" lang="sr" xmltv_id="ArenaSport6.rs@SD">|SR| ARENA SPORT 6</channel>
   <channel site="tvarenasport.com" site_id="07" lang="sr" xmltv_id="ArenaSport7.rs@SD">|SR| ARENA SPORT 7</channel>
   <channel site="tvarenasport.com" site_id="08" lang="sr" xmltv_id="ArenaSport8.rs@SD">|SR| ARENA SPORT 8</channel>
+  <channel site="tvarenasport.com" site_id="09" lang="sr" xmltv_id="ArenaSport9.rs@SD">|SR| ARENA SPORT 9</channel>
+  <channel site="tvarenasport.com" site_id="10" lang="sr" xmltv_id="ArenaSport10.rs@SD">|SR| ARENA SPORT 10</channel>
+  <channel site="mts.rs" site_id="zvezda_tv" lang="bs" xmltv_id="ZvezdaTV.rs">ZVEZDA TV HD</channel>
+  <channel site="mts.rs" site_id="tv_partizan" lang="bs" xmltv_id="TVPartizan.rs">|SR| TV PARTIZAN ᴴᴰ</channel>
+  <channel site="mts.rs" site_id="fight_box" lang="bs" xmltv_id="FightBox.rs">|SR| FIGHT BOX</channel>
   <channel site="mtel.ba" site_id="iptv#ch-465-arena-fight-hd" lang="bs" xmltv_id="ArenaFight.rs">|SR| ARENA FIGHT</channel>
   <channel site="tvarenasport.com" site_id="1x2" lang="sr" xmltv_id="ArenaSport1x2.rs@SD">|SR| ARENA SPORT 1x2</channel>
   <channel site="mtel.ba" site_id="iptv#ch-406-arena-esport-hd" lang="bs" xmltv_id="ArenaEsport.rs">|SR| ARENA E SPORT</channel>
