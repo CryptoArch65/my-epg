@@ -6,6 +6,7 @@ import copy
 import csv
 import sys
 import xml.etree.ElementTree as ET
+from urllib.parse import urlparse
 
 
 def read_aliases(path):
@@ -22,8 +23,26 @@ def read_aliases(path):
     return aliases
 
 
-def main(guide_path, alias_path):
+def read_alias_logos(path):
+    with open(path, newline="", encoding="utf-8") as source:
+        reader = csv.DictReader(source)
+        if reader.fieldnames != ["playlist_tvg_id", "logo_url"]:
+            raise ValueError("Unexpected playlist logo CSV header")
+        logos = {}
+        for row in reader:
+            alias, url = row["playlist_tvg_id"].strip(), row["logo_url"].strip()
+            parsed = urlparse(url)
+            if not alias or alias in logos or parsed.scheme != "https" or not parsed.netloc:
+                raise ValueError(f"Invalid playlist logo for {alias!r}")
+            logos[alias] = url
+    return logos
+
+
+def main(guide_path, alias_path, logos_path=None):
     aliases = read_aliases(alias_path)
+    logos = read_alias_logos(logos_path) if logos_path else {}
+    if set(logos) - set(aliases):
+        raise ValueError("Playlist logo references a missing alias")
     tree = ET.parse(guide_path)
     root = tree.getroot()
     if root.tag != "tv":
@@ -45,6 +64,10 @@ def main(guide_path, alias_path):
             channel.remove(display_name)
         channel.insert(0, ET.Element("display-name"))
         channel[0].text = name
+        if alias in logos:
+            for icon in channel.findall("icon"):
+                channel.remove(icon)
+            channel.append(ET.Element("icon", {"src": logos[alias]}))
         # XMLTV channel entries must precede programme entries.
         root.insert(len(channels), channel)
 
@@ -60,6 +83,6 @@ def main(guide_path, alias_path):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        raise SystemExit("Usage: add_playlist_aliases.py guide.xml config/playlist_aliases.csv")
-    main(sys.argv[1], sys.argv[2])
+    if len(sys.argv) not in (3, 4):
+        raise SystemExit("Usage: add_playlist_aliases.py guide.xml config/playlist_aliases.csv [config/playlist-alias-logos.csv]")
+    main(*sys.argv[1:])
