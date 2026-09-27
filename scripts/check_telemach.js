@@ -140,6 +140,8 @@ async function main({ configPath = path.join(root, 'config', 'telemach-check.jso
       if (!headers?.Authorization) throw new Error(`Could not authenticate to Telemach (${channel.country})`)
       headersByCountry.set(channel.country, headers)
       catalogByCountry.set(channel.country, await getChannelCatalog(channel.country, headers))
+      const premium = [...catalogByCountry.get(channel.country).values()].filter(c => /arena.*premium|premium.*arena/i.test(c.name ?? ''))
+      console.log(`Telemach ${channel.country} Premium channels: ${premium.map(c => `${c.id}=${c.name}`).join('; ') || 'none'}`)
     }
     const headers = headersByCountry.get(channel.country)
     const details = catalogByCountry.get(channel.country).get(channel.site_id)
