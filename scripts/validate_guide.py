@@ -7,10 +7,8 @@ import math
 import sys
 import xml.etree.ElementTree as ET
 
-# Live PR grab on 2026-09-23 returned zero programmes for all Serbian Arena
-# channels from this site. Keep their real IDs in the guide and report the
-# outage, while allowing the other five providers to update normally.
-KNOWN_EMPTY_SITES = {"tvarenasport.com"}
+# All configured sources must produce programmes before the guide is published.
+KNOWN_EMPTY_SITES = set()
 
 
 def main(config_path, guide_path, alias_path=None):
