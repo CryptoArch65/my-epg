@@ -108,13 +108,20 @@
   <channel site="mtel.ba" site_id="iptv#ch-406-arena-esport-hd" lang="bs" xmltv_id="ArenaEsport.rs">|SR| ARENA E SPORT</channel>
   <channel site="tvarenasport.com" site_id="a-tenis" lang="sr" xmltv_id="ArenaSportTenis.rs@SD">|SR| ARENA TENIS</channel>
   <channel site="tvarenasport.com" site_id="a-adrenalin" lang="sr" xmltv_id="ArenaAdrenalin.rs">|SR| ARENA ADRENALIN</channel>
-  <channel site="mts.rs" site_id="animal_planet" lang="bs" xmltv_id="">Animal Planet</channel>
+  <channel site="epg.telemach.ba" site_id="1830" lang="hr" xmltv_id="animal_planet">ANIMAL PLANET ᴴᴰ</channel>
   <channel site="mtel.ba" site_id="iptv#ch-123-discovery-channel" lang="bs" xmltv_id="DiscoveryChannel.rs">Discovery Channel</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276767784233" lang="hr" xmltv_id="">History 2</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="435380776371" lang="hr" xmltv_id="">Viasat History</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276767784232" lang="hr" xmltv_id="">Viasat Nature</channel>
-  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276770344357" lang="hr" xmltv_id="">Viasat Explore</channel>
-  <channel site="mtel.ba" site_id="iptv#ch-bbc-earth-hd" lang="bs" xmltv_id="">BBC Earth HD</channel>
+  <channel site="epg.telemach.ba" site_id="1861" lang="hr" xmltv_id="276770344357">VIASAT EXPLORER</channel>
+  <channel site="epg.telemach.ba" site_id="1640" lang="hr" xmltv_id="iptv#ch-bbc-earth-hd">BBC Earth</channel>
+  <channel site="epg.telemach.ba" site_id="1855" lang="hr" xmltv_id="slovnationalgeographic.si">NATGEO ᴴᴰ</channel>
+  <channel site="epg.telemach.ba" site_id="1863" lang="hr" xmltv_id="natgeowild.ba">NATGEO WILD ᴴᴰ</channel>
+  <channel site="epg.telemach.ba" site_id="1478" lang="hr" xmltv_id="discovery.dk">ID DISCOVERY ᴴᴰ</channel>
+  <channel site="epg.telemach.ba" site_id="1857" lang="hr" xmltv_id="historychannel2.ba">History HD</channel>
+  <channel site="epg.telemach.ba" site_id="1867" lang="hr" xmltv_id="eentertainment.ba">E! Entertainment</channel>
+  <channel site="epg.telemach.ba" site_id="1866" lang="hr" xmltv_id="travelchannel.bh">TRAVEL CHANNEL ᴴᴰ</channel>
+  <channel site="epg.telemach.ba" site_id="1860" lang="hr" xmltv_id="loviribolov.ba">LOV &amp; RIBOLOV ᴴᴰ</channel>
   <channel site="mtel.ba" site_id="iptv#ch-140-docubox-hd" lang="bs" xmltv_id="">Docubox</channel>
   <channel site="mtel.ba" site_id="iptv#ch-153-24-kitchen" lang="bs" xmltv_id="">24 Kitchen</channel>
   <channel site="mtel.ba" site_id="iptv#ch-451-food-network" lang="bs" xmltv_id="">Food Network</channel>
