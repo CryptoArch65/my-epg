@@ -69,6 +69,20 @@
   <channel site="tvarenasport.hr" site_id="08" lang="hr" xmltv_id="ArenaSport8.hr@SD">Arena Sport 8</channel>
   <channel site="tvarenasport.hr" site_id="09" lang="hr" xmltv_id="ArenaSport9.hr@SD">Arena Sport 9</channel>
   <channel site="tvarenasport.hr" site_id="10" lang="hr" xmltv_id="ArenaSport10.hr@SD">Arena Sport 10</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="696524328080" lang="hr" xmltv_id="SportKlub1HR.hr">|HR| SPORT KLUB 1</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="696528936296" lang="hr" xmltv_id="SportKlub2HR.hr">|HR| SPORT KLUB 2</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="696530472226" lang="hr" xmltv_id="SportKlub3HR.hr">|HR| SPORT KLUB 3</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="696530983951" lang="hr" xmltv_id="SportKlub4HR.hr">|HR| SPORT KLUB 4</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="696521768448" lang="hr" xmltv_id="SportKlub5HR.hr">|HR| SPORT KLUB 5</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="696524328149" lang="hr" xmltv_id="SportKlub6HR.hr">|HR| SPORT KLUB 6</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="696529959967" lang="hr" xmltv_id="SportKlub7HR.hr">|HR| SPORT KLUB 7</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="696523816253" lang="hr" xmltv_id="SportKlub8HR.hr">|HR| SPORT KLUB 8</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="696529447952" lang="hr" xmltv_id="SportKlub9HR.hr">|HR| SPORT KLUB 9</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="696529448021" lang="hr" xmltv_id="SportKlub10HR.hr">|HR| SPORT KLUB 10</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="704057896278" lang="hr" xmltv_id="SportKlub11HR.hr">|HR| SPORT KLUB 11</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="708158504296" lang="hr" xmltv_id="SportKlub12HR.hr">|HR| SPORT KLUB 12</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="704057896326" lang="hr" xmltv_id="SportKlubGolfHR.hr">|HR| SK GOLF</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="704061992162" lang="hr" xmltv_id="SportKlubEsportsHR.hr">|HR| SPORT KLUB E SPORTS</channel>
   <channel site="mts.rs" site_id="eurosport_1" lang="bs" xmltv_id="">Eurosport 1</channel>
   <channel site="mts.rs" site_id="eurosport_2" lang="bs" xmltv_id="">Eurosport 2</channel>
   <channel site="tvarenasport.com" site_id="a1p" lang="sr" xmltv_id="ArenaSport1Premium.rs@SD">Arena Sport 1 Premium Serbia</channel>
