@@ -39,6 +39,20 @@ jobs:
       - name: Clone iptv-org/epg
         run: git clone --depth 1 https://github.com/iptv-org/epg.git epg
 
+      - name: Use Croatia Arena schedule embedded on the official site
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          config = Path("epg/sites/tvarenasport.hr/tvarenasport.hr.config.js")
+          original = "url: 'https://tvarenaprogram.com/live/v2/hr',"
+          replacement = "url: 'https://tvarenasport.hr/wp-content/tv-program.php',"
+          content = config.read_text(encoding="utf-8")
+          if content.count(original) != 1:
+              raise SystemExit("Croatian Arena grabber URL changed upstream")
+          config.write_text(content.replace(original, replacement), encoding="utf-8")
+          PY
+
       - name: Install grabber dependencies
         working-directory: epg
         run: npm ci
