@@ -27,6 +27,10 @@ CHANNELS = {
     "1864": "276771368119",  # Crime & Investigation
     "1120": "276770856271",  # Da Vinci
     "1865": "iptv#ch-444-hgtv",  # Home and Garden TV
+    "1834": "276770856295",  # STAR Channel
+    "1835": "276771368133",  # STAR Life
+    "1836": "276770856280",  # STAR Crime
+    "1837": "276770344385",  # STAR Movies
 }
 IMAGE_HOST = "images-web.ug-be.cdn.united.cloud"
 BASE_URL = f"https://{IMAGE_HOST}"
