@@ -7,6 +7,7 @@ on:
     paths:
       - config/channels.xml
       - config/playlist_aliases.csv
+      - config/playlist-alias-logos.csv
       - config/bih-source-logos.csv
       - scripts/arena_serbia.config.js
       - scripts/naslovi.net.config.js
@@ -78,7 +79,7 @@ jobs:
       - name: Validate guide before publishing
         run: |
           python3 scripts/add_channel_logos.py guide.new.xml config/bih-source-logos.csv
-          python3 scripts/add_playlist_aliases.py guide.new.xml config/playlist_aliases.csv
+          python3 scripts/add_playlist_aliases.py guide.new.xml config/playlist_aliases.csv config/playlist-alias-logos.csv
           python3 scripts/validate_guide.py config/channels.xml guide.new.xml config/playlist_aliases.csv
 
       - name: Publish guide.xml
