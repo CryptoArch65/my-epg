@@ -156,11 +156,9 @@
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276795944047" lang="hr" xmltv_id="Klasik.hr">Klasik</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276796967984" lang="hr" xmltv_id="KinoTV.hr">Kino TV</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="338257448306" lang="hr" xmltv_id="">Viasat Kino</channel>
-  <channel site="mtel.ba" site_id="iptv#ch-442-superstar-2" lang="bs" xmltv_id="">Superstar 2</channel>
-  <channel site="mtel.ba" site_id="iptv#ch-superstar-3-hd" lang="bs" xmltv_id="">SUPERSTAR 3 HD</channel>
-  <channel site="mtel.ba" site_id="iptv#ch-286-filmbox-premium" lang="bs" xmltv_id="">Filmbox Premium</channel>
-  <channel site="mtel.ba" site_id="iptv#ch-124-filmbox-arthouse" lang="bs" xmltv_id="">Filmbox Arthouse</channel>
-  <channel site="mtel.ba" site_id="iptv#ch-120-filmbox-extra" lang="bs" xmltv_id="">Filmbox Extra</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="528074792267" lang="hr" xmltv_id="">FilmBox+ Hits</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="528074792422" lang="hr" xmltv_id="">FilmBox+ Festival</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="528078376344" lang="hr" xmltv_id="">FilmBox+ Emotion</channel>
   <channel site="mtel.ba" site_id="iptv#ch-122-filmbox-stars" lang="bs" xmltv_id="">Filmbox Stars</channel>
   <channel site="mtel.ba" site_id="iptv#ch-euro-cinema-1" lang="bs" xmltv_id="">Euro Cinema 1</channel>
   <channel site="mtel.ba" site_id="iptv#ch-euro-cinema-2" lang="bs" xmltv_id="">Euro Cinema 2</channel>
