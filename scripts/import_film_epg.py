@@ -2,6 +2,7 @@
 """Add film channel broadcaster schedules and logos to the XMLTV guide."""
 
 import csv
+import io
 import re
 import sys
 import time
@@ -13,6 +14,7 @@ from zoneinfo import ZoneInfo
 
 import cairosvg
 from lxml import html
+from PIL import Image
 
 
 ZONE = ZoneInfo("Europe/Zagreb")
@@ -22,6 +24,7 @@ M1_URLS = {
     "M1Gold.hr": "https://www.m1film.hr/gold/epg/",
 }
 SUPERSTAR_URL = "https://superstartv.rs/programske-seme/"
+DIZI_URL = "https://www.tvprogramdanas.net/dizi"
 SUPERSTAR_TABS = {
     "SuperstarTV1.rs": "elementor-tab-content-1641",
     "SuperstarTV2.rs": "elementor-tab-content-1642",
@@ -39,6 +42,7 @@ LOGOS = {
     "528074792267": "https://tv-hr-prod.yo-digital.com/prod/images/logos/445/250/c0dfc41344be994e918bde5d6594c0cf.000328.png",  # Hits
     "528074792422": "https://tv-hr-prod.yo-digital.com/prod/images/logos/445/250/0a94c619694dd7c4d7aed031121c739d.000331.png",  # Festival
     "528078376344": "https://tv-hr-prod.yo-digital.com/prod/images/logos/445/250/10a620143bb634323129956f97c6bc82.000329.png",  # Emotion
+    "DiziChannel.hr": "https://www.tvprogramdanas.net/uploads/logos/dizi.webp",
 }
 
 
@@ -164,12 +168,43 @@ def superstar_schedules(page):
     return schedules
 
 
+def dizi_schedule(page):
+    tree = html.fromstring(page)
+    entries = []
+    dates = set()
+    for tab in tree.xpath('//div[contains(concat(" ", normalize-space(@class), " "), " schedule-tab ")]'):
+        match = re.fullmatch(r"schedule-(\d{4}-\d\d-\d\d)", tab.get("id", ""))
+        if not match:
+            raise ValueError("Missing Dizi schedule day")
+        day = match.group(1)
+        dates.add(day)
+        for row in tab.xpath('.//div[contains(concat(" ", normalize-space(@class), " "), " timeline-item ")]'):
+            clock = text(row, './/span[contains(concat(" ", normalize-space(@class), " "), " time ")]')
+            duration = text(row, './/span[contains(concat(" ", normalize-space(@class), " "), " duration ")]')
+            title = text(row, './/h3[contains(concat(" ", normalize-space(@class), " "), " program-name ")]')
+            description = text(row, './/p[contains(concat(" ", normalize-space(@class), " "), " program-desc ")]')
+            minutes = re.fullmatch(r"(\d+)\s*min", duration)
+            if not title or not re.fullmatch(r"\d\d:\d\d", clock) or not minutes:
+                raise ValueError(f"Incomplete Dizi programme on {day}")
+            start = timestamp(day, clock)
+            stop = start + timedelta(minutes=int(minutes.group(1)))
+            entries.append((start, title, description, stop))
+    if not dates or len(entries) < 10:
+        raise ValueError("Dizi channel schedule missing")
+    today = datetime.now(ZONE).date()
+    if max(dates) < (today - timedelta(days=1)).isoformat():
+        print(f"WARNING: Dizi schedule expired {max(dates)}; waiting for publisher's next update")
+        return []
+    return entries
+
+
 def append_programmes(root, channel_id, entries):
     entries = sorted(set(entries), key=lambda item: item[0])
     if len(entries) < 10:
         raise ValueError(f"Too few programmes for {channel_id}: {len(entries)}")
-    for index, (start, title, description) in enumerate(entries):
-        stop = entries[index + 1][0] if index + 1 < len(entries) else start + timedelta(hours=2)
+    for index, item in enumerate(entries):
+        start, title, description = item[:3]
+        stop = item[3] if len(item) == 4 else entries[index + 1][0] if index + 1 < len(entries) else start + timedelta(hours=2)
         if not start < stop <= start + timedelta(hours=6):
             raise ValueError(f"Invalid programme times for {channel_id}: {start} -> {stop}")
         event = ET.SubElement(root, "programme", {
@@ -187,9 +222,10 @@ def main(guide_path, config_path, logo_csv, logos_dir):
     schedules = axn_schedules(download(AXN_URL))
     schedules.update({channel_id: m1_schedule(download(url)) for channel_id, url in M1_URLS.items()})
     schedules.update(superstar_schedules(download(SUPERSTAR_URL)))
+    schedules["DiziChannel.hr"] = dizi_schedule(download(DIZI_URL))
     config = ET.parse(config_path).getroot()
     custom_ids = {channel.get("xmltv_id") for channel in config}
-    if custom_ids != (set(M1_URLS) | {"M1Family.hr", "AXN.hr", "AXNSpin.hr"} | set(SUPERSTAR_TABS)):
+    if custom_ids != (set(M1_URLS) | {"M1Family.hr", "AXN.hr", "AXNSpin.hr", "DiziChannel.hr"} | set(SUPERSTAR_TABS)):
         raise ValueError("Custom channel configuration differs from logo list")
     if not custom_ids <= set(LOGOS):
         raise ValueError("Missing custom channel logos")
@@ -207,6 +243,11 @@ def main(guide_path, config_path, logo_csv, logos_dir):
                 if ET.fromstring(data).tag != "{http://www.w3.org/2000/svg}svg":
                     raise ValueError(f"Unexpected logo format: {channel_id}")
                 data = cairosvg.svg2png(bytestring=data, output_width=300)
+            elif url.endswith(".webp"):
+                with Image.open(io.BytesIO(data)) as image:
+                    buffer = io.BytesIO()
+                    image.convert("RGBA").save(buffer, format="PNG")
+                    data = buffer.getvalue()
             if not data.startswith(b"\x89PNG\r\n\x1a\n"):
                 raise ValueError(f"Unexpected logo format: {channel_id}")
             output.write_bytes(data)
