@@ -12,6 +12,7 @@ on:
       - scripts/arena_serbia.config.js
       - scripts/naslovi.net.config.js
       - scripts/add_channel_logos.py
+      - scripts/import_documentary_logos.py
       - scripts/add_playlist_aliases.py
       - scripts/validate_guide.py
       - .github/workflows/epg.yml
@@ -68,6 +69,12 @@ jobs:
         working-directory: epg
         run: npm ci
 
+      - name: Host selected documentary channel logos from Telemach
+        run: |
+          python3 scripts/import_documentary_logos.py \
+            epg/sites/epg.telemach.ba/epg.telemach.ba.config.js \
+            config/bih-source-logos.csv logos
+
       - name: Grab selected channels
         working-directory: epg
         run: |
@@ -88,7 +95,7 @@ jobs:
           mv guide.new.xml guide.xml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add guide.xml
+          git add guide.xml config/bih-source-logos.csv logos/
           if git diff --cached --quiet; then
             echo "Guide has not changed"
             exit 0
