@@ -13,6 +13,7 @@ on:
       - scripts/naslovi.net.config.js
       - scripts/add_channel_logos.py
       - scripts/import_documentary_logos.py
+      - scripts/import_maxsport_logos.py
       - scripts/add_playlist_aliases.py
       - scripts/validate_guide.py
       - .github/workflows/epg.yml
@@ -74,6 +75,9 @@ jobs:
           python3 scripts/import_documentary_logos.py \
             epg/sites/epg.telemach.ba/epg.telemach.ba.config.js \
             config/bih-source-logos.csv logos
+
+      - name: Host MAXSport logos from Hrvatski Telekom
+        run: python3 scripts/import_maxsport_logos.py config/bih-source-logos.csv logos
 
       - name: Grab selected channels
         working-directory: epg
