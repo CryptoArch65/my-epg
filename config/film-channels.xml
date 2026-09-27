@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<channels>
+  <channel site="axn.hr" site_id="axn" lang="hr" xmltv_id="AXN.hr">AXN</channel>
+  <channel site="axn.hr" site_id="spin" lang="hr" xmltv_id="AXNSpin.hr">AXN Spin</channel>
+  <channel site="m1film.hr" site_id="hr" lang="hr" xmltv_id="M1Film.hr">M1 Film</channel>
+  <channel site="m1film.hr" site_id="gold" lang="hr" xmltv_id="M1Gold.hr">M1 Gold</channel>
+  <channel site="m1film.hr/family" site_id="family" lang="hr" xmltv_id="M1Family.hr">M1 Family</channel>
+</channels>
