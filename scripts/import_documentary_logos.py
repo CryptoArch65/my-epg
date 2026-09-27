@@ -21,6 +21,12 @@ CHANNELS = {
     "1867": "eentertainment.ba",
     "1866": "travelchannel.bh",
     "1860": "loviribolov.ba",
+    "1858": "435380776371",  # Viasat History
+    "1862": "276767784232",  # Viasat Nature
+    "119": "iptv#ch-127-tlc",  # TLC
+    "1864": "276771368119",  # Crime & Investigation
+    "1120": "276770856271",  # Da Vinci
+    "1865": "iptv#ch-444-hgtv",  # Home and Garden TV
 }
 IMAGE_HOST = "images-web.ug-be.cdn.united.cloud"
 BASE_URL = f"https://{IMAGE_HOST}"
@@ -72,7 +78,7 @@ def main(config, csv_path, logos_dir):
     if all(configured[guide_id]["logo_url"].startswith(REPO_URL + f"telemach-{site_id}.")
            and (logos_dir / configured[guide_id]["logo_url"].removeprefix(REPO_URL)).is_file()
            for site_id, guide_id in CHANNELS.items()):
-        print("All 10 Telemach logos are already hosted in this repository")
+        print(f"All {len(CHANNELS)} Telemach logos are already hosted in this repository")
         return
 
     script = config.read_text(encoding="utf-8")
@@ -113,7 +119,7 @@ def main(config, csv_path, logos_dir):
         writer = csv.DictWriter(target, fieldnames=["guide_id", "logo_url"], lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
-    print("Imported 10 official Telemach logos into logos/ and updated logo mappings")
+    print(f"Imported {len(CHANNELS)} official Telemach logos into logos/ and updated logo mappings")
 
 
 if __name__ == "__main__":
