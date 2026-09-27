@@ -137,6 +137,8 @@
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276771368141" lang="hr" xmltv_id="">HBO 2</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276767784254" lang="hr" xmltv_id="">HBO 3</channel>
   <channel site="epg.telemach.ba" site_id="283" lang="hr" xmltv_id="CineStarTV1.ba">CineStar TV 1 HD (BIH)</channel>
+  <channel site="epg.telemach.ba" site_id="1880" lang="hr" xmltv_id="Diva.ba">Diva ➁</channel>
+  <channel site="epg.telemach.ba" site_id="990" lang="hr" xmltv_id="PickboxTV.ba">Pickbox TV</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="461760552050" lang="hr" xmltv_id="CineStarTVPremiere1.hr">Cinestar Premiere 1</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="461771816042" lang="hr" xmltv_id="CineStarTVPremiere2.hr">Cinestar Premiere 2</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="461780008179" lang="hr" xmltv_id="CineStarTV2.hr">Cinestar 2</channel>
