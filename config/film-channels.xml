@@ -5,4 +5,7 @@
   <channel site="m1film.hr" site_id="hr" lang="hr" xmltv_id="M1Film.hr">M1 Film</channel>
   <channel site="m1film.hr" site_id="gold" lang="hr" xmltv_id="M1Gold.hr">M1 Gold</channel>
   <channel site="m1film.hr/family" site_id="family" lang="hr" xmltv_id="M1Family.hr">M1 Family</channel>
+  <channel site="superstartv.rs" site_id="1" lang="sr" xmltv_id="SuperstarTV1.rs">SUPERSTAR TV HD</channel>
+  <channel site="superstartv.rs" site_id="2" lang="sr" xmltv_id="SuperstarTV2.rs">SUPERSTAR TV 2</channel>
+  <channel site="superstartv.rs" site_id="3" lang="sr" xmltv_id="SuperstarTV3.rs">SUPERSTAR TV 3</channel>
 </channels>
