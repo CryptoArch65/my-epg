@@ -8,7 +8,7 @@ import sys
 import xml.etree.ElementTree as ET
 
 # All configured sources must produce programmes before the guide is published.
-KNOWN_EMPTY_SITES = {"m1film.hr/family"}  # Broadcaster publishes a logo but no Family schedule.
+KNOWN_EMPTY_SITES = {"m1film.hr/family", "superstartv.rs"}  # Superstar's published week may expire before its next update.
 
 
 def main(config_path, guide_path, alias_path=None, extra_config_path=None):
