@@ -31,6 +31,7 @@ CHANNELS = {
     "1835": "276771368133",  # STAR Life
     "1836": "276770856280",  # STAR Crime
     "1837": "276770344385",  # STAR Movies
+    "283": "CineStarTV1.ba",  # CineStar TV 1 HD (BIH)
 }
 IMAGE_HOST = "images-web.ug-be.cdn.united.cloud"
 BASE_URL = f"https://{IMAGE_HOST}"
