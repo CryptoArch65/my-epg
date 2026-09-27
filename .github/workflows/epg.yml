@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - config/channels.xml
+      - config/film-channels.xml
       - config/playlist_aliases.csv
       - config/playlist-alias-logos.csv
       - config/bih-source-logos.csv
@@ -13,6 +14,7 @@ on:
       - scripts/naslovi.net.config.js
       - scripts/add_channel_logos.py
       - scripts/import_documentary_logos.py
+      - scripts/import_film_epg.py
       - scripts/import_maxsport_logos.py
       - scripts/add_playlist_aliases.py
       - scripts/validate_guide.py
@@ -70,6 +72,9 @@ jobs:
         working-directory: epg
         run: npm ci
 
+      - name: Install HTML parser for broadcaster schedules
+        run: python3 -m pip install lxml cairosvg
+
       - name: Host selected documentary channel logos from Telemach
         run: |
           python3 scripts/import_documentary_logos.py \
@@ -87,11 +92,16 @@ jobs:
             --output=../guide.new.xml \
             --maxConnections=4
 
+      - name: Add AXN and M1 Film broadcaster schedules and logos
+        run: |
+          python3 scripts/import_film_epg.py \
+            guide.new.xml config/film-channels.xml config/bih-source-logos.csv logos
+
       - name: Validate guide before publishing
         run: |
           python3 scripts/add_channel_logos.py guide.new.xml config/bih-source-logos.csv
           python3 scripts/add_playlist_aliases.py guide.new.xml config/playlist_aliases.csv config/playlist-alias-logos.csv
-          python3 scripts/validate_guide.py config/channels.xml guide.new.xml config/playlist_aliases.csv
+          python3 scripts/validate_guide.py config/channels.xml guide.new.xml config/playlist_aliases.csv config/film-channels.xml
 
       - name: Publish guide.xml
         if: github.ref == 'refs/heads/main'
