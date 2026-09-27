@@ -85,11 +85,11 @@
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="704061992162" lang="hr" xmltv_id="SportKlubEsportsHR.hr">|HR| SPORT KLUB E SPORTS</channel>
   <channel site="mts.rs" site_id="eurosport_1" lang="bs" xmltv_id="">Eurosport 1</channel>
   <channel site="mts.rs" site_id="eurosport_2" lang="bs" xmltv_id="">Eurosport 2</channel>
-  <channel site="tvarenasport.com" site_id="a1p" lang="sr" xmltv_id="ArenaSport1Premium.rs@SD">Arena Sport 1 Premium Serbia</channel>
-  <channel site="tvarenasport.com" site_id="a2p" lang="sr" xmltv_id="ArenaSport2Premium.rs@SD">Arena Sport 2 Premium Serbia</channel>
-  <channel site="tvarenasport.com" site_id="a3p" lang="sr" xmltv_id="ArenaSport3Premium.rs@SD">Arena Sport 3 Premium Serbia</channel>
-  <channel site="tvarenasport.com" site_id="a4p" lang="sr" xmltv_id="ArenaSport4Premium.rs@SD">Arena Sport 4 Premium Serbia</channel>
-  <channel site="tvarenasport.com" site_id="aa5p" lang="sr" xmltv_id="ArenaSport5Premium.rs@SD">Arena Sport 5 Premium Serbia</channel>
+  <channel site="tvarenasport.com" site_id="a1p" lang="sr" xmltv_id="ArenaSport1Premium.rs@SD">|SR| ARENA 1 PREMIUM</channel>
+  <channel site="tvarenasport.com" site_id="a2p" lang="sr" xmltv_id="ArenaSport2Premium.rs@SD">|SR| ARENA 2 PREMIUM</channel>
+  <channel site="tvarenasport.com" site_id="a3p" lang="sr" xmltv_id="ArenaSport3Premium.rs@SD">|SR| ARENA 3 PREMIUM</channel>
+  <channel site="tvarenasport.com" site_id="a4p" lang="sr" xmltv_id="ArenaSport4Premium.rs@SD">|SR| ARENA 4 PREMIUM</channel>
+  <channel site="tvarenasport.com" site_id="aa5p" lang="sr" xmltv_id="ArenaSport5Premium.rs@SD">|SR| ARENA 5 PREMIUM</channel>
   <channel site="tvarenasport.com" site_id="01" lang="sr" xmltv_id="ArenaSport1.rs@SD">Arena Sport 1 Serbia</channel>
   <channel site="tvarenasport.com" site_id="02" lang="sr" xmltv_id="ArenaSport2.rs@SD">Arena Sport 2 Serbia</channel>
   <channel site="tvarenasport.com" site_id="03" lang="sr" xmltv_id="ArenaSport3.rs@SD">Arena Sport 3 Serbia</channel>
