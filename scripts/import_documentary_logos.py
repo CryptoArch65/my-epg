@@ -34,6 +34,7 @@ CHANNELS = {
     "283": "CineStarTV1.ba",  # CineStar TV 1 HD (BIH)
     "1880": "Diva.ba",  # Diva
     "990": "PickboxTV.ba",  # Pickbox HD
+    "1849": "SciFi.ba",  # SCI FI HD (BIH)
 }
 IMAGE_HOST = "images-web.ug-be.cdn.united.cloud"
 BASE_URL = f"https://{IMAGE_HOST}"
