@@ -83,8 +83,8 @@
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="708158504296" lang="hr" xmltv_id="SportKlub12HR.hr">|HR| SPORT KLUB 12</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="704057896326" lang="hr" xmltv_id="SportKlubGolfHR.hr">|HR| SK GOLF</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="704061992162" lang="hr" xmltv_id="SportKlubEsportsHR.hr">|HR| SPORT KLUB E SPORTS</channel>
-  <channel site="mts.rs" site_id="eurosport_1" lang="bs" xmltv_id="">Eurosport 1</channel>
-  <channel site="mts.rs" site_id="eurosport_2" lang="bs" xmltv_id="">Eurosport 2</channel>
+  <channel site="naslovi.net" site_id="eurosport" lang="sr" xmltv_id="eurosport_1">|SR| EURO SPORT 1</channel>
+  <channel site="naslovi.net" site_id="eurosport-2" lang="sr" xmltv_id="eurosport_2">|SR| EURO SPORT 2</channel>
   <channel site="tvarenasport.com" site_id="a1p" lang="sr" xmltv_id="ArenaSport1Premium.rs@SD">|SR| ARENA 1 PREMIUM</channel>
   <channel site="tvarenasport.com" site_id="a2p" lang="sr" xmltv_id="ArenaSport2Premium.rs@SD">|SR| ARENA 2 PREMIUM</channel>
   <channel site="tvarenasport.com" site_id="a3p" lang="sr" xmltv_id="ArenaSport3Premium.rs@SD">|SR| ARENA 3 PREMIUM</channel>
