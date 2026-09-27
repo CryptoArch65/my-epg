@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Add AXN and M1 schedules and their broadcasters' logos to the XMLTV guide."""
+"""Add film channel broadcaster schedules and logos to the XMLTV guide."""
 
 import csv
 import re
@@ -21,12 +21,24 @@ M1_URLS = {
     "M1Film.hr": "https://www.m1film.hr/hr/epg/",
     "M1Gold.hr": "https://www.m1film.hr/gold/epg/",
 }
+SUPERSTAR_URL = "https://superstartv.rs/programske-seme/"
+SUPERSTAR_TABS = {
+    "SuperstarTV1.rs": "elementor-tab-content-1641",
+    "SuperstarTV2.rs": "elementor-tab-content-1642",
+    "SuperstarTV3.rs": "elementor-tab-content-1643",
+}
 LOGOS = {
     "AXN.hr": "https://axnro.getonline.ie/wp-content/uploads/2024/10/AXN-hover.png",
     "AXNSpin.hr": "https://axnro.getonline.ie/wp-content/uploads/2024/10/AXN_spin.png",
     "M1Film.hr": "https://www.m1film.hr/system/template/mediatv/images/logo-m1.png",
     "M1Gold.hr": "https://www.m1film.hr/system/template/mediatv/images/logo-m1gold.png",
     "M1Family.hr": "https://www.m1film.hr/system/template/mediatv/images/logo-m1family.svg",
+    "SuperstarTV1.rs": "https://superstartv.rs/wp-content/uploads/2024/05/ss1-1.png",
+    "SuperstarTV2.rs": "https://superstartv.rs/wp-content/uploads/2024/05/ss2-1.png",
+    "SuperstarTV3.rs": "https://superstartv.rs/wp-content/uploads/2024/05/ss3n.png",
+    "528074792267": "https://tv-hr-prod.yo-digital.com/prod/images/logos/445/250/c0dfc41344be994e918bde5d6594c0cf.000328.png",  # Hits
+    "528074792422": "https://tv-hr-prod.yo-digital.com/prod/images/logos/445/250/0a94c619694dd7c4d7aed031121c739d.000331.png",  # Festival
+    "528078376344": "https://tv-hr-prod.yo-digital.com/prod/images/logos/445/250/10a620143bb634323129956f97c6bc82.000329.png",  # Emotion
 }
 
 
@@ -103,6 +115,55 @@ def m1_schedule(page):
     return programmes
 
 
+def superstar_schedules(page):
+    tree = html.fromstring(page)
+    match = re.search(r"(\d\d\.\d\d\.\d{4})\s*[–-]\s*(\d\d\.\d\d\.\d{4})", tree.text_content())
+    if not match:
+        raise ValueError("Superstar published schedule date range missing")
+    first = datetime.strptime(match.group(1), "%d.%m.%Y").date()
+    last = datetime.strptime(match.group(2), "%d.%m.%Y").date()
+    if last < first or (last - first).days > 14:
+        raise ValueError("Unexpected Superstar schedule date range")
+
+    schedules = {}
+    for channel_id, tab_id in SUPERSTAR_TABS.items():
+        tab = tree.xpath(f'//*[@id="{tab_id}"]')
+        if len(tab) != 1:
+            raise ValueError(f"Missing official Superstar tab for {channel_id}")
+        programmes = []
+        seen_days = set()
+        for heading in tab[0].xpath('.//h3'):
+            date_match = re.search(r"\b(\d\d)\.(\d\d)\b", heading.text_content())
+            if not date_match:
+                continue
+            day = first.replace(day=int(date_match.group(1)), month=int(date_match.group(2)))
+            if day < first and first.month == 12:
+                day = day.replace(year=first.year + 1)
+            if not first <= day <= last or day in seen_days:
+                continue  # WordPress repeats the same tables in nested page sections.
+            seen_days.add(day)
+            table = heading.xpath('ancestor::table[1]')[0]
+            previous = None
+            for row in table.xpath('./tr[td]'):
+                cells = row.xpath('./td')
+                if len(cells) < 2:
+                    continue
+                clock = " ".join(cells[0].text_content().split())
+                title = " ".join(cells[1].text_content().split())
+                if not re.fullmatch(r"\d\d:\d\d", clock) or not title:
+                    raise ValueError(f"Incomplete Superstar listing for {channel_id} on {day}")
+                start = timestamp(day.isoformat(), clock, previous)
+                previous = start
+                programmes.append((start, title, ""))
+        if len(seen_days) < 3 or len(programmes) < 20:
+            raise ValueError(f"Superstar channel schedule incomplete: {channel_id}")
+        if last < datetime.now(ZONE).date() - timedelta(days=1):
+            print(f"WARNING: Superstar schedule expired {last}; waiting for publisher's next update")
+            programmes = []
+        schedules[channel_id] = programmes
+    return schedules
+
+
 def append_programmes(root, channel_id, entries):
     entries = sorted(set(entries), key=lambda item: item[0])
     if len(entries) < 10:
@@ -125,9 +186,13 @@ def append_programmes(root, channel_id, entries):
 def main(guide_path, config_path, logo_csv, logos_dir):
     schedules = axn_schedules(download(AXN_URL))
     schedules.update({channel_id: m1_schedule(download(url)) for channel_id, url in M1_URLS.items()})
+    schedules.update(superstar_schedules(download(SUPERSTAR_URL)))
     config = ET.parse(config_path).getroot()
-    if {channel.get("xmltv_id") for channel in config} != set(LOGOS):
+    custom_ids = {channel.get("xmltv_id") for channel in config}
+    if custom_ids != (set(M1_URLS) | {"M1Family.hr", "AXN.hr", "AXNSpin.hr"} | set(SUPERSTAR_TABS)):
         raise ValueError("Custom channel configuration differs from logo list")
+    if not custom_ids <= set(LOGOS):
+        raise ValueError("Missing custom channel logos")
 
     with logo_csv.open(newline="", encoding="utf-8") as source:
         rows = list(csv.DictReader(source))
@@ -167,7 +232,8 @@ def main(guide_path, config_path, logo_csv, logos_dir):
             ET.SubElement(node, "display-name", lang="hr").text = "AXN ADRIA"
         root.insert(len(channels) + offset, node)
     for channel_id, entries in schedules.items():
-        append_programmes(root, channel_id, entries)
+        if entries:
+            append_programmes(root, channel_id, entries)
     tree.write(guide_path, encoding="utf-8", xml_declaration=True)
 
 
