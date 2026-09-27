@@ -9,6 +9,7 @@ on:
       - config/playlist_aliases.csv
       - config/bih-source-logos.csv
       - scripts/arena_serbia.config.js
+      - scripts/naslovi.net.config.js
       - scripts/add_channel_logos.py
       - scripts/add_playlist_aliases.py
       - scripts/validate_guide.py
@@ -39,6 +40,11 @@ jobs:
 
       - name: Clone iptv-org/epg
         run: git clone --depth 1 https://github.com/iptv-org/epg.git epg
+
+      - name: Add Naslovi.net Eurosport schedule grabber
+        run: |
+          mkdir -p epg/sites/naslovi.net
+          cp scripts/naslovi.net.config.js epg/sites/naslovi.net/naslovi.net.config.js
 
       - name: Read Serbian Arena schedules embedded on the official site
         run: cp scripts/arena_serbia.config.js epg/sites/tvarenasport.com/tvarenasport.com.config.js
