@@ -16,6 +16,7 @@ function channelName(siteId) {
   const regular = /^0*(\d+)$/.exec(siteId)
   if (regular) return `Arena Sport ${regular[1]}`
   if (siteId === 'a-tenis') return 'Arena Tenis'
+  if (siteId === 'a-adrenalin') return 'Adrenalin'
   if (siteId === '1x2') return 'Arena 1X2'
   return null
 }
