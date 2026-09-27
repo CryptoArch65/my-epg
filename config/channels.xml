@@ -48,9 +48,9 @@
   <channel site="mtel.ba" site_id="iptv#ch-151-pink-fashion" lang="bs" xmltv_id="PinkFashion.rs">Pink Fashion</channel>
   <channel site="mtel.ba" site_id="iptv#ch-215-pink-world" lang="bs" xmltv_id="PinkWorld.rs">PINK WORLD</channel>
   <channel site="mtel.ba" site_id="iptv#ch-150-pink-style" lang="bs" xmltv_id="PinkStyle.rs">Pink Style</channel>
-  <channel site="epg.telemach.ba" site_id="1934" lang="hr" xmltv_id="ArenaSportPremium1BH.ba">Arena Premium 1 HD (BIH)</channel>
-  <channel site="epg.telemach.ba" site_id="1935" lang="hr" xmltv_id="ArenaSportPremium2BH.ba">Arena Premium 2 HD (BIH)</channel>
-  <channel site="epg.telemach.ba" site_id="1936" lang="hr" xmltv_id="ArenaSportPremium3BH.ba">Arena Premium 3 HD (BIH)</channel>
+  <channel site="epg.telemach.ba" site_id="1934" lang="hr" xmltv_id="ArenaSportPremium1BH.ba">|BH| ARENA 1 PREMIUM</channel>
+  <channel site="epg.telemach.ba" site_id="1935" lang="hr" xmltv_id="ArenaSportPremium2BH.ba">|BH| ARENA 2 PREMIUM</channel>
+  <channel site="epg.telemach.ba" site_id="1936" lang="hr" xmltv_id="ArenaSportPremium3BH.ba">|BH| ARENA 3 PREMIUM</channel>
   <channel site="epg.telemach.ba" site_id="2135" lang="hr" xmltv_id="ArenaSport1.ba">Arena Sport 1</channel>
   <channel site="epg.telemach.ba" site_id="2134" lang="hr" xmltv_id="ArenaSport2.ba">Arena Sport 2</channel>
   <channel site="epg.telemach.ba" site_id="2133" lang="bs" xmltv_id="ArenaSport3.ba">Arena Sport 3</channel>
