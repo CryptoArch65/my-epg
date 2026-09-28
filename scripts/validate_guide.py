@@ -11,16 +11,21 @@ import xml.etree.ElementTree as ET
 KNOWN_EMPTY_SITES = {"m1film.hr/family", "superstartv.rs", "tvprogramdanas.net"}  # Broadcasters may publish short schedules.
 
 
-def main(config_path, guide_path, alias_path=None, extra_config_path=None):
+def main(config_path, guide_path, alias_path=None, extra_config_path=None, regional_config_path=None):
     config = ET.parse(config_path).getroot()
     if config.tag != "channels":
         raise ValueError("Expected <channels> in channel configuration")
 
     expected = {}
     extra = ET.parse(extra_config_path).getroot() if extra_config_path else None
+    regional = ET.parse(regional_config_path).getroot() if regional_config_path else None
     if extra is not None and extra.tag != "channels":
         raise ValueError("Expected <channels> in extra channel configuration")
-    for channel in list(config.findall("channel")) + (list(extra.findall("channel")) if extra is not None else []):
+    if regional is not None and regional.tag != "channels":
+        raise ValueError("Expected <channels> in regional channel configuration")
+    for channel in (list(config.findall("channel"))
+                    + (list(extra.findall("channel")) if extra is not None else [])
+                    + (list(regional.findall("channel")) if regional is not None else [])):
         site = channel.get("site")
         channel_id = channel.get("xmltv_id") or channel.get("site_id")
         if not site or not channel_id:
@@ -111,6 +116,6 @@ def main(config_path, guide_path, alias_path=None, extra_config_path=None):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) not in (3, 4, 5):
-        raise SystemExit("Usage: validate_guide.py config/channels.xml guide.new.xml [aliases.csv] [film-channels.xml]")
+    if len(sys.argv) not in (3, 4, 5, 6):
+        raise SystemExit("Usage: validate_guide.py config/channels.xml guide.new.xml [aliases.csv] [film-channels.xml] [regional-channels.xml]")
     main(*sys.argv[1:])

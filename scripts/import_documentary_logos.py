@@ -30,6 +30,8 @@ CHANNELS = {
     "1634": "KCNMusic2.ba",  # MUZICKI; prior exported M3U shared an ID with KCN 3
     "1644": "KCNSvet3.ba",  # MUZICKI; prior exported M3U shared an ID with KCN 2
     "1617": "KCN1.ba",  # SRBIJA / KCN 1
+    "483": "CityTV.ba",  # BIH / City TV HD
+    "853": "BIRTV.ba",  # BIH / RTV BIR HD
 
     "1855": "slovnationalgeographic.si",
     "1863": "natgeowild.ba",

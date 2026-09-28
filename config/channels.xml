@@ -217,7 +217,6 @@
   <channel site="epg.telemach.ba" site_id="200" lang="hr" xmltv_id="TelevizijaHema.ba">Televizija Hema</channel>
   <channel site="epg.telemach.ba" site_id="651" lang="hr" xmltv_id="RTVSana.ba">RTV Sana</channel>
   <channel site="epg.telemach.ba" site_id="468" lang="hr" xmltv_id="RTVVogosca.ba">TV Vogošća HD</channel>
-  <channel site="epg.telemach.ba" site_id="469" lang="hr" xmltv_id="RTVHB.ba">RTVHB HD</channel>
   <channel site="epg.telemach.ba" site_id="476" lang="hr" xmltv_id="NTVICKakanj.ba">NTV IC Kakanj</channel>
   <channel site="epg.telemach.ba" site_id="479" lang="hr" xmltv_id="RTVVisoko.ba">RTV Visoko</channel>
   <channel site="epg.telemach.ba" site_id="480" lang="hr" xmltv_id="TVBugojno.ba">TV Bugojno</channel>
@@ -234,4 +233,5 @@
   <channel site="epg.telemach.ba" site_id="1634" lang="hr" xmltv_id="KCNMusic2.ba">K::CN Music 2 (BIH)</channel>
   <channel site="epg.telemach.ba" site_id="1644" lang="hr" xmltv_id="KCNSvet3.ba">K::CN Svet+ 3 (BIH)</channel>
   <channel site="epg.telemach.ba" site_id="1617" lang="hr" xmltv_id="KCN1.ba">K::CN 1 (BIH)</channel>
+  <channel site="epg.telemach.ba" site_id="853" lang="hr" xmltv_id="BIRTV.ba">RTV BIR HD</channel>
 </channels>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<channels>
+  <channel site="rtv-hb.com" site_id="tv-vodic" lang="hr" xmltv_id="RTVHB.ba">|BIH| RTV HB</channel>
+  <channel site="tvprogramdanas.net" site_id="rtv-banovina" lang="hr" xmltv_id="RTVBanovina.ba">|BIH| TELEVIZIJA RADIO BANOVINA</channel>
+  <channel site="tvprogramdanas.net" site_id="aurora-tv" lang="hr" xmltv_id="AuroraTV.hr">|HR| Aurora</channel>
+  <channel site="tvprogramdanas.net" site_id="z1" lang="hr" xmltv_id="Z1.hr">|HR| Z 1</channel>
+  <channel site="tvprogramdanas.net" site_id="diadora-tv" lang="hr" xmltv_id="DiadoraTV.hr">Diadora TV</channel>
+  <channel site="tvprogramdanas.net" site_id="libertas-tv" lang="hr" xmltv_id="LibertasTV.hr">Libertas TV</channel>
+</channels>
