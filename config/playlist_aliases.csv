@@ -164,7 +164,7 @@ eurocinema1.ba,iptv#ch-euro-cinema-1,Euro Cinema 1
 eurocinema2.ba,iptv#ch-euro-cinema-2,Euro Cinema 2
 eurocinema3.ba,iptv#ch-euro-cinema-3,Euro Cinema 3
 eurocinema4.ba,iptv#ch-euro-cinema-4,Euro Cinema 4
-City.Play.(BIH).ba (src05),iptv#ch-208-city-play,CityPLAY
+City.Play.(BIH).ba (src05),CityPlay.ba,CityPLAY
 PinkFolk1.hr (src09),PinkFolk1.rs,PINK FOLK 1
 Pink.Folk.2.(BIH).ba (src05),PinkFolk2.rs,PINK FOLK 2
 Pink.Music.(BIH).ba (src05),PinkMusic.rs,PINK MUSIC
@@ -176,7 +176,7 @@ pink&roll.bh,PinknRoll.rs,PINK & ROLL
 pinkhits.ba,PinkHits.rs,PINK HITS 1
 pinkhits2.ba,PinkHits2.rs,PINK HITS 2
 balkanika.ba,338256424367,BALKANIKA
-Bravo.Music.(BIH).ba (src05),iptv#ch-206-bravo-music,BRAVO MUSIC
+Bravo.Music.(BIH).ba (src05),BravoMusic.ba,BRAVO MUSIC
 babytv.hr,276770344366,BABY TV
 minitv.hr,MiniTV.hr,MINI
 nickelodeon.hr,Nickelodeon.hr,NICKELODEON
@@ -211,3 +211,8 @@ tvk3.ba,TVK3.ba,|BIH| K3 PRNJAVOR
 tvlukavac.ba,TVLukavac.ba,RTV LUKAVAC
 tvvogošća.ba,RTVVogosca.ba,|BIH| RTV Vogosca
 unatv.ba,UnaTV.ba,|BIH| Una BIH
+GrandTV.hr (src01),GrandTV.ba,GRAND TV
+Grand.narodna.televizija.2.(RS).rs (src05),Grand2.ba,GRAND 2
+cmc.bh,CMC.ba,CMC
+idjtv.bh,IDJTV.ba,IDJ TV
+grandnostalgija.rs,GrandNostalgija.ba,Grand Nostalgija ᴴᴰ

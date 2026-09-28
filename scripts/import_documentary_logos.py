@@ -11,6 +11,25 @@ from urllib.request import Request, urlopen
 
 
 CHANNELS = {
+    "1104": "GrandTV.ba",  # MUZICKI
+    "1520": "Grand2.ba",  # MUZICKI
+    "1693": "CityPlay.ba",  # MUZICKI
+    "1683": "PinkFolk1.rs",  # MUZICKI
+    "1684": "PinkFolk2.rs",  # MUZICKI
+    "1597": "PinkMusic.rs",  # MUZICKI
+    "1688": "PinkMusic2.rs",  # MUZICKI
+    "496": "HayatMusic.ba",  # MUZICKI
+    "1596": "CMC.ba",  # MUZICKI
+    "1496": "IDJTV.ba",  # MUZICKI
+    "1685": "PinknRoll.rs",  # MUZICKI
+    "1689": "PinkHits.rs",  # MUZICKI
+    "1690": "PinkHits2.rs",  # MUZICKI
+    "409": "338256424367",  # MUZICKI
+    "1636": "BravoMusic.ba",  # MUZICKI
+    "1594": "GrandNostalgija.ba",  # MUZICKI
+    "1634": "KCNMusic2.ba",  # MUZICKI; M3U currently shares an ID with KCN 3
+    "1644": "KCNSvet3.ba",  # MUZICKI; M3U currently shares an ID with KCN 2
+
     "1855": "slovnationalgeographic.si",
     "1863": "natgeowild.ba",
     "1830": "animal_planet",
@@ -109,6 +128,11 @@ def main(config, csv_path, logos_dir):
 
     downloads = {}
     for site_id, guide_id in CHANNELS.items():
+        current_url = configured[guide_id]["logo_url"]
+        if current_url.startswith(REPO_URL + f"telemach-{site_id}.") and (
+            logos_dir / current_url.removeprefix(REPO_URL)
+        ).is_file():
+            continue
         url = image_for(by_id[site_id])
         with urlopen(Request(url, headers={"Referer": "https://epg.telemach.ba/"}), timeout=30) as response:
             data = response.read(2_000_001)
@@ -127,7 +151,7 @@ def main(config, csv_path, logos_dir):
         writer = csv.DictWriter(target, fieldnames=["guide_id", "logo_url"], lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
-    print(f"Imported {len(CHANNELS)} official Telemach logos into logos/ and updated logo mappings")
+    print(f"Imported {len(downloads)} official Telemach logos into logos/ and updated logo mappings")
 
 
 if __name__ == "__main__":

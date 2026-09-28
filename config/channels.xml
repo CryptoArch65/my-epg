@@ -166,17 +166,17 @@
   <channel site="mtel.ba" site_id="iptv#ch-euro-cinema-3" lang="bs" xmltv_id="">Euro Cinema 3</channel>
   <channel site="mtel.ba" site_id="iptv#ch-euro-cinema-4" lang="bs" xmltv_id="">Euro Cinema 4</channel>
   <channel site="mtel.ba" site_id="iptv#ch-208-city-play" lang="bs" xmltv_id="">City Play</channel>
-  <channel site="mts.rs" site_id="pink_folk" lang="bs" xmltv_id="PinkFolk1.rs">Pink Folk</channel>
-  <channel site="mts.rs" site_id="pink_folk_2" lang="bs" xmltv_id="PinkFolk2.rs">Pink Folk 2</channel>
-  <channel site="mts.rs" site_id="pink_music" lang="bs" xmltv_id="PinkMusic.rs">Pink Music</channel>
-  <channel site="mts.rs" site_id="pink_music_2" lang="bs" xmltv_id="PinkMusic2.rs">Pink Music 2</channel>
-  <channel site="mtel.ba" site_id="iptv#ch-222-hayat-music" lang="bs" xmltv_id="HayatMusic.ba">Hayat Music Box</channel>
+  <channel site="epg.telemach.ba" site_id="1683" lang="hr" xmltv_id="PinkFolk1.rs">Pink Folk</channel>
+  <channel site="epg.telemach.ba" site_id="1684" lang="hr" xmltv_id="PinkFolk2.rs">Pink Folk 2</channel>
+  <channel site="epg.telemach.ba" site_id="1597" lang="hr" xmltv_id="PinkMusic.rs">Pink Music</channel>
+  <channel site="epg.telemach.ba" site_id="1688" lang="hr" xmltv_id="PinkMusic2.rs">Pink Music 2</channel>
+  <channel site="epg.telemach.ba" site_id="496" lang="hr" xmltv_id="HayatMusic.ba">Hayat Music Box</channel>
   <channel site="mtel.ba" site_id="iptv#ch-407-toxic-tv" lang="bs" xmltv_id="">Toxic TV</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="282239016175" lang="hr" xmltv_id="">Jugoton</channel>
-  <channel site="mts.rs" site_id="pink%26roll" lang="bs" xmltv_id="PinknRoll.rs">Pink&amp;Roll</channel>
-  <channel site="mts.rs" site_id="pink_hits_1" lang="bs" xmltv_id="PinkHits.rs">Pink Hits 1</channel>
-  <channel site="mts.rs" site_id="pink_hits_2" lang="bs" xmltv_id="PinkHits2.rs">Pink Hits 2</channel>
-  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="338256424367" lang="hr" xmltv_id="">Balkanika</channel>
+  <channel site="epg.telemach.ba" site_id="1685" lang="hr" xmltv_id="PinknRoll.rs">Pink&amp;Roll</channel>
+  <channel site="epg.telemach.ba" site_id="1689" lang="hr" xmltv_id="PinkHits.rs">Pink Hits 1</channel>
+  <channel site="epg.telemach.ba" site_id="1690" lang="hr" xmltv_id="PinkHits2.rs">Pink Hits 2</channel>
+  <channel site="epg.telemach.ba" site_id="409" lang="hr" xmltv_id="338256424367">Balkanika</channel>
   <channel site="mtel.ba" site_id="iptv#ch-206-bravo-music" lang="bs" xmltv_id="">Bravo Music</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276770344366" lang="hr" xmltv_id="">Baby TV</channel>
   <channel site="mtel.ba" site_id="iptv#ch-100-hayatovci" lang="bs" xmltv_id="Hayatovci.ba">HAYATOVCI</channel>
@@ -225,4 +225,12 @@
   <channel site="epg.telemach.ba" site_id="552" lang="hr" xmltv_id="TV5.ba">TV5 HD (BH)</channel>
   <channel site="epg.telemach.ba" site_id="486" lang="hr" xmltv_id="MTVIgman.ba">MTV Igman HD</channel>
   <channel site="epg.telemach.ba" site_id="675" lang="hr" xmltv_id="IzvornaTV.ba">Izvorna TV</channel>
+  <channel site="epg.telemach.ba" site_id="1104" lang="hr" xmltv_id="GrandTV.ba">Grand International HD (BIH)</channel>
+  <channel site="epg.telemach.ba" site_id="1520" lang="hr" xmltv_id="Grand2.ba">Grand narodna televizija 2 (BIH)</channel>
+  <channel site="epg.telemach.ba" site_id="1596" lang="hr" xmltv_id="CMC.ba">CMC HD (BIH)</channel>
+  <channel site="epg.telemach.ba" site_id="1496" lang="hr" xmltv_id="IDJTV.ba">IDJTV HD (BIH)</channel>
+  <channel site="epg.telemach.ba" site_id="1636" lang="hr" xmltv_id="BravoMusic.ba">Bravo Music (BIH)</channel>
+  <channel site="epg.telemach.ba" site_id="1594" lang="hr" xmltv_id="GrandNostalgija.ba">Grand Nostalgija (BIH)</channel>
+  <channel site="epg.telemach.ba" site_id="1634" lang="hr" xmltv_id="KCNMusic2.ba">K::CN Music 2 (BIH)</channel>
+  <channel site="epg.telemach.ba" site_id="1644" lang="hr" xmltv_id="KCNSvet3.ba">K::CN Svet+ 3 (BIH)</channel>
 </channels>
