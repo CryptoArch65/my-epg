@@ -119,6 +119,20 @@ def m1_schedule(page):
     return programmes
 
 
+def load_m1_schedule(url):
+    # A successful HTTP response can occasionally contain an incomplete EPG page.
+    for attempt in range(3):
+        try:
+            programmes = m1_schedule(download(url))
+            if not programmes:
+                raise ValueError("M1 schedule contains no programmes")
+            return programmes
+        except ValueError:
+            if attempt == 2:
+                raise
+            time.sleep(2 * (attempt + 1))
+
+
 def superstar_schedules(page):
     tree = html.fromstring(page)
     match = re.search(r"(\d\d\.\d\d\.\d{4})\s*[–-]\s*(\d\d\.\d\d\.\d{4})", tree.text_content())
@@ -220,7 +234,7 @@ def append_programmes(root, channel_id, entries):
 
 def main(guide_path, config_path, logo_csv, logos_dir):
     schedules = axn_schedules(download(AXN_URL))
-    schedules.update({channel_id: m1_schedule(download(url)) for channel_id, url in M1_URLS.items()})
+    schedules.update({channel_id: load_m1_schedule(url) for channel_id, url in M1_URLS.items()})
     schedules.update(superstar_schedules(download(SUPERSTAR_URL)))
     schedules["DiziChannel.hr"] = dizi_schedule(download(DIZI_URL))
     config = ET.parse(config_path).getroot()
