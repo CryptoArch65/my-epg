@@ -1,0 +1,32 @@
+[
+  {
+    "xmltv_id": "ArenaSport1.ba",
+    "slug": "tv-arena-sport-1-hr",
+    "display_name": "Arena Sport 1"
+  },
+  {
+    "xmltv_id": "ArenaSport2.ba",
+    "slug": "tv-arena-sport-2-hr",
+    "display_name": "Arena Sport 2"
+  },
+  {
+    "xmltv_id": "ArenaSport3.ba",
+    "slug": "tv-arena-sport-3-hr",
+    "display_name": "Arena Sport 3"
+  },
+  {
+    "xmltv_id": "ArenaSport4.ba",
+    "slug": "arena-sport-4-hr",
+    "display_name": "Arena Sport 4"
+  },
+  {
+    "xmltv_id": "ArenaSport5BH.ba",
+    "slug": "arena-sport-5-hr",
+    "display_name": "Arena Sport 5"
+  },
+  {
+    "xmltv_id": "ArenaSport6.ba",
+    "slug": "arena-sport-6-hr",
+    "display_name": "Arena Sport 6"
+  }
+]
