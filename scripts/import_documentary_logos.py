@@ -27,8 +27,9 @@ CHANNELS = {
     "409": "338256424367",  # MUZICKI
     "1636": "BravoMusic.ba",  # MUZICKI
     "1594": "GrandNostalgija.ba",  # MUZICKI
-    "1634": "KCNMusic2.ba",  # MUZICKI; M3U currently shares an ID with KCN 3
-    "1644": "KCNSvet3.ba",  # MUZICKI; M3U currently shares an ID with KCN 2
+    "1634": "KCNMusic2.ba",  # MUZICKI; prior exported M3U shared an ID with KCN 3
+    "1644": "KCNSvet3.ba",  # MUZICKI; prior exported M3U shared an ID with KCN 2
+    "1617": "KCN1.ba",  # SRBIJA / KCN 1
 
     "1855": "slovnationalgeographic.si",
     "1863": "natgeowild.ba",

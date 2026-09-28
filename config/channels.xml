@@ -233,4 +233,5 @@
   <channel site="epg.telemach.ba" site_id="1594" lang="hr" xmltv_id="GrandNostalgija.ba">Grand Nostalgija (BIH)</channel>
   <channel site="epg.telemach.ba" site_id="1634" lang="hr" xmltv_id="KCNMusic2.ba">K::CN Music 2 (BIH)</channel>
   <channel site="epg.telemach.ba" site_id="1644" lang="hr" xmltv_id="KCNSvet3.ba">K::CN Svet+ 3 (BIH)</channel>
+  <channel site="epg.telemach.ba" site_id="1617" lang="hr" xmltv_id="KCN1.ba">K::CN 1 (BIH)</channel>
 </channels>
