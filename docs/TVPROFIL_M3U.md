@@ -91,6 +91,11 @@ python3 scripts/match_tvprofil_channels.py \
 prije EPG preuzimanja. Takav red nije u runtime konfiguraciji. Pregledaj
 `ambiguous` i `not_found` redove i provjeri automatske `matched` rezultate.
 
+U browser sesiji 29. 9. 2026. potvrđeni su `bht1` (27 programa) i `ftv`
+(39 programa) za taj datum. Ručne veze za BHT1, BHT 1 HD i obični FTV
+nalaze se u `tvprofil_name_overrides.csv`. Za `FTV HD` veza je ostavljena
+otvorenom dok se ne potvrdi da zaista emituje isti raspored kao FTV.
+
 Nakon pregleda može se napraviti lokalna kopija vodiča s tim rasporedom:
 
 ```bash
