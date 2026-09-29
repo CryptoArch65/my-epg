@@ -29,12 +29,14 @@ def parse_m3u(text: str):
         line = line.strip()
         if not line.startswith("#EXTINF:"):
             continue
-        head, sep, display_name = line.partition(",")
+        head, sep, display_name = line.rpartition(",")
         if not sep:
             continue
         attrs = dict(ATTR_RE.findall(head))
+        if attrs.get("stream_type") not in (None, "live"):
+            continue
         name = display_name.strip()
-        if not name:
+        if not name or re.fullmatch(r"-\s*[^-]+\s*-", name):
             continue
         rows.append({
             "provider_name": name,
@@ -83,9 +85,9 @@ def main():
             writer.writerow({
                 **row,
                 "corrected_name": corrected,
-                "tvprofil_name": old.get("tvprofil_name", ""),
-                "tvprofil_slug": old.get("tvprofil_slug", ""),
-                "status": old.get("status", "pending"),
+                "tvprofil_name": old.get("tvprofil_name", "") if old.get("status") == "manual" else "",
+                "tvprofil_slug": old.get("tvprofil_slug", "") if old.get("status") == "manual" else "",
+                "status": old.get("status", "pending") if old.get("status") == "manual" else "pending",
                 "confidence": old.get("confidence", ""),
                 "note": old.get("note", ""),
             })

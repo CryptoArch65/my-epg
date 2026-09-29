@@ -176,8 +176,8 @@ def main():
         provider = row.get("provider_name", "").strip()
         override = overrides.get(provider, {})
         corrected = (override.get("corrected_name") or row.get("corrected_name") or provider).strip()
-        manual_slug = (override.get("tvprofil_slug") or row.get("tvprofil_slug") or "").strip()
-        manual_name = (override.get("tvprofil_name") or row.get("tvprofil_name") or "").strip()
+        manual_slug = (override.get("tvprofil_slug") or (row.get("tvprofil_slug") if row.get("status") == "manual" else "") or "").strip()
+        manual_name = (override.get("tvprofil_name") or (row.get("tvprofil_name") if row.get("status") == "manual" else "") or "").strip()
         enabled = override.get("enabled", "yes").strip().lower() not in {"0", "no", "false", "off"}
 
         row["corrected_name"] = corrected
@@ -194,6 +194,9 @@ def main():
         if candidate:
             row["tvprofil_name"] = candidate["name"]
             row["tvprofil_slug"] = candidate["slug"]
+        else:
+            row["tvprofil_name"] = ""
+            row["tvprofil_slug"] = ""
         row["status"] = status
         row["confidence"] = f"{score:.3f}" if score else ""
         row["note"] = "manual override" if status == "manual" else row.get("note", "")

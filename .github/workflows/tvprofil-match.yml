@@ -1,0 +1,29 @@
+name: Review TVProfil M3U matches
+
+on:
+  workflow_dispatch:
+
+jobs:
+  match:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install playwright
+      - run: python -m playwright install --with-deps chromium
+      - name: Build review report
+        run: |
+          python scripts/match_tvprofil_channels.py \
+            --channels config/tvprofil_playlist_channels.csv \
+            --report tvprofil_match_review.csv \
+            --output-config tvprofil_channels.runtime.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tvprofil-match-review
+          path: |
+            tvprofil_match_review.csv
+            tvprofil_channels.runtime.json
