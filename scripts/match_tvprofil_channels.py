@@ -157,13 +157,11 @@ def main():
         page = browser.new_page(locale="hr-HR", timezone_id="Europe/Zagreb")
         page.goto(BOX_URL, wait_until="load", timeout=60000)
         catalog = extract_catalog(page)
+        if not catalog:
+            print("TVProfil page:", page.url, page.title())
+            print("TVProfil controls:", page.evaluate("() => [...document.querySelectorAll('input, option, label, a')].slice(0, 12).map(e => e.outerHTML.slice(0, 300))"))
+            raise SystemExit("Could not extract TVProfil channel catalog from /box/")
         browser.close()
-
-    if not catalog:
-        raise SystemExit(
-            "Could not extract a TVProfil channel catalog from /box/. "
-            "Use manual tvprofil_slug overrides until markup support is updated."
-        )
     print(f"TVProfil catalog candidates: {len(catalog)}")
 
     output = []
