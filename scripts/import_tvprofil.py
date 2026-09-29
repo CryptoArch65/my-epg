@@ -99,24 +99,51 @@ def main(guide_path, config_path):
         raise SystemExit("TVProfil channel configuration is empty")
 
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        browser = p.chromium.launch(
+            headless=True,
+            args=[
+                "--disable-blink-features=AutomationControlled",
+                "--no-sandbox",
+                "--disable-dev-shm-usage",
+            ],
+        )
         context = browser.new_context(
             locale="hr-HR",
             timezone_id="Europe/Zagreb",
             user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/140 Safari/537.36",
         )
         page = context.new_page()
+        page.add_init_script("""
+            Object.defineProperty(navigator, 'webdriver', {get: () => undefined});
+            Object.defineProperty(navigator, 'languages', {get: () => ['hr-HR', 'hr', 'en-US', 'en']});
+            Object.defineProperty(navigator, 'platform', {get: () => 'Linux x86_64'});
+        """)
 
         loaded = False
         last_error = None
         for template in PAGE_CANDIDATES:
             try:
-                page.goto(template.format(slug=channels[0]["slug"]), wait_until="domcontentloaded", timeout=60000)
-                page.wait_for_function("typeof Tvprofil !== 'undefined' && (typeof bazinga === 'function' || typeof window.bazinga === 'function')", timeout=30000)
-                loaded = True
-                print("TVProfil session:", page.url, "| title:", page.title())
-                break
+                target = template.format(slug=channels[0]["slug"])
+                response = page.goto(target, wait_until="load", timeout=60000)
+                status = response.status if response else "no-response"
+                try:
+                    page.wait_for_function(
+                        "typeof Tvprofil !== 'undefined' && (typeof bazinga === 'function' || typeof window.bazinga === 'function')",
+                        timeout=20000,
+                    )
+                    loaded = True
+                    print("TVProfil session:", page.url, "| status:", status, "| title:", page.title())
+                    break
+                except Exception as wait_exc:
+                    body = page.locator("body").inner_text(timeout=5000)[:500].replace("\n", " | ")
+                    print("TVProfil candidate failed:", target)
+                    print("  final URL:", page.url, "| status:", status, "| title:", page.title())
+                    print("  body:", body)
+                    print("  Tvprofil:", page.evaluate("typeof Tvprofil"))
+                    print("  bazinga:", page.evaluate("typeof bazinga"))
+                    last_error = wait_exc
             except Exception as exc:
+                print("TVProfil navigation failed:", template, "|", exc)
                 last_error = exc
 
         if not loaded:
