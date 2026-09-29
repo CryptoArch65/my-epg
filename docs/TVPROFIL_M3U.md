@@ -45,6 +45,12 @@ Ako znaš tačan TvProfil slug, možeš ga direktno upisati. Tada status postaje
 
 ## 3. Match prema TvProfilu
 
+**Trenutno ograničenje (29. 9. 2026):** TvProfil vraća Cloudflare provjeru
+GitHub Actions runneru. Zbog toga automatsko čitanje kataloga na tom runneru
+ne radi. Ovaj workflow je samo za ručni pokušaj i neće promijeniti `guide.xml`.
+Nemoj koristiti automatske rezultate bez pregleda, niti uključivati runtime
+konfiguraciju u produkciju dok pristup katalogu i rasporedu nije potvrđen.
+
 ```bash
 python3 scripts/match_tvprofil_channels.py
 ```
