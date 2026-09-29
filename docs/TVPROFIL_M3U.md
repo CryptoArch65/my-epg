@@ -73,6 +73,21 @@ window.TVPROFIL_EXPORT_CHANNELS = [
 Ovaj test zahtijeva otvorenu TvProfil sesiju i nije zamjena za automatski
 GitHub workflow. XML prvo treba pregledati i validirati prije uvoza u vodič.
 
+Za mapiranje ostalih kanala otvori `https://tvprofil.com/box/` u svojoj
+browser sesiji i u konzoli pokreni `scripts/tvprofil_browser_catalog.js`.
+Skripta lokalno preuzima `tvprofil-catalog.json` s nazivima i slugovima;
+ne šalje podatke na GitHub. Taj katalog se može koristiti bez Playwrighta:
+
+```bash
+python3 scripts/match_tvprofil_channels.py \
+  --catalog /putanja/do/tvprofil-catalog.json \
+  --report tvprofil_match_review.csv \
+  --output-config tvprofil_channels.runtime.json
+```
+
+Pregledaj `ambiguous` i `not_found` redove i provjeri automatske `matched`
+rezultate prije korištenja runtime konfiguracije.
+
 Nakon pregleda može se napraviti lokalna kopija vodiča s tim rasporedom:
 
 ```bash
