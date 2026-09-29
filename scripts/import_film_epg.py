@@ -233,7 +233,11 @@ def append_programmes(root, channel_id, entries):
 
 
 def main(guide_path, config_path, logo_csv, logos_dir):
-    schedules = axn_schedules(download(AXN_URL))
+    try:
+        schedules = axn_schedules(download(AXN_URL))
+    except TimeoutError as exc:
+        print(f"WARNING: AXN schedule download timed out; continuing without AXN schedules: {exc}")
+        schedules = {}
     schedules.update({channel_id: load_m1_schedule(url) for channel_id, url in M1_URLS.items()})
     schedules.update(superstar_schedules(download(SUPERSTAR_URL)))
     schedules["DiziChannel.hr"] = dizi_schedule(download(DIZI_URL))
