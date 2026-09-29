@@ -109,6 +109,36 @@ def parse_rtvhb():
     return events
 
 
+def parse_slon(page):
+    tree = html.fromstring(page)
+    today = datetime.now(ZONE).date()
+    events = []
+    seen_days = set()
+    for heading in tree.xpath('//h2[contains(., "TV program za")]'):
+        match = re.search(r"\\b(\\d{2})\\.(\\d{2})\\.(\\d{4})\\b", heading.text_content())
+        if not match:
+            continue
+        day = datetime(int(match.group(3)), int(match.group(2)), int(match.group(1))).date()
+        if day in seen_days or not today - timedelta(days=1) <= day <= today + timedelta(days=7):
+            continue
+        seen_days.add(day)
+        listing = heading.getnext()
+        if listing is None or listing.tag != "p":
+            raise ValueError(f"RTV Slon schedule layout changed for {day}")
+        for raw in listing.xpath("./text()"):
+            entry = " ".join(raw.split())
+            programme = re.fullmatch(r"([01]?\\d|2[0-3]):([0-5]\\d)\\s+(.+)", entry)
+            if not programme:
+                if entry:
+                    raise ValueError(f"Unexpected RTV Slon programme: {entry!r}")
+                continue
+            start = datetime.strptime(f"{day} {programme.group(1)}:{programme.group(2)}", "%Y-%m-%d %H:%M").replace(tzinfo=ZONE)
+            events.append((start, 180, programme.group(3), ""))
+    if today not in seen_days or not events:
+        raise ValueError("RTV Slon current dated schedule missing")
+    return events
+
+
 def append_programmes(root, channel_id, events):
     # A few source rows overlap; the next broadcast start takes precedence.
     unique = {}
@@ -170,11 +200,12 @@ def host_logos(pages, csv_path, logo_dir):
 
 def main(guide_path, config_path, logos_csv, logos_dir):
     configured = ET.parse(config_path).getroot()
-    if configured.tag != "channels" or {c.get("xmltv_id") for c in configured} != set(REGIONAL) | {"RTVHB.ba"}:
+    if configured.tag != "channels" or {c.get("xmltv_id") for c in configured} != set(REGIONAL) | {"RTVHB.ba", "TVSlonExtra.ba"}:
         raise ValueError("Regional channel configuration differs from importer")
     pages = {slug: download("https://www.tvprogramdanas.net/" + slug) for slug in set(LOGOS.values())}
     schedules = {id: parse_tvprogram(pages[slug], id) for id, slug in REGIONAL.items()}
     schedules["RTVHB.ba"] = parse_rtvhb()
+    schedules["TVSlonExtra.ba"] = parse_slon(download("https://www.rtvslon.ba/tv-program/"))
     host_logos(pages, logos_csv, logos_dir)
 
     tree = ET.parse(guide_path)
