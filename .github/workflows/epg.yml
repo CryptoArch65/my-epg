@@ -114,6 +114,7 @@ jobs:
             guide.new.xml config/regional-channels.xml config/bih-source-logos.csv logos
 
       - name: Add TVProfil Arena Sport 1-6 schedules
+        continue-on-error: true # TVProfil may block GitHub runners; publish other sources.
         run: |
           python3 scripts/import_tvprofil.py guide.new.xml config/tvprofil_channels.json
 
