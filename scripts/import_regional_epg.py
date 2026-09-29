@@ -115,11 +115,13 @@ def parse_slon(page):
     events = []
     seen_days = set()
     for heading in tree.xpath('//h2[contains(., "TV program za")]'):
-        match = re.search(r"\\b(\\d{2})\\.(\\d{2})\\.(\\d{4})\\b", heading.text_content())
+        match = re.search(r"\b(\d{2})\.(\d{2})\.(\d{4})\b", heading.text_content())
         if not match:
             continue
         day = datetime(int(match.group(3)), int(match.group(2)), int(match.group(1))).date()
-        if day in seen_days or not today - timedelta(days=1) <= day <= today + timedelta(days=7):
+        if day in seen_days:
+            continue
+        if day < today - timedelta(days=1) or day > today + timedelta(days=7):
             continue
         seen_days.add(day)
         listing = heading.getnext()
@@ -127,7 +129,7 @@ def parse_slon(page):
             raise ValueError(f"RTV Slon schedule layout changed for {day}")
         for raw in listing.xpath("./text()"):
             entry = " ".join(raw.split())
-            programme = re.fullmatch(r"([01]?\\d|2[0-3]):([0-5]\\d)\\s+(.+)", entry)
+            programme = re.fullmatch(r"([01]?\d|2[0-3]):([0-5]\d)\s+(.+)", entry)
             if not programme:
                 if entry:
                     raise ValueError(f"Unexpected RTV Slon programme: {entry!r}")
