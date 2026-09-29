@@ -73,6 +73,17 @@ window.TVPROFIL_EXPORT_CHANNELS = [
 Ovaj test zahtijeva otvorenu TvProfil sesiju i nije zamjena za automatski
 GitHub workflow. XML prvo treba pregledati i validirati prije uvoza u vodič.
 
+Nakon pregleda može se napraviti lokalna kopija vodiča s tim rasporedom:
+
+```bash
+python3 scripts/import_tvprofil_browser_xml.py guide.xml \
+  /putanja/do/tvprofil-browser-test-YYYY-MM-DD.xml guide.review.xml
+```
+
+Importer prihvata samo ID-ove iz `config/tvprofil_channels.json`, provjerava
+naslove, vrijeme, duplikate i preklapanja, pa mijenja samo programe tih kanala
+u novom fajlu. Ne mijenja ulazni `guide.xml` i ništa ne objavljuje.
+
 ```bash
 python3 scripts/match_tvprofil_channels.py
 ```
