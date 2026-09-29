@@ -11,6 +11,10 @@ from urllib.request import Request, urlopen
 
 
 CHANNELS = {
+    "1585": "Prva.rs",
+    "1584": "PrvaPlus.rs",
+    "1582": "PrvaWorld.rs",
+    "1583": "PrvaKick.rs",
     "1104": "GrandTV.ba",  # MUZICKI
     "1520": "Grand2.ba",  # MUZICKI
     "1693": "CityPlay.ba",  # MUZICKI
