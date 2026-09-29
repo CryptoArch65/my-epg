@@ -25,6 +25,7 @@ def read_text(source: str) -> str:
 
 def parse_m3u(text: str):
     rows = []
+    section = ""
     for line in io.StringIO(text):
         line = line.strip()
         if not line.startswith("#EXTINF:"):
@@ -36,11 +37,14 @@ def parse_m3u(text: str):
         if attrs.get("stream_type") not in (None, "live"):
             continue
         name = display_name.strip()
-        if not name or re.fullmatch(r"-\s*[^-]+\s*-", name):
+        if re.fullmatch(r"-\s*[^-]+\s*-", name):
+            section = name.strip("- ").strip()
+            continue
+        if not name:
             continue
         rows.append({
             "provider_name": name,
-            "group": attrs.get("group-title", "").strip(),
+            "group": attrs.get("group-title", "").strip() or section,
             "tvg_id": attrs.get("tvg-id", "").strip(),
             "tvg_name": attrs.get("tvg-name", "").strip(),
             "tvg_logo": attrs.get("tvg-logo", "").strip(),
