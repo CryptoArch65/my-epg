@@ -15,6 +15,7 @@ from urllib.parse import unquote
 
 BOX_URL = "https://tvprofil.com/box/"
 QUALITY = {"hd", "fhd", "uhd", "4k", "8k", "sd", "hevc", "h265", "h264", "1080p", "720p", "2160p"}
+GENERIC = {"tv", "kanal", "channel", "sport", "sports", "plus"}
 COUNTRY_PREFIX = re.compile(r"^\s*\|(?:bih|bh|ba|hr|srb|sr|rs)\|\s*", re.I)
 
 
@@ -116,6 +117,7 @@ def extract_catalog(page):
 
 def best_match(name: str, catalog):
     key = normalize(name)
+    words = {w for w in key.split() if w not in GENERIC and not w.isdigit()}
     exact = [candidate for candidate in catalog if normalize(candidate["name"]) == key]
     if len(exact) == 1:
         return exact[0], "matched", 1.0
@@ -123,7 +125,11 @@ def best_match(name: str, catalog):
         return exact[0], "ambiguous", 1.0
 
     scored = sorted(
-        ((difflib.SequenceMatcher(None, key, normalize(candidate["name"])).ratio(), candidate) for candidate in catalog),
+        (
+            (difflib.SequenceMatcher(None, key, normalize(candidate["name"])).ratio(), candidate)
+            for candidate in catalog
+            if words & {w for w in normalize(candidate["name"]).split() if w not in GENERIC and not w.isdigit()}
+        ),
         key=lambda item: item[0],
         reverse=True,
     )
