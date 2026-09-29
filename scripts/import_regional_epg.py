@@ -301,6 +301,10 @@ def main(guide_path, config_path, logos_csv, logos_dir):
             raise ValueError(f"Duplicate channel in generated guide: {channel_id}")
         node = ET.Element("channel", id=channel_id)
         ET.SubElement(node, "display-name", lang="hr").text = configured_channel.text
+        if channel_id == "RTLCroatiaWorld.hr":
+            # Match the names used for SD and HD variants in the provider playlist.
+            for name in ("|HR| RTL CROATIA WORLD", "|HR| RTL CROATIA WORLD HD"):
+                ET.SubElement(node, "display-name", lang="hr").text = name
         root.insert(len(channels) + index, node)
     for channel_id, events in schedules.items():
         append_programmes(root, channel_id, events)
