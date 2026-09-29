@@ -75,8 +75,10 @@ GitHub workflow. XML prvo treba pregledati i validirati prije uvoza u vodič.
 
 Za mapiranje ostalih kanala otvori `https://tvprofil.com/box/` u svojoj
 browser sesiji i u konzoli pokreni `scripts/tvprofil_browser_catalog.js`.
-Skripta lokalno preuzima `tvprofil-catalog.json` s nazivima i slugovima;
-ne šalje podatke na GitHub. Taj katalog se može koristiti bez Playwrighta:
+Skripta lokalno preuzima `tvprofil-catalog.json` s nazivima i numeričkim
+`data-id` vrijednostima (i slugovima gdje su stvarno prisutni). Numerički ID
+**nije** slug za preuzimanje rasporeda. Skripta ne šalje podatke na GitHub.
+Taj katalog se može koristiti bez Playwrighta:
 
 ```bash
 python3 scripts/match_tvprofil_channels.py \
@@ -85,8 +87,9 @@ python3 scripts/match_tvprofil_channels.py \
   --output-config tvprofil_channels.runtime.json
 ```
 
-Pregledaj `ambiguous` i `not_found` redove i provjeri automatske `matched`
-rezultate prije korištenja runtime konfiguracije.
+`needs_slug` znači da je naziv kanala pronađen, ali još treba potvrditi slug
+prije EPG preuzimanja. Takav red nije u runtime konfiguraciji. Pregledaj
+`ambiguous` i `not_found` redove i provjeri automatske `matched` rezultate.
 
 Nakon pregleda može se napraviti lokalna kopija vodiča s tim rasporedom:
 
@@ -119,6 +122,7 @@ Generiše:
 Statusi u CSV-u:
 
 - `matched` — automatski dovoljno siguran
+- `needs_slug` — naziv/ID pronađen, slug za raspored još nije potvrđen
 - `manual` — ručno potvrđen slug
 - `ambiguous` — treba provjeriti
 - `not_found` — nije pronađen
