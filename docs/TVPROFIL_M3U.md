@@ -54,6 +54,25 @@ pokušaj i neće promijeniti `guide.xml`.
 Nemoj koristiti automatske rezultate bez pregleda, niti uključivati runtime
 konfiguraciju u produkciju dok pristup katalogu i rasporedu nije potvrđen.
 
+### Test iz vlastite TvProfil browser sesije
+
+U razgovoru je potvrđeno da TvProfilov JSONP poziv radi u otvorenoj browser
+sesiji. `scripts/tvprofil_browser_export.js` može se kopirati u konzolu na
+TvProfil stranici. Po početnim postavkama preuzima raspored za šest Arena
+kanala od sedam dana prije do pet dana poslije današnjeg datuma i sprema
+`tvprofil-browser-test-YYYY-MM-DD.xml` lokalno. Skripta ne piše u GitHub.
+
+Za drugi potvrđeni kanal prije pokretanja postavi:
+
+```javascript
+window.TVPROFIL_EXPORT_CHANNELS = [
+  {xmltv_id: "moj.id", slug: "potvrdeni-tvprofil-slug", display_name: "Naziv kanala"}
+];
+```
+
+Ovaj test zahtijeva otvorenu TvProfil sesiju i nije zamjena za automatski
+GitHub workflow. XML prvo treba pregledati i validirati prije uvoza u vodič.
+
 ```bash
 python3 scripts/match_tvprofil_channels.py
 ```
