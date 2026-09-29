@@ -9,10 +9,9 @@ import hashlib
 import json
 import re
 import unicodedata
+from functools import lru_cache
 from pathlib import Path
 from urllib.parse import unquote
-
-from playwright.sync_api import sync_playwright
 
 BOX_URL = "https://tvprofil.com/box/"
 QUALITY = {"hd", "fhd", "uhd", "4k", "8k", "sd", "hevc", "h265", "h264", "1080p", "720p", "2160p"}
@@ -24,6 +23,7 @@ def strip_diacritics(value: str) -> str:
     return "".join(c for c in unicodedata.normalize("NFKD", value) if not unicodedata.combining(c))
 
 
+@lru_cache(maxsize=None)
 def normalize(value: str) -> str:
     s = strip_diacritics(value).lower()
     s = COUNTRY_PREFIX.sub("", s)
@@ -145,6 +145,7 @@ def main():
     parser.add_argument("--base-config", default="config/tvprofil_channels.json")
     parser.add_argument("--output-config", default="config/tvprofil_channels.runtime.json")
     parser.add_argument("--report", default="config/tvprofil_playlist_channels.csv")
+    parser.add_argument("--catalog", help="JSON catalog exported from a TvProfil browser session")
     args = parser.parse_args()
 
     channels_path = Path(args.channels)
@@ -152,16 +153,26 @@ def main():
         rows = list(csv.DictReader(f))
     overrides = load_overrides(Path(args.overrides))
 
-    with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(headless=True, args=["--no-sandbox", "--disable-dev-shm-usage"])
-        page = browser.new_page(locale="hr-HR", timezone_id="Europe/Zagreb")
-        page.goto(BOX_URL, wait_until="load", timeout=60000)
-        catalog = extract_catalog(page)
-        if not catalog:
-            print("TVProfil page:", page.url, page.title())
-            print("TVProfil controls:", page.evaluate("() => [...document.querySelectorAll('input, option, label, a')].slice(0, 12).map(e => e.outerHTML.slice(0, 300))"))
-            raise SystemExit("Could not extract TVProfil channel catalog from /box/")
-        browser.close()
+    if args.catalog:
+        catalog = json.loads(Path(args.catalog).read_text(encoding="utf-8"))
+        if not isinstance(catalog, list) or any(
+            not isinstance(item, dict) or not item.get("name") or not item.get("slug")
+            for item in catalog
+        ):
+            raise SystemExit("Catalog must be a JSON array of {name, slug} entries")
+    else:
+        from playwright.sync_api import sync_playwright
+
+        with sync_playwright() as playwright:
+            browser = playwright.chromium.launch(headless=True, args=["--no-sandbox", "--disable-dev-shm-usage"])
+            page = browser.new_page(locale="hr-HR", timezone_id="Europe/Zagreb")
+            page.goto(BOX_URL, wait_until="load", timeout=60000)
+            catalog = extract_catalog(page)
+            if not catalog:
+                print("TVProfil page:", page.url, page.title())
+                print("TVProfil controls:", page.evaluate("() => [...document.querySelectorAll('input, option, label, a')].slice(0, 12).map(e => e.outerHTML.slice(0, 300))"))
+                raise SystemExit("Could not extract TVProfil channel catalog from /box/")
+            browser.close()
     print(f"TVProfil catalog candidates: {len(catalog)}")
 
     output = []
