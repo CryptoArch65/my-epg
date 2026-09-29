@@ -84,6 +84,7 @@ def official_logos():
         elif code == 'rts_1_hd':
             print('MTS RTS 1 has no usable channel logo; product fields: '
                   + ', '.join(sorted(row.keys())))
+            print('MTS RTS 1 image sample: ' + repr(row.get('images'))[:600])
     return logos
 
 
@@ -98,6 +99,10 @@ def mtel_logos():
     for row in products:
         if not isinstance(row, dict):
             continue
+        if 'rts' in str(row.get('name', '')).lower() and 'svet' in str(row.get('name', '')).lower():
+            print('m:tel RTS Svet sample: code=' + repr(row.get('code'))
+                  + ' picture=' + repr(row.get('picture'))[:260]
+                  + ' images=' + repr(row.get('images'))[:260])
         channel_id = MTEL_CHANNELS.get(str(row.get('code')))
         if not channel_id:
             continue
