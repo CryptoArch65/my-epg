@@ -2,6 +2,12 @@ name: Review TVProfil M3U matches
 
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/tvprofil-match.yml'
+      - 'config/tvprofil_playlist_channels.csv'
+      - 'config/tvprofil_name_overrides.csv'
+      - 'scripts/match_tvprofil_channels.py'
 
 jobs:
   match:
