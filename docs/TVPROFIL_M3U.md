@@ -46,8 +46,11 @@ Ako znaš tačan TvProfil slug, možeš ga direktno upisati. Tada status postaje
 ## 3. Match prema TvProfilu
 
 **Trenutno ograničenje (29. 9. 2026):** TvProfil vraća Cloudflare provjeru
-GitHub Actions runneru. Zbog toga automatsko čitanje kataloga na tom runneru
-ne radi. Ovaj workflow je samo za ručni pokušaj i neće promijeniti `guide.xml`.
+GitHub Actions runneru. Zaseban test sa poznatim `tv-arena-sport-1-hr` slugom
+je također vratio HTTP 403 i poruku "Blocked. Your browser is outdated" za
+sve adrese koje postojeći importer pokušava. Zbog toga trenutno ni katalog ni
+raspored sa TvProfila ne rade na tom runneru. Ovaj workflow je samo za ručni
+pokušaj i neće promijeniti `guide.xml`.
 Nemoj koristiti automatske rezultate bez pregleda, niti uključivati runtime
 konfiguraciju u produkciju dok pristup katalogu i rasporedu nije potvrđen.
 
