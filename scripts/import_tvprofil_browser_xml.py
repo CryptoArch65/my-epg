@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import copy
+import csv
 import json
 import xml.etree.ElementTree as ET
 from collections import defaultdict
@@ -52,31 +53,54 @@ def main() -> None:
     parser.add_argument("export", type=Path, help="Browser-exported XMLTV file")
     parser.add_argument("output", type=Path, help="New guide path; input remains unchanged")
     parser.add_argument("--config", type=Path, default=Path("config/tvprofil_channels.json"))
+    parser.add_argument("--aliases", type=Path, default=Path("config/playlist_aliases.csv"))
     args = parser.parse_args()
     if args.output.resolve() in {args.guide.resolve(), args.export.resolve()}:
         raise SystemExit("Output path must differ from both input paths")
 
     allowed = {c["xmltv_id"] for c in json.loads(args.config.read_text(encoding="utf-8"))}
+    aliases = {}
+    if args.aliases.exists():
+        with args.aliases.open(newline="", encoding="utf-8-sig") as f:
+            aliases = {r["playlist_tvg_id"].strip(): r["guide_id"].strip()
+                       for r in csv.DictReader(f)}
     source = ET.parse(args.export).getroot()
-    ids, count = validate(source, allowed)
+    export_ids, count = validate(source, allowed | {a for a, target in aliases.items() if target in allowed})
+    ids = {aliases.get(cid, cid) for cid in export_ids}
+    if len(ids) != len(export_ids):
+        raise ValueError("Multiple exported channels map to the same guide channel")
     tree = ET.parse(args.guide)
     root = tree.getroot()
     existing_channels = {n.get("id") for n in root.findall("channel")}
     first_programme = root.find("programme")
     insert_at = list(root).index(first_programme) if first_programme is not None else len(root)
     for node in source.findall("channel"):
-        if node.get("id") not in existing_channels:
-            root.insert(insert_at, copy.deepcopy(node))
+        target = aliases.get(node.get("id"), node.get("id"))
+        if target not in existing_channels:
+            channel = copy.deepcopy(node)
+            channel.set("id", target)
+            root.insert(insert_at, channel)
             insert_at += 1
-    old = [node for node in root.findall("programme") if node.get("channel") in ids]
+    affected_aliases = {a: target for a, target in aliases.items()
+                        if target in ids and a in existing_channels}
+    old = [node for node in root.findall("programme")
+           if node.get("channel") in ids or node.get("channel") in affected_aliases]
     for node in old:
         root.remove(node)
     for node in source.findall("programme"):
-        root.append(copy.deepcopy(node))
+        target = aliases.get(node.get("channel"), node.get("channel"))
+        programme = copy.deepcopy(node)
+        programme.set("channel", target)
+        root.append(programme)
+        for alias, alias_target in affected_aliases.items():
+            if alias_target == target:
+                duplicate = copy.deepcopy(programme)
+                duplicate.set("channel", alias)
+                root.append(duplicate)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     tree.write(args.output, encoding="utf-8", xml_declaration=True)
-    print(f"Validated {count} programmes across {len(ids)} channels")
-    print(f"Replaced {len(old)} old programmes -> {args.output}")
+    print(f"Validated {count} source programmes across {len(ids)} channels")
+    print(f"Replaced {len(old)} old source/alias programmes; refreshed {len(affected_aliases)} aliases -> {args.output}")
 
 
 if __name__ == "__main__":
