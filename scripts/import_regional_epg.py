@@ -80,7 +80,7 @@ def parse_tvprogram(page, channel_id):
             description = text(row, './/p[contains(concat(" ", normalize-space(@class), " "), " program-desc ")]')
             events.append((start, min(int(minutes.group(1)), 360), title, description))
     if not events:
-        raise ValueError(f"No current dated programmes for {channel_id}")
+        print(f"Warning: no current dated programmes for {channel_id}; leaving its schedule empty")
     return events
 
 
