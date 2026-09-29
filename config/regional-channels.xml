@@ -7,4 +7,6 @@
   <channel site="tvprogramdanas.net" site_id="diadora-tv" lang="hr" xmltv_id="DiadoraTV.hr">Diadora TV</channel>
   <channel site="tvprogramdanas.net" site_id="libertas-tv" lang="hr" xmltv_id="LibertasTV.hr">Libertas TV</channel>
   <channel site="rtvslon.ba" site_id="tv-program" lang="hr" xmltv_id="TVSlonExtra.ba">|BIH| TV SLON EXTRA</channel>
+  <channel site="mymedia.ba" site_id="tv-program" lang="bs" xmltv_id="MYTV.ba">|BH| MYTV</channel>
+  <channel site="tvprogram24.rs" site_id="rtl-croatia-world" lang="hr" xmltv_id="RTLCroatiaWorld.hr">RTL Croatia World</channel>
 </channels>

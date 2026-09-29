@@ -234,4 +234,19 @@
   <channel site="epg.telemach.ba" site_id="1644" lang="hr" xmltv_id="KCNSvet3.ba">K::CN Svet+ 3 (BIH)</channel>
   <channel site="epg.telemach.ba" site_id="1617" lang="hr" xmltv_id="KCN1.ba">K::CN 1 (BIH)</channel>
   <channel site="epg.telemach.ba" site_id="853" lang="hr" xmltv_id="BIRTV.ba">RTV BIR HD</channel>
+  <channel site="epg.telemach.ba" site_id="1512" lang="hr" xmltv_id="HRT3.hr">HRT 3 HD (BIH)</channel>
+  <channel site="epg.telemach.ba" site_id="1513" lang="hr" xmltv_id="HRT4.hr">HRT 4 HD (BIH)</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276771368109" lang="hr" xmltv_id="DomaTV.hr">Doma TV</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276771368143" lang="hr" xmltv_id="RTLPassion.hr">RTL Passion</channel>
+  <channel site="epg.telemach.ba" site_id="1493" lang="hr" xmltv_id="RTLLiving.hr">RTL Living HD (BIH)</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276770344347" lang="hr" xmltv_id="RTLCrime.hr">RTL Crime</channel>
+  <channel site="epg.telemach.ba" site_id="489" lang="hr" xmltv_id="LaudatoTV.hr">Laudato TV</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="338261544447" lang="hr" xmltv_id="OsječkaTV.hr">Osječka TV</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="343756840406" lang="hr" xmltv_id="VinkovačkaTV.hr">PLAVA Vinkovačka</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="338262567998" lang="hr" xmltv_id="SBTV.hr">SBTV</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="338263080034" lang="hr" xmltv_id="SlavonskaTV.hr">Slavonska TV</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="338262567995" lang="hr" xmltv_id="VarazdinskaTV.hr">VTV</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="343758888249" lang="hr" xmltv_id="OTV.hr">OTV</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="343756840422" lang="hr" xmltv_id="TVJadran.hr">TV Jadran</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="343757352384" lang="hr" xmltv_id="KanalRi.hr">Kanal Ri</channel>
 </channels>
