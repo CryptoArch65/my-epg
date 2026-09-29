@@ -70,7 +70,8 @@
       const events = await fetchDay(channel.slug, datum);
       for (const event of events) {
         if (!Number.isFinite(event.ts) || !Number.isFinite(event.len) || event.len <= 0 || !event.title) {
-          throw new Error(`Nevažeći program: ${channel.slug} ${datum}`);
+          console.error("Nevažeći red iz TvProfila", {channel: channel.slug, datum, event});
+          throw new Error(`Nevažeći program: ${channel.slug} ${datum}; pogledaj prethodni zapis u konzoli`);
         }
         const key = `${channel.xmltv_id}:${event.ts}:${event.len}:${event.title}`;
         if (seen.has(key)) continue;
