@@ -54,6 +54,14 @@ def load_overrides(path: Path):
         }
 
 
+def load_alias_targets(path: Path):
+    if not path.exists():
+        return {}
+    with path.open(newline="", encoding="utf-8-sig") as f:
+        return {row["playlist_tvg_id"].strip(): row["guide_id"].strip()
+                for row in csv.DictReader(f)}
+
+
 def extract_catalog(page):
     raw = page.evaluate(r"""
     () => {
@@ -148,6 +156,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--channels", default="config/tvprofil_playlist_channels.csv")
     parser.add_argument("--overrides", default="config/tvprofil_name_overrides.csv")
+    parser.add_argument("--aliases", default="config/playlist_aliases.csv")
     parser.add_argument("--base-config", default="config/tvprofil_channels.json")
     parser.add_argument("--output-config", default="config/tvprofil_channels.runtime.json")
     parser.add_argument("--report", default="config/tvprofil_playlist_channels.csv")
@@ -158,6 +167,7 @@ def main():
     with channels_path.open(newline="", encoding="utf-8-sig") as f:
         rows = list(csv.DictReader(f))
     overrides = load_overrides(Path(args.overrides))
+    alias_targets = load_alias_targets(Path(args.aliases))
 
     if args.catalog:
         catalog = json.loads(Path(args.catalog).read_text(encoding="utf-8"))
@@ -222,7 +232,8 @@ def main():
 
         if status in {"matched", "manual"} and candidate:
             output.append({
-                "xmltv_id": safe_id(row.get("tvg_id", "").strip(), corrected),
+                "xmltv_id": alias_targets.get(row.get("tvg_id", "").strip(),
+                                              safe_id(row.get("tvg_id", "").strip(), corrected)),
                 "slug": candidate["slug"],
                 "display_name": corrected,
             })
