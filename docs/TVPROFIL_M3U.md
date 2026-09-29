@@ -98,8 +98,9 @@ program. Ručne veze za BHT1, BHT 1 HD i obični FTV nalaze se u
 `bht1` i `ftv` na glavne ID-ove vodiča `BHT1.ba` i
 `Federalnatelevizija.ba`; browser XML importer osvježava i sve postojeće
 aliase tih kanala. Postojeći alias `FTV.HD.(BIH).ba (src05)` nasljeđuje
-raspored `Federalnatelevizija.ba` i u probnom vodiču. Prije objave treba
-provjeriti da FTV HD stream zaista emituje isti raspored.
+raspored `Federalnatelevizija.ba` i u probnom vodiču. Korisnik je nakon
+provjere potvrdio zajednički EPG za FTV i FTV HD; ako se stvarni program
+razlikuje, taj alias treba zasebno mapirati.
 
 Nakon pregleda može se napraviti lokalna kopija vodiča s tim rasporedom:
 
