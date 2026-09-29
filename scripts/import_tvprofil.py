@@ -13,6 +13,9 @@ from playwright.sync_api import sync_playwright
 
 ZONE = ZoneInfo("Europe/Zagreb")
 PAGE_CANDIDATES = [
+    "https://tvprofil.com/",
+    "https://tvprofil.com/hr/",
+    "https://tvprofil.com/box/",
     "https://tvprofil.com/hr/tvprogram/kanal/{slug}",
     "https://tvprofil.com/tvprogram/kanal/{slug}",
     "https://tvprofil.com/ba/tvprogram/kanal/{slug}",
@@ -109,9 +112,9 @@ def main(guide_path, config_path):
         for template in PAGE_CANDIDATES:
             try:
                 page.goto(template.format(slug=channels[0]["slug"]), wait_until="domcontentloaded", timeout=60000)
-                page.wait_for_function("typeof bazinga === 'function' && typeof Tvprofil !== 'undefined'", timeout=30000)
+                page.wait_for_function("typeof Tvprofil !== 'undefined' && (typeof bazinga === 'function' || typeof window.bazinga === 'function')", timeout=30000)
                 loaded = True
-                print("TVProfil session:", page.url)
+                print("TVProfil session:", page.url, "| title:", page.title())
                 break
             except Exception as exc:
                 last_error = exc
