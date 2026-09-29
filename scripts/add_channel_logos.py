@@ -5,6 +5,15 @@ import sys
 import xml.etree.ElementTree as ET
 from urllib.parse import urlparse
 
+PLAYLIST_NAMES = {
+    'Hayat.ba': ('|BIH| HAYAT BIH', '|BIH| HAYAT BiH HD'),
+    'FACETV.ba': ('|BIH| FACE TV', '|BIH| FACE TV HD'),
+    'RTL2.hr': ('|HR| RTL 2', '|HR| RTL 2 HD'),
+    'Prva.rs': ('|SRB| PRVA TV', '|SRB| PRVA TV HD'),
+    'RTLAdria.hr': ('|HR| RTL ADRIA',),
+    'SportskaTV.hr': ('SPORTSKA TV',),
+}
+
 
 def main(guide_path, logos_path):
     tree = ET.parse(guide_path)
@@ -32,6 +41,15 @@ def main(guide_path, logos_path):
             for icon in channel.findall('icon'):
                 channel.remove(icon)
             channel.append(ET.Element('icon', {'src': url}))
+
+    for channel_id, names in PLAYLIST_NAMES.items():
+        channel = channels.get(channel_id)
+        if channel is None:
+            raise ValueError(f'Missing channel for playlist names: {channel_id}')
+        present = {element.text for element in channel.findall('display-name')}
+        for name in names:
+            if name not in present:
+                ET.SubElement(channel, 'display-name', {'lang': 'hr'}).text = name
 
     tree.write(guide_path, encoding='utf-8', xml_declaration=True)
     print(f'Added verified source logos to {len(seen)} XMLTV channels')

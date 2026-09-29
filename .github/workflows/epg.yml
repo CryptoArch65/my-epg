@@ -18,6 +18,7 @@ on:
       - scripts/import_film_epg.py
       - scripts/import_regional_epg.py
       - scripts/import_maxsport_logos.py
+      - scripts/import_maxtv_channel_logos.py
       - scripts/import_hayat_una_logos.py
       - scripts/add_playlist_aliases.py
       - scripts/validate_guide.py
@@ -91,6 +92,12 @@ jobs:
 
       - name: Host MAXSport logos from Hrvatski Telekom
         run: python3 scripts/import_maxsport_logos.py config/bih-source-logos.csv logos
+
+      - name: Update selected channel logos from MAXtv
+        run: |
+          python3 scripts/import_maxtv_channel_logos.py \
+            epg/sites/mojmaxtv.hrvatskitelekom.hr/mojmaxtv.hrvatskitelekom.hr.config.js \
+            config/bih-source-logos.csv
 
       - name: Host Hayat and UNA TV logos
         run: python3 scripts/import_hayat_una_logos.py config/bih-source-logos.csv logos

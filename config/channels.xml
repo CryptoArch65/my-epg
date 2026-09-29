@@ -249,4 +249,7 @@
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="343758888249" lang="hr" xmltv_id="OTV.hr">OTV</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="343756840422" lang="hr" xmltv_id="TVJadran.hr">TV Jadran</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="343757352384" lang="hr" xmltv_id="KanalRi.hr">Kanal Ri</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="311618600203" lang="hr" xmltv_id="RTLAdria.hr">RTL Adria</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="338263080036" lang="hr" xmltv_id="DiadoraTV.hr">Diadora TV</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276770856251" lang="hr" xmltv_id="SportskaTV.hr">Sportska Televizija</channel>
 </channels>

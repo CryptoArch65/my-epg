@@ -4,7 +4,6 @@
   <channel site="tvprogramdanas.net" site_id="rtv-banovina" lang="hr" xmltv_id="RTVBanovina.ba">|BIH| TELEVIZIJA RADIO BANOVINA</channel>
   <channel site="tvprogramdanas.net" site_id="aurora-tv" lang="hr" xmltv_id="AuroraTV.hr">|HR| Aurora</channel>
   <channel site="tvprogramdanas.net" site_id="z1" lang="hr" xmltv_id="Z1.hr">|HR| Z 1</channel>
-  <channel site="tvprogramdanas.net" site_id="diadora-tv" lang="hr" xmltv_id="DiadoraTV.hr">Diadora TV</channel>
   <channel site="tvprogramdanas.net" site_id="libertas-tv" lang="hr" xmltv_id="LibertasTV.hr">Libertas TV</channel>
   <channel site="rtvslon.ba" site_id="tv-program" lang="hr" xmltv_id="TVSlonExtra.ba">|BIH| TV SLON EXTRA</channel>
   <channel site="mymedia.ba" site_id="tv-program" lang="bs" xmltv_id="MYTV.ba">|BH| MYTV</channel>

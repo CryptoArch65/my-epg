@@ -22,7 +22,6 @@ REGIONAL = {
     "RTVBanovina.ba": "rtv-banovina",
     "AuroraTV.hr": "aurora-tv",
     "Z1.hr": "z1",  # MojTV returns HTTP 403 to the scheduled grabber.
-    "DiadoraTV.hr": "diadora-tv",
     "LibertasTV.hr": "libertas-tv",
 }
 LOGOS = {**REGIONAL, "HercegTV.ba": "herceg-tv"}
