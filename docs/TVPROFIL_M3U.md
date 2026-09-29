@@ -92,9 +92,14 @@ prije EPG preuzimanja. Takav red nije u runtime konfiguraciji. Pregledaj
 `ambiguous` i `not_found` redove i provjeri automatske `matched` rezultate.
 
 U browser sesiji 29. 9. 2026. potvrđeni su `bht1` (27 programa) i `ftv`
-(39 programa) za taj datum. Ručne veze za BHT1, BHT 1 HD i obični FTV
-nalaze se u `tvprofil_name_overrides.csv`. Za `FTV HD` veza je ostavljena
-otvorenom dok se ne potvrdi da zaista emituje isti raspored kao FTV.
+(39 programa) za taj datum. Izvoz za 13 dana sadrži 382 odnosno 491
+program. Ručne veze za BHT1, BHT 1 HD i obični FTV nalaze se u
+`tvprofil_name_overrides.csv`. Matcher prevodi postojeće playlist alias ID-ove
+`bht1` i `ftv` na glavne ID-ove vodiča `BHT1.ba` i
+`Federalnatelevizija.ba`; browser XML importer osvježava i sve postojeće
+aliase tih kanala. Postojeći alias `FTV.HD.(BIH).ba (src05)` nasljeđuje
+raspored `Federalnatelevizija.ba` i u probnom vodiču. Prije objave treba
+provjeriti da FTV HD stream zaista emituje isti raspored.
 
 Nakon pregleda može se napraviti lokalna kopija vodiča s tim rasporedom:
 
