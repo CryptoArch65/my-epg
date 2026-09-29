@@ -2,9 +2,6 @@ name: Review TVProfil M3U matches
 
 on:
   workflow_dispatch:
-  pull_request:
-    paths:
-      - '.github/workflows/tvprofil-match.yml'
 
 jobs:
   match:
