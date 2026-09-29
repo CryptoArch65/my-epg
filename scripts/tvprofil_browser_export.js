@@ -63,15 +63,20 @@
   const programmes = [];
   const seen = new Set();
   const counts = {};
+  const missingTitles = [];
   for (const channel of channels) {
     let count = 0;
     for (let offset = -7; offset <= 5; offset++) {
       const datum = day(offset);
       const events = await fetchDay(channel.slug, datum);
       for (const event of events) {
-        if (!Number.isFinite(event.ts) || !Number.isFinite(event.len) || event.len <= 0 || !event.title) {
+        if (!Number.isFinite(event.ts) || !Number.isFinite(event.len) || event.len <= 0) {
           console.error("Nevažeći red iz TvProfila", {channel: channel.slug, datum, event});
           throw new Error(`Nevažeći program: ${channel.slug} ${datum}; pogledaj prethodni zapis u konzoli`);
+        }
+        if (!event.title) {
+          missingTitles.push({channel: channel.slug, datum, ts: event.ts, len: event.len});
+          continue;
         }
         const key = `${channel.xmltv_id}:${event.ts}:${event.len}:${event.title}`;
         if (seen.has(key)) continue;
@@ -104,4 +109,7 @@
   link.click();
   setTimeout(() => URL.revokeObjectURL(url), 60000);
   console.log("XMLTV sačuvan:", programmes.length, "programa", counts);
+  if (missingTitles.length) {
+    console.warn(`Preskočeno ${missingTitles.length} redova bez naslova (nisu u XML-u):`, missingTitles);
+  }
 })();
