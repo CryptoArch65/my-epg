@@ -28,6 +28,14 @@
     const el = document.getElementById(label.htmlFor);
     if (el) for (const value of values(el)) add(label.textContent, value);
   }
+  // /box/ stores most channels as plain <div data-id="123">Name</div>.
+  // This numeric ID is useful for name matching but is NOT a schedule slug.
+  for (const el of document.querySelectorAll(".channels [data-id]")) {
+    const name = clean(el.textContent);
+    const id = el.getAttribute("data-id");
+    if (!name || !/^\d+$/.test(id) || name.length > 120) continue;
+    entries.set(`${name}\0id:${id}`, {name, id});
+  }
   const catalog = [...entries.values()].sort((a, b) => a.name.localeCompare(b.name));
   if (!catalog.length) {
     console.log("Nema pronađenih kanala. Stranica:", location.href,
@@ -41,5 +49,5 @@
   link.download = "tvprofil-catalog.json";
   link.click();
   setTimeout(() => URL.revokeObjectURL(url), 60000);
-  console.log(`Sačuvan TvProfil katalog: ${catalog.length} kandidata`, catalog.slice(0, 12));
+  console.log(`Sačuvan TvProfil katalog: ${catalog.length} kandidata (numerički ID nije slug)`, catalog.slice(0, 12));
 })();
