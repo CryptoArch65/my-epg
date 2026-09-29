@@ -156,10 +156,10 @@ def main():
     if args.catalog:
         catalog = json.loads(Path(args.catalog).read_text(encoding="utf-8"))
         if not isinstance(catalog, list) or any(
-            not isinstance(item, dict) or not item.get("name") or not item.get("slug")
+            not isinstance(item, dict) or not item.get("name") or not (item.get("slug") or item.get("id"))
             for item in catalog
         ):
-            raise SystemExit("Catalog must be a JSON array of {name, slug} entries")
+            raise SystemExit("Catalog must be a JSON array of {name, slug} or {name, id} entries")
     else:
         from playwright.sync_api import sync_playwright
 
@@ -177,7 +177,7 @@ def main():
 
     output = []
     fields = list(rows[0].keys()) if rows else []
-    for needed in ["corrected_name", "tvprofil_name", "tvprofil_slug", "status", "confidence", "note"]:
+    for needed in ["corrected_name", "tvprofil_name", "tvprofil_id", "tvprofil_slug", "status", "confidence", "note"]:
         if needed not in fields:
             fields.append(needed)
 
@@ -202,9 +202,13 @@ def main():
 
         if candidate:
             row["tvprofil_name"] = candidate["name"]
-            row["tvprofil_slug"] = candidate["slug"]
+            row["tvprofil_id"] = candidate.get("id", "")
+            row["tvprofil_slug"] = candidate.get("slug", "")
+            if status == "matched" and not candidate.get("slug"):
+                status = "needs_slug"
         else:
             row["tvprofil_name"] = ""
+            row["tvprofil_id"] = ""
             row["tvprofil_slug"] = ""
         row["status"] = status
         row["confidence"] = f"{score:.3f}" if score else ""
