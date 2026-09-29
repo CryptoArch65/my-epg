@@ -33,7 +33,7 @@ async ({slug, datum}) => {
 
   bazinga(data);
 
-  const bKey = Object.keys(data).find(k => /^bd+$/.test(k));
+  const bKey = Object.keys(data).find(k => /^b\d+$/.test(k));
   if (!bKey) throw new Error("TVProfil bKey not found");
 
   const lang = Tvprofil?.config?.lang || "";
