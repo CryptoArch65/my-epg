@@ -4,8 +4,9 @@
 import csv
 import json
 import sys
+from datetime import datetime
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import quote, unquote, urljoin, urlparse
 from urllib.request import Request, urlopen
 
 
@@ -26,26 +27,42 @@ CHANNELS = {
 }
 URL = ('https://mts.rs/hybris/ecommerce/b2c/v1/products/search'
        '?sort=pozicija-rastuce&searchQueryContext=CHANNEL_PROGRAM'
-       '&query=:pozicija-rastuce:tip-kanala-radio:TV%20kanali&pageSize=10000')
+       '&query=:pozicija-rastuce:tip-kanala-radio:TV%20kanali'
+       ':channelProgramDates:{}&pageSize=10000')
 MTEL_URL = ('https://mtel.ba/hybris/ecommerce/b2c/v1/products/channels/search'
             '?pageSize=999&query=:relevantno:tv-kategorija:tv-iptv')
+MTEL_CHANNELS = {
+    'iptv#ch-20-rts-2': 'RTS2.rs',
+    'iptv#ch-50-rts-muzika': 'RTSMuzika.rs',
+    'iptv#ch-433-rts-klasika': 'RTSKlasika.rs',
+    'iptv#ch-21-rts-nauka-hd': 'RTSNauka.rs',
+    'iptv#ch-388-rts-poletarac': 'RTSPoletarac.rs',
+    'iptv#ch-49-rts-trezor': 'RTSTrezor.rs',
+    'iptv#ch-45-rts-zivot': 'RTSZivot.rs',
+    'iptv#ch-19-rts-svet': 'RTSSvet.rs',
+    'iptv#ch-360-prva-max': 'PrvaMax.rs',
+    'iptv#ch-363-prva-life': 'PrvaLife.rs',
+}
 
 
-def first_url(value):
+def first_url(value, base=''):
     if isinstance(value, str):
-        return value if value.startswith('https://') else None
+        if value.startswith('https://'):
+            return value
+        return urljoin(base, value) if base and value.startswith('/') else None
     if isinstance(value, list):
-        return next((url for item in value if (url := first_url(item))), None)
+        return next((url for item in value if (url := first_url(item, base))), None)
     if isinstance(value, dict):
         for key in ('url', 'src', 'path', 'image', 'logo'):
-            if key in value and (url := first_url(value[key])):
+            if key in value and (url := first_url(value[key], base)):
                 return url
-        return next((url for item in value.values() if (url := first_url(item))), None)
+        return next((url for item in value.values() if (url := first_url(item, base))), None)
     return None
 
 
 def official_logos():
-    request = Request(URL, headers={'User-Agent': 'Mozilla/5.0', 'Accept': 'application/json'})
+    date = datetime.now().strftime('%Y-%m-%d')
+    request = Request(URL.format(date), headers={'User-Agent': 'Mozilla/5.0', 'Accept': 'application/json'})
     with urlopen(request, timeout=35) as response:
         data = json.load(response)
     products = data.get('products') if isinstance(data, dict) else data
@@ -56,27 +73,38 @@ def official_logos():
         if not isinstance(row, dict):
             continue
         code = str(row.get('code', ''))
-        if code not in CHANNELS:
+        channel_id = CHANNELS.get(code) or CHANNELS.get(unquote(code)) or CHANNELS.get(quote(code))
+        if not channel_id:
             continue
-        logo = first_url(row.get('picture')) or first_url(row.get('images')) or first_url(row.get('logo'))
+        logo = (first_url(row.get('picture'), 'https://mts.rs')
+                or first_url(row.get('images'), 'https://mts.rs')
+                or first_url(row.get('logo'), 'https://mts.rs'))
         if logo and urlparse(logo).hostname in {'mts.rs', 'www.mts.rs', 'medias.services.mts.rs'}:
-            logos[CHANNELS[code]] = logo
+            logos[channel_id] = logo
+        elif code == 'rts_1_hd':
+            print('MTS RTS 1 has no usable channel logo; product fields: '
+                  + ', '.join(sorted(row.keys())))
     return logos
 
 
-def svet_logo():
+def mtel_logos():
     request = Request(MTEL_URL, headers={'User-Agent': 'Mozilla/5.0', 'Accept': 'application/json'})
     with urlopen(request, timeout=35) as response:
         data = json.load(response)
     products = data.get('products') if isinstance(data, dict) else data
     if not isinstance(products, list):
-        return None
+        raise ValueError('m:tel returned no channel products')
+    logos = {}
     for row in products:
-        if isinstance(row, dict) and str(row.get('code')) == 'iptv#ch-19-rts-svet':
-            logo = first_url(row.get('picture')) or first_url(row.get('images'))
-            if logo and urlparse(logo).hostname in {'mtel.ba', 'www.mtel.ba', 'medias.services.mtel.ba'}:
-                return logo
-    return None
+        if not isinstance(row, dict):
+            continue
+        channel_id = MTEL_CHANNELS.get(str(row.get('code')))
+        if not channel_id:
+            continue
+        logo = first_url(row.get('picture'), 'https://mtel.ba') or first_url(row.get('images'), 'https://mtel.ba')
+        if logo and urlparse(logo).hostname in {'mtel.ba', 'www.mtel.ba', 'medias.services.mtel.ba'}:
+            logos[channel_id] = logo
+    return logos
 
 
 def main(csv_path):
@@ -96,14 +124,12 @@ def main(csv_path):
     for channel_id, logo in logos.items():
         by_id[channel_id]['logo_url'] = logo
     try:
-        svet = svet_logo()
-        if svet:
-            by_id['RTSSvet.rs']['logo_url'] = svet
-            print('Updated official m:tel logo for RTS Svet')
-        else:
-            print('Warning: m:tel RTS Svet logo unavailable; keeping existing logo')
+        mtel = mtel_logos()
+        for channel_id, logo in mtel.items():
+            by_id[channel_id]['logo_url'] = logo
+        print(f'Updated {len(mtel)} official m:tel channel logos')
     except (OSError, ValueError, KeyError, json.JSONDecodeError) as exc:
-        print(f'Warning: m:tel RTS Svet logo unavailable; keeping existing logo: {exc}')
+        print(f'Warning: m:tel logo catalogue unavailable; keeping existing logos: {exc}')
     missing = set(CHANNELS.values()) - set(logos)
     if missing:
         print('Warning: MTS has no matching logo for ' + ', '.join(sorted(missing)))

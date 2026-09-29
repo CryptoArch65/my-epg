@@ -15,12 +15,12 @@
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="274913832109" lang="hr" xmltv_id="RTL.hr">RTL</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276770344334" lang="hr" xmltv_id="RTL2.hr">RTL 2</channel>
   <channel site="mts.rs" site_id="rts_1_hd" lang="bs" xmltv_id="RTS1.rs">RTS 1</channel>
-  <channel site="mts.rs" site_id="rts_2_hd" lang="bs" xmltv_id="RTS2.rs">RTS 2</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-20-rts-2" lang="bs" xmltv_id="RTS2.rs">RTS 2</channel>
   <channel site="mts.rs" site_id="rts_3_hd" lang="bs" xmltv_id="RTS3.rs">RTS 3</channel>
-  <channel site="mts.rs" site_id="rts_muzika" lang="bs" xmltv_id="RTSMuzika.rs">RTS Muzika</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-50-rts-muzika" lang="bs" xmltv_id="RTSMuzika.rs">RTS Muzika</channel>
   <channel site="epg.telemach.ba" site_id="1585" lang="hr" xmltv_id="Prva.rs">Prva (BIH)</channel>
   <channel site="epg.telemach.ba" site_id="1582" lang="hr" xmltv_id="PrvaWorld.rs">Prva World (BIH)</channel>
-  <channel site="mts.rs" site_id="Prva%20MAX" lang="bs" xmltv_id="PrvaMax.rs">Prva MAX</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-360-prva-max" lang="bs" xmltv_id="PrvaMax.rs">Prva MAX</channel>
   <channel site="mts.rs" site_id="b92" lang="bs" xmltv_id="B92.rs">B92</channel>
   <channel site="mts.rs" site_id="Informer%20TV" lang="bs" xmltv_id="InformerTV.rs">Informer TV</channel>
   <channel site="mts.rs" site_id="k1_hd" lang="bs" xmltv_id="K1.rs">K1</channel>
@@ -253,14 +253,14 @@
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="338263080036" lang="hr" xmltv_id="DiadoraTV.hr">Diadora TV</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276770856251" lang="hr" xmltv_id="SportskaTV.hr">Sportska Televizija</channel>
   <channel site="mts.rs" site_id="rts_drama" lang="bs" xmltv_id="RTSDrama.rs">RTS Drama</channel>
-  <channel site="mts.rs" site_id="rts_klasika" lang="bs" xmltv_id="RTSKlasika.rs">RTS Klasika</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-433-rts-klasika" lang="bs" xmltv_id="RTSKlasika.rs">RTS Klasika</channel>
   <channel site="mts.rs" site_id="rts_kolo" lang="bs" xmltv_id="RTSKolo.rs">RTS Kolo</channel>
-  <channel site="mts.rs" site_id="rts_nauka" lang="bs" xmltv_id="RTSNauka.rs">RTS Nauka</channel>
-  <channel site="mts.rs" site_id="rts_poletarac" lang="bs" xmltv_id="RTSPoletarac.rs">RTS Poletarac</channel>
-  <channel site="mts.rs" site_id="rts_trezor" lang="bs" xmltv_id="RTSTrezor.rs">RTS Trezor</channel>
-  <channel site="mts.rs" site_id="rts_zivot" lang="bs" xmltv_id="RTSZivot.rs">RTS Život</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-21-rts-nauka-hd" lang="bs" xmltv_id="RTSNauka.rs">RTS Nauka</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-388-rts-poletarac" lang="bs" xmltv_id="RTSPoletarac.rs">RTS Poletarac</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-49-rts-trezor" lang="bs" xmltv_id="RTSTrezor.rs">RTS Trezor</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-45-rts-zivot" lang="bs" xmltv_id="RTSZivot.rs">RTS Život</channel>
   <channel site="mtel.ba" site_id="iptv#ch-19-rts-svet" lang="bs" xmltv_id="RTSSvet.rs">RTS Svet</channel>
   <channel site="epg.telemach.ba" site_id="1584" lang="hr" xmltv_id="PrvaPlus.rs">Prva Plus (BIH)</channel>
   <channel site="epg.telemach.ba" site_id="1583" lang="hr" xmltv_id="PrvaKick.rs">Prva Kick (BIH)</channel>
-  <channel site="mts.rs" site_id="prva_life" lang="bs" xmltv_id="PrvaLife.rs">Prva Life</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-363-prva-life" lang="bs" xmltv_id="PrvaLife.rs">Prva Life</channel>
 </channels>
