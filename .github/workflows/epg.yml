@@ -136,12 +136,24 @@ jobs:
               'query': query, 'pageSize': 10000,
           })
           with urlopen(Request(url, headers={'User-Agent': 'Mozilla/5.0'}), timeout=30) as response:
-              products = json.load(response).get('products', [])
+              data = json.load(response)
+          products = data.get('products', [])
           print('MTS live product count:', len(products))
+          print('MTS pagination:', data.get('pagination'))
           for product in products:
               name = product.get('name', '')
               if any(word in name.lower() for word in ('pink', 'elita', 'zadruga', 'bravo')):
                   print('MTS live:', repr(name), repr(product.get('code')), len(product.get('programs') or []))
+          for page in (1, 2):
+              page_url = url + '&currentPage=' + str(page)
+              with urlopen(Request(page_url, headers={'User-Agent': 'Mozilla/5.0'}), timeout=30) as response:
+                  page_data = json.load(response)
+              print('MTS page', page, 'pagination:', page_data.get('pagination'))
+              print('MTS page', page, 'first code:', (page_data.get('products') or [{}])[0].get('code'))
+              for product in page_data.get('products', []):
+                  name = product.get('name', '')
+                  if any(word in name.lower() for word in ('pink', 'elita', 'zadruga', 'bravo')):
+                      print('MTS page', page, repr(name), repr(product.get('code')), len(product.get('programs') or []))
           PY
 
       - name: Grab selected channels
