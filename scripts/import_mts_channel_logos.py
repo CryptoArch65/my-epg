@@ -5,6 +5,7 @@ import csv
 import json
 import sys
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from pathlib import Path
 from urllib.parse import quote, unquote, urljoin, urlparse
 from urllib.request import Request, urlopen
@@ -61,7 +62,7 @@ def first_url(value, base=''):
 
 
 def official_logos():
-    date = datetime.now().strftime('%Y-%m-%d')
+    date = datetime.now(ZoneInfo('Europe/Belgrade')).strftime('%Y-%m-%d')
     request = Request(URL.format(date), headers={'User-Agent': 'Mozilla/5.0', 'Accept': 'application/json'})
     with urlopen(request, timeout=35) as response:
         data = json.load(response)
@@ -79,12 +80,8 @@ def official_logos():
         logo = (first_url(row.get('picture'), 'https://mts.rs')
                 or first_url(row.get('images'), 'https://mts.rs')
                 or first_url(row.get('logo'), 'https://mts.rs'))
-        if logo and urlparse(logo).hostname in {'mts.rs', 'www.mts.rs', 'medias.services.mts.rs'}:
+        if logo and urlparse(logo).hostname in {'mts.rs', 'www.mts.rs', 'medias.services.mts.rs', 'mediasb2c.mts.rs'}:
             logos[channel_id] = logo
-        elif code == 'rts_1_hd':
-            print('MTS RTS 1 has no usable channel logo; product fields: '
-                  + ', '.join(sorted(row.keys())))
-            print('MTS RTS 1 image sample: ' + repr(row.get('images'))[:600])
     return logos
 
 
@@ -99,11 +96,7 @@ def mtel_logos():
     for row in products:
         if not isinstance(row, dict):
             continue
-        if 'rts' in str(row.get('name', '')).lower() and 'svet' in str(row.get('name', '')).lower():
-            print('m:tel RTS Svet sample: code=' + repr(row.get('code'))
-                  + ' picture=' + repr(row.get('picture'))[:260]
-                  + ' images=' + repr(row.get('images'))[:260])
-        channel_id = MTEL_CHANNELS.get(str(row.get('code')))
+        channel_id = MTEL_CHANNELS.get('iptv#' + str(row.get('code')))
         if not channel_id:
             continue
         logo = first_url(row.get('picture'), 'https://mtel.ba') or first_url(row.get('images'), 'https://mtel.ba')
@@ -128,6 +121,7 @@ def main(csv_path):
         return
     for channel_id, logo in logos.items():
         by_id[channel_id]['logo_url'] = logo
+    mtel = {}
     try:
         mtel = mtel_logos()
         for channel_id, logo in mtel.items():
@@ -135,7 +129,7 @@ def main(csv_path):
         print(f'Updated {len(mtel)} official m:tel channel logos')
     except (OSError, ValueError, KeyError, json.JSONDecodeError) as exc:
         print(f'Warning: m:tel logo catalogue unavailable; keeping existing logos: {exc}')
-    missing = set(CHANNELS.values()) - set(logos)
+    missing = set(CHANNELS.values()) - set(logos) - set(mtel)
     if missing:
         print('Warning: MTS has no matching logo for ' + ', '.join(sorted(missing)))
     with csv_path.open('w', newline='', encoding='utf-8') as output:
