@@ -119,6 +119,31 @@ jobs:
       - name: Host missing M3U logos for review
         run: python3 scripts/host_m3u_missing_logos.py config/m3u-missing-logo-trial.csv config/bih-source-logos.csv logos
 
+      - name: Inspect live MTS Pink identifiers
+        continue-on-error: true
+        run: |
+          python3 - <<'PY'
+          import json
+          from datetime import datetime
+          from urllib.parse import urlencode
+          from urllib.request import Request, urlopen
+          from zoneinfo import ZoneInfo
+
+          day = datetime.now(ZoneInfo('Europe/Belgrade')).date().isoformat()
+          query = ':pozicija-rastuce:tip-kanala-radio:TV kanali:channelProgramDates:' + day
+          url = 'https://mts.rs/hybris/ecommerce/b2c/v1/products/search?' + urlencode({
+              'sort': 'pozicija-rastuce', 'searchQueryContext': 'CHANNEL_PROGRAM',
+              'query': query, 'pageSize': 10000,
+          })
+          with urlopen(Request(url, headers={'User-Agent': 'Mozilla/5.0'}), timeout=30) as response:
+              products = json.load(response).get('products', [])
+          print('MTS live product count:', len(products))
+          for product in products:
+              name = product.get('name', '')
+              if any(word in name.lower() for word in ('pink', 'elita', 'zadruga', 'bravo')):
+                  print('MTS live:', repr(name), repr(product.get('code')), len(product.get('programs') or []))
+          PY
+
       - name: Grab selected channels
         working-directory: epg
         run: |
