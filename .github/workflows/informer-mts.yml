@@ -79,17 +79,14 @@ jobs:
           from collections import Counter
 
           root = ET.parse('guide.informer.xml').getroot()
-          channel = next((c for c in root.findall('channel') if c.get('id') == 'InformerTV.rs'), None)
+          channel = next((c for c in root.findall('channel') if c.get('id') == 'informertv.rs'), None)
           if channel is None:
-              raise SystemExit('Missing InformerTV.rs channel')
+              raise SystemExit('Missing informertv.rs channel')
           counts = Counter(p.get('channel') for p in root.findall('programme'))
-          if counts['InformerTV.rs'] == 0:
-              raise SystemExit('No MTS programmes for InformerTV.rs')
-          print('InformerTV.rs', counts['InformerTV.rs'], 'programmes')
+          if counts['informertv.rs'] == 0:
+              raise SystemExit('No MTS programmes for informertv.rs')
+          print('informertv.rs', counts['informertv.rs'], 'programmes')
           PY
-
-      - name: Restore configured Informer logo
-        run: python3 scripts/add_channel_logos.py guide.informer.xml config/bih-source-logos.csv
 
       - name: Publish guide
         run: |
