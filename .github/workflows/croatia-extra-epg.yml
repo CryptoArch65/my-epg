@@ -11,6 +11,7 @@ on:
       - scripts/merge_xmltv.py
       - scripts/add_croatia_epg_aliases.py
       - scripts/apply_m3u_croatia_playlist_logos.py
+      - scripts/import_nova_cinema_raspored.py
       - .github/workflows/croatia-extra-epg.yml
   workflow_run:
     workflows: ["Update EPG"]
@@ -63,8 +64,11 @@ jobs:
       - name: Merge extra Croatia EPG into guide
         run: python3 scripts/merge_xmltv.py guide.xml croatia-extra.xml guide.merged.xml
 
-      - name: Install Pillow
-        run: python3 -m pip install Pillow
+      - name: Install Python dependencies
+        run: python3 -m pip install Pillow lxml
+
+      - name: Import Nova Cinema schedule from raspored.tv
+        run: python3 scripts/import_nova_cinema_raspored.py guide.merged.xml
 
       - name: Add Croatia playlist aliases
         run: python3 scripts/add_croatia_epg_aliases.py guide.merged.xml config/croatia-playlist-aliases.csv
@@ -79,8 +83,8 @@ jobs:
           from collections import Counter
 
           root = ET.parse('guide.merged.xml').getroot()
-          wanted = ['htv5', 'N1Croatia.hr', 'zdravatv.hr']
-          required_epg = ['N1Croatia.hr', 'zdravatv.hr']
+          wanted = ['htv5', 'N1Croatia.hr', 'zdravatv.hr', 'nova-plus-cinema']
+          required_epg = ['N1Croatia.hr', 'zdravatv.hr', 'nova-plus-cinema']
           channels = {c.get('id') for c in root.findall('channel')}
           counts = Counter(p.get('channel') for p in root.findall('programme'))
           for channel_id in wanted:
