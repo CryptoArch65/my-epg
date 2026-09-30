@@ -8,7 +8,7 @@ dayjs.extend(utc)
 dayjs.extend(timezone)
 
 const TZ = 'Europe/Belgrade'
-const SITE_IDS = new Set(['eurosport', 'eurosport-2'])
+const SITE_IDS = new Set(['eurosport', 'eurosport-2', 'k1'])
 
 module.exports = {
   site: 'naslovi.net',
