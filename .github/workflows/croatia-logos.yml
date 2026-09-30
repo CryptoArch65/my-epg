@@ -11,7 +11,7 @@ on:
       - config/croatia-playlist-aliases.csv
       - scripts/host_m3u_croatia_logos.py
       - scripts/apply_m3u_croatia_playlist_logos.py
-      - scripts/add_playlist_aliases.py
+      - scripts/add_croatia_playlist_aliases.py
       - .github/workflows/croatia-logos.yml
 
 permissions:
@@ -40,7 +40,7 @@ jobs:
         run: python3 scripts/host_m3u_croatia_logos.py config/m3u-croatia-logo-trial.csv config/bih-source-logos.csv logos
 
       - name: Add Croatia playlist EPG aliases
-        run: python3 scripts/add_playlist_aliases.py guide.xml config/croatia-playlist-aliases.csv
+        run: python3 scripts/add_croatia_playlist_aliases.py guide.xml config/croatia-playlist-aliases.csv
 
       - name: Apply Croatia logos to playlist tvg-id channels
         run: python3 scripts/apply_m3u_croatia_playlist_logos.py guide.xml config/m3u-croatia-playlist-logos.csv logos
