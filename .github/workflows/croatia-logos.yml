@@ -8,8 +8,10 @@ on:
       - guide.xml
       - config/m3u-croatia-logo-trial.csv
       - config/m3u-croatia-playlist-logos.csv
+      - config/croatia-playlist-aliases.csv
       - scripts/host_m3u_croatia_logos.py
       - scripts/apply_m3u_croatia_playlist_logos.py
+      - scripts/add_playlist_aliases.py
       - .github/workflows/croatia-logos.yml
 
 permissions:
@@ -37,17 +39,20 @@ jobs:
       - name: Replace Croatia guide logos from M3U
         run: python3 scripts/host_m3u_croatia_logos.py config/m3u-croatia-logo-trial.csv config/bih-source-logos.csv logos
 
+      - name: Add Croatia playlist EPG aliases
+        run: python3 scripts/add_playlist_aliases.py guide.xml config/croatia-playlist-aliases.csv
+
       - name: Apply Croatia logos to playlist tvg-id channels
         run: python3 scripts/apply_m3u_croatia_playlist_logos.py guide.xml config/m3u-croatia-playlist-logos.csv logos
 
-      - name: Commit Croatia logo updates
+      - name: Commit Croatia logo and EPG alias updates
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add guide.xml config/bih-source-logos.csv logos/
           if git diff --cached --quiet; then
-            echo "Croatia logos have not changed"
+            echo "Croatia logos and aliases have not changed"
             exit 0
           fi
-          git commit -m "Update Croatia M3U logos"
+          git commit -m "Update Croatia logos and EPG aliases"
           git push
