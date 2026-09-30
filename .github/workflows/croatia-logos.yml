@@ -5,8 +5,11 @@ on:
   push:
     branches: [main]
     paths:
+      - guide.xml
       - config/m3u-croatia-logo-trial.csv
+      - config/m3u-croatia-playlist-logos.csv
       - scripts/host_m3u_croatia_logos.py
+      - scripts/apply_m3u_croatia_playlist_logos.py
       - .github/workflows/croatia-logos.yml
 
 permissions:
@@ -31,14 +34,17 @@ jobs:
       - name: Install Pillow
         run: python -m pip install Pillow
 
-      - name: Replace Croatia logos from M3U
+      - name: Replace Croatia guide logos from M3U
         run: python3 scripts/host_m3u_croatia_logos.py config/m3u-croatia-logo-trial.csv config/bih-source-logos.csv logos
 
-      - name: Commit hosted Croatia logos
+      - name: Apply Croatia logos to playlist tvg-id channels
+        run: python3 scripts/apply_m3u_croatia_playlist_logos.py guide.xml config/m3u-croatia-playlist-logos.csv logos
+
+      - name: Commit Croatia logo updates
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add config/bih-source-logos.csv logos/
+          git add guide.xml config/bih-source-logos.csv logos/
           if git diff --cached --quiet; then
             echo "Croatia logos have not changed"
             exit 0
