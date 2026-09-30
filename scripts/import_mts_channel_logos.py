@@ -25,6 +25,10 @@ CHANNELS = {
     'rts_zivot': 'RTSZivot.rs',
     'Prva%20MAX': 'PrvaMax.rs',
     'prva_life': 'PrvaLife.rs',
+    'una_tv': 'UnaTV.rs',
+    'kurir_hd': 'KurirTV.rs',
+    'blic_tv': 'BlicTV.rs',
+    'k1_hd': 'K1.rs',
 }
 URL = ('https://mts.rs/hybris/ecommerce/b2c/v1/products/search'
        '?sort=pozicija-rastuce&searchQueryContext=CHANNEL_PROGRAM'

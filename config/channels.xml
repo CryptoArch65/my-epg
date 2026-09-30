@@ -263,4 +263,8 @@
   <channel site="epg.telemach.ba" site_id="1584" lang="hr" xmltv_id="PrvaPlus.rs">Prva Plus (BIH)</channel>
   <channel site="epg.telemach.ba" site_id="1583" lang="hr" xmltv_id="PrvaKick.rs">Prva Kick (BIH)</channel>
   <channel site="mtel.ba" site_id="iptv#ch-363-prva-life" lang="bs" xmltv_id="PrvaLife.rs">Prva Life</channel>
+  <channel site="epg.telemach.ba" site_id="1698" lang="hr" xmltv_id="NovaS.rs">Nova S HD (BIH)</channel>
+  <channel site="mts.rs" site_id="una_tv" lang="bs" xmltv_id="UnaTV.rs">UNA TV</channel>
+  <channel site="mts.rs" site_id="kurir_hd" lang="bs" xmltv_id="KurirTV.rs">Kurir TV</channel>
+  <channel site="mts.rs" site_id="blic_tv" lang="bs" xmltv_id="BlicTV.rs">Blic TV</channel>
 </channels>
