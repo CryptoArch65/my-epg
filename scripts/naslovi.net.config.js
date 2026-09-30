@@ -14,12 +14,13 @@ module.exports = {
   site: 'naslovi.net',
   tz: TZ,
   lang: 'sr',
-  days: 2,
+  days: 3,
   url({ channel, date }) {
     if (!SITE_IDS.has(channel.site_id)) throw new Error('Unknown Naslovi.net channel')
-    return `https://naslovi.net/tv-program/${channel.site_id}/${date.format('YYYY-MM-DD')}`
+    return `https://naslovi.net/tv-program/${channel.site_id}/${(channel.site_id === 'k1' ? date.subtract(1, 'day') : date).format('YYYY-MM-DD')}`
   },
-  parser({ content, date }) {
+  parser({ content, date, channel }) {
+    const tvDate = channel.site_id === 'k1' ? date.subtract(1, 'day') : date
     const $ = cheerio.load(content)
     const rows = $('div.tvrow')
     const programs = []
@@ -34,7 +35,7 @@ module.exports = {
       if (hour > 23 || minute > 59) return
       if (previous && hour * 60 + minute < previous) dayOffset += 1
       previous = hour * 60 + minute
-      const startDate = date.add(dayOffset, 'day').format('YYYY-MM-DD')
+      const startDate = tvDate.add(dayOffset, 'day').format('YYYY-MM-DD')
       const start = dayjs.tz(`${startDate} ${time}`, 'YYYY-MM-DD HH:mm', TZ)
       const description = $(row).find('.descr').first().text().trim()
       const category = $(row).find('.category').first().text().trim()
