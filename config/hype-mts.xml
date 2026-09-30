@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channels>
+  <channel site="mts.rs" site_id="hype" lang="bs" xmltv_id="HypeTV.rs">Hype TV</channel>
+  <channel site="mts.rs" site_id="hype" lang="bs" xmltv_id="hype-tv">Hype 2</channel>
+</channels>
