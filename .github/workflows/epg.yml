@@ -14,6 +14,7 @@ on:
       - config/m3u-missing-logo-trial.csv
       - config/m3u-bosna-logo-trial.csv
       - config/m3u-pink-logo-trial.csv
+      - config/pink-mts-channels.csv
       - scripts/arena_serbia.config.js
       - scripts/naslovi.net.config.js
       - scripts/add_channel_logos.py
@@ -21,6 +22,7 @@ on:
       - scripts/host_m3u_missing_logos.py
       - scripts/host_m3u_bosna_logos.py
       - scripts/host_m3u_pink_logos.py
+      - scripts/import_mts_pink_epg.py
       - scripts/import_documentary_logos.py
       - scripts/import_film_epg.py
       - scripts/import_regional_epg.py
@@ -163,6 +165,9 @@ jobs:
             --channels=../config/channels.xml \
             --output=../guide.new.xml \
             --maxConnections=4
+
+      - name: Import Pink schedules from all MTS pages
+        run: python3 scripts/import_mts_pink_epg.py guide.new.xml config/pink-mts-channels.csv
 
       - name: Add AXN and M1 Film broadcaster schedules and logos
         run: |
