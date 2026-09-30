@@ -1,0 +1,94 @@
+name: Update Croatia Extra EPG
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Update EPG"]
+    types: [completed]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: croatia-extra-epg
+  cancel-in-progress: false
+
+jobs:
+  update-croatia-extra:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Clone iptv-org/epg
+        run: git clone --depth 1 https://github.com/iptv-org/epg.git epg
+
+      - name: Install grabber dependencies
+        working-directory: epg
+        run: npm ci
+
+      - name: Grab extra Croatia channels
+        working-directory: epg
+        run: |
+          npm run grab --- \
+            --channels=../config/croatia-extra-channels.xml \
+            --output=../croatia-extra.xml \
+            --maxConnections=3
+
+      - name: Merge extra Croatia EPG into guide
+        run: python3 scripts/merge_xmltv.py guide.xml croatia-extra.xml guide.merged.xml
+
+      - name: Install Pillow
+        run: python3 -m pip install Pillow
+
+      - name: Add Croatia playlist aliases
+        run: python3 scripts/add_croatia_epg_aliases.py guide.merged.xml config/croatia-playlist-aliases.csv
+
+      - name: Apply Croatia provider logos
+        run: python3 scripts/apply_m3u_croatia_playlist_logos.py guide.merged.xml config/m3u-croatia-playlist-logos.csv logos
+
+      - name: Validate extra channel data
+        run: |
+          python3 - <<'PY'
+          import xml.etree.ElementTree as ET
+          from collections import Counter
+
+          root = ET.parse('guide.merged.xml').getroot()
+          wanted = ['htv5', 'N1Croatia.hr', 'zdravatv.hr']
+          channels = {c.get('id') for c in root.findall('channel')}
+          counts = Counter(p.get('channel') for p in root.findall('programme'))
+          for channel_id in wanted:
+              if channel_id not in channels:
+                  raise SystemExit(f'Missing Croatia channel: {channel_id}')
+              if counts[channel_id] == 0:
+                  raise SystemExit(f'No programmes for Croatia channel: {channel_id}')
+              print(channel_id, counts[channel_id], 'programmes')
+          PY
+
+      - name: Publish Croatia-enhanced guide
+        run: |
+          mv guide.merged.xml guide.xml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add guide.xml logos/
+          if git diff --cached --quiet; then
+            echo "Croatia extra EPG has not changed"
+            exit 0
+          fi
+          git commit -m "Update Croatia extra EPG"
+          git push
