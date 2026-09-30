@@ -14,6 +14,7 @@ on:
       - scripts/arena_serbia.config.js
       - scripts/naslovi.net.config.js
       - scripts/add_channel_logos.py
+      - scripts/host_serbian_local_logos.py
       - scripts/import_documentary_logos.py
       - scripts/import_film_epg.py
       - scripts/import_regional_epg.py
@@ -90,6 +91,9 @@ jobs:
           python3 scripts/import_documentary_logos.py \
             epg/sites/epg.telemach.ba/epg.telemach.ba.config.js \
             config/bih-source-logos.csv logos
+
+      - name: Host Serbian regional logos
+        run: python3 scripts/host_serbian_local_logos.py config/bih-source-logos.csv logos
 
       - name: Host MAXSport logos from Hrvatski Telekom
         run: python3 scripts/import_maxsport_logos.py config/bih-source-logos.csv logos

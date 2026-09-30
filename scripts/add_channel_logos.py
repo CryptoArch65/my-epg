@@ -24,6 +24,8 @@ PLAYLIST_NAMES = {
     'EuronewsSerbia.rs': ("|SRB| EURONEWS SERBIA HD",),
     'N1Serbia.rs': ("|SRB| N1 INFO",),
     'RTVNoviPazar.rs': ("|SRB| RTV NOVI PAZAR",),
+    'ArenaSport4.ba': ('|BH| ARENA SPORT 4',),
+    'ArenaSport5BH.ba': ('|BH| ARENA SPORT 5',),
     'NovaS.rs': ('|SRB| NOVA S', '|SRB| NOVA S HD'),
     'UnaTV.rs': ('|SRB| UNA TV',),
     'KurirTV.rs': ('|SRB| KURIR TV',),
