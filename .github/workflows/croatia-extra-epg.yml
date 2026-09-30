@@ -13,6 +13,7 @@ on:
       - scripts/apply_m3u_croatia_playlist_logos.py
       - scripts/import_nova_cinema_raspored.py
       - scripts/import_nova_family_tvprogramdanas.py
+      - scripts/import_nova_world_tvepg.py
       - .github/workflows/croatia-extra-epg.yml
   workflow_run:
     workflows: ["Update EPG"]
@@ -74,6 +75,9 @@ jobs:
       - name: Import Nova Family schedule from tvprogramdanas.net
         run: python3 scripts/import_nova_family_tvprogramdanas.py guide.merged.xml
 
+      - name: Import Nova World schedule and logo from TVEpg.eu
+        run: python3 scripts/import_nova_world_tvepg.py guide.merged.xml logos
+
       - name: Add Croatia playlist aliases
         run: python3 scripts/add_croatia_epg_aliases.py guide.merged.xml config/croatia-playlist-aliases.csv
 
@@ -87,8 +91,8 @@ jobs:
           from collections import Counter
 
           root = ET.parse('guide.merged.xml').getroot()
-          wanted = ['htv5', 'N1Croatia.hr', 'zdravatv.hr', 'nova-plus-cinema', 'nova-plus-family']
-          required_epg = ['N1Croatia.hr', 'zdravatv.hr', 'nova-plus-cinema', 'nova-plus-family']
+          wanted = ['htv5', 'N1Croatia.hr', 'zdravatv.hr', 'nova-plus-cinema', 'nova-plus-family', 'prvaworld.rs']
+          required_epg = ['N1Croatia.hr', 'zdravatv.hr', 'nova-plus-cinema', 'nova-plus-family', 'prvaworld.rs']
           channels = {c.get('id') for c in root.findall('channel')}
           counts = Counter(p.get('channel') for p in root.findall('programme'))
           for channel_id in wanted:
