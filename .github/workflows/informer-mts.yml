@@ -44,6 +44,19 @@ jobs:
       - name: Clone iptv-org/epg
         run: git clone --depth 1 https://github.com/iptv-org/epg.git epg
 
+      - name: Fix encoded MTS channel IDs
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('epg/sites/mts.rs/mts.rs.config.js')
+          s = p.read_text(encoding='utf-8')
+          old = "const channelData = data.products.find(c => c.code === channel.site_id)"
+          new = "const channelData = data.products.find(c => c.code === decodeURIComponent(channel.site_id))"
+          if old not in s:
+              raise SystemExit('MTS parser pattern changed upstream')
+          p.write_text(s.replace(old, new), encoding='utf-8')
+          PY
+
       - name: Install grabber dependencies
         working-directory: epg
         run: npm ci
@@ -59,7 +72,7 @@ jobs:
       - name: Merge Informer MTS EPG into guide
         run: python3 scripts/merge_xmltv.py guide.xml informer-mts.xml guide.informer.xml
 
-      - name: Validate Informer EPG and logo
+      - name: Validate Informer EPG
         run: |
           python3 - <<'PY'
           import xml.etree.ElementTree as ET
