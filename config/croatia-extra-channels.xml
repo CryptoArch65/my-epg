@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<channels>
+  <channel site="mts.rs" site_id="hrt_int_tv" lang="bs" xmltv_id="htv5">HRT INT</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276770344345" lang="hr" xmltv_id="N1Croatia.hr">N1 HR</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="343758888241" lang="hr" xmltv_id="zdravatv.hr">Zdrava TV</channel>
+</channels>
