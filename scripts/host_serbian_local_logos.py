@@ -20,6 +20,7 @@ TARGETS = {
     ),
     "TVLeskovac.rs": (
         "https://logos.siptvs.com/EXYU/full/LESKOVAC.png",
+        "https://epg.serbianforum.org/logo_znaci/TV%20Leskovac.png",
         "https://www.medialector.com/image?fileName=2002536b-9d07-40b1-8711-afc0f459db46",
 
     ),
@@ -29,6 +30,7 @@ TARGETS = {
     ),
     "JefimijaTV.rs": (
         "https://logos.siptvs.com/EXYU/full/jefimija.png",
+        "https://images-web.ug-be.cdn.united.cloud/2023/01/17/11/42/39/light_480x270.png",
         "https://www.tvchannellists.com/wiki/images/5/50/Jefimija.svg",
     ),
 }
