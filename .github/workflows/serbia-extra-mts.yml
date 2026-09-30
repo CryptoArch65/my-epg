@@ -1,0 +1,111 @@
+name: Update Serbia Extra MTS EPG
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - config/serbia-extra-mts.xml
+      - config/serbia-extra-mts-logos.csv
+      - scripts/merge_xmltv.py
+      - scripts/host_m3u_serbia_logos.py
+      - scripts/add_channel_logos.py
+      - .github/workflows/serbia-extra-mts.yml
+  workflow_run:
+    workflows: ["Update EPG"]
+    types: [completed]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: serbia-extra-mts-epg
+  cancel-in-progress: false
+
+jobs:
+  update-serbia-extra:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Clone iptv-org/epg
+        run: git clone --depth 1 https://github.com/iptv-org/epg.git epg
+
+      - name: Install dependencies
+        run: |
+          cd epg
+          npm ci
+          cd ..
+          python3 -m pip install Pillow
+
+      - name: Grab Serbia extra channels from MTS
+        working-directory: epg
+        run: |
+          npm run grab --- \
+            --channels=../config/serbia-extra-mts.xml \
+            --output=../serbia-extra-mts.xml \
+            --maxConnections=5
+
+      - name: Merge Serbia extra MTS EPG into guide
+        run: python3 scripts/merge_xmltv.py guide.xml serbia-extra-mts.xml guide.serbia-extra.xml
+
+      - name: Host EX YU Srbija logos
+        run: python3 scripts/host_m3u_serbia_logos.py config/serbia-extra-mts-logos.csv config/bih-source-logos.csv logos
+
+      - name: Apply Serbia extra logos
+        run: python3 scripts/add_channel_logos.py guide.serbia-extra.xml config/bih-source-logos.csv
+
+      - name: Validate Serbia extra EPG
+        run: |
+          python3 - <<'PY'
+          import xml.etree.ElementTree as ET
+          from collections import Counter
+
+          wanted = ['insajdertv.rs', 'Balkan Trip', 'AgroTV.rs', '101TV.rs', 'SOS Kanal Plus']
+          root = ET.parse('guide.serbia-extra.xml').getroot()
+          counts = Counter(p.get('channel') for p in root.findall('programme'))
+          channels = {c.get('id'): c for c in root.findall('channel')}
+          failed = []
+          for cid in wanted:
+              if cid not in channels:
+                  failed.append(f'{cid}: missing channel')
+                  continue
+              icon = channels[cid].find('icon')
+              icon_src = icon.get('src') if icon is not None else ''
+              print(f'{cid}: {counts[cid]} programmes; logo={icon_src}')
+              if counts[cid] == 0:
+                  failed.append(f'{cid}: 0 programmes')
+              if not icon_src:
+                  failed.append(f'{cid}: no logo')
+          if failed:
+              raise SystemExit('; '.join(failed))
+          PY
+
+      - name: Publish guide and hosted logos
+        run: |
+          mv guide.serbia-extra.xml guide.xml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add guide.xml logos config/bih-source-logos.csv
+          if git diff --cached --quiet; then
+            echo "Serbia extra MTS EPG has not changed"
+            exit 0
+          fi
+          git commit -m "Update Serbia extra MTS EPG and logos"
+          git push
