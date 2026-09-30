@@ -33,7 +33,7 @@ async ({slug, datum}) => {
 
   bazinga(data);
 
-  const bKey = Object.keys(data).find(k => /^bd+$/.test(k));
+  const bKey = Object.keys(data).find(k => /^b\d+$/.test(k));
   if (!bKey) throw new Error("TVProfil bKey not found");
 
   const lang = Tvprofil?.config?.lang || "";
@@ -186,6 +186,18 @@ def main(guide_path, config_path):
             print("  " + error)
         if any("no programmes found" in e for e in errors):
             raise SystemExit("At least one configured TVProfil channel returned no programmes")
+
+    # TVProfil occasionally includes a timed row without a programme title.
+    # Keep it out of XMLTV and report it explicitly instead of inventing a title.
+    untitled = [e for e in all_events if not e["title"]]
+    if untitled:
+        print(f"TVProfil untitled rows skipped: {len(untitled)}")
+        for e in untitled[:20]:
+            print(f'  {e["slug"]} {e["requested_date"]} ts={e["ts"]} len={e["len"]}')
+        all_events = [e for e in all_events if e["title"]]
+    missing_programmes = {c["xmltv_id"] for c in channels} - {e["xmltv_id"] for e in all_events}
+    if missing_programmes:
+        raise SystemExit("TVProfil channels without titled programmes: " + ", ".join(sorted(missing_programmes)))
 
     # Validate before touching the XML tree.
     invalid = [
