@@ -129,7 +129,8 @@ def load_m1_schedule(url):
             return programmes
         except ValueError:
             if attempt == 2:
-                raise
+                print(f"WARNING: M1 schedule unavailable at {url}; continuing without today's M1 programmes")
+                return []
             time.sleep(2 * (attempt + 1))
 
 
