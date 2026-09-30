@@ -1,0 +1,92 @@
+name: Update Informer TV MTS EPG
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - config/informer-mts.xml
+      - scripts/merge_xmltv.py
+      - .github/workflows/informer-mts.yml
+  workflow_run:
+    workflows: ["Update EPG"]
+    types: [completed]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: informer-mts-epg
+  cancel-in-progress: false
+
+jobs:
+  update-informer:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Clone iptv-org/epg
+        run: git clone --depth 1 https://github.com/iptv-org/epg.git epg
+
+      - name: Install grabber dependencies
+        working-directory: epg
+        run: npm ci
+
+      - name: Grab Informer TV from MTS
+        working-directory: epg
+        run: |
+          npm run grab --- \
+            --channels=../config/informer-mts.xml \
+            --output=../informer-mts.xml \
+            --maxConnections=2
+
+      - name: Merge Informer MTS EPG into guide
+        run: python3 scripts/merge_xmltv.py guide.xml informer-mts.xml guide.informer.xml
+
+      - name: Validate Informer EPG and logo
+        run: |
+          python3 - <<'PY'
+          import xml.etree.ElementTree as ET
+          from collections import Counter
+
+          root = ET.parse('guide.informer.xml').getroot()
+          channel = next((c for c in root.findall('channel') if c.get('id') == 'InformerTV.rs'), None)
+          if channel is None:
+              raise SystemExit('Missing InformerTV.rs channel')
+          counts = Counter(p.get('channel') for p in root.findall('programme'))
+          if counts['InformerTV.rs'] == 0:
+              raise SystemExit('No MTS programmes for InformerTV.rs')
+          print('InformerTV.rs', counts['InformerTV.rs'], 'programmes')
+          PY
+
+      - name: Restore configured Informer logo
+        run: python3 scripts/add_channel_logos.py guide.informer.xml config/bih-source-logos.csv
+
+      - name: Publish guide
+        run: |
+          mv guide.informer.xml guide.xml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add guide.xml
+          if git diff --cached --quiet; then
+            echo "Informer MTS EPG has not changed"
+            exit 0
+          fi
+          git commit -m "Update Informer TV MTS EPG"
+          git push
