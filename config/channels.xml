@@ -22,7 +22,7 @@
   <channel site="epg.telemach.ba" site_id="1582" lang="hr" xmltv_id="PrvaWorld.rs">Prva World (BIH)</channel>
   <channel site="mtel.ba" site_id="iptv#ch-360-prva-max" lang="bs" xmltv_id="PrvaMax.rs">Prva MAX</channel>
   <channel site="mts.rs" site_id="b92" lang="bs" xmltv_id="B92.rs">B92</channel>
-  <channel site="mts.rs" site_id="Informer%20TV" lang="bs" xmltv_id="InformerTV.rs">Informer TV</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-informer-tv-hd" lang="bs" xmltv_id="InformerTV.rs">Informer TV</channel>
   <channel site="mtel.ba" site_id="iptv#ch-446-hype-tv" lang="bs" xmltv_id="HypeTV.rs">Hype TV</channel>
   <channel site="mtel.ba" site_id="iptv#ch-6-happy-tv" lang="bs" xmltv_id="Happy.rs">Happy TV</channel>
   <channel site="mts.rs" site_id="tv_pink" lang="bs" xmltv_id="Pink.rs">TV Pink</channel>
@@ -267,7 +267,7 @@
   <channel site="mts.rs" site_id="kurir_hd" lang="bs" xmltv_id="KurirTV.rs">Kurir TV</channel>
   <channel site="mts.rs" site_id="blic_tv" lang="bs" xmltv_id="BlicTV.rs">Blic TV</channel>
   <channel site="naslovi.net" site_id="k1" lang="sr" xmltv_id="K1.rs">K1</channel>
-  <channel site="mts.rs" site_id="prva_files" lang="bs" xmltv_id="PrvaFiles.rs">Prva Files</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-364-prva-files" lang="bs" xmltv_id="PrvaFiles.rs">Prva Files</channel>
   <channel site="mts.rs" site_id="rtv_1" lang="bs" xmltv_id="RTV1.rs">RTV 1</channel>
   <channel site="mts.rs" site_id="rtv_2" lang="bs" xmltv_id="RTV2.rs">RTV 2</channel>
   <channel site="mts.rs" site_id="tv_sandzak" lang="bs" xmltv_id="SandzakTV.rs">TV Sandžak</channel>
