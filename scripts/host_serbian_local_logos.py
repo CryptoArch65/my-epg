@@ -21,6 +21,7 @@ TARGETS = {
     ),
     "TVLeskovac.rs": (
         "https://logos.siptvs.com/EXYU/full/LESKOVAC.png",
+        "https://www.medialector.com/image?fileName=2002536b-9d07-40b1-8711-afc0f459db46",
         "page:https://www.tvl.rs/",
     ),
     "TVKrusevac.rs": (
