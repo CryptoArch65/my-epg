@@ -154,6 +154,13 @@ jobs:
           python3 - <<'PY'
           import xml.etree.ElementTree as ET
 
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          for channel_id in ("K1.rs", "k1-tv"):
+              items = sorted((p for p in ET.parse("guide.xml").getroot().findall("programme") if p.get("channel") == channel_id), key=lambda p: p.get("start", ""))
+              now = datetime.now(ZoneInfo("Europe/Belgrade"))
+              current = [p for p in items if datetime.strptime(p.get("start"), "%Y%m%d%H%M%S %z") <= now < datetime.strptime(p.get("stop"), "%Y%m%d%H%M%S %z")]
+              print(f"K1 diagnostic {channel_id}: count={len(items)}, current={len(current)}, first={items[0].get('start') if items else 'none'}, last={items[-1].get('stop') if items else 'none'}")
           arena_ids = [
               "ArenaSport1.ba",
               "ArenaSport2.ba",
