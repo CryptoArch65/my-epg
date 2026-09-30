@@ -45,6 +45,10 @@ def main(csv_file, logos_dir):
     logos_dir.mkdir(parents=True, exist_ok=True)
     for guide_id, sources in TARGETS.items():
         target = logos_dir / ("serbia-" + guide_id.lower().replace(".", "-") + ".png")
+        svg_target = target.with_suffix(".svg")
+        if svg_target.is_file():
+            by_id[guide_id]["logo_url"] = REPO + svg_target.name
+            continue
         if not target.is_file():
             for source in sources:
                 try:
