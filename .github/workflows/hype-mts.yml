@@ -1,0 +1,107 @@
+name: Update Hype TV MTS EPG
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - config/hype-mts.xml
+      - scripts/merge_xmltv.py
+      - .github/workflows/hype-mts.yml
+  workflow_run:
+    workflows: ["Update EPG"]
+    types: [completed]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hype-mts-epg
+  cancel-in-progress: false
+
+jobs:
+  update-hype:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Clone iptv-org/epg
+        run: git clone --depth 1 https://github.com/iptv-org/epg.git epg
+
+      - name: Install grabber dependencies
+        working-directory: epg
+        run: npm ci
+
+      - name: Grab Hype schedules from MTS
+        working-directory: epg
+        run: |
+          npm run grab --- \
+            --channels=../config/hype-mts.xml \
+            --output=../hype-mts.xml \
+            --maxConnections=2
+
+      - name: Merge Hype EPG into guide
+        run: python3 scripts/merge_xmltv.py guide.xml hype-mts.xml guide.hype.xml
+
+      - name: Apply Hype logos and validate
+        run: |
+          python3 - <<'PY'
+          import xml.etree.ElementTree as ET
+          from collections import Counter
+
+          path = 'guide.hype.xml'
+          tree = ET.parse(path)
+          root = tree.getroot()
+          logos = {
+              'HypeTV.rs': 'http://telekomsrbije.com:2095/images/hype.png',
+              'hype-tv': 'http://telekomsrbije.com:2095/images/hype2.png',
+          }
+          names = {'HypeTV.rs': 'Hype TV', 'hype-tv': 'Hype 2'}
+          channels = {c.get('id'): c for c in root.findall('channel')}
+          counts = Counter(p.get('channel') for p in root.findall('programme'))
+
+          for cid, logo in logos.items():
+              channel = channels.get(cid)
+              if channel is None:
+                  channel = ET.Element('channel', {'id': cid})
+                  ET.SubElement(channel, 'display-name').text = names[cid]
+                  root.insert(len(root.findall('channel')), channel)
+              icon = channel.find('icon')
+              if icon is None:
+                  icon = ET.SubElement(channel, 'icon')
+              icon.set('src', logo)
+              if counts[cid] == 0:
+                  raise SystemExit(f'No MTS programmes for {cid}')
+              print(cid, counts[cid], 'programmes', logo)
+
+          tree.write(path, encoding='utf-8', xml_declaration=True)
+          PY
+
+      - name: Publish guide
+        run: |
+          mv guide.hype.xml guide.xml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add guide.xml
+          if git diff --cached --quiet; then
+            echo "Hype MTS EPG has not changed"
+            exit 0
+          fi
+          git commit -m "Update Hype TV MTS EPG"
+          git push
