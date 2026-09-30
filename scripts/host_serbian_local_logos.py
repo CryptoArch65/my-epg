@@ -47,7 +47,11 @@ def main(csv_file, logos_dir):
         target = logos_dir / ("serbia-" + guide_id.lower().replace(".", "-") + ".png")
         svg_target = target.with_suffix(".svg")
         if svg_target.is_file():
-            by_id[guide_id]["logo_url"] = REPO + svg_target.name
+            if not target.is_file():
+                import cairosvg
+                target.write_bytes(cairosvg.svg2png(url=str(svg_target)))
+                print(f"Hosted {guide_id} PNG from local SVG")
+            by_id[guide_id]["logo_url"] = REPO + target.name
             continue
         if not target.is_file():
             for source in sources:
