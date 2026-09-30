@@ -6,6 +6,7 @@ import io
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
+from urllib.parse import quote, urlsplit, urlunsplit
 from urllib.request import Request, urlopen
 
 from PIL import Image
@@ -19,16 +20,20 @@ def fetch(source, target):
     last_error = None
     for _ in range(2):
         try:
-            request = Request(source, headers={"User-Agent": "Mozilla/5.0", "Accept": "image/*"})
+            parts = urlsplit(source)
+            safe_url = urlunsplit((parts.scheme, parts.netloc, quote(parts.path), parts.query, parts.fragment))
+            request = Request(safe_url, headers={"User-Agent": "Mozilla/5.0", "Accept": "image/*"})
             with urlopen(request, timeout=20) as response:
                 data = response.read(3_000_001)
             if len(data) > 3_000_000:
                 raise ValueError("logo exceeds 3 MB")
             with Image.open(io.BytesIO(data)) as image:
-                if image.width > 3500 or image.height > 3500:
+                if image.width * image.height > 25_000_000:
                     raise ValueError("logo dimensions too large")
                 output = io.BytesIO()
-                image.convert("RGBA").save(output, format="PNG")
+                converted = image.convert("RGBA")
+                converted.thumbnail((1024, 1024))
+                converted.save(output, format="PNG")
             target.write_bytes(output.getvalue())
             return True, f"hosted {len(output.getvalue())} bytes"
         except Exception as exc:
@@ -47,6 +52,8 @@ def main(manifest, logos_csv, logos_dir):
     with logos_csv.open(encoding="utf-8", newline="") as file:
         existing = list(csv.DictReader(file))
     by_id = {row["guide_id"]: row for row in existing}
+    with Path("config/playlist_aliases.csv").open(encoding="utf-8", newline="") as file:
+        alias_ids = {row["playlist_tvg_id"] for row in csv.DictReader(file)}
     logos_dir.mkdir(parents=True, exist_ok=True)
     targets = {
         url: logos_dir / ("m3u-" + hashlib.sha256(url.encode("utf-8")).hexdigest()[:16] + ".png")
@@ -62,7 +69,7 @@ def main(manifest, logos_csv, logos_dir):
     added, unavailable = 0, []
     for row in rows:
         guide_id, url = row["guide_id"], row["logo_url"]
-        if guide_id in by_id:
+        if guide_id in by_id or guide_id in alias_ids:
             continue
         if results[url][0]:
             existing.append({"guide_id": guide_id, "logo_url": RAW_BASE + targets[url].name})
