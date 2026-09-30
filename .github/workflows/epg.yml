@@ -13,12 +13,14 @@ on:
       - config/bih-source-logos.csv
       - config/m3u-missing-logo-trial.csv
       - config/m3u-bosna-logo-trial.csv
+      - config/m3u-pink-logo-trial.csv
       - scripts/arena_serbia.config.js
       - scripts/naslovi.net.config.js
       - scripts/add_channel_logos.py
       - scripts/host_serbian_local_logos.py
       - scripts/host_m3u_missing_logos.py
       - scripts/host_m3u_bosna_logos.py
+      - scripts/host_m3u_pink_logos.py
       - scripts/import_documentary_logos.py
       - scripts/import_film_epg.py
       - scripts/import_regional_epg.py
@@ -137,6 +139,9 @@ jobs:
 
       - name: Replace Bosna logos from the M3U trial
         run: python3 scripts/host_m3u_bosna_logos.py config/m3u-bosna-logo-trial.csv config/bih-source-logos.csv logos
+
+      - name: Replace Pink and Elita logos from the M3U
+        run: python3 scripts/host_m3u_pink_logos.py config/m3u-pink-logo-trial.csv config/bih-source-logos.csv logos
 
       - name: Add TVProfil Arena Sport 1-6 schedules
         continue-on-error: true # TVProfil may block GitHub runners; publish other sources.
