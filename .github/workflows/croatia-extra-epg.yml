@@ -80,14 +80,18 @@ jobs:
 
           root = ET.parse('guide.merged.xml').getroot()
           wanted = ['htv5', 'N1Croatia.hr', 'zdravatv.hr']
+          required_epg = ['N1Croatia.hr', 'zdravatv.hr']
           channels = {c.get('id') for c in root.findall('channel')}
           counts = Counter(p.get('channel') for p in root.findall('programme'))
           for channel_id in wanted:
               if channel_id not in channels:
                   raise SystemExit(f'Missing Croatia channel: {channel_id}')
-              if counts[channel_id] == 0:
-                  raise SystemExit(f'No programmes for Croatia channel: {channel_id}')
               print(channel_id, counts[channel_id], 'programmes')
+          for channel_id in required_epg:
+              if counts[channel_id] == 0:
+                  raise SystemExit(f'No programmes for required Croatia channel: {channel_id}')
+          if counts['htv5'] == 0:
+              print('WARNING: HRT INT currently has no programme data from available sources; publishing channel/logo only')
           PY
 
       - name: Publish Croatia-enhanced guide
