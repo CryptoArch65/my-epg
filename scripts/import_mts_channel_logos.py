@@ -37,6 +37,7 @@ URL = ('https://mts.rs/hybris/ecommerce/b2c/v1/products/search'
 MTEL_URL = ('https://mtel.ba/hybris/ecommerce/b2c/v1/products/channels/search'
             '?pageSize=999&query=:relevantno:tv-kategorija:tv-iptv')
 MTEL_CHANNELS = {
+    'iptv#ch-411-k1': 'K1.rs',
     'iptv#ch-20-rts-2': 'RTS2.rs',
     'iptv#ch-50-rts-muzika': 'RTSMuzika.rs',
     'iptv#ch-433-rts-klasika': 'RTSKlasika.rs',

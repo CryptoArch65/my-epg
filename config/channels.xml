@@ -23,7 +23,7 @@
   <channel site="mtel.ba" site_id="iptv#ch-360-prva-max" lang="bs" xmltv_id="PrvaMax.rs">Prva MAX</channel>
   <channel site="mts.rs" site_id="b92" lang="bs" xmltv_id="B92.rs">B92</channel>
   <channel site="mts.rs" site_id="Informer%20TV" lang="bs" xmltv_id="InformerTV.rs">Informer TV</channel>
-  <channel site="mts.rs" site_id="k1_hd" lang="bs" xmltv_id="K1.rs">K1</channel>
+  <channel site="mtel.ba" site_id="iptv#ch-411-k1" lang="bs" xmltv_id="K1.rs">K1</channel>
   <channel site="mtel.ba" site_id="iptv#ch-446-hype-tv" lang="bs" xmltv_id="HypeTV.rs">Hype TV</channel>
   <channel site="mtel.ba" site_id="iptv#ch-6-happy-tv" lang="bs" xmltv_id="Happy.rs">Happy TV</channel>
   <channel site="mts.rs" site_id="tv_pink" lang="bs" xmltv_id="Pink.rs">TV Pink</channel>
