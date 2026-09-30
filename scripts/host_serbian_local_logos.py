@@ -5,12 +5,15 @@ import io
 import sys
 from pathlib import Path
 from urllib.request import Request, urlopen
+from urllib.parse import urljoin
+from lxml import html
 from PIL import Image
 
 TARGETS = {
     "SandzakTV.rs": (
         "https://logos.siptvs.com/EXYU/SRBIJA/SANDZAK.png",
         "https://trefoil.tv/uploads/posts/2023-11/sandzak-tv.webp",
+        "page:https://sandzak.tv/",
     ),
     "TVIstok.rs": (
         "https://logos.siptvs.com/EXYU/GENERAL/tvistok.png",
@@ -18,6 +21,7 @@ TARGETS = {
     ),
     "TVLeskovac.rs": (
         "https://logos.siptvs.com/EXYU/full/LESKOVAC.png",
+        "page:https://www.tvl.rs/",
     ),
     "TVKrusevac.rs": (
         "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/serbia/rtk-krusevac-rs.png",
@@ -25,6 +29,7 @@ TARGETS = {
     ),
     "JefimijaTV.rs": (
         "https://logos.siptvs.com/EXYU/full/jefimija.png",
+        "page:https://jefimija.tv/",
     ),
 }
 REPO = "https://raw.githubusercontent.com/CryptoArch65/my-epg/main/logos/"
@@ -40,6 +45,21 @@ def main(csv_file, logos_dir):
         target = logos_dir / ("serbia-" + guide_id.lower().replace(".", "-") + ".png")
         if not target.is_file():
             for source in sources:
+                if source.startswith("page:"):
+                    try:
+                        page = source[5:]
+                        request = Request(page, headers={"User-Agent": "Mozilla/5.0"})
+                        with urlopen(request, timeout=25) as response:
+                            doc = html.fromstring(response.read(2_000_000))
+                        matches = []
+                        for img in doc.xpath("//img"):
+                            attrs = " ".join(str(v) for v in img.attrib.values()).lower()
+                            if "logo" in attrs or any(term in attrs for term in ("sandzak", "jefimija", "leskovac")):
+                                matches.append((img.get("alt"), img.get("src") or img.get("data-src")))
+                        print(f"Logo candidates on {page}: {matches[:12]}")
+                    except Exception as exc:
+                        print(f"Cannot inspect {source}: {exc}")
+                    continue
                 try:
                     request = Request(source, headers={"User-Agent": "Mozilla/5.0", "Accept": "image/*"})
                     with urlopen(request, timeout=25) as response:
