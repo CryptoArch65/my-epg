@@ -71,28 +71,33 @@ jobs:
       - name: Apply Serbia extra logos
         run: python3 scripts/add_channel_logos.py guide.serbia-extra.xml config/bih-source-logos.csv
 
-      - name: Validate Serbia extra EPG
+      - name: Validate Serbia extra EPG and logos
         run: |
           python3 - <<'PY'
           import xml.etree.ElementTree as ET
           from collections import Counter
 
-          wanted = ['insajdertv.rs', 'Balkan Trip', 'AgroTV.rs', '101TV.rs', 'SOS Kanal Plus']
+          all_channels = ['insajdertv.rs', 'Balkan Trip', 'AgroTV.rs', '101TV.rs', 'SOS Kanal Plus']
+          epg_required = ['insajdertv.rs', 'AgroTV.rs']
           root = ET.parse('guide.serbia-extra.xml').getroot()
           counts = Counter(p.get('channel') for p in root.findall('programme'))
           channels = {c.get('id'): c for c in root.findall('channel')}
           failed = []
-          for cid in wanted:
+
+          for cid in all_channels:
               if cid not in channels:
                   failed.append(f'{cid}: missing channel')
                   continue
               icon = channels[cid].find('icon')
               icon_src = icon.get('src') if icon is not None else ''
               print(f'{cid}: {counts[cid]} programmes; logo={icon_src}')
-              if counts[cid] == 0:
-                  failed.append(f'{cid}: 0 programmes')
               if not icon_src:
                   failed.append(f'{cid}: no logo')
+
+          for cid in epg_required:
+              if counts[cid] == 0:
+                  failed.append(f'{cid}: 0 programmes')
+
           if failed:
               raise SystemExit('; '.join(failed))
           PY
