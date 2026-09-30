@@ -267,4 +267,19 @@
   <channel site="mts.rs" site_id="kurir_hd" lang="bs" xmltv_id="KurirTV.rs">Kurir TV</channel>
   <channel site="mts.rs" site_id="blic_tv" lang="bs" xmltv_id="BlicTV.rs">Blic TV</channel>
   <channel site="naslovi.net" site_id="k1" lang="sr" xmltv_id="K1.rs">K1</channel>
+  <channel site="mts.rs" site_id="prva_files" lang="bs" xmltv_id="PrvaFiles.rs">Prva Files</channel>
+  <channel site="mts.rs" site_id="rtv_1" lang="bs" xmltv_id="RTV1.rs">RTV 1</channel>
+  <channel site="mts.rs" site_id="rtv_2" lang="bs" xmltv_id="RTV2.rs">RTV 2</channel>
+  <channel site="mts.rs" site_id="tv_sandzak" lang="bs" xmltv_id="SandzakTV.rs">TV Sandžak</channel>
+  <channel site="mts.rs" site_id="studio_b" lang="bs" xmltv_id="StudioB.rs">Studio B</channel>
+  <channel site="mts.rs" site_id="tv_palma_plus" lang="bs" xmltv_id="PalmaPlus.rs">TV Palma plus</channel>
+  <channel site="mts.rs" site_id="tv_istok" lang="bs" xmltv_id="TVIstok.rs">TV Istok</channel>
+  <channel site="mts.rs" site_id="tv_leskovac" lang="bs" xmltv_id="TVLeskovac.rs">TV Leskovac</channel>
+  <channel site="mts.rs" site_id="tv_hram" lang="bs" xmltv_id="TVHram.rs">TV Hram</channel>
+  <channel site="mts.rs" site_id="tv_krusevac" lang="bs" xmltv_id="TVKrusevac.rs">TV Kruševac</channel>
+  <channel site="mts.rs" site_id="tanjug_tv" lang="bs" xmltv_id="TanjugTV.rs">Tanjug TV</channel>
+  <channel site="mts.rs" site_id="TV%20Jefimija" lang="bs" xmltv_id="JefimijaTV.rs">TV Jefimija</channel>
+  <channel site="mts.rs" site_id="euronews_serbia" lang="bs" xmltv_id="EuronewsSerbia.rs">Euronews Serbia</channel>
+  <channel site="epg.telemach.ba" site_id="1608" lang="hr" xmltv_id="N1Serbia.rs">N1 HD (RS)/(BIH)</channel>
+  <channel site="epg.telemach.ba" site_id="1524" lang="hr" xmltv_id="RTVNoviPazar.rs">RTV Novi Pazar (BIH)</channel>
 </channels>

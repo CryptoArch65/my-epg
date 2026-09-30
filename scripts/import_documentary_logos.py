@@ -11,6 +11,8 @@ from urllib.request import Request, urlopen
 
 
 CHANNELS = {
+    "1608": "N1Serbia.rs",
+    "1524": "RTVNoviPazar.rs",
     "1698": "NovaS.rs",
     "1585": "Prva.rs",
     "1584": "PrvaPlus.rs",
