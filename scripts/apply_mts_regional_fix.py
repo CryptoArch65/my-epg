@@ -49,18 +49,30 @@ def main():
         content = content.replace(marker, regional_function + marker, 1)
         changed = True
 
-    old_stamp = '''                    start = stamp(item["start"])
-                    stop = stamp(item["end"])
-'''
-    new_stamp = '''                    start = regional_stamp(item["start"])
-                    stop = regional_stamp(item["end"])
-'''
-    if new_stamp not in content:
-        if content.count(old_stamp) < 2:
-            raise SystemExit("Expected regional/K1 stamp blocks were not found")
-        # Only the first block belongs to import_regionals(). K1 keeps its own
-        # existing timestamp behavior because its primary schedule is official.
-        content = content.replace(old_stamp, new_stamp, 1)
+    # Scope the timestamp replacement strictly to import_regionals(). K1 and
+    # every other MTS importer keep their existing timestamp handling.
+    if "start = regional_stamp(item[\"start\"])" not in content:
+        regional_start = content.find("def import_regionals(root):")
+        k1_start = content.find("\ndef supplement_k1(root):", regional_start)
+        if regional_start < 0 or k1_start < 0:
+            raise SystemExit("Could not locate import_regionals() boundaries")
+
+        prefix = content[:regional_start]
+        regional = content[regional_start:k1_start]
+        suffix = content[k1_start:]
+
+        old_start = 'start = stamp(item["start"])'
+        old_stop = 'stop = stamp(item["end"])'
+        if regional.count(old_start) != 1 or regional.count(old_stop) != 1:
+            raise SystemExit("Regional timestamp statements changed unexpectedly")
+
+        regional = regional.replace(
+            old_start, 'start = regional_stamp(item["start"])', 1
+        )
+        regional = regional.replace(
+            old_stop, 'stop = regional_stamp(item["end"])', 1
+        )
+        content = prefix + regional + suffix
         changed = True
 
     if changed:
