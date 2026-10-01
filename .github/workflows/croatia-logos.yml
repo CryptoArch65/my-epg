@@ -1,28 +1,20 @@
 name: Update Croatia Logos
 
 on:
-  workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - guide.xml
-      - config/m3u-croatia-logo-trial.csv
-      - config/m3u-croatia-playlist-logos.csv
-      - config/croatia-playlist-aliases.csv
-      - scripts/host_m3u_croatia_logos.py
-      - scripts/apply_m3u_croatia_playlist_logos.py
-      - scripts/add_croatia_playlist_aliases.py
-      - .github/workflows/croatia-logos.yml
+  workflow_run:
+    workflows: ["Update Informer TV MTS EPG"]
+    types: [completed]
 
 permissions:
   contents: write
 
 concurrency:
-  group: croatia-logo-refresh
+  group: guide-writer
   cancel-in-progress: false
 
 jobs:
   update-croatia-logos:
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'failure' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
