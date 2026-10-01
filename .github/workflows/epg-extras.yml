@@ -8,6 +8,8 @@ on:
     branches: [main]
     paths:
       - scripts/diagnose_mts_regional_times.py
+      - scripts/apply_mts_regional_fix.py
+      - scripts/verify_mts_regional_guide.py
       - scripts/import_mts_serbia_epg.py
       - scripts/import_mts_pink_epg.py
       - scripts/run_epg_extras.sh
@@ -48,5 +50,18 @@ jobs:
       - name: Diagnose live MTS regional timestamps
         run: python3 scripts/diagnose_mts_regional_times.py
 
+      - name: Apply MTS regional local-clock fix
+        run: |
+          python3 scripts/apply_mts_regional_fix.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/import_mts_serbia_epg.py
+          if ! git diff --cached --quiet; then
+            git commit -m "Fix MTS regional clock and Newsmax alias"
+          fi
+
       - name: Run all EPG extras serially
         run: bash scripts/run_epg_extras.sh
+
+      - name: Verify final Serbian regional guide
+        run: python3 scripts/verify_mts_regional_guide.py guide.xml
