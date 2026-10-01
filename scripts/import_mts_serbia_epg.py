@@ -54,14 +54,16 @@ REGIONAL_TARGETS = (
         "codes": ("tv_krusevac",),
         "names": ("TV Kruševac", "TV Krusevac", "RTK Kruševac"),
         "aliases": ("TV Kruševac", "tv_krusevac"),
-    },
+
+        "clock_offset_hours": -2,    },
     {
         "guide_id": "NewsmaxBalkans.rs",
         "display": "Newsmax Balkans",
         "codes": ("Newsmax_Balkans", "newsmax_balkans"),
         "names": ("Newsmax Balkans", "Newsmax Balkans HD", "Newsmax"),
         "aliases": ("Newsmax_Balkans", "Newsmax Balkans", "newsmaxbalkans.rs"),
-    },
+
+        "clock_offset_hours": -2,    },
     {
         "guide_id": "TVAS.rs",
         "display": "TV AS",
@@ -82,23 +84,25 @@ REGIONAL_TARGETS = (
         "codes": ("sos_kanal_plus",),
         "names": ("SOS Kanal Plus", "SOS Plus"),
         "aliases": ("sos_kanal_plus", "SOS Kanal Plus"),
-    },
+
+        "clock_offset_hours": -2,    },
     {
         "guide_id": "PesterTV.rs",
         "display": "Pešter TV",
         "codes": ("pester_tv", "tv_pester", "pester"),
         "names": ("Pešter TV", "Pester TV", "TV Pešter", "TV Pester"),
         "aliases": ("pester_tv", "tv_pester", "Pešter TV", "Pester TV"),
-    },
+
+        "clock_offset_hours": -2,    },
 )
 
 
-def regional_stamp(value):
-    """Interpret MTS regional ISO clock values as Europe/Belgrade local time.
+def regional_stamp(value, offset_hours=0):
+    """Interpret an MTS regional clock as Serbia local time plus a safe override.
 
-    MTS currently appends ``Z`` to values such as 10:00 even though broadcaster
-    schedules show that 10:00 is the intended Serbian local clock time. Keeping
-    the Z would turn 10:00 into 12:00 during CEST.
+    MTS appends ``Z`` to regional programme times even when the visible clock is
+    already Europe/Belgrade local time. A few channels are additionally two
+    hours late in MTS itself; ``offset_hours`` corrects only those channels.
     """
     if isinstance(value, str):
         text = value.strip()
@@ -107,8 +111,13 @@ def regional_stamp(value):
             if local.tzinfo is not None:
                 local = local.replace(tzinfo=None)
             local = local.replace(tzinfo=ZONE)
+            if offset_hours:
+                local = local + timedelta(hours=offset_hours)
             return local.strftime("%Y%m%d%H%M%S %z")
-    return stamp(value)
+    parsed = parse_xmltv_time(stamp(value)).astimezone(ZONE)
+    if offset_hours:
+        parsed = parsed + timedelta(hours=offset_hours)
+    return parsed.strftime("%Y%m%d%H%M%S %z")
 
 
 def parse_xmltv_time(value):
@@ -314,8 +323,8 @@ def import_regionals(root):
                 if not isinstance(title, str) or not title.strip():
                     continue
                 try:
-                    start = regional_stamp(item["start"])
-                    stop = regional_stamp(item["end"])
+                    start = regional_stamp(item["start"], target.get("clock_offset_hours", 0))
+                    stop = regional_stamp(item["end"], target.get("clock_offset_hours", 0))
                     if parse_xmltv_time(start) >= parse_xmltv_time(stop):
                         continue
                 except (KeyError, TypeError, ValueError):
