@@ -51,6 +51,22 @@ jobs:
       - name: Clone iptv-org/epg
         run: git clone --depth 1 https://github.com/iptv-org/epg.git epg
 
+      - name: Extend MAXtv EPG window to 3 days
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          config = Path('epg/sites/mojmaxtv.hrvatskitelekom.hr/mojmaxtv.hrvatskitelekom.hr.config.js')
+          content = config.read_text(encoding='utf-8')
+          marker = "module.exports = {\n  site: SITE_URL,"
+          replacement = "module.exports = {\n  site: SITE_URL,\n  days: 3,"
+          if replacement not in content:
+              if content.count(marker) != 1:
+                  raise SystemExit('MAXtv config structure changed upstream')
+              content = content.replace(marker, replacement, 1)
+              config.write_text(content, encoding='utf-8')
+          PY
+
       - name: Install grabber dependencies
         working-directory: epg
         run: npm ci
