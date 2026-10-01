@@ -10,7 +10,6 @@ on:
       - config/regional-channels.xml
       - config/playlist_aliases.csv
       - config/playlist-alias-logos.csv
-      - config/bih-source-logos.csv
       - config/m3u-missing-logo-trial.csv
       - config/m3u-bosna-logo-trial.csv
       - config/m3u-pink-logo-trial.csv
@@ -37,6 +36,30 @@ on:
       - scripts/import_tvprofil.py
       - config/tvprofil_channels.json
       - .github/workflows/epg.yml
+      - config/serbia-extra-mts.xml
+      - config/serbia-extra-mts-logos.csv
+      - config/croatia-extra-channels.xml
+      - config/croatia-playlist-aliases.csv
+      - config/m3u-croatia-playlist-logos.csv
+      - config/hype-mts.xml
+      - config/informer-mts.xml
+      - config/m3u-croatia-logo-trial.csv
+      - scripts/import_mts_pink_hahalol.py
+      - scripts/merge_xmltv.py
+      - scripts/add_croatia_epg_aliases.py
+      - scripts/apply_m3u_croatia_playlist_logos.py
+      - scripts/import_nova_cinema_raspored.py
+      - scripts/import_nova_family_tvprogramdanas.py
+      - scripts/import_nova_world_tvepg.py
+      - scripts/import_bih_local_channels.py
+      - scripts/host_m3u_croatia_logos.py
+      - scripts/add_croatia_playlist_aliases.py
+      - .github/workflows/serbia-extra-mts.yml
+      - .github/workflows/croatia-extra-epg.yml
+      - .github/workflows/hype-mts.yml
+      - .github/workflows/informer-mts.yml
+      - .github/workflows/croatia-logos.yml
+      - .github/workflows/bih-local-epg.yml
   schedule:
     - cron: "0 4 * * *"
 
@@ -44,8 +67,8 @@ permissions:
   contents: write
 
 concurrency:
-  group: epg-refresh
-  cancel-in-progress: false
+  group: guide-writer
+  cancel-in-progress: true
 
 jobs:
   update-epg:
