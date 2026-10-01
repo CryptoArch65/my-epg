@@ -12,6 +12,7 @@ on:
       - scripts/verify_mts_regional_guide.py
       - scripts/import_mts_serbia_epg.py
       - scripts/import_mts_pink_epg.py
+      - scripts/test_mts_v2_krusevac.py
       - scripts/run_epg_extras.sh
       - config/serbia-extra-mts.xml
       - config/serbia-extra-telemach.xml
@@ -62,6 +63,19 @@ jobs:
 
       - name: Run all EPG extras serially
         run: bash scripts/run_epg_extras.sh
+
+      - name: Apply isolated MTS v2 TV Krusevac test
+        run: |
+          python3 scripts/test_mts_v2_krusevac.py guide.xml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add guide.xml
+          if ! git diff --cached --quiet; then
+            git commit -m "Test MTS v2 EPG for TV Krusevac"
+            git fetch origin main
+            git rebase origin/main
+            git push origin HEAD:main
+          fi
 
       - name: Verify final Serbian regional guide
         run: python3 scripts/verify_mts_regional_guide.py guide.xml
