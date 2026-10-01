@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Expose the playlist's active tvg-id values as XMLTV channel aliases."""
+"""Expose only active playlist tvg-id values as XMLTV channel aliases."""
 
 import collections
 import copy
@@ -8,6 +8,8 @@ import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from urllib.parse import urlparse
+
+DEFAULT_ACTIVE_IDS = Path("config/active_playlist_tvg_ids.txt")
 
 
 def read_aliases(path):
@@ -53,6 +55,9 @@ def main(guide_path, alias_path, logos_path=None, active_ids_path=None):
     logos = read_alias_logos(logos_path) if logos_path else {}
     if set(logos) - set(all_aliases):
         raise ValueError("Playlist logo references a missing alias")
+
+    if active_ids_path is None and DEFAULT_ACTIVE_IDS.exists():
+        active_ids_path = DEFAULT_ACTIVE_IDS
 
     aliases = all_aliases
     if active_ids_path:
