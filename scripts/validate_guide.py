@@ -3,6 +3,7 @@
 
 import collections
 import csv
+from datetime import datetime, timezone
 import math
 import sys
 import xml.etree.ElementTree as ET
@@ -11,7 +12,9 @@ import xml.etree.ElementTree as ET
 KNOWN_EMPTY_SITES = {"m1film.hr/family", "superstartv.rs", "tvprogramdanas.net", "tvprogram24.rs", "tvprofil.com"}  # Broadcasters may publish short schedules.
 
 
-def main(config_path, guide_path, alias_path=None, extra_config_path=None, regional_config_path=None):
+def main(config_path, guide_path, alias_path=None, extra_config_path=None, regional_config_path=None, now=None):
+    if now is None:
+        now = datetime.now(timezone.utc)
     config = ET.parse(config_path).getroot()
     if config.tag != "channels":
         raise ValueError("Expected <channels> in channel configuration")
@@ -53,6 +56,8 @@ def main(config_path, guide_path, alias_path=None, extra_config_path=None, regio
 
     actual = set()
     programmes_by_channel = collections.Counter()
+    last_programme_by_channel = {}
+    has_future_programmes = False
     root_seen = False
 
     for event, element in ET.iterparse(guide_path, events=("start", "end")):
@@ -76,8 +81,49 @@ def main(config_path, guide_path, alias_path=None, extra_config_path=None, regio
             channel_id = element.get("channel")
             if channel_id not in allowed:
                 raise ValueError(f"Programme uses unknown channel: {channel_id}")
-            if not element.get("start") or element.find("title") is None:
+            start_str = element.get("start")
+            stop_str = element.get("stop")
+            title_node = element.find("title")
+            if not start_str or not stop_str or title_node is None:
                 raise ValueError(f"Incomplete programme on channel: {channel_id}")
+            title = (title_node.text or "").strip()
+
+            try:
+                start_dt = datetime.strptime(start_str, "%Y%m%d%H%M%S %z")
+            except Exception as e:
+                raise ValueError(
+                    f"Programme start time '{start_str}' on channel '{channel_id}' "
+                    f"fails to parse with '%Y%m%d%H%M%S %z' for programme '{title}': {e}"
+                )
+
+            try:
+                stop_dt = datetime.strptime(stop_str, "%Y%m%d%H%M%S %z")
+            except Exception as e:
+                raise ValueError(
+                    f"Programme stop time '{stop_str}' on channel '{channel_id}' "
+                    f"fails to parse with '%Y%m%d%H%M%S %z' for programme '{title}': {e}"
+                )
+
+            if stop_dt <= start_dt:
+                raise ValueError(
+                    f"Programme stop time is not after start time on channel '{channel_id}': "
+                    f"start='{start_str}', stop='{stop_str}', programme='{title}'"
+                )
+
+            if channel_id in last_programme_by_channel:
+                prev_stop_dt, prev_title, prev_start_str, prev_stop_str = last_programme_by_channel[channel_id]
+                if start_dt < prev_stop_dt:
+                    raise ValueError(
+                        f"Overlapping programmes on channel '{channel_id}': "
+                        f"'{prev_title}' ({prev_start_str} - {prev_stop_str}) overlaps with "
+                        f"'{title}' ({start_str} - {stop_str})"
+                    )
+
+            last_programme_by_channel[channel_id] = (stop_dt, title, start_str, stop_str)
+
+            if stop_dt > now:
+                has_future_programmes = True
+
             programmes_by_channel[channel_id] += 1
             element.clear()
 
@@ -89,6 +135,9 @@ def main(config_path, guide_path, alias_path=None, extra_config_path=None, regio
     for alias, target in aliases.items():
         if programmes_by_channel[alias] != programmes_by_channel[target]:
             raise ValueError(f"Alias programme count differs from its source: {alias!r}")
+
+    if programmes_by_channel and not has_future_programmes:
+        raise ValueError("Guide contains no future programmes (all programmes are in the past)")
 
     active = active & set(expected)
 
