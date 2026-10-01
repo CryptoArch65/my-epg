@@ -1,0 +1,136 @@
+name: Repair EPG Writer Pipeline
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/repair-epg-pipeline.yml
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Serialize all guide.xml writers
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          root = Path('.')
+
+          def replace_on_block(path: Path, upstream: str):
+              text = path.read_text(encoding='utf-8')
+              marker = '\npermissions:\n'
+              if not text.startswith('name:') or '\non:\n' not in text or marker not in text:
+                  raise SystemExit(f'Unexpected workflow structure: {path}')
+              prefix, rest = text.split('\non:\n', 1)
+              _, suffix = rest.split(marker, 1)
+              new_on = (
+                  'on:\n'
+                  '  workflow_run:\n'
+                  f'    workflows: ["{upstream}"]\n'
+                  '    types: [completed]\n'
+              )
+              return prefix + '\n' + new_on + marker + suffix
+
+          def set_concurrency(text: str, cancel: bool):
+              pattern = re.compile(
+                  r'concurrency:\n  group: [^\n]+\n  cancel-in-progress: (?:true|false)'
+              )
+              replacement = (
+                  'concurrency:\n'
+                  '  group: guide-writer\n'
+                  f'  cancel-in-progress: {str(cancel).lower()}'
+              )
+              text, count = pattern.subn(replacement, text, count=1)
+              if count != 1:
+                  raise SystemExit('Could not update concurrency block')
+              return text
+
+          def set_job_condition(text: str, condition: str):
+              pattern = re.compile(r'(?m)^(  [A-Za-z0-9_-]+:)\n(?:    if: .*\n)?')
+              match = pattern.search(text[text.index('jobs:'):])
+              if not match:
+                  raise SystemExit('Could not locate workflow job')
+              offset = text.index('jobs:')
+              start = offset + match.start()
+              end = offset + match.end()
+              job_header = match.group(1)
+              return text[:start] + job_header + '\n    if: ' + condition + '\n' + text[end:]
+
+          # Main workflow: this is the only automatic entry point. A fresh main
+          # run may pre-empt an older downstream writer so stale data never wins.
+          main = root / '.github/workflows/epg.yml'
+          text = main.read_text(encoding='utf-8')
+          text = set_concurrency(text, True)
+          text = text.replace('      - config/bih-source-logos.csv\n', '')
+
+          anchor = '      - .github/workflows/epg.yml\n'
+          if anchor not in text:
+              raise SystemExit('Could not locate Update EPG path trigger anchor')
+          extra_paths = '''      - config/serbia-extra-mts.xml
+      - config/serbia-extra-mts-logos.csv
+      - config/croatia-extra-channels.xml
+      - config/croatia-playlist-aliases.csv
+      - config/m3u-croatia-playlist-logos.csv
+      - config/hype-mts.xml
+      - config/informer-mts.xml
+      - config/m3u-croatia-logo-trial.csv
+      - scripts/import_mts_pink_hahalol.py
+      - scripts/merge_xmltv.py
+      - scripts/add_croatia_epg_aliases.py
+      - scripts/apply_m3u_croatia_playlist_logos.py
+      - scripts/import_nova_cinema_raspored.py
+      - scripts/import_nova_family_tvprogramdanas.py
+      - scripts/import_nova_world_tvepg.py
+      - scripts/import_bih_local_channels.py
+      - scripts/host_m3u_croatia_logos.py
+      - scripts/add_croatia_playlist_aliases.py
+      - .github/workflows/serbia-extra-mts.yml
+      - .github/workflows/croatia-extra-epg.yml
+      - .github/workflows/hype-mts.yml
+      - .github/workflows/informer-mts.yml
+      - .github/workflows/croatia-logos.yml
+      - .github/workflows/bih-local-epg.yml
+'''
+          if '      - config/serbia-extra-mts.xml\n' not in text:
+              text = text.replace(anchor, anchor + extra_paths)
+          main.write_text(text, encoding='utf-8')
+
+          chain = [
+              ('.github/workflows/serbia-extra-mts.yml', 'Update EPG', "${{ github.event.workflow_run.conclusion == 'success' }}"),
+              ('.github/workflows/croatia-extra-epg.yml', 'Update Serbia Extra MTS EPG', "${{ github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'failure' }}"),
+              ('.github/workflows/hype-mts.yml', 'Update Croatia Extra EPG', "${{ github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'failure' }}"),
+              ('.github/workflows/informer-mts.yml', 'Update Hype TV MTS EPG', "${{ github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'failure' }}"),
+              ('.github/workflows/croatia-logos.yml', 'Update Informer TV MTS EPG', "${{ github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'failure' }}"),
+              ('.github/workflows/bih-local-epg.yml', 'Update Croatia Logos', "${{ github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'failure' }}"),
+          ]
+
+          for rel, upstream, condition in chain:
+              path = root / rel
+              workflow = replace_on_block(path, upstream)
+              workflow = set_concurrency(workflow, False)
+              workflow = set_job_condition(workflow, condition)
+              path.write_text(workflow, encoding='utf-8')
+              print(f'Updated {rel}: after {upstream}')
+
+          # This workflow is deliberately one-shot.
+          Path('.github/workflows/repair-epg-pipeline.yml').unlink()
+          PY
+
+      - name: Commit repaired pipeline
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A .github/workflows
+          git commit -m "Serialize EPG writer workflows"
+          git push origin main
