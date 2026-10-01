@@ -133,4 +133,5 @@ jobs:
             exit 0
           fi
           git commit -m "Update Croatia extra EPG"
+          git pull --rebase origin main
           git push
