@@ -77,8 +77,8 @@ jobs:
           import xml.etree.ElementTree as ET
           from collections import Counter
 
-          all_channels = ['insajdertv.rs', 'Balkan Trip', 'AgroTV.rs', '101TV.rs', 'SOS Kanal Plus']
-          epg_required = ['insajdertv.rs', 'AgroTV.rs']
+          all_channels = ['insajdertv.rs', 'Balkan Trip', 'AgroTV.rs', '101TV.rs', 'SOS Kanal Plus', 'pink-ha-ha', 'pink-lol']
+          epg_required = ['insajdertv.rs', 'AgroTV.rs', 'pink-ha-ha', 'pink-lol']
           root = ET.parse('guide.serbia-extra.xml').getroot()
           counts = Counter(p.get('channel') for p in root.findall('programme'))
           channels = {c.get('id'): c for c in root.findall('channel')}
