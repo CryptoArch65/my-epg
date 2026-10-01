@@ -625,9 +625,13 @@
 <channel id="AgroTV.rs"><display-name>Agro TV</display-name><icon src="https://raw.githubusercontent.com/CryptoArch65/my-epg/main/logos/m3u-serbia-a8620acc2dc26d72.png" /></channel>
 <channel id="101TV.rs"><display-name>TV Bor</display-name><icon src="https://raw.githubusercontent.com/CryptoArch65/my-epg/main/logos/m3u-serbia-d1820ab8aaef7438.png" /></channel>
 <channel id="SOS Kanal Plus"><display-name>SOS Kanal Plus</display-name><icon src="https://raw.githubusercontent.com/CryptoArch65/my-epg/main/logos/m3u-serbia-c196266824d3ccc4.png" /></channel>
-<channel id="pink-ha-ha"><display-name>HA HA</display-name><icon src="https://raw.githubusercontent.com/CryptoArch65/my-epg/main/logos/m3u-serbia-f193d50ee47f2141.png" /></channel>
-<channel id="pink-lol"><display-name>LOL</display-name><icon src="https://raw.githubusercontent.com/CryptoArch65/my-epg/main/logos/m3u-serbia-fb5e95309395bdf5.png" /></channel>
-<programme start="20260929233000 +0000" stop="20260930002000 +0000" channel="276767784232"><title lang="hr">Odbrojavanje grabežljivaca</title><desc lang="hr">Putujemo prostranstvima Sjeverne Amerike kako bismo svjedočili dugotrajnoj borbi između vukova i mošusnog goveda te lovu dupina na ribu.</desc><category lang="hr">Dokumentarni</category><episode-num system="xmltv_ns">0.2.0/1</episode-num><episode-num system="onscreen">S01E03</episode-num><rating system="MPA"><value>0</value></rating><image>https://tv-hr-prod.yo-digital.com/prod/images/356/200/img206992-tv4948336.jpg</image></programme>
+<channel id="pink-ha-ha">
+    <display-name lang="bs">HA HA</display-name>
+  <icon src="https://raw.githubusercontent.com/CryptoArch65/my-epg/main/logos/m3u-serbia-f193d50ee47f2141.png" /></channel>
+  <channel id="pink-lol">
+    <display-name lang="bs">LOL</display-name>
+  <icon src="https://raw.githubusercontent.com/CryptoArch65/my-epg/main/logos/m3u-serbia-fb5e95309395bdf5.png" /></channel>
+  <programme start="20260929233000 +0000" stop="20260930002000 +0000" channel="276767784232"><title lang="hr">Odbrojavanje grabežljivaca</title><desc lang="hr">Putujemo prostranstvima Sjeverne Amerike kako bismo svjedočili dugotrajnoj borbi između vukova i mošusnog goveda te lovu dupina na ribu.</desc><category lang="hr">Dokumentarni</category><episode-num system="xmltv_ns">0.2.0/1</episode-num><episode-num system="onscreen">S01E03</episode-num><rating system="MPA"><value>0</value></rating><image>https://tv-hr-prod.yo-digital.com/prod/images/356/200/img206992-tv4948336.jpg</image></programme>
 <programme start="20260930002000 +0000" stop="20260930011000 +0000" channel="276767784232"><title lang="hr">Najsmrtonosnije vrijeme na svijetu</title><desc lang="hr">Uragan Harvey razara obalni grad i donosi kišu kakva se događa jednom u tisuću godina, a potapa Houston.</desc><category lang="hr">Dokumentarni</category><episode-num system="xmltv_ns">1.1.0/1</episode-num><episode-num system="onscreen">S02E02</episode-num><rating system="MPA"><value>0</value></rating><image>https://tv-hr-prod.yo-digital.com/prod/images/356/200/img84654-tv3483400.jpg</image></programme>
 <programme start="20260930011000 +0000" stop="20260930015500 +0000" channel="276767784232"><title lang="hr">Doktori za egzotične ljubimce</title><desc lang="hr">Dr. James mora spasiti jednu posebnu pticu, dr. Hamish liječi preslatkog australskog sisavca Shuga, a dr. Lucinda istražuje zašto nimfa Snowy liježe prevelik broj jaja.</desc><category lang="hr">Dokumentarni</category><episode-num system="xmltv_ns">0.2.0/1</episode-num><episode-num system="onscreen">S01E03</episode-num><rating system="MPA"><value>0</value></rating><image>https://tv-hr-prod.yo-digital.com/prod/images/356/200/img124808-tv4258652.jpg</image></programme>
 <programme start="20260930015500 +0000" stop="20260930023500 +0000" channel="276767784232"><title lang="hr">Riječna čudovišta</title><desc lang="hr">Nastavljajući svoju godinu istraživanja Amazone, Jeremy istražuje tri tajanstvene smrti u tri različite zemlje, u misiji koja ga vodi dalje no ikada.</desc><category lang="hr">Dokumentarni</category><episode-num system="xmltv_ns">5.3.0/1</episode-num><episode-num system="onscreen">S06E04</episode-num><rating system="MPA"><value>0</value></rating><image>https://tv-hr-prod.yo-digital.com/prod/images/356/200/img101058-tv2577818.jpg</image></programme>
@@ -28676,4 +28680,1569 @@
 <programme start="20261002223000 +0000" stop="20261002233000 +0000" channel="insajdertv.rs"><title lang="bs">Tabu</title><desc lang="bs">Prvi TABU u novoj sezoni istražuje šta se događa kada deca koja su trpela nasilje postanu nasilnici, i postavlja pitanje - ko je zakazao? O žrtvama, počiniocima i odraslima koji moraju da osveste ozbiljnost situacije, govore Roberto Grujičić - dečiji psihijatar, Hristina Knežević Cvetinčanin - sociološkinja i Tatjana Daničić - psihološkinja. Autor Milan Nikolić.</desc><category lang="bs">Info</category><image>https://mediasb2c.mts.rs/medias/5-1f75a682644c48f0a8e98ba3bac45cd7.jpg?context=bWFzdGVyfHJvb3R8MzI5MTR8aW1hZ2UvanBlZ3xhRFl4TDJobU5pODJPRFExTnpJeU5qZzJNall5TWk4MVh6Rm1OelZoTmpneU5qUTBZelE0WmpCaE9HVTVPR0poTTJKaFl6UTFZMlEzTG1wd1p3fDVhZWVmNTFiYmY5MTBiYzFkYzIyNTUzYzI3YzE2NzAyOWRmNzEzNjFmZDBlNDcyZjQ2ZmEyMTgxNDBiNWQzMjQ</image></programme>
 <programme start="20261002233000 +0000" stop="20261003000000 +0000" channel="insajdertv.rs"><title lang="bs">Marka Žvaka</title><desc lang="bs">Marka Žvaka istražuje drugu stranu Srbije i čuva od zaborava ljude, životinje, pojave i fenomene našeg društva.</desc><category lang="bs">Info</category><image>https://mediasb2c.mts.rs/medias/5-ac170a23ef3c4842828c7248e38cb2c0.jpg?context=bWFzdGVyfHJvb3R8MzgwNTR8aW1hZ2UvanBlZ3xhR001TDJobU9TODJPRFExTnpJeU5qazJNRGt5Tmk4MVgyRmpNVGN3WVRJelpXWXpZelE0TkRJNE1qaGpOekkwT0dVek9HTmlNbU13TG1wd1p3fDJjYTMxZTkwYWE1NGJkMTg5NmNkM2ZhYTA1YjY1MGZkYTdlMTgwMzY3NWEyYzE5ODU3NmQxNTA2ZmMwYjYxNGQ</image></programme>
 <programme start="20261003000000 +0000" stop="20261003030000 +0000" channel="insajdertv.rs"><title lang="bs">3D - Nova dimenzija dana</title><desc lang="bs">Nova dimenzija dana - 3D i svi Insajderovi timovi na jednom mestu. Tri sata najaktuelnijih tema, najvažnijih događaja, najrelevantnijih sagovornika i analiza i najzanimljivijih fenomena. Radnim danima od 15h.</desc><category lang="bs">Zabavni program</category><image>https://mediasb2c.mts.rs/medias/5-b3c6ce5304b64c1083561742af00d157.jpg?context=bWFzdGVyfHJvb3R8MjQ3MjJ8aW1hZ2UvanBlZ3xhRE5oTDJobFppODJPRFExTnpJeU5qWXpNekkwTmk4MVgySXpZelpqWlRVek1EUmlOalJqTVRBNE16VTJNVGMwTW1GbU1EQmtNVFUzTG1wd1p3fGNjMTU0NWE0ZmMyMTIzYTYyYzk2NzY2ZGExYTRjNzJlNzliM2NhMDdmOWM3MzBhOWM1N2JlYjAyM2Y2ZmExY2M</image></programme>
+<programme start="20261001011500 +0000" stop="20261001020000 +0000" channel="pink-ha-ha">
+    <title lang="bs">Stand Up u Apolo Teatru</title>
+    <desc lang="bs">Britanska stendap komedija donosi nastupe najboljih stendap komičara iz zemlje na scenu u londonskom Hamersmit Apolo.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001020000 +0000" stop="20261001020200 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001020200 +0000" stop="20261001023000 +0000" channel="pink-ha-ha">
+    <title lang="bs">Leteći Cirkus Monti Pajtona</title>
+    <desc lang="bs">Početak emitovanja ove serije 5. oktobra 1969. godine označio je početak nove ere komedije, kako u ujedinjenom Kraljevstvu, tako i širem svetu, jer su montipajtonovci, nadmašivači, u četiri sezone. u početku razumljiv malom broju gledalaca, da bi kasnije stekli veliku popularnost širom sveta. Serija se izdvaja upotrebom apsurdnih situacija, pomešanih sa rizičnim i nagoveštajima-zasutim humorom, vizuelnim gegovima i opservacionim skečevima bez poente vica.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001023000 +0000" stop="20261001023100 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001023100 +0000" stop="20261001030600 +0000" channel="pink-ha-ha">
+    <title lang="bs">Alo, alo</title>
+    <desc lang="bs">Rene Artoa (Gorden Kej) je vlasnik kafea u okupiranom francuskom gradiću Nuvionu u vreme Drugog svetskog rata. On se nalazi između dve vatre: naizgled sarađuje sa nacistima a u stvari potajno pomaže Pokretu otpora.Nemački pukovnik Von Strom (Ričard Marner) je u dobrim odnosima sa Reneom ali koristi kafe da sakrije ukradenu sliku, koju planira da proda posle rata. Nažalost Hitler takođe želi sliku i poslao je gestapovca Oto Flika (Ričard Gibson) da je pronađe. A sa druge strane Pokret otpora, koji predvodi Mišel (Kirsten Kuk) kod Renea krije britanske vazduhoplovce. U sred sve te zbrke Rene mora i da skriva afere sa konobaricama od svoje žene Edit (Karmen Silvera).</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001030600 +0000" stop="20261001034200 +0000" channel="pink-ha-ha">
+    <title lang="bs">Povuci ručnu</title>
+    <desc lang="bs">Emisija je kolažnog tipa i traje oko trideset pet minuta. Pored domaćina Jove Radovanovića učestvuje i stalna ekipa glumaca Mina Lazarević i Božidar Bole Stošić, kao i po jedan gost. Zastupljena je zabavna muzika uz jednu priču iz života, dva skeča, dvojnika, rubriku vesti, kuvara kao šou numeru, najavu i odjavu s gostom, njihovu solo muzičku numeru, kao i duet.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001034200 +0000" stop="20261001034500 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001034500 +0000" stop="20261001043400 +0000" channel="pink-ha-ha">
+    <title lang="bs">B.B. show</title>
+    <desc lang="bs">BB Show je najdugotrajnija humoristička tv serija na prostorima bivše Jugoslavije. Koncipirana je kao red skeč viceva, red duhovitih muzičkih spotova. Lansirala je i mnogobrojne likove i karaktere koji su zasmejavali decu i odrasle godinama. Snimljeno je 7000 viceva, bez političkih i seksualnih konotacija.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001043400 +0000" stop="20261001043700 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001043700 +0000" stop="20261001052100 +0000" channel="pink-ha-ha">
+    <title lang="bs">Skrivena kamera</title>
+    <desc lang="bs">Pažljivo pratite sve što se oko vas dešava. Ukoliko vam se učini da je situacija neobična, očekujte kameru TV Pink u blizini. Skrivena kamera opet je na našem programu i opet vas vreba iza ćoška.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001052100 +0000" stop="20261001052600 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001052600 +0000" stop="20261001062700 +0000" channel="pink-ha-ha">
+    <title lang="bs">Pogled odozdo</title>
+    <desc lang="bs">Van engleskog govornog područja, gde je i nastala, ova vrsta scenskog nastupa postaje sve omiljenija među publikom, a odlična ekipa na čelu sa Srdjanom Jovanovićem, aktuelne probleme, vrcavim i domišljatim humorom, učiniće mnogo bezazlenijim. Pogled Odozdo, relaksira, prosvećuje i zabavlja!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001062700 +0000" stop="20261001062800 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001062800 +0000" stop="20261001071500 +0000" channel="pink-ha-ha">
+    <title lang="bs">Stand Up u Apolo Teatru</title>
+    <desc lang="bs">Britanska stendap komedija donosi nastupe najboljih stendap komičara iz zemlje na scenu u londonskom Hamersmit Apolo.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001071500 +0000" stop="20261001075900 +0000" channel="pink-ha-ha">
+    <title lang="bs">Stand Up u Apolo Teatru</title>
+    <desc lang="bs">Britanska stendap komedija donosi nastupe najboljih stendap komičara iz zemlje na scenu u londonskom Hamersmit Apolo.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001075900 +0000" stop="20261001080100 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001080100 +0000" stop="20261001083000 +0000" channel="pink-ha-ha">
+    <title lang="bs">Leteći Cirkus Monti Pajtona</title>
+    <desc lang="bs">Početak emitovanja ove serije 5. oktobra 1969. godine označio je početak nove ere komedije, kako u ujedinjenom Kraljevstvu, tako i širem svetu, jer su montipajtonovci, nadmašivači, u četiri sezone. u početku razumljiv malom broju gledalaca, da bi kasnije stekli veliku popularnost širom sveta. Serija se izdvaja upotrebom apsurdnih situacija, pomešanih sa rizičnim i nagoveštajima-zasutim humorom, vizuelnim gegovima i opservacionim skečevima bez poente vica.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001083000 +0000" stop="20261001083100 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001083100 +0000" stop="20261001083300 +0000" channel="pink-ha-ha">
+    <title lang="bs">Skrivena Kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001083300 +0000" stop="20261001090800 +0000" channel="pink-ha-ha">
+    <title lang="bs">Alo, alo</title>
+    <desc lang="bs">Rene Artoa (Gorden Kej) je vlasnik kafea u okupiranom francuskom gradiću Nuvionu u vreme Drugog svetskog rata. On se nalazi između dve vatre: naizgled sarađuje sa nacistima a u stvari potajno pomaže Pokretu otpora.Nemački pukovnik Von Strom (Ričard Marner) je u dobrim odnosima sa Reneom ali koristi kafe da sakrije ukradenu sliku, koju planira da proda posle rata. Nažalost Hitler takođe želi sliku i poslao je gestapovca Oto Flika (Ričard Gibson) da je pronađe. A sa druge strane Pokret otpora, koji predvodi Mišel (Kirsten Kuk) kod Renea krije britanske vazduhoplovce. U sred sve te zbrke Rene mora i da skriva afere sa konobaricama od svoje žene Edit (Karmen Silvera).</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001090800 +0000" stop="20261001094500 +0000" channel="pink-ha-ha">
+    <title lang="bs">Povuci ručnu</title>
+    <desc lang="bs">Emisija je kolažnog tipa i traje oko trideset pet minuta. Pored domaćina Jove Radovanovića učestvuje i stalna ekipa glumaca Mina Lazarević i Božidar Bole Stošić, kao i po jedan gost. Zastupljena je zabavna muzika uz jednu priču iz života, dva skeča, dvojnika, rubriku vesti, kuvara kao šou numeru, najavu i odjavu s gostom, njihovu solo muzičku numeru, kao i duet.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001094500 +0000" stop="20261001094900 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001094900 +0000" stop="20261001103700 +0000" channel="pink-ha-ha">
+    <title lang="bs">B.B. show</title>
+    <desc lang="bs">BB Show je najdugotrajnija humoristička tv serija na prostorima bivše Jugoslavije. Koncipirana je kao red skeč viceva, red duhovitih muzičkih spotova. Lansirala je i mnogobrojne likove i karaktere koji su zasmejavali decu i odrasle godinama. Snimljeno je 7000 viceva, bez političkih i seksualnih konotacija.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001103700 +0000" stop="20261001110300 +0000" channel="pink-ha-ha">
+    <title lang="bs">Komedija s nogu 3 u 1</title>
+    <desc lang="bs">Stand-up komičari sa prostora bivše Jugoslavije okupljaju se u emisiji Komedija sa nogama 3 u 1. Svaka epizoda sadrži postavu od tri komičara iz tri različite zemlje, zbog čega je i sama emisija nazvana 3 u 1.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001110300 +0000" stop="20261001110500 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001110500 +0000" stop="20261001114900 +0000" channel="pink-ha-ha">
+    <title lang="bs">Skrivena kamera</title>
+    <desc lang="bs">Pažljivo pratite sve što se oko vas dešava. Ukoliko vam se učini da je situacija neobična, očekujte kameru TV Pink u blizini. Skrivena kamera opet je na našem programu i opet vas vreba iza ćoška.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001114900 +0000" stop="20261001115200 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001115200 +0000" stop="20261001124800 +0000" channel="pink-ha-ha">
+    <title lang="bs">Pogled odozdo</title>
+    <desc lang="bs">Van engleskog govornog područja, gde je i nastala, ova vrsta scenskog nastupa postaje sve omiljenija među publikom, a odlična ekipa na čelu sa Srdjanom Jovanovićem, aktuelne probleme, vrcavim i domišljatim humorom, učiniće mnogo bezazlenijim. Pogled Odozdo, relaksira, prosvećuje i zabavlja!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001124800 +0000" stop="20261001133200 +0000" channel="pink-ha-ha">
+    <title lang="bs">Stand Up u Apolo Teatru</title>
+    <desc lang="bs">Britanska stendap komedija donosi nastupe najboljih stendap komičara iz zemlje na scenu u londonskom Hamersmit Apolo.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001133200 +0000" stop="20261001141600 +0000" channel="pink-ha-ha">
+    <title lang="bs">Stand Up u Apolo Teatru</title>
+    <desc lang="bs">Britanska stendap komedija donosi nastupe najboljih stendap komičara iz zemlje na scenu u londonskom Hamersmit Apolo.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001141600 +0000" stop="20261001144800 +0000" channel="pink-ha-ha">
+    <title lang="bs">Leteći Cirkus Monti Pajtona</title>
+    <desc lang="bs">Početak emitovanja ove serije 5. oktobra 1969. godine označio je početak nove ere komedije, kako u ujedinjenom Kraljevstvu, tako i širem svetu, jer su montipajtonovci, nadmašivači, u četiri sezone. u početku razumljiv malom broju gledalaca, da bi kasnije stekli veliku popularnost širom sveta. Serija se izdvaja upotrebom apsurdnih situacija, pomešanih sa rizičnim i nagoveštajima-zasutim humorom, vizuelnim gegovima i opservacionim skečevima bez poente vica.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001144800 +0000" stop="20261001151400 +0000" channel="pink-ha-ha">
+    <title lang="bs">Alo, alo</title>
+    <desc lang="bs">Rene Artoa (Gorden Kej) je vlasnik kafea u okupiranom francuskom gradiću Nuvionu u vreme Drugog svetskog rata. On se nalazi između dve vatre: naizgled sarađuje sa nacistima a u stvari potajno pomaže Pokretu otpora.Nemački pukovnik Von Strom (Ričard Marner) je u dobrim odnosima sa Reneom ali koristi kafe da sakrije ukradenu sliku, koju planira da proda posle rata. Nažalost Hitler takođe želi sliku i poslao je gestapovca Oto Flika (Ričard Gibson) da je pronađe. A sa druge strane Pokret otpora, koji predvodi Mišel (Kirsten Kuk) kod Renea krije britanske vazduhoplovce. U sred sve te zbrke Rene mora i da skriva afere sa konobaricama od svoje žene Edit (Karmen Silvera).</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001151400 +0000" stop="20261001155200 +0000" channel="pink-ha-ha">
+    <title lang="bs">Povuci ručnu</title>
+    <desc lang="bs">Emisija je kolažnog tipa i traje oko trideset pet minuta. Pored domaćina Jove Radovanovića učestvuje i stalna ekipa glumaca Mina Lazarević i Božidar Bole Stošić, kao i po jedan gost. Zastupljena je zabavna muzika uz jednu priču iz života, dva skeča, dvojnika, rubriku vesti, kuvara kao šou numeru, najavu i odjavu s gostom, njihovu solo muzičku numeru, kao i duet.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001155200 +0000" stop="20261001155500 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001155500 +0000" stop="20261001164400 +0000" channel="pink-ha-ha">
+    <title lang="bs">B.B. show</title>
+    <desc lang="bs">BB Show je najdugotrajnija humoristička tv serija na prostorima bivše Jugoslavije. Koncipirana je kao red skeč viceva, red duhovitih muzičkih spotova. Lansirala je i mnogobrojne likove i karaktere koji su zasmejavali decu i odrasle godinama. Snimljeno je 7000 viceva, bez političkih i seksualnih konotacija.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001164400 +0000" stop="20261001171000 +0000" channel="pink-ha-ha">
+    <title lang="bs">Komedija s nogu 3 u 1</title>
+    <desc lang="bs">Stand-up komičari sa prostora bivše Jugoslavije okupljaju se u emisiji Komedija sa nogama 3 u 1. Svaka epizoda sadrži postavu od tri komičara iz tri različite zemlje, zbog čega je i sama emisija nazvana 3 u 1.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001171000 +0000" stop="20261001171100 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001171100 +0000" stop="20261001175500 +0000" channel="pink-ha-ha">
+    <title lang="bs">Skrivena kamera</title>
+    <desc lang="bs">Pažljivo pratite sve što se oko vas dešava. Ukoliko vam se učini da je situacija neobična, očekujte kameru TV Pink u blizini. Skrivena kamera opet je na našem programu i opet vas vreba iza ćoška.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001175500 +0000" stop="20261001175800 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001175800 +0000" stop="20261001185400 +0000" channel="pink-ha-ha">
+    <title lang="bs">Pogled odozdo</title>
+    <desc lang="bs">Van engleskog govornog područja, gde je i nastala, ova vrsta scenskog nastupa postaje sve omiljenija među publikom, a odlična ekipa na čelu sa Srdjanom Jovanovićem, aktuelne probleme, vrcavim i domišljatim humorom, učiniće mnogo bezazlenijim. Pogled Odozdo, relaksira, prosvećuje i zabavlja!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001185400 +0000" stop="20261001193800 +0000" channel="pink-ha-ha">
+    <title lang="bs">Stand Up u Apolo Teatru</title>
+    <desc lang="bs">Britanska stendap komedija donosi nastupe najboljih stendap komičara iz zemlje na scenu u londonskom Hamersmit Apolo.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001193800 +0000" stop="20261001202300 +0000" channel="pink-ha-ha">
+    <title lang="bs">Stand Up u Apolo Teatru</title>
+    <desc lang="bs">Britanska stendap komedija donosi nastupe najboljih stendap komičara iz zemlje na scenu u londonskom Hamersmit Apolo.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001202300 +0000" stop="20261001205400 +0000" channel="pink-ha-ha">
+    <title lang="bs">Leteći Cirkus Monti Pajtona</title>
+    <desc lang="bs">Početak emitovanja ove serije 5. oktobra 1969. godine označio je početak nove ere komedije, kako u ujedinjenom Kraljevstvu, tako i širem svetu, jer su montipajtonovci, nadmašivači, u četiri sezone. u početku razumljiv malom broju gledalaca, da bi kasnije stekli veliku popularnost širom sveta. Serija se izdvaja upotrebom apsurdnih situacija, pomešanih sa rizičnim i nagoveštajima-zasutim humorom, vizuelnim gegovima i opservacionim skečevima bez poente vica.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001205400 +0000" stop="20261001212000 +0000" channel="pink-ha-ha">
+    <title lang="bs">Alo, alo</title>
+    <desc lang="bs">Rene Artoa (Gorden Kej) je vlasnik kafea u okupiranom francuskom gradiću Nuvionu u vreme Drugog svetskog rata. On se nalazi između dve vatre: naizgled sarađuje sa nacistima a u stvari potajno pomaže Pokretu otpora.Nemački pukovnik Von Strom (Ričard Marner) je u dobrim odnosima sa Reneom ali koristi kafe da sakrije ukradenu sliku, koju planira da proda posle rata. Nažalost Hitler takođe želi sliku i poslao je gestapovca Oto Flika (Ričard Gibson) da je pronađe. A sa druge strane Pokret otpora, koji predvodi Mišel (Kirsten Kuk) kod Renea krije britanske vazduhoplovce. U sred sve te zbrke Rene mora i da skriva afere sa konobaricama od svoje žene Edit (Karmen Silvera).</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001212000 +0000" stop="20261001215800 +0000" channel="pink-ha-ha">
+    <title lang="bs">Povuci ručnu</title>
+    <desc lang="bs">Emisija je kolažnog tipa i traje oko trideset pet minuta. Pored domaćina Jove Radovanovića učestvuje i stalna ekipa glumaca Mina Lazarević i Božidar Bole Stošić, kao i po jedan gost. Zastupljena je zabavna muzika uz jednu priču iz života, dva skeča, dvojnika, rubriku vesti, kuvara kao šou numeru, najavu i odjavu s gostom, njihovu solo muzičku numeru, kao i duet.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001215800 +0000" stop="20261001220200 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001220200 +0000" stop="20261001225000 +0000" channel="pink-ha-ha">
+    <title lang="bs">B.B. show</title>
+    <desc lang="bs">BB Show je najdugotrajnija humoristička tv serija na prostorima bivše Jugoslavije. Koncipirana je kao red skeč viceva, red duhovitih muzičkih spotova. Lansirala je i mnogobrojne likove i karaktere koji su zasmejavali decu i odrasle godinama. Snimljeno je 7000 viceva, bez političkih i seksualnih konotacija.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001225000 +0000" stop="20261001231600 +0000" channel="pink-ha-ha">
+    <title lang="bs">Komedija s nogu 3 u 1</title>
+    <desc lang="bs">Stand-up komičari sa prostora bivše Jugoslavije okupljaju se u emisiji Komedija sa nogama 3 u 1. Svaka epizoda sadrži postavu od tri komičara iz tri različite zemlje, zbog čega je i sama emisija nazvana 3 u 1.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001231600 +0000" stop="20261001231800 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261001231800 +0000" stop="20261002000200 +0000" channel="pink-ha-ha">
+    <title lang="bs">Skrivena kamera</title>
+    <desc lang="bs">Pažljivo pratite sve što se oko vas dešava. Ukoliko vam se učini da je situacija neobična, očekujte kameru TV Pink u blizini. Skrivena kamera opet je na našem programu i opet vas vreba iza ćoška.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002000200 +0000" stop="20261002000500 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002000500 +0000" stop="20261002010000 +0000" channel="pink-ha-ha">
+    <title lang="bs">Pogled odozdo</title>
+    <desc lang="bs">Van engleskog govornog područja, gde je i nastala, ova vrsta scenskog nastupa postaje sve omiljenija među publikom, a odlična ekipa na čelu sa Srdjanom Jovanovićem, aktuelne probleme, vrcavim i domišljatim humorom, učiniće mnogo bezazlenijim. Pogled Odozdo, relaksira, prosvećuje i zabavlja!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002010000 +0000" stop="20261002014500 +0000" channel="pink-ha-ha">
+    <title lang="bs">Stand Up u Apolo Teatru</title>
+    <desc lang="bs">Britanska stendap komedija donosi nastupe najboljih stendap komičara iz zemlje na scenu u londonskom Hamersmit Apolo.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002014500 +0000" stop="20261002022900 +0000" channel="pink-ha-ha">
+    <title lang="bs">Stand Up u Apolo Teatru</title>
+    <desc lang="bs">Britanska stendap komedija donosi nastupe najboljih stendap komičara iz zemlje na scenu u londonskom Hamersmit Apolo.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001013800 +0000" stop="20261001020300 +0000" channel="pink-lol">
+    <title lang="bs">Crazy Hidden Camera</title>
+    <desc lang="bs">Uživajte uz snimke urnebesnih, skrivenih kamera!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001020300 +0000" stop="20261001020500 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001020500 +0000" stop="20261001022600 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001022600 +0000" stop="20261001022800 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001022800 +0000" stop="20261001025000 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001025000 +0000" stop="20261001025200 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001025200 +0000" stop="20261001031300 +0000" channel="pink-lol">
+    <title lang="bs">Pop Circus</title>
+    <desc lang="bs">Uživajte uz kompilaciju najboljih, svetskih, cirkuskih tačaka! Ova emisija za celu porodicu, donosi niz blistavih i spektakularnih nastupa uz koje ćete se beskrajno zabaviti.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001031300 +0000" stop="20261001033500 +0000" channel="pink-lol">
+    <title lang="bs">Urnebesni video</title>
+    <desc lang="bs">Urnebesno smešni kućni video snimci. U svakodnevnom životu uvek se događa nešto smešno, iznenađujuće ili blesavo. Još je bolje kada se sve to uhvati na kameri!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001033500 +0000" stop="20261001033700 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001033700 +0000" stop="20261001035900 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001035900 +0000" stop="20261001042100 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001042100 +0000" stop="20261001042200 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001042200 +0000" stop="20261001044800 +0000" channel="pink-lol">
+    <title lang="bs">Crazy Hidden Camera</title>
+    <desc lang="bs">Uživajte uz snimke urnebesnih, skrivenih kamera!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001044800 +0000" stop="20261001045000 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001045000 +0000" stop="20261001051200 +0000" channel="pink-lol">
+    <title lang="bs">Urnebesni video</title>
+    <desc lang="bs">Urnebesno smešni kućni video snimci. U svakodnevnom životu uvek se događa nešto smešno, iznenađujuće ili blesavo. Još je bolje kada se sve to uhvati na kameri!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001051200 +0000" stop="20261001053400 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001053400 +0000" stop="20261001055600 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001055600 +0000" stop="20261001055800 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001055800 +0000" stop="20261001062400 +0000" channel="pink-lol">
+    <title lang="bs">Crazy Hidden Camera</title>
+    <desc lang="bs">Uživajte uz snimke urnebesnih, skrivenih kamera!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001062400 +0000" stop="20261001062600 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001062600 +0000" stop="20261001064700 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001064700 +0000" stop="20261001064900 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001064900 +0000" stop="20261001071100 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001071100 +0000" stop="20261001071300 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001071300 +0000" stop="20261001073500 +0000" channel="pink-lol">
+    <title lang="bs">Urnebesni video</title>
+    <desc lang="bs">Urnebesno smešni kućni video snimci. U svakodnevnom životu uvek se događa nešto smešno, iznenađujuće ili blesavo. Još je bolje kada se sve to uhvati na kameri!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001073500 +0000" stop="20261001073700 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001073700 +0000" stop="20261001080200 +0000" channel="pink-lol">
+    <title lang="bs">Crazy Hidden Camera</title>
+    <desc lang="bs">Uživajte uz snimke urnebesnih, skrivenih kamera!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001080200 +0000" stop="20261001080300 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001080300 +0000" stop="20261001082500 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001082500 +0000" stop="20261001082700 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001082700 +0000" stop="20261001084900 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001084900 +0000" stop="20261001085100 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001085100 +0000" stop="20261001091200 +0000" channel="pink-lol">
+    <title lang="bs">Pop Circus</title>
+    <desc lang="bs">Uživajte uz kompilaciju najboljih, svetskih, cirkuskih tačaka! Ova emisija za celu porodicu, donosi niz blistavih i spektakularnih nastupa uz koje ćete se beskrajno zabaviti.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001091200 +0000" stop="20261001093400 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001093400 +0000" stop="20261001093600 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001093600 +0000" stop="20261001100200 +0000" channel="pink-lol">
+    <title lang="bs">Crazy Hidden Camera</title>
+    <desc lang="bs">Uživajte uz snimke urnebesnih, skrivenih kamera!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001100200 +0000" stop="20261001102500 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001102500 +0000" stop="20261001102700 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001102700 +0000" stop="20261001104900 +0000" channel="pink-lol">
+    <title lang="bs">Urnebesni video</title>
+    <desc lang="bs">Urnebesno smešni kućni video snimci. U svakodnevnom životu uvek se događa nešto smešno, iznenađujuće ili blesavo. Još je bolje kada se sve to uhvati na kameri!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001104900 +0000" stop="20261001111400 +0000" channel="pink-lol">
+    <title lang="bs">Crazy Hidden Camera</title>
+    <desc lang="bs">Uživajte uz snimke urnebesnih, skrivenih kamera!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001111400 +0000" stop="20261001111600 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001111600 +0000" stop="20261001113800 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001113800 +0000" stop="20261001113900 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001113900 +0000" stop="20261001120500 +0000" channel="pink-lol">
+    <title lang="bs">Crazy Hidden Camera</title>
+    <desc lang="bs">Uživajte uz snimke urnebesnih, skrivenih kamera!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001120500 +0000" stop="20261001122800 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001122800 +0000" stop="20261001123000 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001123000 +0000" stop="20261001125300 +0000" channel="pink-lol">
+    <title lang="bs">Urnebesni video</title>
+    <desc lang="bs">Urnebesno smešni kućni video snimci. U svakodnevnom životu uvek se događa nešto smešno, iznenađujuće ili blesavo. Još je bolje kada se sve to uhvati na kameri!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001125300 +0000" stop="20261001125400 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001125400 +0000" stop="20261001131600 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001131600 +0000" stop="20261001131700 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001131700 +0000" stop="20261001133900 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001133900 +0000" stop="20261001134300 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001134300 +0000" stop="20261001140500 +0000" channel="pink-lol">
+    <title lang="bs">Urnebesni video</title>
+    <desc lang="bs">Urnebesno smešni kućni video snimci. U svakodnevnom životu uvek se događa nešto smešno, iznenađujuće ili blesavo. Još je bolje kada se sve to uhvati na kameri!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001140500 +0000" stop="20261001140700 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001140700 +0000" stop="20261001142900 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001142900 +0000" stop="20261001145100 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001145100 +0000" stop="20261001151200 +0000" channel="pink-lol">
+    <title lang="bs">Pop Circus</title>
+    <desc lang="bs">Uživajte uz kompilaciju najboljih, svetskih, cirkuskih tačaka! Ova emisija za celu porodicu, donosi niz blistavih i spektakularnih nastupa uz koje ćete se beskrajno zabaviti.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001151200 +0000" stop="20261001153400 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001153400 +0000" stop="20261001153600 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001153600 +0000" stop="20261001160200 +0000" channel="pink-lol">
+    <title lang="bs">Crazy Hidden Camera</title>
+    <desc lang="bs">Uživajte uz snimke urnebesnih, skrivenih kamera!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001160200 +0000" stop="20261001162500 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001162500 +0000" stop="20261001162700 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001162700 +0000" stop="20261001164900 +0000" channel="pink-lol">
+    <title lang="bs">Urnebesni video</title>
+    <desc lang="bs">Urnebesno smešni kućni video snimci. U svakodnevnom životu uvek se događa nešto smešno, iznenađujuće ili blesavo. Još je bolje kada se sve to uhvati na kameri!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001164900 +0000" stop="20261001171500 +0000" channel="pink-lol">
+    <title lang="bs">Crazy Hidden Camera</title>
+    <desc lang="bs">Uživajte uz snimke urnebesnih, skrivenih kamera!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001171500 +0000" stop="20261001171700 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001171700 +0000" stop="20261001173800 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001173800 +0000" stop="20261001173900 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001173900 +0000" stop="20261001180500 +0000" channel="pink-lol">
+    <title lang="bs">Crazy Hidden Camera</title>
+    <desc lang="bs">Uživajte uz snimke urnebesnih, skrivenih kamera!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001180500 +0000" stop="20261001182800 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001182800 +0000" stop="20261001183000 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001183000 +0000" stop="20261001185300 +0000" channel="pink-lol">
+    <title lang="bs">Urnebesni video</title>
+    <desc lang="bs">Urnebesno smešni kućni video snimci. U svakodnevnom životu uvek se događa nešto smešno, iznenađujuće ili blesavo. Još je bolje kada se sve to uhvati na kameri!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001185300 +0000" stop="20261001185500 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001185500 +0000" stop="20261001191600 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001191600 +0000" stop="20261001191700 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001191700 +0000" stop="20261001194000 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001194000 +0000" stop="20261001194300 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001194300 +0000" stop="20261001200600 +0000" channel="pink-lol">
+    <title lang="bs">Urnebesni video</title>
+    <desc lang="bs">Urnebesno smešni kućni video snimci. U svakodnevnom životu uvek se događa nešto smešno, iznenađujuće ili blesavo. Još je bolje kada se sve to uhvati na kameri!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001200600 +0000" stop="20261001200700 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001200700 +0000" stop="20261001202900 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001202900 +0000" stop="20261001205100 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001205100 +0000" stop="20261001211200 +0000" channel="pink-lol">
+    <title lang="bs">Pop Circus</title>
+    <desc lang="bs">Uživajte uz kompilaciju najboljih, svetskih, cirkuskih tačaka! Ova emisija za celu porodicu, donosi niz blistavih i spektakularnih nastupa uz koje ćete se beskrajno zabaviti.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001211200 +0000" stop="20261001213400 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001213400 +0000" stop="20261001213600 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001213600 +0000" stop="20261001220200 +0000" channel="pink-lol">
+    <title lang="bs">Crazy Hidden Camera</title>
+    <desc lang="bs">Uživajte uz snimke urnebesnih, skrivenih kamera!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001220200 +0000" stop="20261001222500 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001222500 +0000" stop="20261001222700 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001222700 +0000" stop="20261001224900 +0000" channel="pink-lol">
+    <title lang="bs">Urnebesni video</title>
+    <desc lang="bs">Urnebesno smešni kućni video snimci. U svakodnevnom životu uvek se događa nešto smešno, iznenađujuće ili blesavo. Još je bolje kada se sve to uhvati na kameri!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001224900 +0000" stop="20261001231500 +0000" channel="pink-lol">
+    <title lang="bs">Crazy Hidden Camera</title>
+    <desc lang="bs">Uživajte uz snimke urnebesnih, skrivenih kamera!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001231500 +0000" stop="20261001231700 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001231700 +0000" stop="20261001233800 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001233800 +0000" stop="20261001234000 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261001234000 +0000" stop="20261002000500 +0000" channel="pink-lol">
+    <title lang="bs">Crazy Hidden Camera</title>
+    <desc lang="bs">Uživajte uz snimke urnebesnih, skrivenih kamera!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002000500 +0000" stop="20261002002900 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002002900 +0000" stop="20261002003100 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002003100 +0000" stop="20261002005300 +0000" channel="pink-lol">
+    <title lang="bs">Urnebesni video</title>
+    <desc lang="bs">Urnebesno smešni kućni video snimci. U svakodnevnom životu uvek se događa nešto smešno, iznenađujuće ili blesavo. Još je bolje kada se sve to uhvati na kameri!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002005300 +0000" stop="20261002005500 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002005500 +0000" stop="20261002011600 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002011600 +0000" stop="20261002011700 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002011700 +0000" stop="20261002014000 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002014000 +0000" stop="20261002014400 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002014400 +0000" stop="20261002020600 +0000" channel="pink-lol">
+    <title lang="bs">Urnebesni video</title>
+    <desc lang="bs">Urnebesno smešni kućni video snimci. U svakodnevnom životu uvek se događa nešto smešno, iznenađujuće ili blesavo. Još je bolje kada se sve to uhvati na kameri!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002014500 +0000" stop="20261002022900 +0000" channel="pink-ha-ha">
+    <title lang="bs">Stand Up u Apolo Teatru</title>
+    <desc lang="bs">Britanska stendap komedija donosi nastupe najboljih stendap komičara iz zemlje na scenu u londonskom Hamersmit Apolo.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002022900 +0000" stop="20261002030100 +0000" channel="pink-ha-ha">
+    <title lang="bs">Leteći Cirkus Monti Pajtona</title>
+    <desc lang="bs">Početak emitovanja ove serije 5. oktobra 1969. godine označio je početak nove ere komedije, kako u ujedinjenom Kraljevstvu, tako i širem svetu, jer su montipajtonovci, nadmašivači, u četiri sezone. u početku razumljiv malom broju gledalaca, da bi kasnije stekli veliku popularnost širom sveta. Serija se izdvaja upotrebom apsurdnih situacija, pomešanih sa rizičnim i nagoveštajima-zasutim humorom, vizuelnim gegovima i opservacionim skečevima bez poente vica.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002030100 +0000" stop="20261002032700 +0000" channel="pink-ha-ha">
+    <title lang="bs">Alo, alo</title>
+    <desc lang="bs">Rene Artoa (Gorden Kej) je vlasnik kafea u okupiranom francuskom gradiću Nuvionu u vreme Drugog svetskog rata. On se nalazi između dve vatre: naizgled sarađuje sa nacistima a u stvari potajno pomaže Pokretu otpora.Nemački pukovnik Von Strom (Ričard Marner) je u dobrim odnosima sa Reneom ali koristi kafe da sakrije ukradenu sliku, koju planira da proda posle rata. Nažalost Hitler takođe želi sliku i poslao je gestapovca Oto Flika (Ričard Gibson) da je pronađe. A sa druge strane Pokret otpora, koji predvodi Mišel (Kirsten Kuk) kod Renea krije britanske vazduhoplovce. U sred sve te zbrke Rene mora i da skriva afere sa konobaricama od svoje žene Edit (Karmen Silvera).</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002032700 +0000" stop="20261002040500 +0000" channel="pink-ha-ha">
+    <title lang="bs">Povuci ručnu</title>
+    <desc lang="bs">Emisija je kolažnog tipa i traje oko trideset pet minuta. Pored domaćina Jove Radovanovića učestvuje i stalna ekipa glumaca Mina Lazarević i Božidar Bole Stošić, kao i po jedan gost. Zastupljena je zabavna muzika uz jednu priču iz života, dva skeča, dvojnika, rubriku vesti, kuvara kao šou numeru, najavu i odjavu s gostom, njihovu solo muzičku numeru, kao i duet.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002040500 +0000" stop="20261002040800 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002040800 +0000" stop="20261002045700 +0000" channel="pink-ha-ha">
+    <title lang="bs">B.B. show</title>
+    <desc lang="bs">BB Show je najdugotrajnija humoristička tv serija na prostorima bivše Jugoslavije. Koncipirana je kao red skeč viceva, red duhovitih muzičkih spotova. Lansirala je i mnogobrojne likove i karaktere koji su zasmejavali decu i odrasle godinama. Snimljeno je 7000 viceva, bez političkih i seksualnih konotacija.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002045700 +0000" stop="20261002045800 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002045800 +0000" stop="20261002054200 +0000" channel="pink-ha-ha">
+    <title lang="bs">Skrivena kamera</title>
+    <desc lang="bs">Pažljivo pratite sve što se oko vas dešava. Ukoliko vam se učini da je situacija neobična, očekujte kameru TV Pink u blizini. Skrivena kamera opet je na našem programu i opet vas vreba iza ćoška.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002054200 +0000" stop="20261002054500 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002054500 +0000" stop="20261002064100 +0000" channel="pink-ha-ha">
+    <title lang="bs">Pogled odozdo</title>
+    <desc lang="bs">Van engleskog govornog područja, gde je i nastala, ova vrsta scenskog nastupa postaje sve omiljenija među publikom, a odlična ekipa na čelu sa Srdjanom Jovanovićem, aktuelne probleme, vrcavim i domišljatim humorom, učiniće mnogo bezazlenijim. Pogled Odozdo, relaksira, prosvećuje i zabavlja!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002064100 +0000" stop="20261002072500 +0000" channel="pink-ha-ha">
+    <title lang="bs">Stand Up u Apolo Teatru</title>
+    <desc lang="bs">Britanska stendap komedija donosi nastupe najboljih stendap komičara iz zemlje na scenu u londonskom Hamersmit Apolo.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002072500 +0000" stop="20261002081000 +0000" channel="pink-ha-ha">
+    <title lang="bs">Stand Up u Apolo Teatru</title>
+    <desc lang="bs">Britanska stendap komedija donosi nastupe najboljih stendap komičara iz zemlje na scenu u londonskom Hamersmit Apolo.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002081000 +0000" stop="20261002084100 +0000" channel="pink-ha-ha">
+    <title lang="bs">Leteći Cirkus Monti Pajtona</title>
+    <desc lang="bs">Početak emitovanja ove serije 5. oktobra 1969. godine označio je početak nove ere komedije, kako u ujedinjenom Kraljevstvu, tako i širem svetu, jer su montipajtonovci, nadmašivači, u četiri sezone. u početku razumljiv malom broju gledalaca, da bi kasnije stekli veliku popularnost širom sveta. Serija se izdvaja upotrebom apsurdnih situacija, pomešanih sa rizičnim i nagoveštajima-zasutim humorom, vizuelnim gegovima i opservacionim skečevima bez poente vica.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002084100 +0000" stop="20261002090700 +0000" channel="pink-ha-ha">
+    <title lang="bs">Alo, alo</title>
+    <desc lang="bs">Rene Artoa (Gorden Kej) je vlasnik kafea u okupiranom francuskom gradiću Nuvionu u vreme Drugog svetskog rata. On se nalazi između dve vatre: naizgled sarađuje sa nacistima a u stvari potajno pomaže Pokretu otpora.Nemački pukovnik Von Strom (Ričard Marner) je u dobrim odnosima sa Reneom ali koristi kafe da sakrije ukradenu sliku, koju planira da proda posle rata. Nažalost Hitler takođe želi sliku i poslao je gestapovca Oto Flika (Ričard Gibson) da je pronađe. A sa druge strane Pokret otpora, koji predvodi Mišel (Kirsten Kuk) kod Renea krije britanske vazduhoplovce. U sred sve te zbrke Rene mora i da skriva afere sa konobaricama od svoje žene Edit (Karmen Silvera).</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002090700 +0000" stop="20261002094000 +0000" channel="pink-ha-ha">
+    <title lang="bs">Povuci ručnu</title>
+    <desc lang="bs">Emisija je kolažnog tipa i traje oko trideset pet minuta. Pored domaćina Jove Radovanovića učestvuje i stalna ekipa glumaca Mina Lazarević i Božidar Bole Stošić, kao i po jedan gost. Zastupljena je zabavna muzika uz jednu priču iz života, dva skeča, dvojnika, rubriku vesti, kuvara kao šou numeru, najavu i odjavu s gostom, njihovu solo muzičku numeru, kao i duet.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002094000 +0000" stop="20261002094500 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002094500 +0000" stop="20261002102300 +0000" channel="pink-ha-ha">
+    <title lang="bs">B.B. show</title>
+    <desc lang="bs">BB Show je najdugotrajnija humoristička tv serija na prostorima bivše Jugoslavije. Koncipirana je kao red skeč viceva, red duhovitih muzičkih spotova. Lansirala je i mnogobrojne likove i karaktere koji su zasmejavali decu i odrasle godinama. Snimljeno je 7000 viceva, bez političkih i seksualnih konotacija.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002102300 +0000" stop="20261002102600 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002102600 +0000" stop="20261002105000 +0000" channel="pink-ha-ha">
+    <title lang="bs">Komedija s nogu 3 u 1</title>
+    <desc lang="bs">Stand-up komičari sa prostora bivše Jugoslavije okupljaju se u emisiji Komedija sa nogama 3 u 1. Svaka epizoda sadrži postavu od tri komičara iz tri različite zemlje, zbog čega je i sama emisija nazvana 3 u 1.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002105000 +0000" stop="20261002105400 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002105400 +0000" stop="20261002113800 +0000" channel="pink-ha-ha">
+    <title lang="bs">Skrivena kamera</title>
+    <desc lang="bs">Pažljivo pratite sve što se oko vas dešava. Ukoliko vam se učini da je situacija neobična, očekujte kameru TV Pink u blizini. Skrivena kamera opet je na našem programu i opet vas vreba iza ćoška.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002113800 +0000" stop="20261002113900 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002113900 +0000" stop="20261002123500 +0000" channel="pink-ha-ha">
+    <title lang="bs">Pogled odozdo</title>
+    <desc lang="bs">Van engleskog govornog područja, gde je i nastala, ova vrsta scenskog nastupa postaje sve omiljenija među publikom, a odlična ekipa na čelu sa Srdjanom Jovanovićem, aktuelne probleme, vrcavim i domišljatim humorom, učiniće mnogo bezazlenijim. Pogled Odozdo, relaksira, prosvećuje i zabavlja!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002123500 +0000" stop="20261002123900 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002123900 +0000" stop="20261002132300 +0000" channel="pink-ha-ha">
+    <title lang="bs">Stand Up u Apolo Teatru</title>
+    <desc lang="bs">Britanska stendap komedija donosi nastupe najboljih stendap komičara iz zemlje na scenu u londonskom Hamersmit Apolo.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002132300 +0000" stop="20261002140800 +0000" channel="pink-ha-ha">
+    <title lang="bs">Stand Up u Apolo Teatru</title>
+    <desc lang="bs">Britanska stendap komedija donosi nastupe najboljih stendap komičara iz zemlje na scenu u londonskom Hamersmit Apolo.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002140800 +0000" stop="20261002140900 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002140900 +0000" stop="20261002144200 +0000" channel="pink-ha-ha">
+    <title lang="bs">Leteći Cirkus Monti Pajtona</title>
+    <desc lang="bs">Početak emitovanja ove serije 5. oktobra 1969. godine označio je početak nove ere komedije, kako u ujedinjenom Kraljevstvu, tako i širem svetu, jer su montipajtonovci, nadmašivači, u četiri sezone. u početku razumljiv malom broju gledalaca, da bi kasnije stekli veliku popularnost širom sveta. Serija se izdvaja upotrebom apsurdnih situacija, pomešanih sa rizičnim i nagoveštajima-zasutim humorom, vizuelnim gegovima i opservacionim skečevima bez poente vica.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002144200 +0000" stop="20261002144600 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002144600 +0000" stop="20261002151000 +0000" channel="pink-ha-ha">
+    <title lang="bs">Alo, alo</title>
+    <desc lang="bs">Rene Artoa (Gorden Kej) je vlasnik kafea u okupiranom francuskom gradiću Nuvionu u vreme Drugog svetskog rata. On se nalazi između dve vatre: naizgled sarađuje sa nacistima a u stvari potajno pomaže Pokretu otpora.Nemački pukovnik Von Strom (Ričard Marner) je u dobrim odnosima sa Reneom ali koristi kafe da sakrije ukradenu sliku, koju planira da proda posle rata. Nažalost Hitler takođe želi sliku i poslao je gestapovca Oto Flika (Ričard Gibson) da je pronađe. A sa druge strane Pokret otpora, koji predvodi Mišel (Kirsten Kuk) kod Renea krije britanske vazduhoplovce. U sred sve te zbrke Rene mora i da skriva afere sa konobaricama od svoje žene Edit (Karmen Silvera).</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002151000 +0000" stop="20261002154300 +0000" channel="pink-ha-ha">
+    <title lang="bs">Povuci ručnu</title>
+    <desc lang="bs">Emisija je kolažnog tipa i traje oko trideset pet minuta. Pored domaćina Jove Radovanovića učestvuje i stalna ekipa glumaca Mina Lazarević i Božidar Bole Stošić, kao i po jedan gost. Zastupljena je zabavna muzika uz jednu priču iz života, dva skeča, dvojnika, rubriku vesti, kuvara kao šou numeru, najavu i odjavu s gostom, njihovu solo muzičku numeru, kao i duet.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002154300 +0000" stop="20261002154800 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002154800 +0000" stop="20261002162500 +0000" channel="pink-ha-ha">
+    <title lang="bs">B.B. show</title>
+    <desc lang="bs">BB Show je najdugotrajnija humoristička tv serija na prostorima bivše Jugoslavije. Koncipirana je kao red skeč viceva, red duhovitih muzičkih spotova. Lansirala je i mnogobrojne likove i karaktere koji su zasmejavali decu i odrasle godinama. Snimljeno je 7000 viceva, bez političkih i seksualnih konotacija.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002162500 +0000" stop="20261002162800 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002162800 +0000" stop="20261002165200 +0000" channel="pink-ha-ha">
+    <title lang="bs">Komedija s nogu 3 u 1</title>
+    <desc lang="bs">Stand-up komičari sa prostora bivše Jugoslavije okupljaju se u emisiji Komedija sa nogama 3 u 1. Svaka epizoda sadrži postavu od tri komičara iz tri različite zemlje, zbog čega je i sama emisija nazvana 3 u 1.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002165200 +0000" stop="20261002165500 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002165500 +0000" stop="20261002174000 +0000" channel="pink-ha-ha">
+    <title lang="bs">Skrivena kamera</title>
+    <desc lang="bs">Pažljivo pratite sve što se oko vas dešava. Ukoliko vam se učini da je situacija neobična, očekujte kameru TV Pink u blizini. Skrivena kamera opet je na našem programu i opet vas vreba iza ćoška.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002174000 +0000" stop="20261002174100 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002174100 +0000" stop="20261002183700 +0000" channel="pink-ha-ha">
+    <title lang="bs">Pogled odozdo</title>
+    <desc lang="bs">Van engleskog govornog područja, gde je i nastala, ova vrsta scenskog nastupa postaje sve omiljenija među publikom, a odlična ekipa na čelu sa Srdjanom Jovanovićem, aktuelne probleme, vrcavim i domišljatim humorom, učiniće mnogo bezazlenijim. Pogled Odozdo, relaksira, prosvećuje i zabavlja!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002183700 +0000" stop="20261002184000 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002184000 +0000" stop="20261002192500 +0000" channel="pink-ha-ha">
+    <title lang="bs">Stand Up u Apolo Teatru</title>
+    <desc lang="bs">Britanska stendap komedija donosi nastupe najboljih stendap komičara iz zemlje na scenu u londonskom Hamersmit Apolo.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002192500 +0000" stop="20261002200900 +0000" channel="pink-ha-ha">
+    <title lang="bs">Stand Up u Apolo Teatru</title>
+    <desc lang="bs">Britanska stendap komedija donosi nastupe najboljih stendap komičara iz zemlje na scenu u londonskom Hamersmit Apolo.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002200900 +0000" stop="20261002201100 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002201100 +0000" stop="20261002204400 +0000" channel="pink-ha-ha">
+    <title lang="bs">Leteći Cirkus Monti Pajtona</title>
+    <desc lang="bs">Početak emitovanja ove serije 5. oktobra 1969. godine označio je početak nove ere komedije, kako u ujedinjenom Kraljevstvu, tako i širem svetu, jer su montipajtonovci, nadmašivači, u četiri sezone. u početku razumljiv malom broju gledalaca, da bi kasnije stekli veliku popularnost širom sveta. Serija se izdvaja upotrebom apsurdnih situacija, pomešanih sa rizičnim i nagoveštajima-zasutim humorom, vizuelnim gegovima i opservacionim skečevima bez poente vica.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002204400 +0000" stop="20261002204800 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002204800 +0000" stop="20261002211200 +0000" channel="pink-ha-ha">
+    <title lang="bs">Alo, alo</title>
+    <desc lang="bs">Rene Artoa (Gorden Kej) je vlasnik kafea u okupiranom francuskom gradiću Nuvionu u vreme Drugog svetskog rata. On se nalazi između dve vatre: naizgled sarađuje sa nacistima a u stvari potajno pomaže Pokretu otpora.Nemački pukovnik Von Strom (Ričard Marner) je u dobrim odnosima sa Reneom ali koristi kafe da sakrije ukradenu sliku, koju planira da proda posle rata. Nažalost Hitler takođe želi sliku i poslao je gestapovca Oto Flika (Ričard Gibson) da je pronađe. A sa druge strane Pokret otpora, koji predvodi Mišel (Kirsten Kuk) kod Renea krije britanske vazduhoplovce. U sred sve te zbrke Rene mora i da skriva afere sa konobaricama od svoje žene Edit (Karmen Silvera).</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002211200 +0000" stop="20261002214500 +0000" channel="pink-ha-ha">
+    <title lang="bs">Povuci ručnu</title>
+    <desc lang="bs">Emisija je kolažnog tipa i traje oko trideset pet minuta. Pored domaćina Jove Radovanovića učestvuje i stalna ekipa glumaca Mina Lazarević i Božidar Bole Stošić, kao i po jedan gost. Zastupljena je zabavna muzika uz jednu priču iz života, dva skeča, dvojnika, rubriku vesti, kuvara kao šou numeru, najavu i odjavu s gostom, njihovu solo muzičku numeru, kao i duet.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002214500 +0000" stop="20261002214900 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002214900 +0000" stop="20261002222700 +0000" channel="pink-ha-ha">
+    <title lang="bs">B.B. show</title>
+    <desc lang="bs">BB Show je najdugotrajnija humoristička tv serija na prostorima bivše Jugoslavije. Koncipirana je kao red skeč viceva, red duhovitih muzičkih spotova. Lansirala je i mnogobrojne likove i karaktere koji su zasmejavali decu i odrasle godinama. Snimljeno je 7000 viceva, bez političkih i seksualnih konotacija.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002222700 +0000" stop="20261002223000 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002223000 +0000" stop="20261002225400 +0000" channel="pink-ha-ha">
+    <title lang="bs">Komedija s nogu 3 u 1</title>
+    <desc lang="bs">Stand-up komičari sa prostora bivše Jugoslavije okupljaju se u emisiji Komedija sa nogama 3 u 1. Svaka epizoda sadrži postavu od tri komičara iz tri različite zemlje, zbog čega je i sama emisija nazvana 3 u 1.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002225400 +0000" stop="20261002225600 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002225600 +0000" stop="20261002234000 +0000" channel="pink-ha-ha">
+    <title lang="bs">Skrivena kamera</title>
+    <desc lang="bs">Pažljivo pratite sve što se oko vas dešava. Ukoliko vam se učini da je situacija neobična, očekujte kameru TV Pink u blizini. Skrivena kamera opet je na našem programu i opet vas vreba iza ćoška.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002234000 +0000" stop="20261002234100 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261002234100 +0000" stop="20261003003700 +0000" channel="pink-ha-ha">
+    <title lang="bs">Pogled odozdo</title>
+    <desc lang="bs">Van engleskog govornog područja, gde je i nastala, ova vrsta scenskog nastupa postaje sve omiljenija među publikom, a odlična ekipa na čelu sa Srdjanom Jovanovićem, aktuelne probleme, vrcavim i domišljatim humorom, učiniće mnogo bezazlenijim. Pogled Odozdo, relaksira, prosvećuje i zabavlja!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261003003700 +0000" stop="20261003004000 +0000" channel="pink-ha-ha">
+    <title lang="bs">Ne može da škodi</title>
+    <desc lang="bs">Kratka, televizijska emisija u kojoj glumac Lane Gutović, na humoristično-satiričan način opisuje pojave iz naše svakodnevnice.</desc>
+    <category lang="bs">Tv-serijali</category>
+  </programme>
+  <programme start="20261003004000 +0000" stop="20261003012400 +0000" channel="pink-ha-ha">
+    <title lang="bs">Stand Up u Apolo Teatru</title>
+    <desc lang="bs">Britanska stendap komedija donosi nastupe najboljih stendap komičara iz zemlje na scenu u londonskom Hamersmit Apolo.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261003012400 +0000" stop="20261003020900 +0000" channel="pink-ha-ha">
+    <title lang="bs">Stand Up u Apolo Teatru</title>
+    <desc lang="bs">Britanska stendap komedija donosi nastupe najboljih stendap komičara iz zemlje na scenu u londonskom Hamersmit Apolo.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002014400 +0000" stop="20261002020600 +0000" channel="pink-lol">
+    <title lang="bs">Urnebesni video</title>
+    <desc lang="bs">Urnebesno smešni kućni video snimci. U svakodnevnom životu uvek se događa nešto smešno, iznenađujuće ili blesavo. Još je bolje kada se sve to uhvati na kameri!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002020600 +0000" stop="20261002020700 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002020700 +0000" stop="20261002022900 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002022900 +0000" stop="20261002025100 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002025100 +0000" stop="20261002031200 +0000" channel="pink-lol">
+    <title lang="bs">Pop Circus</title>
+    <desc lang="bs">Uživajte uz kompilaciju najboljih, svetskih, cirkuskih tačaka! Ova emisija za celu porodicu, donosi niz blistavih i spektakularnih nastupa uz koje ćete se beskrajno zabaviti.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002031200 +0000" stop="20261002033400 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002033400 +0000" stop="20261002033700 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002033700 +0000" stop="20261002040300 +0000" channel="pink-lol">
+    <title lang="bs">Crazy Hidden Camera</title>
+    <desc lang="bs">Uživajte uz snimke urnebesnih, skrivenih kamera!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002040300 +0000" stop="20261002042500 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002042500 +0000" stop="20261002042700 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002042700 +0000" stop="20261002044900 +0000" channel="pink-lol">
+    <title lang="bs">Urnebesni video</title>
+    <desc lang="bs">Urnebesno smešni kućni video snimci. U svakodnevnom životu uvek se događa nešto smešno, iznenađujuće ili blesavo. Još je bolje kada se sve to uhvati na kameri!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002044900 +0000" stop="20261002051500 +0000" channel="pink-lol">
+    <title lang="bs">Crazy Hidden Camera</title>
+    <desc lang="bs">Uživajte uz snimke urnebesnih, skrivenih kamera!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002051500 +0000" stop="20261002051700 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002051700 +0000" stop="20261002053800 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002053800 +0000" stop="20261002054000 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002054000 +0000" stop="20261002060500 +0000" channel="pink-lol">
+    <title lang="bs">Crazy Hidden Camera</title>
+    <desc lang="bs">Uživajte uz snimke urnebesnih, skrivenih kamera!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002060500 +0000" stop="20261002062900 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002062900 +0000" stop="20261002063100 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002063100 +0000" stop="20261002065300 +0000" channel="pink-lol">
+    <title lang="bs">Urnebesni video</title>
+    <desc lang="bs">Urnebesno smešni kućni video snimci. U svakodnevnom životu uvek se događa nešto smešno, iznenađujuće ili blesavo. Još je bolje kada se sve to uhvati na kameri!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002065300 +0000" stop="20261002065500 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002065500 +0000" stop="20261002071600 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002071600 +0000" stop="20261002071800 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002071800 +0000" stop="20261002074000 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002074000 +0000" stop="20261002074400 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002074400 +0000" stop="20261002080600 +0000" channel="pink-lol">
+    <title lang="bs">Urnebesni video</title>
+    <desc lang="bs">Urnebesno smešni kućni video snimci. U svakodnevnom životu uvek se događa nešto smešno, iznenađujuće ili blesavo. Još je bolje kada se sve to uhvati na kameri!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002080600 +0000" stop="20261002080700 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002080700 +0000" stop="20261002082900 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002082900 +0000" stop="20261002085100 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002085100 +0000" stop="20261002091200 +0000" channel="pink-lol">
+    <title lang="bs">Pop Circus</title>
+    <desc lang="bs">Uživajte uz kompilaciju najboljih, svetskih, cirkuskih tačaka! Ova emisija za celu porodicu, donosi niz blistavih i spektakularnih nastupa uz koje ćete se beskrajno zabaviti.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002091200 +0000" stop="20261002093500 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002093500 +0000" stop="20261002093600 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002093600 +0000" stop="20261002095900 +0000" channel="pink-lol">
+    <title lang="bs">Urnebesni video</title>
+    <desc lang="bs">Urnebesno smešni kućni video snimci. U svakodnevnom životu uvek se događa nešto smešno, iznenađujuće ili blesavo. Još je bolje kada se sve to uhvati na kameri!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002095900 +0000" stop="20261002102000 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002102000 +0000" stop="20261002102200 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002102200 +0000" stop="20261002104800 +0000" channel="pink-lol">
+    <title lang="bs">Crazy Hidden Camera</title>
+    <desc lang="bs">Uživajte uz snimke urnebesnih, skrivenih kamera!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002104800 +0000" stop="20261002111000 +0000" channel="pink-lol">
+    <title lang="bs">Urnebesni video</title>
+    <desc lang="bs">Urnebesno smešni kućni video snimci. U svakodnevnom životu uvek se događa nešto smešno, iznenađujuće ili blesavo. Još je bolje kada se sve to uhvati na kameri!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002111000 +0000" stop="20261002111200 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002111200 +0000" stop="20261002113300 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002113300 +0000" stop="20261002113500 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002113500 +0000" stop="20261002115700 +0000" channel="pink-lol">
+    <title lang="bs">Pop Circus</title>
+    <desc lang="bs">Uživajte uz kompilaciju najboljih, svetskih, cirkuskih tačaka! Ova emisija za celu porodicu, donosi niz blistavih i spektakularnih nastupa uz koje ćete se beskrajno zabaviti.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002115700 +0000" stop="20261002121900 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002121900 +0000" stop="20261002122100 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002122100 +0000" stop="20261002124300 +0000" channel="pink-lol">
+    <title lang="bs">Urnebesni video</title>
+    <desc lang="bs">Urnebesno smešni kućni video snimci. U svakodnevnom životu uvek se događa nešto smešno, iznenađujuće ili blesavo. Još je bolje kada se sve to uhvati na kameri!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002124300 +0000" stop="20261002124500 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002124500 +0000" stop="20261002131100 +0000" channel="pink-lol">
+    <title lang="bs">Crazy Hidden Camera</title>
+    <desc lang="bs">Uživajte uz snimke urnebesnih, skrivenih kamera!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002131100 +0000" stop="20261002131200 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002131200 +0000" stop="20261002133500 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002133500 +0000" stop="20261002133700 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002133700 +0000" stop="20261002135900 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002135900 +0000" stop="20261002140100 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002140100 +0000" stop="20261002142300 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002142300 +0000" stop="20261002142400 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002142400 +0000" stop="20261002144700 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002144700 +0000" stop="20261002151300 +0000" channel="pink-lol">
+    <title lang="bs">Crazy Hidden Camera</title>
+    <desc lang="bs">Uživajte uz snimke urnebesnih, skrivenih kamera!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002151300 +0000" stop="20261002153500 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002153500 +0000" stop="20261002153700 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002153700 +0000" stop="20261002155900 +0000" channel="pink-lol">
+    <title lang="bs">Urnebesni video</title>
+    <desc lang="bs">Urnebesno smešni kućni video snimci. U svakodnevnom životu uvek se događa nešto smešno, iznenađujuće ili blesavo. Još je bolje kada se sve to uhvati na kameri!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002155900 +0000" stop="20261002162100 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002162100 +0000" stop="20261002162300 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002162300 +0000" stop="20261002164900 +0000" channel="pink-lol">
+    <title lang="bs">Crazy Hidden Camera</title>
+    <desc lang="bs">Uživajte uz snimke urnebesnih, skrivenih kamera!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002164900 +0000" stop="20261002171100 +0000" channel="pink-lol">
+    <title lang="bs">Urnebesni video</title>
+    <desc lang="bs">Urnebesno smešni kućni video snimci. U svakodnevnom životu uvek se događa nešto smešno, iznenađujuće ili blesavo. Još je bolje kada se sve to uhvati na kameri!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002171100 +0000" stop="20261002171300 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002171300 +0000" stop="20261002173400 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002173400 +0000" stop="20261002173600 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002173600 +0000" stop="20261002175700 +0000" channel="pink-lol">
+    <title lang="bs">Pop Circus</title>
+    <desc lang="bs">Uživajte uz kompilaciju najboljih, svetskih, cirkuskih tačaka! Ova emisija za celu porodicu, donosi niz blistavih i spektakularnih nastupa uz koje ćete se beskrajno zabaviti.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002175700 +0000" stop="20261002181900 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002181900 +0000" stop="20261002182100 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002182100 +0000" stop="20261002184400 +0000" channel="pink-lol">
+    <title lang="bs">Urnebesni video</title>
+    <desc lang="bs">Urnebesno smešni kućni video snimci. U svakodnevnom životu uvek se događa nešto smešno, iznenađujuće ili blesavo. Još je bolje kada se sve to uhvati na kameri!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002184400 +0000" stop="20261002184500 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002184500 +0000" stop="20261002191100 +0000" channel="pink-lol">
+    <title lang="bs">Crazy Hidden Camera</title>
+    <desc lang="bs">Uživajte uz snimke urnebesnih, skrivenih kamera!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002191100 +0000" stop="20261002191300 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002191300 +0000" stop="20261002193500 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002193500 +0000" stop="20261002193800 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002193800 +0000" stop="20261002200000 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002200000 +0000" stop="20261002200200 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002200200 +0000" stop="20261002202300 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002202300 +0000" stop="20261002202500 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002202500 +0000" stop="20261002204700 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002204700 +0000" stop="20261002211400 +0000" channel="pink-lol">
+    <title lang="bs">Crazy Hidden Camera</title>
+    <desc lang="bs">Uživajte uz snimke urnebesnih, skrivenih kamera!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002211400 +0000" stop="20261002213600 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002213600 +0000" stop="20261002213800 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002213800 +0000" stop="20261002220000 +0000" channel="pink-lol">
+    <title lang="bs">Urnebesni video</title>
+    <desc lang="bs">Urnebesno smešni kućni video snimci. U svakodnevnom životu uvek se događa nešto smešno, iznenađujuće ili blesavo. Još je bolje kada se sve to uhvati na kameri!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002220000 +0000" stop="20261002222100 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002222100 +0000" stop="20261002222300 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002222300 +0000" stop="20261002224900 +0000" channel="pink-lol">
+    <title lang="bs">Crazy Hidden Camera</title>
+    <desc lang="bs">Uživajte uz snimke urnebesnih, skrivenih kamera!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002224900 +0000" stop="20261002231100 +0000" channel="pink-lol">
+    <title lang="bs">Urnebesni video</title>
+    <desc lang="bs">Urnebesno smešni kućni video snimci. U svakodnevnom životu uvek se događa nešto smešno, iznenađujuće ili blesavo. Još je bolje kada se sve to uhvati na kameri!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002231100 +0000" stop="20261002231300 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002231300 +0000" stop="20261002233500 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002233500 +0000" stop="20261002233600 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002233600 +0000" stop="20261002235800 +0000" channel="pink-lol">
+    <title lang="bs">Pop Circus</title>
+    <desc lang="bs">Uživajte uz kompilaciju najboljih, svetskih, cirkuskih tačaka! Ova emisija za celu porodicu, donosi niz blistavih i spektakularnih nastupa uz koje ćete se beskrajno zabaviti.</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261002235800 +0000" stop="20261003002000 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261003002000 +0000" stop="20261003002200 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261003002200 +0000" stop="20261003004400 +0000" channel="pink-lol">
+    <title lang="bs">Urnebesni video</title>
+    <desc lang="bs">Urnebesno smešni kućni video snimci. U svakodnevnom životu uvek se događa nešto smešno, iznenađujuće ili blesavo. Još je bolje kada se sve to uhvati na kameri!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261003004400 +0000" stop="20261003004600 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261003004600 +0000" stop="20261003011200 +0000" channel="pink-lol">
+    <title lang="bs">Crazy Hidden Camera</title>
+    <desc lang="bs">Uživajte uz snimke urnebesnih, skrivenih kamera!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261003011200 +0000" stop="20261003011300 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261003011300 +0000" stop="20261003013500 +0000" channel="pink-lol">
+    <title lang="bs">LOL</title>
+    <desc lang="bs">Uživajte uz beskrajno zanimljive i zabavne skečeve i snimke koje donosi Lol i nasmejte se do suza!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261003013500 +0000" stop="20261003013700 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261003013700 +0000" stop="20261003015900 +0000" channel="pink-lol">
+    <title lang="bs">Najbolji klipovi svih vremena</title>
+    <desc lang="bs">Uživajte uz ove zabavne, neverovatne i urnebesne video snimke! Budite uz nas jer ćete videti najbolje klipove svih vremena!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
+  <programme start="20261003015900 +0000" stop="20261003020100 +0000" channel="pink-lol">
+    <title lang="bs">Skrivena kamera Sexy Cam</title>
+    <desc lang="bs">Nasmejte se uz zabavne minute provokativnih i škakljivih snimaka skrivene kamere!</desc>
+    <category lang="bs">Zabavni program</category>
+  </programme>
 </tv>
