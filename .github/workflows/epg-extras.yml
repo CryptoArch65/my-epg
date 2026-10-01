@@ -12,6 +12,7 @@ on:
       - scripts/verify_mts_regional_guide.py
       - scripts/import_mts_serbia_epg.py
       - scripts/fix_mts_regional_identity.py
+      - scripts/remove_duplicate_regional_aliases.py
       - scripts/run_epg_extras.sh
       - config/serbia-extra-mts.xml
       - config/serbia-extra-telemach.xml
@@ -76,14 +77,15 @@ jobs:
             git push origin HEAD:main
           fi
 
-      - name: Fix RTV Kraljevo and host TV AS/Pester logos
+      - name: Fix RTV Kraljevo, regional logos, and duplicate aliases
         run: |
           python3 scripts/fix_mts_regional_identity.py guide.xml
+          python3 scripts/remove_duplicate_regional_aliases.py guide.xml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add guide.xml logos/
           if ! git diff --cached --quiet; then
-            git commit -m "Fix RTV Kraljevo and regional logos"
+            git commit -m "Fix RTV Kraljevo, regional logos, and duplicate aliases"
             git fetch origin main
             git rebase origin/main
             git push origin HEAD:main
