@@ -6,9 +6,21 @@ import csv
 import math
 import sys
 import xml.etree.ElementTree as ET
+from pathlib import Path
 
 # All configured sources must produce programmes before the guide is published.
 KNOWN_EMPTY_SITES = {"m1film.hr/family", "superstartv.rs", "tvprogramdanas.net", "tvprogram24.rs"}  # Broadcasters may publish short schedules.
+DEFAULT_ACTIVE_IDS = Path("config/active_playlist_tvg_ids.txt")
+
+
+def read_active_ids():
+    if not DEFAULT_ACTIVE_IDS.exists():
+        return None
+    return {
+        line.strip()
+        for line in DEFAULT_ACTIVE_IDS.read_text(encoding="utf-8").splitlines()
+        if line.strip() and not line.lstrip().startswith("#")
+    }
 
 
 def main(config_path, guide_path, alias_path=None, extra_config_path=None, regional_config_path=None):
@@ -38,16 +50,24 @@ def main(config_path, guide_path, alias_path=None, extra_config_path=None, regio
         raise ValueError("Channel configuration is empty")
 
     aliases = {}
+    active_ids = read_active_ids()
+    total_alias_rows = 0
     if alias_path:
         with open(alias_path, newline="", encoding="utf-8") as source:
             reader = csv.DictReader(source)
             if reader.fieldnames != ["playlist_tvg_id", "guide_id", "display_name"]:
                 raise ValueError("Unexpected alias CSV header")
             for row in reader:
+                total_alias_rows += 1
                 alias, target = row["playlist_tvg_id"].strip(), row["guide_id"].strip()
+                if active_ids is not None and alias not in active_ids:
+                    continue
                 if not alias or alias in expected or alias in aliases or target not in expected:
                     raise ValueError(f"Invalid playlist alias: {alias!r} -> {target!r}")
                 aliases[alias] = target
+
+    if active_ids is not None and alias_path:
+        print(f"Validating active playlist aliases: {len(aliases)}/{total_alias_rows}")
 
     allowed = set(expected) | set(aliases)
 
@@ -108,7 +128,7 @@ def main(config_path, guide_path, alias_path=None, extra_config_path=None, regio
         print("WARNING: No programmes for source(s): " + ", ".join(sorted(missing_sites)))
 
     print(
-        f"Guide validated: {len(expected)} source channels, {len(aliases)} playlist aliases, "
+        f"Guide validated: {len(expected)} source channels, {len(aliases)} active playlist aliases, "
         f"{len(active)} source channels with programmes, "
         f"{source_programmes} source programmes "
         f"across {len(set(expected.values()))} sites"
