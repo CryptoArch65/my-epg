@@ -1,17 +1,21 @@
 #!/usr/bin/env python3
 """Supplement Serbian EPG entries that need special MTS/alias handling.
 
-- K1: keep the existing guide schedule, then fill uncovered gaps with programmes
-  from every MTS API page (checking both K1 product codes).
-- Balkan Trip: expose the already-working m:tel schedule under the provider's
-  ``Balkan Trip`` tvg-id as well as its canonical guide id.
+- K1: keep the official/existing guide schedule, then fill any uncovered gaps
+  from every MTS API page.
+- Serbian regional/local channels: use the complete MTS API result instead of
+  the standard grabber path that can return 0 programmes for these channels.
+- Balkan Trip: keep the working m:tel schedule exposed under its provider alias.
 """
 
 import copy
+import re
 import sys
+import unicodedata
 import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta
 from pathlib import Path
+from urllib.parse import unquote, urljoin, urlparse
 
 from import_mts_pink_epg import ZONE, day_products, stamp
 
@@ -21,6 +25,72 @@ K1_CODES = ("k1_hd", "k1_duplicate")
 
 BALKAN_SOURCE_ID = "iptv#ch-461-balkan-trip-hd"
 BALKAN_ALIAS_ID = "Balkan Trip"
+
+REGIONAL_TARGETS = (
+    {
+        "guide_id": "TVIstok.rs",
+        "display": "TV Istok 1",
+        "codes": ("tv_istok",),
+        "names": ("TV Istok", "TV Istok 1"),
+        "aliases": ("TV Istok", "tv_istok"),
+    },
+    {
+        "guide_id": "TVLeskovac.rs",
+        "display": "TV Leskovac",
+        "codes": ("tv_leskovac",),
+        "names": ("TV Leskovac", "Televizija Leskovac"),
+        "aliases": ("TV Leskovac", "tv_leskovac"),
+    },
+    {
+        "guide_id": "JefimijaTV.rs",
+        "display": "TV Jefimija",
+        "codes": ("TV Jefimija", "TV%20Jefimija"),
+        "names": ("TV Jefimija", "Jefimija TV", "Jefimija"),
+        "aliases": ("TV Jefimija", "TV%20Jefimija"),
+    },
+    {
+        "guide_id": "TVKrusevac.rs",
+        "display": "TV Kruševac",
+        "codes": ("tv_krusevac",),
+        "names": ("TV Kruševac", "TV Krusevac", "RTK Kruševac"),
+        "aliases": ("TV Kruševac", "tv_krusevac"),
+    },
+    {
+        "guide_id": "NewsmaxBalkans.rs",
+        "display": "Newsmax Balkans",
+        "codes": ("Newsmax_Balkans", "newsmax_balkans"),
+        "names": ("Newsmax Balkans", "Newsmax Balkans HD", "Newsmax"),
+        "aliases": ("Newsmax_Balkans", "Newsmax Balkans"),
+    },
+    {
+        "guide_id": "TVAS.rs",
+        "display": "TV AS",
+        "codes": ("tv_as", "as_tv"),
+        "names": ("TV AS", "AS TV", "Televizija AS"),
+        "aliases": ("TV AS", "tv_as", "as_tv"),
+    },
+    {
+        "guide_id": "TVBor.rs",
+        "display": "TV Bor",
+        "codes": ("tv_bor",),
+        "names": ("TV Bor", "BOR TV", "RTV Bor"),
+        "aliases": ("tv_bor", "TV Bor", "101TV.rs"),
+    },
+    {
+        "guide_id": "SOSKanalPlus.rs",
+        "display": "SOS Kanal Plus",
+        "codes": ("sos_kanal_plus",),
+        "names": ("SOS Kanal Plus", "SOS Plus"),
+        "aliases": ("sos_kanal_plus", "SOS Kanal Plus"),
+    },
+    {
+        "guide_id": "PesterTV.rs",
+        "display": "Pešter TV",
+        "codes": ("pester_tv", "tv_pester", "pester"),
+        "names": ("Pešter TV", "Pester TV", "TV Pešter", "TV Pester"),
+        "aliases": ("pester_tv", "tv_pester", "Pešter TV", "Pester TV"),
+    },
+)
 
 
 def parse_xmltv_time(value):
@@ -36,6 +106,57 @@ def programme_interval(programme):
 
 def overlaps(start, stop, intervals):
     return any(start < other_stop and other_start < stop for other_start, other_stop in intervals)
+
+
+def normalize(value):
+    value = unicodedata.normalize("NFKD", str(value or "")).encode("ascii", "ignore").decode("ascii")
+    return re.sub(r"[^a-z0-9]+", "", value.casefold())
+
+
+def product_name(product):
+    for key in ("name", "title", "channelName"):
+        value = product.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+    return ""
+
+
+def first_url(value, base=""):
+    if isinstance(value, str):
+        if value.startswith("https://"):
+            return value
+        if base and value.startswith("/"):
+            return urljoin(base, value)
+        return None
+    if isinstance(value, list):
+        for item in value:
+            url = first_url(item, base)
+            if url:
+                return url
+    if isinstance(value, dict):
+        for key in ("url", "src", "path", "image", "logo"):
+            if key in value:
+                url = first_url(value[key], base)
+                if url:
+                    return url
+        for item in value.values():
+            url = first_url(item, base)
+            if url:
+                return url
+    return None
+
+
+def product_logo(product):
+    logo = (
+        first_url(product.get("picture"), "https://mts.rs")
+        or first_url(product.get("images"), "https://mts.rs")
+        or first_url(product.get("logo"), "https://mts.rs")
+    )
+    if logo and urlparse(logo).hostname in {
+        "mts.rs", "www.mts.rs", "medias.services.mts.rs", "mediasb2c.mts.rs"
+    }:
+        return logo
+    return None
 
 
 def add_item(root, channel_id, start, stop, item):
@@ -61,6 +182,158 @@ def add_item(root, channel_id, start, stop, item):
             ET.SubElement(programme, "image").text = image.strip()
 
     return programme
+
+
+def ensure_channel(root, channel_id, display, template=None, logo=None):
+    channels = {node.get("id"): node for node in root.findall("channel")}
+    channel = channels.get(channel_id)
+    if channel is None:
+        if template is not None:
+            channel = copy.deepcopy(template)
+            channel.set("id", channel_id)
+        else:
+            channel = ET.Element("channel", {"id": channel_id})
+            ET.SubElement(channel, "display-name", {"lang": "sr"}).text = display
+        root.insert(len(root.findall("channel")), channel)
+
+    names = [node.text for node in channel.findall("display-name")]
+    if display not in names:
+        ET.SubElement(channel, "display-name", {"lang": "sr"}).text = display
+
+    if logo:
+        for icon in list(channel.findall("icon")):
+            channel.remove(icon)
+        ET.SubElement(channel, "icon", {"src": logo})
+    return channel
+
+
+def sync_alias(root, source_id, alias_id, display=None):
+    if alias_id == source_id:
+        return
+    channels = {node.get("id"): node for node in root.findall("channel")}
+    source = channels[source_id]
+    alias = channels.get(alias_id)
+    if alias is None:
+        alias = copy.deepcopy(source)
+        alias.set("id", alias_id)
+        root.insert(len(root.findall("channel")), alias)
+    else:
+        for child in list(alias):
+            alias.remove(child)
+        for child in source:
+            alias.append(copy.deepcopy(child))
+    if display:
+        names = [node.text for node in alias.findall("display-name")]
+        if display not in names:
+            ET.SubElement(alias, "display-name", {"lang": "sr"}).text = display
+
+    for programme in list(root.findall("programme")):
+        if programme.get("channel") == alias_id:
+            root.remove(programme)
+    for programme in root.findall("programme"):
+        if programme.get("channel") == source_id:
+            clone = copy.deepcopy(programme)
+            clone.set("channel", alias_id)
+            root.append(clone)
+
+
+def match_product(products, target):
+    wanted_codes = {normalize(unquote(code)) for code in target["codes"]}
+    wanted_names = {normalize(name) for name in target["names"]}
+
+    for product in products:
+        if normalize(unquote(str(product.get("code", "")))) in wanted_codes:
+            return product
+    for product in products:
+        name = normalize(product_name(product))
+        if name in wanted_names:
+            return product
+    # Last resort: tolerate HD/TV suffix/prefix differences while avoiding very short matches.
+    for product in products:
+        name = normalize(product_name(product))
+        if not name:
+            continue
+        for wanted in wanted_names:
+            if len(wanted) >= 6 and (name.startswith(wanted) or wanted.startswith(name)):
+                return product
+    return None
+
+
+def import_regionals(root):
+    today = datetime.now(ZONE).date()
+    per_day = {}
+    try:
+        for day in (today, today + timedelta(days=1)):
+            per_day[day] = day_products(day.isoformat())
+    except Exception as exc:
+        print(f"WARNING: MTS regional import unavailable; keeping existing schedules: {exc}")
+        return {}
+
+    results = {}
+    all_products = per_day[today]
+    for target in REGIONAL_TARGETS:
+        guide_id = target["guide_id"]
+        sample = match_product(all_products, target)
+        if sample is None:
+            print(f"WARNING: MTS regional channel not found: {target['display']}")
+            results[guide_id] = 0
+            continue
+
+        code = str(sample.get("code", ""))
+        logo = product_logo(sample)
+        items = {}
+        matched_names = []
+        for day, products in per_day.items():
+            product = next(
+                (row for row in products if str(row.get("code", "")) == code),
+                None,
+            ) or match_product(products, target)
+            if product is None:
+                continue
+            matched_names.append(product_name(product))
+            for item in product.get("programs") or []:
+                title = item.get("title")
+                if not isinstance(title, str) or not title.strip():
+                    continue
+                try:
+                    start = stamp(item["start"])
+                    stop = stamp(item["end"])
+                    if parse_xmltv_time(start) >= parse_xmltv_time(stop):
+                        continue
+                except (KeyError, TypeError, ValueError):
+                    continue
+                items[(start, stop, title.strip())] = item
+
+        channels = {node.get("id"): node for node in root.findall("channel")}
+        template = channels.get(guide_id)
+        if template is None:
+            for alias in target["aliases"]:
+                if alias in channels:
+                    template = channels[alias]
+                    break
+        ensure_channel(root, guide_id, target["display"], template=template, logo=logo)
+
+        if items:
+            ids_to_clear = {guide_id, *target["aliases"], code, unquote(code)}
+            for programme in list(root.findall("programme")):
+                if programme.get("channel") in ids_to_clear:
+                    root.remove(programme)
+            for (start, stop, _title), item in sorted(items.items()):
+                add_item(root, guide_id, start, stop, item)
+
+            aliases = list(target["aliases"])
+            for alias in (code, unquote(code)):
+                if alias and alias not in aliases and alias != guide_id:
+                    aliases.append(alias)
+            for alias in aliases:
+                sync_alias(root, guide_id, alias, target["display"])
+
+        results[guide_id] = len(items)
+        print(
+            f"MTS regional {guide_id}: code={code!r}, name={product_name(sample)!r}, "
+            f"programmes={len(items)}, logo={'yes' if logo else 'no'}"
+        )
+    return results
 
 
 def supplement_k1(root):
@@ -192,6 +465,7 @@ def main(guide_path):
     root = tree.getroot()
 
     supplement_k1(root)
+    import_regionals(root)
     sync_balkan_alias(root)
 
     tree.write(guide_path, encoding="utf-8", xml_declaration=True)
