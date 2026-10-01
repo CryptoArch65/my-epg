@@ -60,7 +60,7 @@ REGIONAL_TARGETS = (
         "display": "Newsmax Balkans",
         "codes": ("Newsmax_Balkans", "newsmax_balkans"),
         "names": ("Newsmax Balkans", "Newsmax Balkans HD", "Newsmax"),
-        "aliases": ("Newsmax_Balkans", "Newsmax Balkans"),
+        "aliases": ("Newsmax_Balkans", "Newsmax Balkans", "newsmaxbalkans.rs"),
     },
     {
         "guide_id": "TVAS.rs",
@@ -91,6 +91,24 @@ REGIONAL_TARGETS = (
         "aliases": ("pester_tv", "tv_pester", "Pešter TV", "Pester TV"),
     },
 )
+
+
+def regional_stamp(value):
+    """Interpret MTS regional ISO clock values as Europe/Belgrade local time.
+
+    MTS currently appends ``Z`` to values such as 10:00 even though broadcaster
+    schedules show that 10:00 is the intended Serbian local clock time. Keeping
+    the Z would turn 10:00 into 12:00 during CEST.
+    """
+    if isinstance(value, str):
+        text = value.strip()
+        if text.endswith("Z"):
+            local = __import__("datetime").datetime.fromisoformat(text[:-1])
+            if local.tzinfo is not None:
+                local = local.replace(tzinfo=None)
+            local = local.replace(tzinfo=ZONE)
+            return local.strftime("%Y%m%d%H%M%S %z")
+    return stamp(value)
 
 
 def parse_xmltv_time(value):
@@ -296,8 +314,8 @@ def import_regionals(root):
                 if not isinstance(title, str) or not title.strip():
                     continue
                 try:
-                    start = stamp(item["start"])
-                    stop = stamp(item["end"])
+                    start = regional_stamp(item["start"])
+                    stop = regional_stamp(item["end"])
                     if parse_xmltv_time(start) >= parse_xmltv_time(stop):
                         continue
                 except (KeyError, TypeError, ValueError):
