@@ -127,11 +127,34 @@ jobs:
           mv guide.merged.xml guide.xml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add guide.xml logos/
-          if git diff --cached --quiet; then
-            echo "Croatia extra EPG has not changed"
-            exit 0
+          BACKUP_DIR=$(mktemp -d)
+          cp guide.xml "$BACKUP_DIR/guide.xml"
+          [ -d logos ] && cp -r logos "$BACKUP_DIR/logos"
+
+          pushed=0
+          for attempt in $(seq 1 5); do
+            echo "Publish attempt $attempt of 5..."
+            git fetch origin main
+            git reset --hard origin/main
+            cp "$BACKUP_DIR/guide.xml" guide.xml
+            [ -d "$BACKUP_DIR/logos" ] && cp -r "$BACKUP_DIR/logos/." logos/
+            git add guide.xml logos/
+            if git diff --cached --quiet; then
+              echo "Croatia extra EPG has not changed"
+              pushed=1
+              break
+            fi
+            git commit -m "Update Croatia extra EPG"
+            if git push origin HEAD:main; then
+              echo "Successfully pushed Croatia extra EPG"
+              pushed=1
+              break
+            fi
+            echo "Push rejected (concurrent push to main), retrying in 3s..."
+            sleep 3
+          done
+          rm -rf "$BACKUP_DIR"
+          if [ "$pushed" -ne 1 ]; then
+            echo "Failed to push Croatia extra EPG after 5 attempts" >&2
+            exit 1
           fi
-          git commit -m "Update Croatia extra EPG"
-          git pull --rebase origin main
-          git push
