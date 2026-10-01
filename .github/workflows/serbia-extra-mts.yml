@@ -54,6 +54,40 @@ jobs:
           cd ..
           python3 -m pip install Pillow
 
+      - name: Diagnose MTS Pink channel codes
+        run: |
+          python3 - <<'PY'
+          import json
+          import urllib.parse
+          import urllib.request
+          from datetime import date
+
+          d = date.today().isoformat()
+          query = f':pozicija-rastuce:tip-kanala-radio:TV kanali:channelProgramDates:{d}'
+          url = 'https://mts.rs/hybris/ecommerce/b2c/v1/products/search?' + urllib.parse.urlencode({
+              'sort': 'pozicija-rastuce',
+              'searchQueryContext': 'CHANNEL_PROGRAM',
+              'query': query,
+              'pageSize': '10000',
+          })
+          req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+          with urllib.request.urlopen(req, timeout=30) as r:
+              data = json.load(r)
+
+          print(f'MTS products: {len(data.get("products", []))}')
+          for p in data.get('products', []):
+              name = str(p.get('name', ''))
+              code = str(p.get('code', ''))
+              hay = (name + ' ' + code).lower()
+              if 'haha' in hay or 'ha ha' in hay or 'lol' in hay:
+                  print('PINK-DIAG', {
+                      'name': name,
+                      'code': code,
+                      'programs': len(p.get('programs') or []),
+                      'first_program': (p.get('programs') or [{}])[0].get('title') if (p.get('programs') or []) else None,
+                  })
+          PY
+
       - name: Grab Serbia extra channels from MTS
         working-directory: epg
         run: |
