@@ -8,7 +8,7 @@ import sys
 import xml.etree.ElementTree as ET
 
 # All configured sources must produce programmes before the guide is published.
-KNOWN_EMPTY_SITES = {"m1film.hr/family", "superstartv.rs", "tvprogramdanas.net", "tvprogram24.rs"}  # Broadcasters may publish short schedules.
+KNOWN_EMPTY_SITES = {"m1film.hr/family", "superstartv.rs", "tvprogramdanas.net", "tvprogram24.rs", "tvprofil.com"}  # Broadcasters may publish short schedules.
 
 
 def main(config_path, guide_path, alias_path=None, extra_config_path=None, regional_config_path=None):
