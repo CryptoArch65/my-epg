@@ -1,26 +1,20 @@
 name: Update BIH Local EPG
 
 on:
-  workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - scripts/import_bih_local_channels.py
-      - .github/workflows/bih-local-epg.yml
   workflow_run:
-    workflows: ["Update Croatia Extra EPG"]
+    workflows: ["Update Croatia Logos"]
     types: [completed]
 
 permissions:
   contents: write
 
 concurrency:
-  group: bih-local-epg
+  group: guide-writer
   cancel-in-progress: false
 
 jobs:
   update-bih-local:
-    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'failure' }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
