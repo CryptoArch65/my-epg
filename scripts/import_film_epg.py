@@ -39,9 +39,9 @@ LOGOS = {
     "SuperstarTV1.rs": "https://superstartv.rs/wp-content/uploads/2024/05/ss1-1.png",
     "SuperstarTV2.rs": "https://superstartv.rs/wp-content/uploads/2024/05/ss2-1.png",
     "SuperstarTV3.rs": "https://superstartv.rs/wp-content/uploads/2024/05/ss3n.png",
-    "528074792267": "https://tv-hr-prod.yo-digital.com/prod/images/logos/445/250/c0dfc41344be994e918bde5d6594c0cf.000328.png",  # Hits
-    "528074792422": "https://tv-hr-prod.yo-digital.com/prod/images/logos/445/250/0a94c619694dd7c4d7aed031121c739d.000331.png",  # Festival
-    "528078376344": "https://tv-hr-prod.yo-digital.com/prod/images/logos/445/250/10a620143bb634323129956f97c6bc82.000329.png",  # Emotion
+    "FilmBoxPlusHits.hr": "https://tv-hr-prod.yo-digital.com/prod/images/logos/445/250/c0dfc41344be994e918bde5d6594c0cf.000328.png",  # Hits
+    "FilmBoxPlusFestival.hr": "https://tv-hr-prod.yo-digital.com/prod/images/logos/445/250/0a94c619694dd7c4d7aed031121c739d.000331.png",  # Festival
+    "FilmBoxPlusEmotion.hr": "https://tv-hr-prod.yo-digital.com/prod/images/logos/445/250/10a620143bb634323129956f97c6bc82.000329.png",  # Emotion
     "DiziChannel.hr": "https://www.tvprogramdanas.net/uploads/logos/dizi.webp",
 }
 

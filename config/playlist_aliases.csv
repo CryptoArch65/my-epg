@@ -46,8 +46,8 @@ ArenaSport1.ba (src01),ArenaSport1.ba,|BH| ARENA SPORT 1
 Arena Sport 2 HD.ba (src09),ArenaSport2.ba,|BH| ARENA SPORT 2
 Arenasport 03.ba (src09),ArenaSport3.ba,|BH| ARENA SPORT 3
 arenasport6.ba,ArenaSport6.ba,|BH| ARENA SPORT 6
-maxsport1.hr,311616552052,|HR| MAX SPORT 1 HD
-maxsport2.hr,311620648169,|HR| MAX SPORT 2
+maxsport1.hr,MAXSport1.hr,|HR| MAX SPORT 1 HD
+maxsport2.hr,MAXSport2.hr,|HR| MAX SPORT 2
 arenasport1.hr,ArenaSport1.hr@SD,|HR| ARENA SPORT 1 HD
 arenasport2.hr,ArenaSport2.hr@SD,|HR| ARENA SPORT 2 HD
 arenasport3.hr,ArenaSport3.hr@SD,|HR| ARENA SPORT 3 HD
@@ -102,27 +102,27 @@ Animal.Planet.HD.(RS).rs (src05),animal_planet,ANIMAL PLANET ᴴᴰ
 animalplanet.bh,animal_planet,ANIMAL PLANET ᴴᴰ
 viasatexplore.ba,276770344357,VIASAT EXPLORER
 Discovery.Channel.HD.(RS).rs (src05),DiscoveryChannel.rs,DISCOVERY CHANNEL ᴴᴰ
-H2.hr,276767784233,History 2 ᴴᴰ
-ViasatHistory.hr (src01),435380776371,Viasat History
-viasathistory.ba,435380776371,Viasat History
-viasatnature.se,276767784232,Viasat Nature
+H2.hr,History2.hr,History 2 ᴴᴰ
+ViasatHistory.hr (src01),ViasatHistory.hr,Viasat History
+viasathistory.ba,ViasatHistory.hr,Viasat History
+viasatnature.se,ViasatNature.hr,Viasat Nature
 bbcearth.ba,iptv#ch-bbc-earth-hd,BBC Earth
-docubox.ba,iptv#ch-140-docubox-hd,Docubox
-24kitchen.ba,iptv#ch-153-24-kitchen,24 KITCHEN ᴴᴰ
-foodnetwork.ba,iptv#ch-451-food-network,FOOD NETWORK
-tlc.ba,iptv#ch-127-tlc,TLC
-crime&investigation.bh,276771368119,CRIME INVESTIGATION ᴴᴰ
-crime&amp;investigation.bh,276771368119,CRIME INVESTIGATION ᴴᴰ
-crime&amp;amp;investigation.bh,276771368119,CRIME INVESTIGATION ᴴᴰ
-davincilearning.bh,276770856271,Da Vinci
-davinci.si,276770856271,Da Vinci
-hgtv.ba,iptv#ch-444-hgtv,HGTV
-DOX TV,iptv#ch-404-dox-tv,DOX TV
-balkantrip.ba,iptv#ch-461-balkan-trip-hd,BALKAN TRIP
+docubox.ba,DocuBox.ba,Docubox
+24kitchen.ba,24Kitchen.ba,24 KITCHEN ᴴᴰ
+foodnetwork.ba,FoodNetwork.ba,FOOD NETWORK
+tlc.ba,TLC.ba,TLC
+crime&investigation.bh,CrimeInvestigation.hr,CRIME INVESTIGATION ᴴᴰ
+crime&amp;investigation.bh,CrimeInvestigation.hr,CRIME INVESTIGATION ᴴᴰ
+crime&amp;amp;investigation.bh,CrimeInvestigation.hr,CRIME INVESTIGATION ᴴᴰ
+davincilearning.bh,DaVinci.hr,Da Vinci
+davinci.si,DaVinci.hr,Da Vinci
+hgtv.ba,HGTV.ba,HGTV
+DOX TV,DoxTV.ba,DOX TV
+balkantrip.ba,BalkanTrip.ba,BALKAN TRIP
 dokutv.ba,DokuTV.hr,Doku TV HD
-hbo.hr,276767784251,HBO
-hbo2.hr,276771368141,HBO 2 HD
-hbo3.hr,276767784254,HBO 3
+hbo.hr,HBO.hr,HBO
+hbo2.hr,HBO2.hr,HBO 2 HD
+hbo3.hr,HBO3.hr,HBO 3
 axn.hr,AXN.hr,AXN
 AXNAdria.hr,AXN.hr,AXN ADRIA
 axnspin.hr,AXNSpin.hr,AXN SPIN
@@ -142,46 +142,46 @@ cinestaraction&thriller.hr,CineStarTVAction.hr,CineStar TV Action and Thriller �
 CineStar.TV.Fantasy.HD.(BIH).ba (src05),CineStarTVFantasy.hr,CINESTAR FANTASY ᴴᴰ
 cinestartvfantasy.hr,CineStarTVFantasy.hr,Cinestar Fantasy
 cinestartvcomedy&family.bh,CineStarTVComedy.hr,CineStar TV Comedy and Family ᴴᴰ ➁
-cinemax.hr,276770344388,CINEMAX ᴴᴰ ➁
-cinemax2.hr,276767784259,Cinemax 2
-star.rs,276770856295,STAR CHANNEL
-starlife.hr,276771368133,STAR Life ᴴᴰ ➁
-starcrime.hr,276770856280,STAR Crime
-starmovies.hr,276770344385,STAR Movies ᴴᴰ ➁
-amc.hr,485655592331,AMC ᴴᴰ ➁
-epicdrama.hr,276771368146,EPIC DRAMA
+cinemax.hr,Cinemax.hr,CINEMAX ᴴᴰ ➁
+cinemax2.hr,Cinemax2.hr,Cinemax 2
+star.rs,STAR.hr,STAR CHANNEL
+starlife.hr,STARLife.hr,STAR Life ᴴᴰ ➁
+starcrime.hr,STARCrime.hr,STAR Crime
+starmovies.hr,STARMovies.hr,STAR Movies ᴴᴰ ➁
+amc.hr,AMC.hr,AMC ᴴᴰ ➁
+epicdrama.hr,ViasatEpicDrama.hr,EPIC DRAMA
 klasiktv.hr,Klasik.hr,KLASIK TV
 kinotv.hr,KinoTV.hr,Kino TV HD
-tv1000.hr,338257448306,Viasat Kino Balkan
+tv1000.hr,ViasatKino.hr,Viasat Kino Balkan
 superstar-tv,SuperstarTV1.rs,SUPERSTAR TV ᴴᴰ
 superstar2.ba,SuperstarTV2.rs,SUPERSTAR TV 2
 superstar3.ba,SuperstarTV3.rs,SUPERSTAR TV 3
-filmboxpremium.hr,528074792267,FILMBOX PREMIUM HD
-filmboxarthouse.ba,528074792422,FILMBOX ARTHOUSE
-filmboxextra.hr,528078376344,Filmbox Extra
-filmboxstars.hr,iptv#ch-122-filmbox-stars,Filmbox Stars
-eurocinema1.ba,iptv#ch-euro-cinema-1,Euro Cinema 1
-eurocinema2.ba,iptv#ch-euro-cinema-2,Euro Cinema 2
-eurocinema3.ba,iptv#ch-euro-cinema-3,Euro Cinema 3
-eurocinema4.ba,iptv#ch-euro-cinema-4,Euro Cinema 4
+filmboxpremium.hr,FilmBoxPlusHits.hr,FILMBOX PREMIUM HD
+filmboxarthouse.ba,FilmBoxPlusFestival.hr,FILMBOX ARTHOUSE
+filmboxextra.hr,FilmBoxPlusEmotion.hr,Filmbox Extra
+filmboxstars.hr,FilmBoxStars.ba,Filmbox Stars
+eurocinema1.ba,EuroCinema1.ba,Euro Cinema 1
+eurocinema2.ba,EuroCinema2.ba,Euro Cinema 2
+eurocinema3.ba,EuroCinema3.ba,Euro Cinema 3
+eurocinema4.ba,EuroCinema4.ba,Euro Cinema 4
 City.Play.(BIH).ba (src05),CityPlay.ba,CityPLAY
 PinkFolk1.hr (src09),PinkFolk1.rs,PINK FOLK 1
 Pink.Folk.2.(BIH).ba (src05),PinkFolk2.rs,PINK FOLK 2
 Pink.Music.(BIH).ba (src05),PinkMusic.rs,PINK MUSIC
 Pink.Music.2.(BIH).ba (src05),PinkMusic2.rs,PINK MUSIC 2
 HayatMusic.ba (src01),HayatMusic.ba,HAYAT MUSIC
-toxictv.ba,iptv#ch-407-toxic-tv,TOXIC TV
-Jugoton.hr (src05),282239016175,JUGOTON
+toxictv.ba,ToxicTV.ba,TOXIC TV
+Jugoton.hr (src05),Jugoton.hr,JUGOTON
 pink&roll.bh,PinknRoll.rs,PINK & ROLL
 pinkhits.ba,PinkHits.rs,PINK HITS 1
 pinkhits2.ba,PinkHits2.rs,PINK HITS 2
 balkanika.ba,338256424367,BALKANIKA
 Bravo.Music.(BIH).ba (src05),BravoMusic.ba,BRAVO MUSIC
-babytv.hr,276770344366,BABY TV
+babytv.hr,BabyTV.hr,BABY TV
 minitv.hr,MiniTV.hr,MINI
 nickelodeon.hr,Nickelodeon.hr,NICKELODEON
 rtlkockica.hr,RTLKockica.hr,RTL KOCKICA
-nicktoons.hr,276770344376,NickToons
+nicktoons.hr,Nicktoons.hr,NickToons
 483,NovaBH.ba,|BIH| NOVA BH
 alternativnatv.ba,AlternativnaTV.ba,|BIH| ALTERNATIVNA TV
 bhalfatvsarajevo.ba,AlfaTV.ba,|BIH| ALFA TV SARAJEVO
@@ -221,6 +221,7 @@ k::cnmusic2.rs,KCNMusic2.ba,KCN 2
 k::cnsvet+3.rs,KCNSvet3.ba,KCN 3
 bhcitytv.ba,CityTV.ba,|BIH| CITY TV
 rtvusk.ba,BIRTV.ba,|BIH| BIR TV UZIVO
+BirTV.ba,BIRTV.ba,RTV BIR HD
 bihrtvhercegbosne.ba,HercegTV.ba,|BIH| Herceg TV
 auroratv.hr,AuroraTV.hr,|HR| AURORA TV
 Libertas TV,LibertasTV.hr,HR: LIBERTAS
@@ -304,7 +305,7 @@ rts-digital,RTS3.rs,SR: RTS 3 HD
 b92.sr,B92.rs,SR: B92 TV
 prva-srpska-tv.sr,Prva.rs,SR: Prva HD
 hype,HypeTV.rs,SR: Hype TV
-balkan_trip,iptv#ch-461-balkan-trip-hd,SR: Balkan Trip
+balkan_trip,BalkanTrip.ba,SR: Balkan Trip
 blictv,BlicTV.rs,SR: Blic TV
 una_tv,UnaTV.rs,SR: Una TV FHD
 superstar_tv,SuperstarTV1.rs,SR: Superstar FHD

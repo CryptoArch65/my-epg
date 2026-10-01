@@ -2,6 +2,7 @@
 """Fetch TVProfil schedules through a real browser session and inject them into XMLTV."""
 
 import json
+import os
 import sys
 import time
 import xml.etree.ElementTree as ET
@@ -98,6 +99,11 @@ def main(guide_path, config_path):
     if not channels:
         raise SystemExit("TVProfil channel configuration is empty")
 
+    MAX_SESSION_ATTEMPTS = 3
+    loaded = False
+    last_error = None
+    is_blocked = False
+
     with sync_playwright() as p:
         browser = p.chromium.launch(
             headless=True,
@@ -107,48 +113,115 @@ def main(guide_path, config_path):
                 "--disable-dev-shm-usage",
             ],
         )
-        context = browser.new_context(
-            locale="hr-HR",
-            timezone_id="Europe/Zagreb",
-            user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/140 Safari/537.36",
-        )
-        page = context.new_page()
-        page.add_init_script("""
-            Object.defineProperty(navigator, 'webdriver', {get: () => undefined});
-            Object.defineProperty(navigator, 'languages', {get: () => ['hr-HR', 'hr', 'en-US', 'en']});
-            Object.defineProperty(navigator, 'platform', {get: () => 'Linux x86_64'});
-        """)
+        for attempt in range(1, MAX_SESSION_ATTEMPTS + 1):
+            if attempt > 1:
+                backoff = 5 * (attempt - 1)
+                print(f"Retrying TVProfil session (attempt {attempt}/{MAX_SESSION_ATTEMPTS}) after {backoff}s backoff...")
+                time.sleep(backoff)
 
-        loaded = False
-        last_error = None
-        for template in PAGE_CANDIDATES:
-            try:
-                target = template.format(slug=channels[0]["slug"])
-                response = page.goto(target, wait_until="load", timeout=60000)
-                status = response.status if response else "no-response"
+            context = browser.new_context(
+                locale="hr-HR",
+                timezone_id="Europe/Zagreb",
+                user_agent=(
+                    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+                    "(KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+                ),
+                viewport={"width": 1920, "height": 1080},
+                extra_http_headers={
+                    "Accept-Language": "hr-HR,hr;q=0.9,en-US;q=0.8,en;q=0.7",
+                    "sec-ch-ua": '"Not(A:Brand";v="99", "Google Chrome";v="133", "Chromium";v="133"',
+                    "sec-ch-ua-mobile": "?0",
+                    "sec-ch-ua-platform": '"Linux"',
+                    "Sec-Fetch-Dest": "document",
+                    "Sec-Fetch-Mode": "navigate",
+                    "Sec-Fetch-Site": "none",
+                    "Sec-Fetch-User": "?1",
+                    "Upgrade-Insecure-Requests": "1",
+                },
+            )
+            page = context.new_page()
+            page.add_init_script("""
+                Object.defineProperty(navigator, 'webdriver', {get: () => undefined});
+                try {
+                    delete Object.getPrototypeOf(navigator).webdriver;
+                } catch (e) {}
+                Object.defineProperty(navigator, 'languages', {get: () => ['hr-HR', 'hr', 'en-US', 'en']});
+                Object.defineProperty(navigator, 'platform', {get: () => 'Linux x86_64'});
+                Object.defineProperty(navigator, 'plugins', {get: () => [1, 2, 3, 4, 5]});
+                window.chrome = {
+                    app: { isInstalled: false },
+                    runtime: {},
+                    loadTimes: function() {},
+                    csi: function() {},
+                };
+            """)
+
+            for template in PAGE_CANDIDATES:
                 try:
-                    page.wait_for_function(
-                        "typeof Tvprofil !== 'undefined' && (typeof bazinga === 'function' || typeof window.bazinga === 'function')",
-                        timeout=20000,
-                    )
-                    loaded = True
-                    print("TVProfil session:", page.url, "| status:", status, "| title:", page.title())
-                    break
-                except Exception as wait_exc:
-                    body = page.locator("body").inner_text(timeout=5000)[:500].replace("\n", " | ")
-                    print("TVProfil candidate failed:", target)
-                    print("  final URL:", page.url, "| status:", status, "| title:", page.title())
-                    print("  body:", body)
-                    print("  Tvprofil:", page.evaluate("typeof Tvprofil"))
-                    print("  bazinga:", page.evaluate("typeof bazinga"))
-                    last_error = wait_exc
-            except Exception as exc:
-                print("TVProfil navigation failed:", template, "|", exc)
-                last_error = exc
+                    target = template.format(slug=channels[0]["slug"])
+                    response = page.goto(target, wait_until="load", timeout=60000)
+                    status = response.status if response else "no-response"
+                    if status == 403:
+                        is_blocked = True
+                    try:
+                        page.wait_for_function(
+                            "typeof Tvprofil !== 'undefined' && (typeof bazinga === 'function' || typeof window.bazinga === 'function')",
+                            timeout=20000,
+                        )
+                        loaded = True
+                        print("TVProfil session:", page.url, "| status:", status, "| title:", page.title())
+                        break
+                    except Exception as wait_exc:
+                        body = page.locator("body").inner_text(timeout=5000)[:500].replace("\n", " | ")
+                        if "Blocked." in body or status == 403:
+                            is_blocked = True
+                        print("TVProfil candidate failed:", target)
+                        print("  final URL:", page.url, "| status:", status, "| title:", page.title())
+                        print("  body:", body)
+                        print("  Tvprofil:", page.evaluate("typeof Tvprofil"))
+                        print("  bazinga:", page.evaluate("typeof bazinga"))
+                        last_error = wait_exc
+                except Exception as exc:
+                    print("TVProfil navigation failed:", template, "|", exc)
+                    last_error = exc
+
+            if loaded:
+                break
+            context.close()
 
         if not loaded:
             browser.close()
-            raise SystemExit(f"Could not establish TVProfil browser session: {last_error}")
+            channel_names = [c["xmltv_id"] for c in channels]
+            channels_str = ", ".join(channel_names)
+            if is_blocked:
+                summary_msg = (
+                    f"Blocked by TVProfil anti-bot protection (HTTP 403). "
+                    f"{len(channels)} channels ({channels_str}) will be missing TVProfil programme data."
+                )
+                print(f"::warning title=TVProfil Scraper Blocked::{summary_msg}", file=sys.stderr)
+                print(f"WARNING: TVProfil import failed: {summary_msg}", file=sys.stderr)
+                step_summary = os.environ.get("GITHUB_STEP_SUMMARY")
+                if step_summary:
+                    try:
+                        with open(step_summary, "a", encoding="utf-8") as f:
+                            f.write(
+                                f"### ⚠️ TVProfil Import Warning\n\n"
+                                f"**{summary_msg}**\n\n"
+                                f"Affected channels:\n"
+                                + "".join(f"- `{ch}`\n" for ch in channel_names)
+                                + "\n"
+                            )
+                    except Exception:
+                        pass
+                raise SystemExit("TVProfil import failed: blocked by TVProfil anti-bot")
+            else:
+                summary_msg = (
+                    f"Could not establish TVProfil browser session: {last_error}. "
+                    f"{len(channels)} channels ({channels_str}) will be missing TVProfil programme data."
+                )
+                print(f"::warning title=TVProfil Session Failed::{summary_msg}", file=sys.stderr)
+                print(f"WARNING: TVProfil import failed: {summary_msg}", file=sys.stderr)
+                raise SystemExit(f"Could not establish TVProfil browser session: {last_error}")
 
         all_events = []
         errors = []

@@ -49,7 +49,15 @@ jobs:
           python-version: '3.12'
 
       - name: Clone iptv-org/epg
-        run: git clone --depth 1 https://github.com/iptv-org/epg.git epg
+        # Pinned to a known-good commit of iptv-org/epg to prevent upstream breaking changes.
+        # Commit: a047034a86e37ac4ed88adaceecf5df196165a46 (master branch as of 2026-10-01)
+        # TODO: update this pin periodically (see docs/GRABBER_PINNING.md)
+        run: |
+          git init epg
+          cd epg
+          git remote add origin https://github.com/iptv-org/epg.git
+          git fetch --depth 1 origin a047034a86e37ac4ed88adaceecf5df196165a46
+          git checkout FETCH_HEAD
 
       - name: Extend MAXtv EPG window to 3 days
         run: |
@@ -127,11 +135,34 @@ jobs:
           mv guide.merged.xml guide.xml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add guide.xml logos/
-          if git diff --cached --quiet; then
-            echo "Croatia extra EPG has not changed"
-            exit 0
+          BACKUP_DIR=$(mktemp -d)
+          cp guide.xml "$BACKUP_DIR/guide.xml"
+          [ -d logos ] && cp -r logos "$BACKUP_DIR/logos"
+
+          pushed=0
+          for attempt in $(seq 1 5); do
+            echo "Publish attempt $attempt of 5..."
+            git fetch origin main
+            git reset --hard origin/main
+            cp "$BACKUP_DIR/guide.xml" guide.xml
+            [ -d "$BACKUP_DIR/logos" ] && cp -r "$BACKUP_DIR/logos/." logos/
+            git add guide.xml logos/
+            if git diff --cached --quiet; then
+              echo "Croatia extra EPG has not changed"
+              pushed=1
+              break
+            fi
+            git commit -m "Update Croatia extra EPG"
+            if git push origin HEAD:main; then
+              echo "Successfully pushed Croatia extra EPG"
+              pushed=1
+              break
+            fi
+            echo "Push rejected (concurrent push to main), retrying in 3s..."
+            sleep 3
+          done
+          rm -rf "$BACKUP_DIR"
+          if [ "$pushed" -ne 1 ]; then
+            echo "Failed to push Croatia extra EPG after 5 attempts" >&2
+            exit 1
           fi
-          git commit -m "Update Croatia extra EPG"
-          git pull --rebase origin main
-          git push
