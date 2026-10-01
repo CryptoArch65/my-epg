@@ -30,6 +30,20 @@ def js_constant(source, name):
     return match.group(1)
 
 
+def ensure_epg_days(config_path, days=3):
+    content = config_path.read_text(encoding='utf-8')
+    if re.search(r'(?m)^\s*days:\s*\d+\s*,', content):
+        content = re.sub(r'(?m)^(\s*)days:\s*\d+\s*,', rf'\1days: {days},', content, count=1)
+    else:
+        marker = 'module.exports = {\n  site: SITE_URL,'
+        replacement = f'module.exports = {{\n  site: SITE_URL,\n  days: {days},'
+        if content.count(marker) != 1:
+            raise ValueError('MAXtv config structure changed upstream')
+        content = content.replace(marker, replacement, 1)
+    config_path.write_text(content, encoding='utf-8')
+    print(f'Configured MAXtv EPG for {days} days')
+
+
 def image_url(value):
     if isinstance(value, str):
         return value if value.startswith(LOGO_PREFIX) else None
@@ -87,6 +101,7 @@ def official_logos(config_path):
 
 
 def main(config_path, csv_path):
+    ensure_epg_days(config_path, 3)
     with csv_path.open(newline='', encoding='utf-8') as source:
         reader = csv.DictReader(source)
         if reader.fieldnames != ['guide_id', 'logo_url']:
