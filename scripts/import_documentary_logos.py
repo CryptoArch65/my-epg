@@ -52,16 +52,16 @@ CHANNELS = {
     "1867": "eentertainment.ba",
     "1866": "travelchannel.bh",
     "1860": "loviribolov.ba",
-    "1858": "435380776371",  # Viasat History
-    "1862": "276767784232",  # Viasat Nature
-    "119": "iptv#ch-127-tlc",  # TLC
-    "1864": "276771368119",  # Crime & Investigation
-    "1120": "276770856271",  # Da Vinci
-    "1865": "iptv#ch-444-hgtv",  # Home and Garden TV
-    "1834": "276770856295",  # STAR Channel
-    "1835": "276771368133",  # STAR Life
-    "1836": "276770856280",  # STAR Crime
-    "1837": "276770344385",  # STAR Movies
+    "1858": "ViasatHistory.hr",  # Viasat History
+    "1862": "ViasatNature.hr",  # Viasat Nature
+    "119": "TLC.ba",  # TLC
+    "1864": "CrimeInvestigation.hr",  # Crime & Investigation
+    "1120": "DaVinci.hr",  # Da Vinci
+    "1865": "HGTV.ba",  # Home and Garden TV
+    "1834": "STAR.hr",  # STAR Channel
+    "1835": "STARLife.hr",  # STAR Life
+    "1836": "STARCrime.hr",  # STAR Crime
+    "1837": "STARMovies.hr",  # STAR Movies
     "283": "CineStarTV1.ba",  # CineStar TV 1 HD (BIH)
     "1880": "Diva.ba",  # Diva
     "990": "PickboxTV.ba",  # Pickbox HD

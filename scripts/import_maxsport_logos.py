@@ -8,8 +8,8 @@ from urllib.request import Request, urlopen
 
 
 LOGOS = {
-    "311616552052": ("1", "https://www.hrvatskitelekom.hr/webresources/images/maxtv-new/programi/250x250_maxsport1.png"),
-    "311620648169": ("2", "https://www.hrvatskitelekom.hr/webresources/images/maxtv-new/programi/250x250_maxsport2.png"),
+    "MAXSport1.hr": ("1", "https://www.hrvatskitelekom.hr/webresources/images/maxtv-new/programi/250x250_maxsport1.png"),
+    "MAXSport2.hr": ("2", "https://www.hrvatskitelekom.hr/webresources/images/maxtv-new/programi/250x250_maxsport2.png"),
 }
 REPO_LOGO = "https://raw.githubusercontent.com/CryptoArch65/my-epg/main/logos/maxsport-{}.png"
 
