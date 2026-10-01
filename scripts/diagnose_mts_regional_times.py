@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""Diagnose MTS regional EPG timestamp semantics against Europe/Belgrade now."""
+"""Diagnose MTS regional EPG timestamp semantics and duplicate channel variants."""
 
 from datetime import datetime, timezone
+import re
+import unicodedata
 
 from import_mts_pink_epg import ZONE, day_products, stamp
 
@@ -14,6 +16,11 @@ TARGETS = {
     "tv_as": "TV AS",
     "pester_tv": "Pester TV",
 }
+
+
+def normalize(value):
+    value = unicodedata.normalize("NFKD", str(value or "")).encode("ascii", "ignore").decode("ascii")
+    return re.sub(r"[^a-z0-9]+", "", value.casefold())
 
 
 def existing_interpretation(value):
@@ -60,6 +67,32 @@ def describe(label, row):
     print(f"  {label}: {start.isoformat()} -> {stop.isoformat()} | {title(item)}")
 
 
+def compact_meta(product):
+    interesting = {}
+    for key in (
+        "code", "name", "url", "position", "pozicija", "channelPosition",
+        "channelType", "serviceType", "platform", "productType", "pk",
+    ):
+        value = product.get(key)
+        if value not in (None, "", [], {}):
+            interesting[key] = value
+    return interesting
+
+
+def candidate_products(products, code, display):
+    wanted = {normalize(code), normalize(display)}
+    rows = []
+    for product in products:
+        pcode = normalize(product.get("code"))
+        pname = normalize(product.get("name"))
+        if pcode in wanted or pname in wanted or any(
+            token and (token in pcode or token in pname or pcode in token or pname in token)
+            for token in wanted
+        ):
+            rows.append(product)
+    return rows
+
+
 def main():
     now = datetime.now(ZONE)
     day = now.date().isoformat()
@@ -70,30 +103,41 @@ def main():
     print(f"Products fetched: {len(products)}")
 
     for code, display in TARGETS.items():
-        product = by_code.get(code)
         print(f"\n=== {display} / code={code} ===")
+        candidates = candidate_products(products, code, display)
+        print(f"Candidate MTS products: {len(candidates)}")
+        for index, candidate in enumerate(candidates, 1):
+            programs = candidate.get("programs") or []
+            print(f" CANDIDATE {index}: {compact_meta(candidate)!r}; programs={len(programs)}")
+            for item in programs[:8]:
+                try:
+                    local_start = existing_interpretation(item.get("start"))
+                    local_stop = existing_interpretation(item.get("end"))
+                    local_label = f"{local_start:%H:%M}-{local_stop:%H:%M}"
+                except Exception:
+                    local_label = "?"
+                print(
+                    "   ITEM:", local_label,
+                    repr(item.get("start")), "->", repr(item.get("end")), "|", title(item)
+                )
+
+        product = by_code.get(code)
         if product is None:
-            print("NOT FOUND")
+            print("Exact-code product NOT FOUND")
             continue
         programs = product.get("programs") or []
-        print(f"MTS name={product.get('name')!r}; programs={len(programs)}")
+        print(f"Selected exact-code product name={product.get('name')!r}; programs={len(programs)}")
         if not programs:
             continue
 
-        for item in programs[:3]:
-            print(
-                "  RAW sample:",
-                repr(item.get("start")), "->", repr(item.get("end")), "|", title(item)
-            )
-
         current, previous, upcoming = current_item(programs, existing_interpretation, now)
-        print(" EXISTING parser (naive => Europe/Belgrade):")
+        print(" EXISTING parser:")
         describe("CURRENT", current)
         describe("PREVIOUS", previous)
         describe("NEXT", upcoming)
 
         current, previous, upcoming = current_item(programs, utc_if_naive_interpretation, now)
-        print(" ALT parser (naive => UTC, then Europe/Belgrade):")
+        print(" ALT parser:")
         describe("CURRENT", current)
         describe("PREVIOUS", previous)
         describe("NEXT", upcoming)
