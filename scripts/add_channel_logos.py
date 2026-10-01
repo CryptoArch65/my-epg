@@ -57,6 +57,7 @@ def main(guide_path, logos_path):
         raise ValueError('Duplicate XMLTV channel ID')
 
     seen = set()
+    applied = 0
     with open(logos_path, encoding='utf-8', newline='') as source:
         reader = csv.DictReader(source)
         if reader.fieldnames != ['guide_id', 'logo_url']:
@@ -65,14 +66,18 @@ def main(guide_path, logos_path):
             channel_id = row['guide_id'].strip()
             url = row['logo_url'].strip()
             parsed = urlparse(url)
-            if (not channel_id or channel_id in seen or channel_id not in channels
+            if (not channel_id or channel_id in seen
                     or parsed.scheme != 'https' or not parsed.netloc):
                 raise ValueError(f'Invalid provider logo for {channel_id!r}')
             seen.add(channel_id)
-            channel = channels[channel_id]
+            channel = channels.get(channel_id)
+            if channel is None:
+                print(f'WARNING: Logo mapping has no channel in this guide: {channel_id}')
+                continue
             for icon in channel.findall('icon'):
                 channel.remove(icon)
             channel.append(ET.Element('icon', {'src': url}))
+            applied += 1
 
     for channel_id, names in PLAYLIST_NAMES.items():
         channel = channels.get(channel_id)
@@ -84,7 +89,7 @@ def main(guide_path, logos_path):
                 ET.SubElement(channel, 'display-name', {'lang': 'hr'}).text = name
 
     tree.write(guide_path, encoding='utf-8', xml_declaration=True)
-    print(f'Added verified source logos to {len(seen)} XMLTV channels')
+    print(f'Added verified source logos to {applied} XMLTV channels')
 
 
 if __name__ == '__main__':
