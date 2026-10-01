@@ -172,6 +172,7 @@ jobs:
         run: python3 scripts/import_mts_pink_epg.py guide.new.xml config/pink-mts-channels.csv
 
       - name: Add AXN and M1 Film broadcaster schedules and logos
+        continue-on-error: true
         run: |
           python3 scripts/import_film_epg.py \
             guide.new.xml config/film-channels.xml config/bih-source-logos.csv logos
@@ -188,7 +189,7 @@ jobs:
         run: python3 scripts/host_m3u_pink_logos.py config/m3u-pink-logo-trial.csv config/bih-source-logos.csv logos
 
       - name: Replace Serbia logos from the M3U
-        run: python3 scripts/host_m3u_serbia_logos.py config/m3u-serbia-logo-trial.csv config/bih-source-logos.csv logos
+        run: python3 scripts/host_m3u-serbia_logos.py config/m3u-serbia-logo-trial.csv config/bih-source-logos.csv logos
 
       - name: Add TVProfil Arena Sport 1-6 schedules
         continue-on-error: true # TVProfil may block GitHub runners; publish other sources.
