@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - .github/workflows/diagnose-xmltv-duplicates.yml
+      - scripts/diagnose_xmltv_duplicates.py
+      - config/active_playlist_tvg_ids.txt
   workflow_dispatch:
 
 permissions:
