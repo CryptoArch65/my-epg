@@ -263,12 +263,10 @@ PY
 croatia_logos() {
   python3 scripts/host_m3u_croatia_logos.py \
     config/m3u-croatia-logo-trial.csv config/bih-source-logos.csv logos
-  python3 scripts/add_croatia_playlist_aliases.py \
-    guide.xml config/croatia-playlist-aliases.csv
   python3 scripts/apply_m3u_croatia_playlist_logos.py \
     guide.xml config/m3u-croatia-playlist-logos.csv logos
 
-  commit_stage "Stage Croatia logos and aliases" \
+  commit_stage "Stage Croatia logos" \
     guide.xml config/bih-source-logos.csv logos/
 }
 
@@ -302,7 +300,7 @@ run_section "Serbia extra EPG" serbia_extra
 run_section "Croatia extra EPG" croatia_extra
 run_section "Hype MTS EPG" hype_extra
 run_section "Informer MTS EPG" informer_extra
-run_section "Croatia logos and aliases" croatia_logos
+run_section "Croatia logos" croatia_logos
 run_section "BIH local EPG" bih_local
 
 python3 - <<'PY'
