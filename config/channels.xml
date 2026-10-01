@@ -194,7 +194,6 @@
   <channel site="epg.telemach.ba" site_id="653" lang="hr" xmltv_id="RTRSPlus.ba">RTRS Plus</channel>
   <channel site="epg.telemach.ba" site_id="197" lang="hr" xmltv_id="AlfaTV.ba">Alfa (Sarajevo)</channel>
   <channel site="epg.telemach.ba" site_id="483" lang="hr" xmltv_id="CityTV.ba">City TV HD</channel>
-  <channel site="epg.telemach.ba" site_id="853" lang="hr" xmltv_id="BirTV.ba">RTV BIR HD</channel>
   <channel site="epg.telemach.ba" site_id="485" lang="hr" xmltv_id="TVLukavac.ba">TV Lukavac</channel>
   <channel site="epg.telemach.ba" site_id="475" lang="hr" xmltv_id="Kanal6.ba">Kanal 6</channel>
   <channel site="mtel.ba" site_id="iptv#ch-439-otv-valentino" lang="bs" xmltv_id="OTVValentino.ba">OTV Valentino</channel>
