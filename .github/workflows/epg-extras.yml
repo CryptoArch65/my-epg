@@ -8,6 +8,7 @@ on:
     branches: [main]
     paths:
       - scripts/diagnose_mts_regional_times.py
+      - scripts/diagnose_xmltv_duplicates.py
       - scripts/apply_mts_regional_fix.py
       - scripts/verify_mts_regional_guide.py
       - scripts/import_mts_serbia_epg.py
@@ -90,6 +91,9 @@ jobs:
             git rebase origin/main
             git push origin HEAD:main
           fi
+
+      - name: Diagnose remaining XMLTV duplicate choices
+        run: python3 scripts/diagnose_xmltv_duplicates.py guide.xml config/playlist_aliases.csv
 
       - name: Verify final Serbian regional guide
         run: python3 scripts/verify_mts_regional_guide.py guide.xml
