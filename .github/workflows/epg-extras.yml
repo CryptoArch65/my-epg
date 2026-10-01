@@ -11,8 +11,6 @@ on:
       - scripts/apply_mts_regional_fix.py
       - scripts/verify_mts_regional_guide.py
       - scripts/import_mts_serbia_epg.py
-      - scripts/import_mts_pink_epg.py
-      - scripts/import_mts_v2_all.py
       - scripts/run_epg_extras.sh
       - config/serbia-extra-mts.xml
       - config/serbia-extra-telemach.xml
