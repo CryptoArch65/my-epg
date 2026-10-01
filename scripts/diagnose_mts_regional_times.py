@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
-"""Diagnose MTS regional EPG timestamp semantics and duplicate channel variants."""
+"""Diagnose MTS regional EPG source variants against the public website schedule."""
 
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
+import json
 import re
 import unicodedata
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
 
-from import_mts_pink_epg import ZONE, day_products, stamp
+from import_mts_pink_epg import API, ZONE, day_products, stamp
 
 TARGETS = {
     "tv_istok": "TV Istok 1",
@@ -15,6 +19,12 @@ TARGETS = {
     "Newsmax_Balkans": "Newsmax Balkans",
     "tv_as": "TV AS",
     "pester_tv": "Pester TV",
+}
+
+QUERY_VARIANTS = {
+    "legacy-tv-kanali": lambda day: f":pozicija-rastuce:tip-kanala-radio:TV kanali:channelProgramDates:{day}",
+    "website-iris-tv-paketi": lambda day: f":pozicija-rastuce:tv-kategorija:iris-tv-paketi:channelProgramDates:{day}",
+    "website-no-platform-facet": lambda day: f":pozicija-rastuce:channelProgramDates:{day}",
 }
 
 
@@ -27,120 +37,92 @@ def existing_interpretation(value):
     return datetime.strptime(stamp(value), "%Y%m%d%H%M%S %z").astimezone(ZONE)
 
 
-def utc_if_naive_interpretation(value):
-    if isinstance(value, (int, float)):
-        seconds = value / 1000 if value > 10**11 else value
-        return datetime.fromtimestamp(seconds, timezone.utc).astimezone(ZONE)
-    if not isinstance(value, str):
-        raise ValueError(f"Unexpected timestamp: {value!r}")
-    dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
-    if dt.tzinfo is None:
-        dt = dt.replace(tzinfo=timezone.utc)
-    return dt.astimezone(ZONE)
-
-
 def title(item):
     return str(item.get("title") or "(no title)").strip()
 
 
-def current_item(programs, parser, now):
-    rows = []
+def fetch_variant_page(day, query, page):
+    url = API + "?" + urlencode({
+        "sort": "pozicija-rastuce",
+        "searchQueryContext": "CHANNEL_PROGRAM",
+        "query": query,
+        "pageSize": 10000,
+        "currentPage": page,
+    })
+    with urlopen(Request(url, headers={"User-Agent": "Mozilla/5.0"}), timeout=35) as response:
+        return json.load(response)
+
+
+def variant_products(day, query):
+    first = fetch_variant_page(day, query, 0)
+    pagination = first.get("pagination") or {}
+    pages = pagination.get("totalPages")
+    if not isinstance(pages, int) or not 1 <= pages <= 30:
+        raise ValueError(f"Unexpected MTS pagination: {pagination!r}")
+    products = list(first.get("products") or [])
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        jobs = {pool.submit(fetch_variant_page, day, query, page): page for page in range(1, pages)}
+        for job in as_completed(jobs):
+            data = job.result()
+            products.extend(data.get("products") or [])
+    return products
+
+
+def product_by_code(products, code):
+    return next((p for p in products if str(p.get("code") or "") == code), None)
+
+
+def print_schedule(label, product):
+    if product is None:
+        print(f"  {label}: NOT FOUND")
+        return
+    programs = product.get("programs") or []
+    print(
+        f"  {label}: code={product.get('code')!r} name={product.get('name')!r} "
+        f"position={product.get('channelPosition')!r} programs={len(programs)}"
+    )
     for item in programs:
         try:
-            start = parser(item.get("start"))
-            stop = parser(item.get("end"))
+            start = existing_interpretation(item.get("start"))
+            stop = existing_interpretation(item.get("end"))
         except Exception:
             continue
-        rows.append((start, stop, item))
-    rows.sort(key=lambda row: row[0])
-    current = next((row for row in rows if row[0] <= now < row[1]), None)
-    previous = max((row for row in rows if row[1] <= now), default=None, key=lambda row: row[1])
-    upcoming = min((row for row in rows if row[0] > now), default=None, key=lambda row: row[0])
-    return current, previous, upcoming
-
-
-def describe(label, row):
-    if row is None:
-        print(f"  {label}: NONE")
-        return
-    start, stop, item = row
-    print(f"  {label}: {start.isoformat()} -> {stop.isoformat()} | {title(item)}")
-
-
-def compact_meta(product):
-    interesting = {}
-    for key in (
-        "code", "name", "url", "position", "pozicija", "channelPosition",
-        "channelType", "serviceType", "platform", "productType", "pk",
-    ):
-        value = product.get(key)
-        if value not in (None, "", [], {}):
-            interesting[key] = value
-    return interesting
-
-
-def candidate_products(products, code, display):
-    wanted = {normalize(code), normalize(display)}
-    rows = []
-    for product in products:
-        pcode = normalize(product.get("code"))
-        pname = normalize(product.get("name"))
-        if pcode in wanted or pname in wanted or any(
-            token and (token in pcode or token in pname or pcode in token or pname in token)
-            for token in wanted
-        ):
-            rows.append(product)
-    return rows
+        if 12 <= start.hour <= 16 or 12 <= stop.hour <= 16:
+            print(f"    {start:%H:%M}-{stop:%H:%M} | {title(item)} | raw={item.get('start')!r}")
 
 
 def main():
     now = datetime.now(ZONE)
     day = now.date().isoformat()
-    products = day_products(day)
-    by_code = {str(product.get("code") or ""): product for product in products}
+    print(f"MTS query-facet diagnostic now={now.isoformat()} day={day}")
 
-    print(f"MTS regional timestamp diagnostic now={now.isoformat()} day={day}")
-    print(f"Products fetched: {len(products)}")
+    variants = {}
+    for label, query_builder in QUERY_VARIANTS.items():
+        query = query_builder(day)
+        try:
+            products = variant_products(day, query)
+        except Exception as exc:
+            print(f"VARIANT {label}: FAILED: {exc}")
+            continue
+        variants[label] = products
+        print(f"VARIANT {label}: products={len(products)} query={query}")
 
     for code, display in TARGETS.items():
-        print(f"\n=== {display} / code={code} ===")
-        candidates = candidate_products(products, code, display)
-        print(f"Candidate MTS products: {len(candidates)}")
-        for index, candidate in enumerate(candidates, 1):
-            programs = candidate.get("programs") or []
-            print(f" CANDIDATE {index}: {compact_meta(candidate)!r}; programs={len(programs)}")
-            for item in programs[:8]:
-                try:
-                    local_start = existing_interpretation(item.get("start"))
-                    local_stop = existing_interpretation(item.get("end"))
-                    local_label = f"{local_start:%H:%M}-{local_stop:%H:%M}"
-                except Exception:
-                    local_label = "?"
-                print(
-                    "   ITEM:", local_label,
-                    repr(item.get("start")), "->", repr(item.get("end")), "|", title(item)
-                )
+        print(f"\n=== {display} / {code} ===")
+        for label, products in variants.items():
+            print_schedule(label, product_by_code(products, code))
 
-        product = by_code.get(code)
-        if product is None:
-            print("Exact-code product NOT FOUND")
-            continue
-        programs = product.get("programs") or []
-        print(f"Selected exact-code product name={product.get('name')!r}; programs={len(programs)}")
-        if not programs:
-            continue
-
-        current, previous, upcoming = current_item(programs, existing_interpretation, now)
-        print(" EXISTING parser:")
-        describe("CURRENT", current)
-        describe("PREVIOUS", previous)
-        describe("NEXT", upcoming)
-
-        current, previous, upcoming = current_item(programs, utc_if_naive_interpretation, now)
-        print(" ALT parser:")
-        describe("CURRENT", current)
-        describe("PREVIOUS", previous)
-        describe("NEXT", upcoming)
+    # Keep one duplicate/near-name diagnostic from the legacy response as a sanity check.
+    products = variants.get("legacy-tv-kanali") or day_products(day)
+    for code, display in TARGETS.items():
+        wanted = {normalize(code), normalize(display)}
+        matches = []
+        for product in products:
+            pcode = normalize(product.get("code"))
+            pname = normalize(product.get("name"))
+            if pcode in wanted or pname in wanted:
+                matches.append(product)
+        print(f"EXACT/NORMALIZED candidates {display}: {[(p.get('code'), p.get('name'), p.get('channelPosition')) for p in matches]}")
 
 
 if __name__ == "__main__":
