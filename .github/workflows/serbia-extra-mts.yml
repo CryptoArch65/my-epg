@@ -1,17 +1,6 @@
 name: Update Serbia Extra MTS EPG
 
 on:
-  workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - config/serbia-extra-mts.xml
-      - config/serbia-extra-mts-logos.csv
-      - scripts/import_mts_pink_hahalol.py
-      - scripts/merge_xmltv.py
-      - scripts/host_m3u_serbia_logos.py
-      - scripts/add_channel_logos.py
-      - .github/workflows/serbia-extra-mts.yml
   workflow_run:
     workflows: ["Update EPG"]
     types: [completed]
@@ -20,12 +9,12 @@ permissions:
   contents: write
 
 concurrency:
-  group: serbia-extra-mts-epg
+  group: guide-writer
   cancel-in-progress: false
 
 jobs:
   update-serbia-extra:
-    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
