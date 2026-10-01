@@ -31,7 +31,15 @@ jobs:
       - name: Provjeri odabir programa
         run: node --test scripts/check_telemach.test.js
       - name: Preuzmi Telemach EPG alat
-        run: git clone --depth 1 https://github.com/iptv-org/epg.git epg
+        # Pinned to a known-good commit of iptv-org/epg to prevent upstream breaking changes.
+        # Commit: a047034a86e37ac4ed88adaceecf5df196165a46 (master branch as of 2026-10-01)
+        # TODO: update this pin periodically (see docs/GRABBER_PINNING.md)
+        run: |
+          git init epg
+          cd epg
+          git remote add origin https://github.com/iptv-org/epg.git
+          git fetch --depth 1 origin a047034a86e37ac4ed88adaceecf5df196165a46
+          git checkout FETCH_HEAD
       - name: Instaliraj zavisnosti
         working-directory: epg
         run: npm ci
