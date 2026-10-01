@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <channels>
+  <!-- Channels handled by the standard MTS extra grab; regional zero-result channels use the all-pages importer. -->
   <channel site="mts.rs" site_id="insajder" lang="bs" xmltv_id="insajdertv.rs">Insajder</channel>
   <channel site="mts.rs" site_id="agro_tv" lang="bs" xmltv_id="AgroTV.rs">Agro TV</channel>
   <channel site="mts.rs" site_id="ha_ha" lang="bs" xmltv_id="pinkhaha.rs">HA HA</channel>
