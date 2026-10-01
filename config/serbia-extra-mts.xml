@@ -2,8 +2,6 @@
 <channels>
   <channel site="mts.rs" site_id="insajder" lang="bs" xmltv_id="insajdertv.rs">Insajder</channel>
   <channel site="mts.rs" site_id="agro_tv" lang="bs" xmltv_id="AgroTV.rs">Agro TV</channel>
-  <channel site="mts.rs" site_id="tv_bor" lang="bs" xmltv_id="101TV.rs">TV Bor</channel>
-  <channel site="mts.rs" site_id="sos_kanal_plus" lang="bs" xmltv_id="SOS Kanal Plus">SOS Kanal Plus</channel>
   <channel site="mts.rs" site_id="ha_ha" lang="bs" xmltv_id="pinkhaha.rs">HA HA</channel>
   <channel site="mts.rs" site_id="lol" lang="bs" xmltv_id="lol.rs">LOL</channel>
 </channels>
