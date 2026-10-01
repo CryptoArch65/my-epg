@@ -127,9 +127,9 @@ def load_m1_schedule(url):
             if not programmes:
                 raise ValueError("M1 schedule contains no programmes")
             return programmes
-        except ValueError:
+        except Exception as exc:
             if attempt == 2:
-                print(f"WARNING: M1 schedule unavailable at {url}; continuing without today's M1 programmes")
+                print(f"WARNING: M1 schedule unavailable at {url}; continuing without today's M1 programmes: {exc}")
                 return []
             time.sleep(2 * (attempt + 1))
 
@@ -234,14 +234,27 @@ def append_programmes(root, channel_id, entries):
 
 
 def main(guide_path, config_path, logo_csv, logos_dir):
+    schedules = {}
+
     try:
-        schedules = axn_schedules(download(AXN_URL))
-    except TimeoutError as exc:
-        print(f"WARNING: AXN schedule download timed out; continuing without AXN schedules: {exc}")
-        schedules = {}
+        schedules.update(axn_schedules(download(AXN_URL)))
+    except Exception as exc:
+        print(f"WARNING: AXN schedules unavailable; continuing without AXN programmes: {exc}")
+
     schedules.update({channel_id: load_m1_schedule(url) for channel_id, url in M1_URLS.items()})
-    schedules.update(superstar_schedules(download(SUPERSTAR_URL)))
-    schedules["DiziChannel.hr"] = dizi_schedule(download(DIZI_URL))
+
+    try:
+        schedules.update(superstar_schedules(download(SUPERSTAR_URL)))
+    except Exception as exc:
+        print(f"WARNING: Superstar schedules unavailable; continuing without Superstar programmes: {exc}")
+        schedules.update({channel_id: [] for channel_id in SUPERSTAR_TABS})
+
+    try:
+        schedules["DiziChannel.hr"] = dizi_schedule(download(DIZI_URL))
+    except Exception as exc:
+        print(f"WARNING: Dizi schedule unavailable; continuing without Dizi programmes: {exc}")
+        schedules["DiziChannel.hr"] = []
+
     config = ET.parse(config_path).getroot()
     custom_ids = {channel.get("xmltv_id") for channel in config}
     if custom_ids != (set(M1_URLS) | {"M1Family.hr", "AXN.hr", "AXNSpin.hr", "DiziChannel.hr"} | set(SUPERSTAR_TABS)):
