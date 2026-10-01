@@ -1,0 +1,21 @@
+name: Diagnose XMLTV duplicates
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/diagnose-xmltv-duplicates.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Report duplicate EPG choices
+        run: python3 scripts/diagnose_xmltv_duplicates.py guide.xml config/playlist_aliases.csv
