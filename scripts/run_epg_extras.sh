@@ -64,7 +64,7 @@ PY
   cd epg
   npm ci
 )
-python3 -m pip install Pillow lxml
+python3 -m pip install Pillow lxml beautifulsoup4
 
 serbia_extra() {
   (
@@ -82,6 +82,10 @@ serbia_extra() {
   python3 scripts/merge_xmltv.py guide.xml pink-hahalol-mts.xml guide.serbia-extra-pink.xml
   mv guide.serbia-extra-pink.xml guide.xml
 
+  # K1 official schedule first, then MTS all-pages fallback + Serbian regional channels.
+  python3 scripts/import_k1_official.py guide.xml
+  python3 scripts/import_mts_serbia_epg.py guide.xml
+
   python3 scripts/host_m3u_serbia_logos.py \
     config/serbia-extra-mts-logos.csv config/bih-source-logos.csv logos
   python3 scripts/add_channel_logos.py guide.xml config/bih-source-logos.csv
@@ -90,27 +94,31 @@ serbia_extra() {
 import xml.etree.ElementTree as ET
 from collections import Counter
 
-all_channels = [
-    'insajdertv.rs', 'Balkan Trip', 'AgroTV.rs', '101TV.rs',
-    'SOS Kanal Plus', 'pinkhaha.rs', 'lol.rs'
-]
-epg_required = ['insajdertv.rs', 'AgroTV.rs', 'pinkhaha.rs', 'lol.rs']
 root = ET.parse('guide.xml').getroot()
 counts = Counter(p.get('channel') for p in root.findall('programme'))
 channels = {c.get('id'): c for c in root.findall('channel')}
+
+all_channels = [
+    'insajdertv.rs', 'AgroTV.rs', 'pinkhaha.rs', 'lol.rs',
+    'K1.rs', 'Balkan Trip',
+    'TVIstok.rs', 'TVLeskovac.rs', 'JefimijaTV.rs', 'TVKrusevac.rs',
+    'NewsmaxBalkans.rs', 'TVAS.rs', 'TVBor.rs', 'SOSKanalPlus.rs', 'PesterTV.rs',
+    '101TV.rs', 'SOS Kanal Plus'
+]
+required = ['insajdertv.rs', 'AgroTV.rs', 'pinkhaha.rs', 'lol.rs', 'K1.rs']
 failed = []
 
 for cid in all_channels:
     if cid not in channels:
-        failed.append(f'{cid}: missing channel')
+        print(cid, 'MISSING')
         continue
     icon = channels[cid].find('icon')
-    if icon is None or not icon.get('src'):
-        failed.append(f'{cid}: no logo')
-    print(cid, counts[cid], 'programmes')
+    print(cid, counts[cid], 'programmes', 'logo=' + ('yes' if icon is not None and icon.get('src') else 'no'))
 
-for cid in epg_required:
-    if counts[cid] == 0:
+for cid in required:
+    if cid not in channels:
+        failed.append(f'{cid}: missing channel')
+    elif counts[cid] == 0:
         failed.append(f'{cid}: 0 programmes')
 
 if failed:
@@ -118,6 +126,41 @@ if failed:
 PY
 
   commit_stage "Stage Serbia extra EPG" guide.xml config/bih-source-logos.csv logos/
+}
+
+nova_series_extra() {
+  (
+    cd epg
+    npm run grab --- \
+      --channels=../config/serbia-extra-telemach.xml \
+      --output=../serbia-extra-telemach.xml \
+      --maxConnections=2
+  )
+
+  python3 scripts/merge_xmltv.py guide.xml serbia-extra-telemach.xml guide.nova-series.xml
+  mv guide.nova-series.xml guide.xml
+  python3 scripts/import_nova_series_logo.py \
+    guide.xml epg/sites/epg.telemach.ba/epg.telemach.ba.config.js
+
+  python3 - <<'PY'
+import xml.etree.ElementTree as ET
+from collections import Counter
+
+root = ET.parse('guide.xml').getroot()
+channels = {c.get('id'): c for c in root.findall('channel')}
+counts = Counter(p.get('channel') for p in root.findall('programme'))
+channel = channels.get('NovaSeries.rs')
+if channel is None:
+    raise SystemExit('NovaSeries.rs missing after Telemach merge')
+if counts['NovaSeries.rs'] == 0:
+    raise SystemExit('NovaSeries.rs has 0 programmes')
+icon = channel.find('icon')
+if icon is None or not icon.get('src'):
+    raise SystemExit('NovaSeries.rs has no logo')
+print('NovaSeries.rs', counts['NovaSeries.rs'], 'programmes', icon.get('src'))
+PY
+
+  commit_stage "Stage Nova Series Telemach EPG" guide.xml
 }
 
 croatia_extra() {
@@ -297,6 +340,7 @@ PY
 }
 
 run_section "Serbia extra EPG" serbia_extra
+run_section "Nova Series Telemach EPG" nova_series_extra
 run_section "Croatia extra EPG" croatia_extra
 run_section "Hype MTS EPG" hype_extra
 run_section "Informer MTS EPG" informer_extra
