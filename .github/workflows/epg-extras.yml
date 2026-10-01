@@ -4,6 +4,16 @@ on:
   workflow_run:
     workflows: ["Update EPG"]
     types: [completed]
+  push:
+    branches: [main]
+    paths:
+      - scripts/diagnose_mts_regional_times.py
+      - scripts/import_mts_serbia_epg.py
+      - scripts/import_mts_pink_epg.py
+      - scripts/run_epg_extras.sh
+      - config/serbia-extra-mts.xml
+      - config/serbia-extra-telemach.xml
+      - .github/workflows/epg-extras.yml
 
 permissions:
   contents: write
@@ -14,7 +24,7 @@ concurrency:
 
 jobs:
   update-extras:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event_name == 'push' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 120
 
@@ -34,6 +44,9 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
+      - name: Diagnose live MTS regional timestamps
+        run: python3 scripts/diagnose_mts_regional_times.py
 
       - name: Run all EPG extras serially
         run: bash scripts/run_epg_extras.sh
