@@ -57,18 +57,18 @@ jobs:
               return text
 
           def set_job_condition(text: str, condition: str):
+              jobs_offset = text.index('jobs:')
               pattern = re.compile(r'(?m)^(  [A-Za-z0-9_-]+:)\n(?:    if: .*\n)?')
-              match = pattern.search(text[text.index('jobs:'):])
+              match = pattern.search(text[jobs_offset:])
               if not match:
                   raise SystemExit('Could not locate workflow job')
-              offset = text.index('jobs:')
-              start = offset + match.start()
-              end = offset + match.end()
-              job_header = match.group(1)
-              return text[:start] + job_header + '\n    if: ' + condition + '\n' + text[end:]
+              start = jobs_offset + match.start()
+              end = jobs_offset + match.end()
+              return text[:start] + match.group(1) + '\n    if: ' + condition + '\n' + text[end:]
 
-          # Main workflow: this is the only automatic entry point. A fresh main
-          # run may pre-empt an older downstream writer so stale data never wins.
+          def gh_expr(body: str):
+              return '$' + '{{ ' + body + ' }}'
+
           main = root / '.github/workflows/epg.yml'
           text = main.read_text(encoding='utf-8')
           text = set_concurrency(text, True)
@@ -77,42 +77,48 @@ jobs:
           anchor = '      - .github/workflows/epg.yml\n'
           if anchor not in text:
               raise SystemExit('Could not locate Update EPG path trigger anchor')
-          extra_paths = '''      - config/serbia-extra-mts.xml
-      - config/serbia-extra-mts-logos.csv
-      - config/croatia-extra-channels.xml
-      - config/croatia-playlist-aliases.csv
-      - config/m3u-croatia-playlist-logos.csv
-      - config/hype-mts.xml
-      - config/informer-mts.xml
-      - config/m3u-croatia-logo-trial.csv
-      - scripts/import_mts_pink_hahalol.py
-      - scripts/merge_xmltv.py
-      - scripts/add_croatia_epg_aliases.py
-      - scripts/apply_m3u_croatia_playlist_logos.py
-      - scripts/import_nova_cinema_raspored.py
-      - scripts/import_nova_family_tvprogramdanas.py
-      - scripts/import_nova_world_tvepg.py
-      - scripts/import_bih_local_channels.py
-      - scripts/host_m3u_croatia_logos.py
-      - scripts/add_croatia_playlist_aliases.py
-      - .github/workflows/serbia-extra-mts.yml
-      - .github/workflows/croatia-extra-epg.yml
-      - .github/workflows/hype-mts.yml
-      - .github/workflows/informer-mts.yml
-      - .github/workflows/croatia-logos.yml
-      - .github/workflows/bih-local-epg.yml
-'''
+          extra_paths = ''.join([
+              '      - config/serbia-extra-mts.xml\n',
+              '      - config/serbia-extra-mts-logos.csv\n',
+              '      - config/croatia-extra-channels.xml\n',
+              '      - config/croatia-playlist-aliases.csv\n',
+              '      - config/m3u-croatia-playlist-logos.csv\n',
+              '      - config/hype-mts.xml\n',
+              '      - config/informer-mts.xml\n',
+              '      - config/m3u-croatia-logo-trial.csv\n',
+              '      - scripts/import_mts_pink_hahalol.py\n',
+              '      - scripts/merge_xmltv.py\n',
+              '      - scripts/add_croatia_epg_aliases.py\n',
+              '      - scripts/apply_m3u_croatia_playlist_logos.py\n',
+              '      - scripts/import_nova_cinema_raspored.py\n',
+              '      - scripts/import_nova_family_tvprogramdanas.py\n',
+              '      - scripts/import_nova_world_tvepg.py\n',
+              '      - scripts/import_bih_local_channels.py\n',
+              '      - scripts/host_m3u_croatia_logos.py\n',
+              '      - scripts/add_croatia_playlist_aliases.py\n',
+              '      - .github/workflows/serbia-extra-mts.yml\n',
+              '      - .github/workflows/croatia-extra-epg.yml\n',
+              '      - .github/workflows/hype-mts.yml\n',
+              '      - .github/workflows/informer-mts.yml\n',
+              '      - .github/workflows/croatia-logos.yml\n',
+              '      - .github/workflows/bih-local-epg.yml\n',
+          ])
           if '      - config/serbia-extra-mts.xml\n' not in text:
               text = text.replace(anchor, anchor + extra_paths)
           main.write_text(text, encoding='utf-8')
 
+          success_only = gh_expr("github.event.workflow_run.conclusion == 'success'")
+          success_or_failure = gh_expr(
+              "github.event.workflow_run.conclusion == 'success' || "
+              "github.event.workflow_run.conclusion == 'failure'"
+          )
           chain = [
-              ('.github/workflows/serbia-extra-mts.yml', 'Update EPG', "${{ github.event.workflow_run.conclusion == 'success' }}"),
-              ('.github/workflows/croatia-extra-epg.yml', 'Update Serbia Extra MTS EPG', "${{ github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'failure' }}"),
-              ('.github/workflows/hype-mts.yml', 'Update Croatia Extra EPG', "${{ github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'failure' }}"),
-              ('.github/workflows/informer-mts.yml', 'Update Hype TV MTS EPG', "${{ github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'failure' }}"),
-              ('.github/workflows/croatia-logos.yml', 'Update Informer TV MTS EPG', "${{ github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'failure' }}"),
-              ('.github/workflows/bih-local-epg.yml', 'Update Croatia Logos', "${{ github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'failure' }}"),
+              ('.github/workflows/serbia-extra-mts.yml', 'Update EPG', success_only),
+              ('.github/workflows/croatia-extra-epg.yml', 'Update Serbia Extra MTS EPG', success_or_failure),
+              ('.github/workflows/hype-mts.yml', 'Update Croatia Extra EPG', success_or_failure),
+              ('.github/workflows/informer-mts.yml', 'Update Hype TV MTS EPG', success_or_failure),
+              ('.github/workflows/croatia-logos.yml', 'Update Informer TV MTS EPG', success_or_failure),
+              ('.github/workflows/bih-local-epg.yml', 'Update Croatia Logos', success_or_failure),
           ]
 
           for rel, upstream, condition in chain:
@@ -123,7 +129,6 @@ jobs:
               path.write_text(workflow, encoding='utf-8')
               print(f'Updated {rel}: after {upstream}')
 
-          # This workflow is deliberately one-shot.
           Path('.github/workflows/repair-epg-pipeline.yml').unlink()
           PY
 
