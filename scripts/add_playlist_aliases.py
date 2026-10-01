@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Expose the playlist's existing tvg-id values as XMLTV channel aliases."""
+"""Expose the playlist's active tvg-id values as XMLTV channel aliases."""
 
 import collections
 import copy
 import csv
 import sys
 import xml.etree.ElementTree as ET
+from pathlib import Path
 from urllib.parse import urlparse
 
 
@@ -38,11 +39,38 @@ def read_alias_logos(path):
     return logos
 
 
-def main(guide_path, alias_path, logos_path=None):
-    aliases = read_aliases(alias_path)
+def read_active_ids(path):
+    active = set()
+    for raw in Path(path).read_text(encoding="utf-8").splitlines():
+        value = raw.strip()
+        if value and not value.startswith("#"):
+            active.add(value)
+    return active
+
+
+def main(guide_path, alias_path, logos_path=None, active_ids_path=None):
+    all_aliases = read_aliases(alias_path)
     logos = read_alias_logos(logos_path) if logos_path else {}
-    if set(logos) - set(aliases):
+    if set(logos) - set(all_aliases):
         raise ValueError("Playlist logo references a missing alias")
+
+    aliases = all_aliases
+    if active_ids_path:
+        active_ids = read_active_ids(active_ids_path)
+        aliases = {
+            alias: target
+            for alias, target in all_aliases.items()
+            if alias in active_ids
+        }
+        logos = {alias: url for alias, url in logos.items() if alias in aliases}
+        skipped = sorted(set(all_aliases) - set(aliases))
+        print(
+            f"Playlist alias activity filter: active={len(aliases)}/{len(all_aliases)} "
+            f"skipped_inactive={len(skipped)}"
+        )
+        if skipped:
+            print("Inactive aliases not cloned: " + ", ".join(skipped))
+
     tree = ET.parse(guide_path)
     root = tree.getroot()
     if root.tag != "tv":
@@ -79,10 +107,13 @@ def main(guide_path, alias_path, logos_path=None):
             root.append(duplicate)
 
     tree.write(guide_path, encoding="utf-8", xml_declaration=True)
-    print(f"Added {len(aliases)} playlist ID aliases to the XMLTV guide")
+    print(f"Added {len(aliases)} active playlist ID aliases to the XMLTV guide")
 
 
 if __name__ == "__main__":
-    if len(sys.argv) not in (3, 4):
-        raise SystemExit("Usage: add_playlist_aliases.py guide.xml config/playlist_aliases.csv [config/playlist-alias-logos.csv]")
+    if len(sys.argv) not in (3, 4, 5):
+        raise SystemExit(
+            "Usage: add_playlist_aliases.py guide.xml config/playlist_aliases.csv "
+            "[config/playlist-alias-logos.csv] [config/active_playlist_tvg_ids.txt]"
+        )
     main(*sys.argv[1:])
