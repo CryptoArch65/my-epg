@@ -35,8 +35,5 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Supplement K1 and Balkan Trip EPG
-        run: python3 scripts/import_mts_serbia_epg.py guide.xml
-
       - name: Run all EPG extras serially
         run: bash scripts/run_epg_extras.sh
