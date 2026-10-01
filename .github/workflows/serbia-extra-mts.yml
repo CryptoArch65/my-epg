@@ -66,7 +66,7 @@ jobs:
       - name: Merge Serbia extra MTS EPG into guide
         run: python3 scripts/merge_xmltv.py guide.xml serbia-extra-mts.xml guide.serbia-extra.xml
 
-      - name: Fetch Pink HA HA and LOL directly from MTS search
+      - name: Fetch Pink HA HA and LOL directly from MTS
         run: python3 scripts/import_mts_pink_hahalol.py
 
       - name: Merge Pink HA HA and LOL into guide
@@ -84,8 +84,8 @@ jobs:
           import xml.etree.ElementTree as ET
           from collections import Counter
 
-          all_channels = ['insajdertv.rs', 'Balkan Trip', 'AgroTV.rs', '101TV.rs', 'SOS Kanal Plus', 'pink-ha-ha', 'pink-lol']
-          epg_required = ['insajdertv.rs', 'AgroTV.rs', 'pink-ha-ha', 'pink-lol']
+          all_channels = ['insajdertv.rs', 'Balkan Trip', 'AgroTV.rs', '101TV.rs', 'SOS Kanal Plus', 'pinkhaha.rs', 'lol.rs']
+          epg_required = ['insajdertv.rs', 'AgroTV.rs', 'pinkhaha.rs', 'lol.rs']
           root = ET.parse('guide.serbia-extra-pink.xml').getroot()
           counts = Counter(p.get('channel') for p in root.findall('programme'))
           channels = {c.get('id'): c for c in root.findall('channel')}
