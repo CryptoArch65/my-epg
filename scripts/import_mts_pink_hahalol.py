@@ -7,8 +7,8 @@ from datetime import date, timedelta, datetime
 
 BASE = 'https://mts.rs/hybris/ecommerce/b2c/v1/products/search'
 CHANNELS = [
-    {'codes': {'ha_ha'}, 'names': {'ha ha','haha'}, 'xmltv_id': 'pink-ha-ha', 'display': 'HA HA'},
-    {'codes': {'lol'}, 'names': {'lol'}, 'xmltv_id': 'pink-lol', 'display': 'LOL'},
+    {'codes': {'ha_ha'}, 'names': {'ha ha','haha'}, 'xmltv_id': 'pinkhaha.rs', 'display': 'PINK HAHA'},
+    {'codes': {'lol'}, 'names': {'lol'}, 'xmltv_id': 'lol.rs', 'display': 'PINK LOL'},
 ]
 
 
@@ -110,7 +110,7 @@ def main():
 
     ET.indent(root, space='  ')
     ET.ElementTree(root).write('pink-hahalol-mts.xml', encoding='utf-8', xml_declaration=True)
-    print('Pink HA HA/LOL counts:', counts)
+    print('Pink HAHA/LOL counts:', counts)
     missing = [cid for cid, n in counts.items() if n == 0]
     if missing:
         raise SystemExit('No programmes for: ' + ', '.join(missing))
