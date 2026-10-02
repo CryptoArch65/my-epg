@@ -38,9 +38,9 @@ jobs:
               pages=(data.get('pagination') or {}).get('totalPages')
               if pages is not None and page+1>=pages: break
           print('NOW',now.isoformat(),'products',len(products))
-          keys=('nis','pink3','pink 3','vesti','narodna')
+          keys=('nis','pink3','vesti','narodna')
           for p in products:
-              hay=' '.join(str(p.get(k) or '') for k in ('name','code')).casefold()
+              hay=norm(' '.join(str(p.get(k) or '') for k in ('name','code')))
               if any(k in hay for k in keys):
                   print('\nCHANNEL',repr(p.get('name')), 'CODE',repr(p.get('code')))
                   print('IMAGES',repr(p.get('images') or p.get('picture') or p.get('logo')))
