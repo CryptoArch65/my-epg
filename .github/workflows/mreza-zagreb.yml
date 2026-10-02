@@ -10,6 +10,7 @@ on:
     paths:
       - scripts/import_gledaj_mreza_zagreb.py
       - scripts/import_requested_channels.py
+      - scripts/import_mts_pink3_narodna.py
       - scripts/apply_mreza_source_logo.py
       - .github/workflows/mreza-zagreb.yml
   schedule:
@@ -51,7 +52,9 @@ jobs:
           python3 scripts/apply_mreza_source_logo.py guide.xml
 
       - name: Import requested EPG and logo fixes
-        run: python3 scripts/import_requested_channels.py guide.xml
+        run: |
+          python3 scripts/import_requested_channels.py guide.xml
+          python3 scripts/import_mts_pink3_narodna.py guide.xml
 
       - name: Verify requested channels
         run: |
@@ -60,8 +63,14 @@ jobs:
           from collections import Counter
           root = ET.parse('guide.xml').getroot()
           counts = Counter(p.get('channel') for p in root.findall('programme'))
-          required_epg = ('MrezaZG.hr', 'NisTV.rs', 'OsječkaTV.hr', 'pink2.rs', 'OTV.hr')
-          for cid in ('MrezaZG.hr','NisTV.rs','OsječkaTV.hr','htv5','pink2.rs','OTV.hr','RTVMlava.rs','RTL.hr'):
+          required_epg = (
+              'MrezaZG.hr', 'NisTV.rs', 'OsječkaTV.hr', 'pink2.rs', 'OTV.hr',
+              'vesti.rs', 'narodnatv.rs'
+          )
+          for cid in (
+              'MrezaZG.hr','NisTV.rs','OsječkaTV.hr','htv5','pink2.rs','OTV.hr',
+              'RTVMlava.rs','RTL.hr','vesti.rs','narodnatv.rs'
+          ):
               ch = next((c for c in root.findall('channel') if c.get('id') == cid), None)
               names = [(n.text or '').strip() for n in ch.findall('display-name')] if ch is not None else []
               icon = ch.find('icon') if ch is not None else None
@@ -69,6 +78,10 @@ jobs:
           for cid in required_epg:
               if counts[cid] == 0:
                   raise SystemExit(f'{cid} has no programmes')
+          for cid in ('vesti.rs','narodnatv.rs'):
+              ch = next((c for c in root.findall('channel') if c.get('id') == cid), None)
+              if ch is None or ch.find('icon') is None or not ch.find('icon').get('src'):
+                  raise SystemExit(f'{cid} MTS logo missing')
           mlava = next((c for c in root.findall('channel') if c.get('id') == 'RTVMlava.rs'), None)
           if mlava is None or mlava.find('icon') is None or not mlava.find('icon').get('src'):
               raise SystemExit('RTVMlava.rs logo missing')
@@ -79,7 +92,7 @@ jobs:
       - name: Publish guide.xml
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.email "41898282+CryptoArch65@users.noreply.github.com"
           git add guide.xml
           if git diff --cached --quiet; then
             echo "Guide has not changed"
