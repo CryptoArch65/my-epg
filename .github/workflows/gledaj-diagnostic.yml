@@ -1,0 +1,45 @@
+name: Diagnose Gledaj Mreza EPG
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/gledaj-diagnostic.yml
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe Gledaj.hr EPG endpoint
+        run: |
+          python3 - <<'PY'
+          from datetime import datetime
+          from urllib.request import Request, urlopen
+          from zoneinfo import ZoneInfo
+
+          # The user supplied channel 299 for Mreza Zagreb. Use today's
+          # Europe/Zagreb midnight in milliseconds to mirror the player URL.
+          now = datetime.now(ZoneInfo('Europe/Zagreb'))
+          midnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
+          millis = int(midnight.timestamp() * 1000)
+          url = f'https://player.gledaj.hr/tv/epg/299/time/{millis}'
+          print('URL:', url)
+          req = Request(url, headers={
+              'User-Agent': 'Mozilla/5.0',
+              'Accept': 'application/json,text/plain,*/*',
+              'Referer': 'https://player.gledaj.hr/',
+          })
+          with urlopen(req, timeout=30) as response:
+              body = response.read(200000)
+              print('STATUS:', response.status)
+              print('CONTENT-TYPE:', response.headers.get('Content-Type'))
+              print('CONTENT-LENGTH-READ:', len(body))
+              text = body.decode('utf-8', errors='replace')
+              print('BODY-BEGIN')
+              print(text[:20000])
+              print('BODY-END')
+          PY
