@@ -1,0 +1,60 @@
+name: Diagnose MTS Pink/Narodna/Nis
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/mts-pink-narodna-diagnostic.yml
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect MTS v2
+        run: |
+          python3 - <<'PY'
+          import json,re,unicodedata
+          from datetime import datetime
+          from urllib.parse import urlencode
+          from urllib.request import Request,urlopen
+          from zoneinfo import ZoneInfo
+
+          def norm(v):
+              v=unicodedata.normalize('NFKD',str(v or '')).encode('ascii','ignore').decode('ascii')
+              return re.sub(r'[^a-z0-9]+','',v.casefold())
+
+          tz=ZoneInfo('Europe/Belgrade')
+          now=datetime.now(tz)
+          day=now.date().isoformat()
+          api='https://mts.rs/hybris/mtscommercewebservices/v2/mtsB2C/products/search'
+          query=f':pozicija-rastuce:tv-kategorija:iris-tv-paketi:channelProgramDates:{day}'
+          products=[]
+          for page in range(20):
+              url=api+'?'+urlencode({'sort':'pozicija-rastuce','searchQueryContext':'CHANNEL_PROGRAM','query':query,'pageSize':50,'fields':'FULL','currentPage':page})
+              with urlopen(Request(url,headers={'User-Agent':'Mozilla/5.0','Accept':'application/json'}),timeout=40) as r:
+                  data=json.load(r)
+              products += data.get('products') or []
+              pages=(data.get('pagination') or {}).get('totalPages')
+              if pages is not None and page+1>=pages: break
+          print('NOW',now.isoformat(),'products',len(products))
+          keys=('nis','pink3','pink 3','vesti','narodna')
+          for p in products:
+              hay=' '.join(str(p.get(k) or '') for k in ('name','code')).casefold()
+              if any(k in hay for k in keys):
+                  print('\nCHANNEL',repr(p.get('name')), 'CODE',repr(p.get('code')))
+                  print('IMAGES',repr(p.get('images') or p.get('picture') or p.get('logo')))
+                  progs=p.get('programs') or []
+                  print('PROGRAMMES',len(progs))
+                  for pr in progs:
+                      s=str(pr.get('start') or '')[:19]
+                      e=str(pr.get('end') or '')[:19]
+                      title=pr.get('title')
+                      try:
+                          sd=datetime.strptime(s,'%Y-%m-%dT%H:%M:%S').replace(tzinfo=tz)
+                          ed=datetime.strptime(e,'%Y-%m-%dT%H:%M:%S').replace(tzinfo=tz)
+                          if sd <= now < ed or abs((sd-now).total_seconds()) < 7200:
+                              print('  ',sd.isoformat(),ed.isoformat(),repr(title))
+                      except Exception:
+                          pass
+          PY
