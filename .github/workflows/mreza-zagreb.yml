@@ -1,0 +1,67 @@
+name: Update Mreza Zagreb EPG
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/import_gledaj_mreza_zagreb.py
+      - .github/workflows/mreza-zagreb.yml
+  schedule:
+    - cron: "20 4 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: guide-writer
+  cancel-in-progress: false
+
+jobs:
+  update-mreza-zagreb:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install browser dependency
+        run: |
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Import Mreza Zagreb from Gledaj.hr and add RTL display aliases
+        run: python3 scripts/import_gledaj_mreza_zagreb.py guide.xml
+
+      - name: Verify imported channels
+        run: |
+          python3 - <<'PY'
+          import xml.etree.ElementTree as ET
+          root = ET.parse('guide.xml').getroot()
+          for cid in ('MrezaZG.hr', 'RTL.hr'):
+              ch = next((c for c in root.findall('channel') if c.get('id') == cid), None)
+              names = [(n.text or '').strip() for n in ch.findall('display-name')] if ch is not None else []
+              progs = [p for p in root.findall('programme') if p.get('channel') == cid]
+              print(cid, 'names=', names, 'programmes=', len(progs))
+          if not any(p.get('channel') == 'MrezaZG.hr' for p in root.findall('programme')):
+              raise SystemExit('MrezaZG.hr has no programmes')
+          PY
+
+      - name: Publish guide.xml
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add guide.xml
+          if git diff --cached --quiet; then
+            echo "Guide has not changed"
+            exit 0
+          fi
+          git commit -m "Update Mreza Zagreb EPG"
+          git pull --rebase
+          git push
