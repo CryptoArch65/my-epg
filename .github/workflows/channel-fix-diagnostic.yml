@@ -1,0 +1,75 @@
+name: Diagnose requested channel sources
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/channel-fix-diagnostic.yml
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect sources and MTS Niš TV
+        run: |
+          python3 -m pip install lxml
+          python3 - <<'PY'
+          import json, re, unicodedata
+          from datetime import datetime
+          from urllib.parse import urlencode
+          from urllib.request import Request, urlopen
+          from zoneinfo import ZoneInfo
+          from lxml import html
+
+          URLS = [
+              'https://osjecka.com/tv-raspored',
+              'https://www.tvprogramdanas.net/osjeka-tv',
+              'https://tvepg.eu/hr/croatia/channel/hrt_international',
+              'https://rtvmlava.com/',
+              'https://naslovi.net/tv-program/red/',
+          ]
+
+          for url in URLS:
+              print('\n===', url, '===')
+              try:
+                  req = Request(url, headers={'User-Agent':'Mozilla/5.0'})
+                  with urlopen(req, timeout=40) as r:
+                      body = r.read(3_000_000)
+                      print('status', r.status, 'final', r.geturl(), 'bytes', len(body))
+                  tree = html.fromstring(body)
+                  print('title:', ' '.join(tree.xpath('string(//title)').split()))
+                  print('canonical:', tree.xpath('//link[@rel="canonical"]/@href')[:3])
+                  print('og:image:', tree.xpath('//meta[@property="og:image"]/@content')[:3])
+                  imgs=[]
+                  for src in tree.xpath('//img/@src'):
+                      if src and src not in imgs:
+                          imgs.append(src)
+                  print('images:', imgs[:20])
+                  text='\n'.join(x.strip() for x in tree.xpath('//body//text()') if x.strip())
+                  print('body sample:', text[:8000])
+              except Exception as exc:
+                  print('ERROR', type(exc).__name__, repr(exc))
+
+          def norm(v):
+              v=unicodedata.normalize('NFKD', str(v or '')).encode('ascii','ignore').decode('ascii')
+              return re.sub(r'[^a-z0-9]+','',v.casefold())
+
+          day=datetime.now(ZoneInfo('Europe/Belgrade')).date().isoformat()
+          api='https://mts.rs/hybris/mtscommercewebservices/v2/mtsB2C/products/search'
+          query=f':pozicija-rastuce:tv-kategorija:iris-tv-paketi:channelProgramDates:{day}'
+          allp=[]
+          for page in range(0,20):
+              url=api+'?'+urlencode({'sort':'pozicija-rastuce','searchQueryContext':'CHANNEL_PROGRAM','query':query,'pageSize':50,'fields':'FULL','currentPage':page})
+              with urlopen(Request(url, headers={'User-Agent':'Mozilla/5.0','Accept':'application/json'}), timeout=40) as r:
+                  data=json.load(r)
+              allp += data.get('products') or []
+              total=(data.get('pagination') or {}).get('totalPages')
+              if total is not None and page+1>=total:
+                  break
+          print('\n=== MTS Niš candidates ===')
+          for p in allp:
+              if 'nis' in norm(p.get('name')) or 'nis' in norm(p.get('code')):
+                  print('name=',repr(p.get('name')),'code=',repr(p.get('code')),'programmes=',len(p.get('programs') or []),'logo=',repr(p.get('picture') or p.get('logo') or p.get('images')))
+          PY
