@@ -14,32 +14,38 @@ jobs:
   diagnose:
     runs-on: ubuntu-latest
     steps:
-      - name: Probe Gledaj.hr EPG endpoint
+      - name: Inspect player scripts for EPG API
         run: |
           python3 - <<'PY'
-          from datetime import datetime
+          import re
           from urllib.request import Request, urlopen
-          from zoneinfo import ZoneInfo
 
-          # The user supplied channel 299 for Mreza Zagreb. Use today's
-          # Europe/Zagreb midnight in milliseconds to mirror the player URL.
-          now = datetime.now(ZoneInfo('Europe/Zagreb'))
-          midnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
-          millis = int(midnight.timestamp() * 1000)
-          url = f'https://player.gledaj.hr/tv/epg/299/time/{millis}'
-          print('URL:', url)
-          req = Request(url, headers={
-              'User-Agent': 'Mozilla/5.0',
-              'Accept': 'application/json,text/plain,*/*',
-              'Referer': 'https://player.gledaj.hr/',
-          })
-          with urlopen(req, timeout=30) as response:
-              body = response.read(200000)
-              print('STATUS:', response.status)
-              print('CONTENT-TYPE:', response.headers.get('Content-Type'))
-              print('CONTENT-LENGTH-READ:', len(body))
-              text = body.decode('utf-8', errors='replace')
-              print('BODY-BEGIN')
-              print(text[:20000])
-              print('BODY-END')
+          base = 'https://player.gledaj.hr/'
+          assets = [
+              'perception_player-11.7.6/scripts/perception.min.js',
+              'perception_player-11.7.6/scripts/perception-lib.min.js',
+          ]
+          headers = {'User-Agent': 'Mozilla/5.0', 'Referer': base}
+          for asset in assets:
+              url = base + asset
+              print('\nASSET', url)
+              with urlopen(Request(url, headers=headers), timeout=60) as r:
+                  text = r.read(8_000_000).decode('utf-8', errors='replace')
+              print('bytes/chars:', len(text))
+              for needle in ('/epg/', 'epg/', 'api/', '/api/', 'channelProgram', 'getEpg', 'EPG'):
+                  print('\nNEEDLE', needle)
+                  seen = 0
+                  for m in re.finditer(re.escape(needle), text, flags=re.I):
+                      start = max(0, m.start() - 500)
+                      end = min(len(text), m.end() + 1000)
+                      snippet = text[start:end].replace('\n', ' ')
+                      print(snippet)
+                      seen += 1
+                      if seen >= 8:
+                          break
+                  print('shown:', seen)
+              urls = sorted(set(re.findall(r'https?://[^"\'\\\s]+', text)))
+              print('\nURLS')
+              for u in urls[:200]:
+                  print(u[:1000])
           PY
