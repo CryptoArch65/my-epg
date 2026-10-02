@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Use MAXtv's public channel catalogue for the selected Croatian logos."""
+"""Use MAXtv's public catalogue for selected Croatian metadata and test Arena Sport 1 EPG."""
 
 import csv
 import hashlib
@@ -22,6 +22,15 @@ API = ('https://tv-hr-prod.yo-digital.com/hr-bifrost/epg/channel'
        '&natco_key={}&app_language=hr&natco_code=hr')
 LOGO_PREFIX = 'https://tv-hr-prod.yo-digital.com/prod/images/logos/'
 
+ARENA1_OLD = (
+    '  <channel site="tvarenasport.hr" site_id="01" lang="hr" '
+    'xmltv_id="ArenaSport1.hr@SD">Arena Sport 1</channel>'
+)
+ARENA1_MAXTV = (
+    '  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="274914856088" lang="hr" '
+    'xmltv_id="ArenaSport1.hr@SD">Arena Sport 1</channel>'
+)
+
 
 def js_constant(source, name):
     match = re.search(r'const\s+' + name + r"\s*=\s*['\"]([^'\"]+)['\"]", source)
@@ -42,6 +51,18 @@ def ensure_epg_days(config_path, days=3):
         content = content.replace(marker, replacement, 1)
     config_path.write_text(content, encoding='utf-8')
     print(f'Configured MAXtv EPG for {days} days')
+
+
+def ensure_arena1_maxtv_source(channels_path=Path('config/channels.xml')):
+    """For the current test, keep the XMLTV ID but source HR Arena Sport 1 from MAXtv."""
+    content = channels_path.read_text(encoding='utf-8')
+    if ARENA1_MAXTV in content:
+        print('HR Arena Sport 1 already configured for MAXtv station 274914856088')
+        return
+    if content.count(ARENA1_OLD) != 1:
+        raise ValueError('Could not uniquely find HR Arena Sport 1 tvarenasport.hr mapping')
+    channels_path.write_text(content.replace(ARENA1_OLD, ARENA1_MAXTV, 1), encoding='utf-8')
+    print('TEST: HR Arena Sport 1 now uses MAXtv station 274914856088 with XMLTV ID ArenaSport1.hr@SD')
 
 
 def image_url(value):
@@ -102,6 +123,7 @@ def official_logos(config_path):
 
 def main(config_path, csv_path):
     ensure_epg_days(config_path, 3)
+    ensure_arena1_maxtv_source()
     with csv_path.open(newline='', encoding='utf-8') as source:
         reader = csv.DictReader(source)
         if reader.fieldnames != ['guide_id', 'logo_url']:
