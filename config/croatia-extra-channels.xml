@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <channels>
   <channel site="m.tv.sms.cz" site_id="HRT+International" lang="cs" xmltv_id="htv5">HRT International</channel>
+  <channel site="m.tv.sms.cz" site_id="Food+Network" lang="en" xmltv_id="iptv#ch-451-food-network">Food Network</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="276770344345" lang="hr" xmltv_id="N1Croatia.hr">N1 HR</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="343758888241" lang="hr" xmltv_id="zdravatv.hr">Zdrava TV</channel>
 </channels>
