@@ -14,8 +14,10 @@ from playwright.sync_api import sync_playwright
 
 CHANNEL_ID = "MrezaZG.hr"
 CHANNEL_NAME = "|HR| MREZA ZAGREB"
-Gledaj_CHANNEL = 299
+GLEDAJ_CHANNEL = 299
 TZ = ZoneInfo("Europe/Zagreb")
+RTL_ID = "RTL.hr"
+RTL_DISPLAY_ALIASES = ("|HR| RTL", "|HR| RTL HD")
 
 MONTHS = {
     "sij": 1, "siječ": 1, "sijecn": 1,
@@ -51,7 +53,7 @@ def local_noon_ms(day: date) -> int:
 
 
 def fetch_text(day: date) -> str:
-    url = f"https://player.gledaj.hr/tv/epg/{Gledaj_CHANNEL}/time/{local_noon_ms(day)}"
+    url = f"https://player.gledaj.hr/tv/epg/{GLEDAJ_CHANNEL}/time/{local_noon_ms(day)}"
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         page = browser.new_page(locale="hr-HR")
@@ -98,12 +100,26 @@ def parse_schedule(text: str, default_year: int) -> list[tuple[datetime, str]]:
         start = datetime(current_day.year, current_day.month, current_day.day, hour, minute, tzinfo=TZ)
         rows.append((start, title))
 
-    # Keep one row per (start,title), then sort.
     return sorted(set(rows), key=lambda row: row[0])
 
 
 def xmltv_time(dt: datetime) -> str:
     return dt.strftime("%Y%m%d%H%M%S %z")
+
+
+def add_rtl_display_aliases(root: ET.Element) -> None:
+    channel = next((node for node in root.findall("channel") if node.get("id") == RTL_ID), None)
+    if channel is None:
+        print("RTL alias warning: RTL.hr channel not found")
+        return
+
+    existing = {(node.text or "").strip() for node in channel.findall("display-name")}
+    added = []
+    for alias in RTL_DISPLAY_ALIASES:
+        if alias not in existing:
+            ET.SubElement(channel, "display-name", {"lang": "hr"}).text = alias
+            added.append(alias)
+    print(f"RTL.hr display aliases added: {added or 'none (already present)'}")
 
 
 def main() -> None:
@@ -114,10 +130,10 @@ def main() -> None:
     tree = ET.parse(guide_path)
     root = tree.getroot()
 
+    add_rtl_display_aliases(root)
+
     today = datetime.now(TZ).date()
     all_rows: list[tuple[datetime, str]] = []
-    # Fetch today and tomorrow. Each Gledaj page generally exposes a wider date strip,
-    # and the second fetch protects us against a partial first response.
     for offset in (0, 1):
         text = fetch_text(today + timedelta(days=offset))
         all_rows.extend(parse_schedule(text, (today + timedelta(days=offset)).year))
@@ -126,7 +142,6 @@ def main() -> None:
     if not rows:
         raise SystemExit("Gledaj.hr returned no parsable Mreza Zagreb programmes")
 
-    # Remove any previous copy before replacing it.
     for node in list(root.findall("channel")):
         if node.get("id") == CHANNEL_ID:
             root.remove(node)
@@ -145,10 +160,7 @@ def main() -> None:
 
     added = 0
     for index, (start, title) in enumerate(useful):
-        if index + 1 < len(useful):
-            stop = useful[index + 1][0]
-        else:
-            stop = start + timedelta(hours=1)
+        stop = useful[index + 1][0] if index + 1 < len(useful) else start + timedelta(hours=1)
         if stop <= start:
             continue
         programme = ET.Element("programme", {
@@ -165,7 +177,7 @@ def main() -> None:
 
     ET.indent(tree, space="  ")
     tree.write(guide_path, encoding="utf-8", xml_declaration=True)
-    print(f"Mreza Zagreb: imported {added} programmes from Gledaj.hr channel {Gledaj_CHANNEL}")
+    print(f"Mreza Zagreb: imported {added} programmes from Gledaj.hr channel {GLEDAJ_CHANNEL}")
     print(f"First: {useful[0][0].isoformat()} {useful[0][1]}")
     print(f"Last:  {useful[-1][0].isoformat()} {useful[-1][1]}")
 
