@@ -1,14 +1,19 @@
-name: Update Mreza Zagreb EPG
+name: Update custom channel fixes
 
 on:
+  workflow_run:
+    workflows: ["Update EPG Extras"]
+    types: [completed]
   workflow_dispatch:
   push:
     branches: [main]
     paths:
       - scripts/import_gledaj_mreza_zagreb.py
+      - scripts/import_requested_channels.py
+      - scripts/apply_mreza_source_logo.py
       - .github/workflows/mreza-zagreb.yml
   schedule:
-    - cron: "20 4 * * *"
+    - cron: "40 5 * * *"
 
 permissions:
   contents: write
@@ -18,39 +23,57 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  update-mreza-zagreb:
+  update-custom-channels:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
 
     steps:
-      - name: Checkout
+      - name: Checkout latest published guide
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Install browser dependency
+      - name: Install parser and browser dependencies
         run: |
-          python -m pip install playwright
+          python -m pip install lxml playwright
           python -m playwright install --with-deps chromium
 
-      - name: Import Mreza Zagreb from Gledaj.hr and add RTL display aliases
-        run: python3 scripts/import_gledaj_mreza_zagreb.py guide.xml
+      - name: Import Mreza Zagreb from Gledaj.hr
+        run: |
+          python3 scripts/import_gledaj_mreza_zagreb.py guide.xml
+          python3 scripts/apply_mreza_source_logo.py guide.xml
 
-      - name: Verify imported channels
+      - name: Import requested EPG and logo fixes
+        run: python3 scripts/import_requested_channels.py guide.xml
+
+      - name: Verify requested channels
         run: |
           python3 - <<'PY'
           import xml.etree.ElementTree as ET
+          from collections import Counter
           root = ET.parse('guide.xml').getroot()
-          for cid in ('MrezaZG.hr', 'RTL.hr'):
+          counts = Counter(p.get('channel') for p in root.findall('programme'))
+          required_epg = ('MrezaZG.hr', 'NisTV.rs', 'OsječkaTV.hr', 'pink2.rs', 'OTV.hr')
+          for cid in ('MrezaZG.hr','NisTV.rs','OsječkaTV.hr','htv5','pink2.rs','OTV.hr','RTVMlava.rs','RTL.hr'):
               ch = next((c for c in root.findall('channel') if c.get('id') == cid), None)
               names = [(n.text or '').strip() for n in ch.findall('display-name')] if ch is not None else []
-              progs = [p for p in root.findall('programme') if p.get('channel') == cid]
-              print(cid, 'names=', names, 'programmes=', len(progs))
-          if not any(p.get('channel') == 'MrezaZG.hr' for p in root.findall('programme')):
-              raise SystemExit('MrezaZG.hr has no programmes')
+              icon = ch.find('icon') if ch is not None else None
+              print(cid, 'programmes=', counts[cid], 'logo=', bool(icon is not None and icon.get('src')), 'names=', names)
+          for cid in required_epg:
+              if counts[cid] == 0:
+                  raise SystemExit(f'{cid} has no programmes')
+          mlava = next((c for c in root.findall('channel') if c.get('id') == 'RTVMlava.rs'), None)
+          if mlava is None or mlava.find('icon') is None or not mlava.find('icon').get('src'):
+              raise SystemExit('RTVMlava.rs logo missing')
+          if counts['htv5'] == 0:
+              print('WARNING: HRT INT TVEpg source unavailable on this run')
           PY
 
       - name: Publish guide.xml
@@ -62,6 +85,7 @@ jobs:
             echo "Guide has not changed"
             exit 0
           fi
-          git commit -m "Update Mreza Zagreb EPG"
-          git pull --rebase
-          git push
+          git commit -m "Update requested channel EPG and logos"
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
