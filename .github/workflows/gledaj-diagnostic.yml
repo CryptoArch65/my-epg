@@ -14,38 +14,51 @@ jobs:
   diagnose:
     runs-on: ubuntu-latest
     steps:
-      - name: Inspect player scripts for EPG API
+      - name: Install Playwright
+        run: |
+          python3 -m pip install playwright
+          python3 -m playwright install --with-deps chromium
+
+      - name: Capture Gledaj.hr EPG API calls
         run: |
           python3 - <<'PY'
-          import re
-          from urllib.request import Request, urlopen
+          import json
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          from playwright.sync_api import sync_playwright
 
-          base = 'https://player.gledaj.hr/'
-          assets = [
-              'perception_player-11.7.6/scripts/perception.min.js',
-              'perception_player-11.7.6/scripts/perception-lib.min.js',
-          ]
-          headers = {'User-Agent': 'Mozilla/5.0', 'Referer': base}
-          for asset in assets:
-              url = base + asset
-              print('\nASSET', url)
-              with urlopen(Request(url, headers=headers), timeout=60) as r:
-                  text = r.read(8_000_000).decode('utf-8', errors='replace')
-              print('bytes/chars:', len(text))
-              for needle in ('/epg/', 'epg/', 'api/', '/api/', 'channelProgram', 'getEpg', 'EPG'):
-                  print('\nNEEDLE', needle)
-                  seen = 0
-                  for m in re.finditer(re.escape(needle), text, flags=re.I):
-                      start = max(0, m.start() - 500)
-                      end = min(len(text), m.end() + 1000)
-                      snippet = text[start:end].replace('\n', ' ')
-                      print(snippet)
-                      seen += 1
-                      if seen >= 8:
-                          break
-                  print('shown:', seen)
-              urls = sorted(set(re.findall(r'https?://[^"\'\\\s]+', text)))
-              print('\nURLS')
-              for u in urls[:200]:
-                  print(u[:1000])
+          now = datetime.now(ZoneInfo('Europe/Zagreb'))
+          midnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
+          millis = int(midnight.timestamp() * 1000)
+          url = f'https://player.gledaj.hr/tv/epg/299/time/{millis}'
+          print('PAGE:', url)
+
+          with sync_playwright() as p:
+              browser = p.chromium.launch(headless=True)
+              page = browser.new_page()
+
+              def on_request(req):
+                  u = req.url
+                  if 'Catherine/api/' in u or 'getEpg' in u or '/api/' in u:
+                      print('\nREQUEST', req.method, u)
+                      print('POSTDATA', req.post_data or '')
+
+              def on_response(resp):
+                  u = resp.url
+                  if 'Catherine/api/' in u or 'getEpg' in u or '/api/' in u:
+                      print('\nRESPONSE', resp.status, u)
+                      try:
+                          body = resp.text()
+                      except Exception as exc:
+                          print('BODY-ERROR', repr(exc))
+                          return
+                      print('BODY', body[:50000])
+
+              page.on('request', on_request)
+              page.on('response', on_response)
+              page.goto(url, wait_until='domcontentloaded', timeout=60000)
+              page.wait_for_timeout(20000)
+              print('TITLE:', page.title())
+              print('BODYTEXT:', page.locator('body').inner_text()[:20000])
+              browser.close()
           PY
