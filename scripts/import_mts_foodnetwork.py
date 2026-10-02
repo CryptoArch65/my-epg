@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Import Food Network EPG from the live MTS v2 feed and mirror it to the provider ID."""
+"""Import Food Network EPG from the live MTS v2 feed when it is available.
+
+Food Network exists in the MTS catalogue as food_network_hd, but the live
+CHANNEL_PROGRAM feed does not always return it. Never fail the guide update or
+destroy an existing schedule when MTS has no current programme rows.
+"""
 
 from __future__ import annotations
 
@@ -95,7 +100,7 @@ def main(path: Path) -> None:
     for day in (today, today + timedelta(days=1)):
         product = next((p for p in products_for_day(day.isoformat()) if str(p.get("code") or "") == CODE), None)
         if product is None:
-            print(f"WARNING: MTS {CODE} missing for {day}")
+            print(f"WARNING: MTS {CODE} missing from live CHANNEL_PROGRAM feed for {day}")
             continue
         source_name = source_name or str(product.get("name") or "")
         items.extend(product.get("programs") or [])
@@ -112,8 +117,10 @@ def main(path: Path) -> None:
         seen.add(key)
         usable.append(item)
     usable.sort(key=lambda item: local_time(item["start"]))
+
     if len(usable) < 10:
-        raise SystemExit(f"MTS Food Network only has {len(usable)} current programmes")
+        print(f"WARNING: MTS Food Network has only {len(usable)} current programmes; leaving existing guide unchanged")
+        return
 
     tree = ET.parse(path)
     root = tree.getroot()
@@ -135,7 +142,6 @@ def main(path: Path) -> None:
         clone.set("channel", TARGET_IDS[1])
         root.append(clone)
 
-    # Keep whichever existing source/provider logo is already configured.
     if alias.find("icon") is None and source.find("icon") is not None:
         alias.append(copy.deepcopy(source.find("icon")))
 
