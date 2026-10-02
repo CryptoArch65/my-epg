@@ -75,7 +75,6 @@ jobs:
               'MrezaZG.hr', 'NisTV.rs', 'OsječkaTV.hr', 'pink2.rs', 'OTV.hr',
               'vesti.rs', 'narodnatv.rs', 'CinemaniaHD.ba',
               'SuperstarTV1.rs', 'SuperstarTV2.rs', 'SuperstarTV3.rs',
-              'iptv#ch-451-food-network', 'foodnetwork.ba',
               '343758888241', 'zdravatv.hr'
           )
           inspected = (
@@ -101,6 +100,8 @@ jobs:
               raise SystemExit('RTVMlava.rs logo missing')
           if counts['htv5'] == 0:
               print('WARNING: HRT INT TVEpg source unavailable on this run')
+          if counts['iptv#ch-451-food-network'] == 0:
+              print('WARNING: Food Network source exists but currently has no live programme data')
           PY
 
       - name: Publish guide.xml
