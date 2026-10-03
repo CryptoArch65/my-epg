@@ -17,6 +17,7 @@ on:
       - scripts/run_epg_extras.sh
       - config/serbia-extra-mts.xml
       - config/serbia-extra-telemach.xml
+      - config/croatia-extra-channels.xml
       - .github/workflows/epg-extras.yml
 
 permissions:
