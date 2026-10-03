@@ -10,6 +10,7 @@
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="282237992222" lang="hr" xmltv_id="BravoTV.hr">bravo TV</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="529074728256" lang="hr" xmltv_id="Jeka.hr">Jeka</channel>
   <channel site="mts.rs" site_id="tv_duga_plus" lang="bs" xmltv_id="DugaTV.rs">TV Duga plus</channel>
+  <channel site="mts.rs" site_id="top_tv_hd" lang="bs" xmltv_id="TopTV.rs">TOP TV</channel>
   <channel site="mtel.ba" site_id="iptv#ch-437-toxic-folk" lang="bs" xmltv_id="ToxicFolk.ba">Toxic Folk</channel>
   <channel site="mtel.ba" site_id="iptv#ch-toxic-rap" lang="bs" xmltv_id="ToxicRap.ba">Toxic Rap</channel>
 </channels>
