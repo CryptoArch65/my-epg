@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<channels>
+  <channel site="epg.telemach.ba" site_id="201" lang="hr" xmltv_id="BNMusic.ba">BN Music HD (BIH)</channel>
+  <channel site="epg.telemach.ba" site_id="495" lang="hr" xmltv_id="HayatFolk.ba">Hayat Folk Box</channel>
+  <channel site="epg.telemach.ba" site_id="654" lang="hr" xmltv_id="SevdahTV.ba">Sevdah TV</channel>
+  <channel site="epg.telemach.ba" site_id="1593" lang="hr" xmltv_id="DMSat.ba">DM Sat (BIH)</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="282239016155" lang="hr" xmltv_id="DMC.hr">DMC</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="282237992207" lang="hr" xmltv_id="FashionTV.hr">Fashion TV</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="282238504055" lang="hr" xmltv_id="ExtraTV.hr">ExtraTV</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="282237992222" lang="hr" xmltv_id="BravoTV.hr">bravo TV</channel>
+  <channel site="mts.rs" site_id="tv_duga_plus" lang="bs" xmltv_id="DugaTV.rs">TV Duga plus</channel>
+</channels>
