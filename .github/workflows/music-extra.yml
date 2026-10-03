@@ -1,0 +1,127 @@
+name: Update Music EPG Extras
+
+on:
+  workflow_run:
+    workflows: ["Update custom channel fixes"]
+    types: [completed]
+  push:
+    branches: [main]
+    paths:
+      - config/music-extra-channels.xml
+      - scripts/merge_xmltv.py
+      - .github/workflows/music-extra.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: guide-writer
+  cancel-in-progress: false
+
+jobs:
+  update-music-extras:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout latest published guide
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Clone shared EPG grabber
+        run: git clone --depth 1 https://github.com/iptv-org/epg.git epg
+
+      - name: Install grabber dependencies
+        working-directory: epg
+        run: npm ci
+
+      - name: Use three days from MAXtv
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('epg/sites/mojmaxtv.hrvatskitelekom.hr/mojmaxtv.hrvatskitelekom.hr.config.js')
+          text = path.read_text(encoding='utf-8')
+          marker = "module.exports = {\n  site: SITE_URL,"
+          replacement = "module.exports = {\n  site: SITE_URL,\n  days: 3,"
+          if replacement not in text:
+              if text.count(marker) != 1:
+                  raise SystemExit('MAXtv config structure changed upstream')
+              path.write_text(text.replace(marker, replacement, 1), encoding='utf-8')
+          PY
+
+      - name: Grab extra music channels
+        working-directory: epg
+        run: |
+          npm run grab --- \
+            --channels=../config/music-extra-channels.xml \
+            --output=../music-extra.xml \
+            --maxConnections=3
+
+      - name: Keep only channels with programme data
+        run: |
+          python3 - <<'PY'
+          import xml.etree.ElementTree as ET
+          from collections import Counter
+
+          path = 'music-extra.xml'
+          tree = ET.parse(path)
+          root = tree.getroot()
+          counts = Counter(p.get('channel') for p in root.findall('programme'))
+          keep = {cid for cid, count in counts.items() if cid and count > 0}
+          for channel in list(root.findall('channel')):
+              if channel.get('id') not in keep:
+                  root.remove(channel)
+          for programme in list(root.findall('programme')):
+              if programme.get('channel') not in keep:
+                  root.remove(programme)
+          if not keep:
+              raise SystemExit('No music extra channels returned programme data')
+          tree.write(path, encoding='utf-8', xml_declaration=True)
+          for cid in sorted(keep):
+              print(cid, counts[cid], 'programmes')
+          PY
+
+      - name: Merge music EPG into guide
+        run: |
+          python3 scripts/merge_xmltv.py guide.xml music-extra.xml guide.music.xml
+          mv guide.music.xml guide.xml
+
+      - name: Verify merged music channels
+        run: |
+          python3 - <<'PY'
+          import xml.etree.ElementTree as ET
+          from collections import Counter
+          root = ET.parse('guide.xml').getroot()
+          counts = Counter(p.get('channel') for p in root.findall('programme'))
+          wanted = (
+              'BNMusic.ba','HayatFolk.ba','SevdahTV.ba','DMSat.ba',
+              'DMC.hr','FashionTV.hr','ExtraTV.hr','BravoTV.hr','DugaTV.rs'
+          )
+          for cid in wanted:
+              print(cid, counts[cid], 'programmes')
+          if not any(counts[cid] for cid in wanted):
+              raise SystemExit('Music EPG merge produced no programme data')
+          PY
+
+      - name: Publish guide.xml
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add guide.xml
+          if git diff --cached --quiet; then
+            echo "Guide has not changed"
+            exit 0
+          fi
+          git commit -m "Update music EPG extras"
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
