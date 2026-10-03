@@ -9,6 +9,7 @@ on:
     paths:
       - config/music-extra-channels.xml
       - scripts/merge_xmltv.py
+      - scripts/import_mts_duga.py
       - .github/workflows/music-extra.yml
   workflow_dispatch:
 
@@ -66,6 +67,9 @@ jobs:
             --output=../music-extra.xml \
             --maxConnections=3
 
+      - name: Try live MTS v2 fallback for Duga TV
+        run: python3 scripts/import_mts_duga.py music-extra.xml
+
       - name: Keep only channels with programme data
         run: |
           python3 - <<'PY'
@@ -104,7 +108,7 @@ jobs:
           counts = Counter(p.get('channel') for p in root.findall('programme'))
           wanted = (
               'BNMusic.ba','HayatFolk.ba','SevdahTV.ba','DMSat.ba',
-              'DMC.hr','FashionTV.hr','ExtraTV.hr','BravoTV.hr','DugaTV.rs'
+              'DMC.hr','FashionTV.hr','ExtraTV.hr','BravoTV.hr','Jeka.hr','DugaTV.rs'
           )
           for cid in wanted:
               print(cid, counts[cid], 'programmes')
