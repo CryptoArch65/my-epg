@@ -8,5 +8,6 @@
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="282237992207" lang="hr" xmltv_id="FashionTV.hr">Fashion TV</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="282238504055" lang="hr" xmltv_id="ExtraTV.hr">ExtraTV</channel>
   <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="282237992222" lang="hr" xmltv_id="BravoTV.hr">bravo TV</channel>
+  <channel site="mojmaxtv.hrvatskitelekom.hr" site_id="529074728256" lang="hr" xmltv_id="Jeka.hr">Jeka</channel>
   <channel site="mts.rs" site_id="tv_duga_plus" lang="bs" xmltv_id="DugaTV.rs">TV Duga plus</channel>
 </channels>
