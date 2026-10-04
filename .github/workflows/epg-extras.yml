@@ -14,6 +14,8 @@ on:
       - scripts/import_mts_serbia_epg.py
       - scripts/fix_mts_regional_identity.py
       - scripts/remove_duplicate_regional_aliases.py
+      - scripts/import_nova_series_logo.py
+      - scripts/import_pikaboo_telemach.py
       - scripts/run_epg_extras.sh
       - config/serbia-extra-mts.xml
       - config/serbia-extra-telemach.xml
