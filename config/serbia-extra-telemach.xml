@@ -4,4 +4,7 @@
   <channel site="epg.telemach.ba" site_id="1604" lang="hr" xmltv_id="NovaSeries.rs">Nova Series (BIH)</channel>
   <!-- Pikaboo: exact Telemach BIH channel. -->
   <channel site="epg.telemach.ba" site_id="921" lang="hr" xmltv_id="Pikaboo.ba">Pikaboo HD (BIH)</channel>
+  <!-- Canonical Telemach kids feeds copied onto playlist-facing IDs after merge. -->
+  <channel site="epg.telemach.ba" site_id="922" lang="hr" xmltv_id="NickJrTelemach.ba">Nick Jr. (BIH)</channel>
+  <channel site="epg.telemach.ba" site_id="1879" lang="hr" xmltv_id="PinkSuperKidsTelemach.ba">Pink super kids (BIH)</channel>
 </channels>
