@@ -189,7 +189,11 @@ def replace_programmes(root, events):
 
 def main(guide_path, logos_dir):
     logos_dir.mkdir(parents=True, exist_ok=True)
-    hosted_logo = host_logo(logos_dir)
+    try:
+        hosted_logo = host_logo(logos_dir)
+    except Exception as exc:
+        hosted_logo = SMART_LOGO
+        print(f"WARNING: Smart TV Tešanj logo could not be hosted; using official URL directly: {exc}")
 
     tree = ET.parse(guide_path)
     root = tree.getroot()
