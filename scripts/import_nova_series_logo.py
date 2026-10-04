@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Set Nova Series logo with MTS priority and expose useful XMLTV aliases."""
+"""Set Nova Series logo/aliases and finalize Pikaboo from Telemach."""
 
 import copy
 import json
@@ -13,6 +13,7 @@ from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
 from import_mts_pink_epg import day_products
+from import_pikaboo_telemach import telemach_logo as pikaboo_telemach_logo
 
 CHANNEL_ID = "NovaSeries.rs"
 SITE_ID = "1604"
@@ -131,6 +132,26 @@ def sync_alias(root, source_id, alias_id):
             root.append(clone)
 
 
+def finalize_pikaboo(root, telemach_config):
+    channel = next((c for c in root.findall("channel") if c.get("id") == "Pikaboo.ba"), None)
+    if channel is None:
+        raise ValueError("Pikaboo.ba missing after Telemach grab")
+
+    count = sum(1 for p in root.findall("programme") if p.get("channel") == "Pikaboo.ba")
+    if count == 0:
+        raise ValueError("Pikaboo.ba has 0 Telemach programmes")
+
+    logo = pikaboo_telemach_logo(telemach_config)
+    for icon in list(channel.findall("icon")):
+        channel.remove(icon)
+    ET.SubElement(channel, "icon", {"src": logo})
+
+    names = {(n.text or "").strip() for n in channel.findall("display-name")}
+    if "PIKABOO" not in names:
+        ET.SubElement(channel, "display-name").text = "PIKABOO"
+    print(f"Pikaboo.ba: {count} programmes; Telemach logo={logo}")
+
+
 def main(guide_path, telemach_config):
     tree = ET.parse(guide_path)
     root = tree.getroot()
@@ -161,6 +182,8 @@ def main(guide_path, telemach_config):
     count = sum(1 for p in root.findall("programme") if p.get("channel") == CHANNEL_ID)
     if count == 0:
         raise ValueError("Nova Series has no Telemach programmes")
+
+    finalize_pikaboo(root, telemach_config)
 
     tree.write(guide_path, encoding="utf-8", xml_declaration=True)
     print(f"Nova Series: {count} programmes; aliases={','.join(ALIASES)}")
