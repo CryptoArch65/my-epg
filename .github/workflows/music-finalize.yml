@@ -1,0 +1,102 @@
+name: Finalize Music EPG
+
+on:
+  workflow_run:
+    workflows: ["Update Music EPG Extras"]
+    types: [completed]
+  push:
+    branches: [main]
+    paths:
+      - config/music-playlist-aliases.csv
+      - config/music-logo-sources.csv
+      - scripts/sync_music_playlist_aliases.py
+      - scripts/import_toxic_rap_tvprogramdanas.py
+      - scripts/import_duga_official.py
+      - scripts/resolve_music_logos.py
+      - .github/workflows/music-finalize.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: guide-writer
+  cancel-in-progress: false
+
+jobs:
+  finalize-music:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout latest published guide
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Install HTML parser
+        run: python3 -m pip install lxml
+
+      - name: Import Toxic Rap from TVProgramDanas
+        run: python3 scripts/import_toxic_rap_tvprogramdanas.py guide.xml
+
+      - name: Prefer official Duga TV weekly schedule
+        run: python3 scripts/import_duga_official.py guide.xml
+
+      - name: Sync exact playlist music EPG aliases
+        run: python3 scripts/sync_music_playlist_aliases.py guide.xml config/music-playlist-aliases.csv
+
+      - name: Resolve requested music logos
+        run: python3 scripts/resolve_music_logos.py guide.xml config/music-logo-sources.csv
+
+      - name: Verify music auto-matching IDs
+        run: |
+          python3 - <<'PY'
+          import xml.etree.ElementTree as ET
+          from collections import Counter
+
+          root = ET.parse('guide.xml').getroot()
+          channels = {c.get('id'): c for c in root.findall('channel')}
+          counts = Counter(p.get('channel') for p in root.findall('programme'))
+
+          epg_required = {
+              'bnmusic.ba': 'BNMusic.ba',
+              'bravomusic.ba': 'BravoMusic.ba',
+              'bravo!tv.hr': 'BravoTV.hr',
+              'grandtelevizija.ba': 'GrandTV.ba',
+              'hayatfolk.ba': 'HayatFolk.ba',
+              'toxicfolk.ba': 'ToxicFolk.ba',
+              'toxicrap.ba': 'ToxicRap.ba',
+              'tvduga+sat.ba': 'DugaTV.rs',
+          }
+          for alias, target in epg_required.items():
+              if alias not in channels:
+                  raise SystemExit(f'Missing music playlist alias {alias}')
+              if counts[alias] != counts[target]:
+                  raise SystemExit(f'Music alias programme mismatch {alias}={counts[alias]} target {target}={counts[target]}')
+              print(f'{alias} -> {target}: {counts[alias]} programmes OK')
+
+          logo_only = ('yuplanet.at','kafanska.ba','kafanskovece.ba','uzivoteka.ba','kristaltv.ba','imperiatv.ba')
+          for cid in logo_only:
+              channel = channels.get(cid)
+              icon = channel.find('icon') if channel is not None else None
+              if channel is None or icon is None or not icon.get('src'):
+                  raise SystemExit(f'Missing logo-only XMLTV channel/icon: {cid}')
+              print(f'{cid}: logo OK -> {icon.get("src")}')
+          PY
+
+      - name: Publish finalized music guide
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add guide.xml
+          if git diff --cached --quiet; then
+            echo "Guide has not changed"
+            exit 0
+          fi
+          git commit -m "Finalize music EPG aliases and logos"
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
