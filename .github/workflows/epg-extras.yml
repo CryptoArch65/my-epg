@@ -16,6 +16,7 @@ on:
       - scripts/remove_duplicate_regional_aliases.py
       - scripts/import_nova_series_logo.py
       - scripts/import_pikaboo_telemach.py
+      - scripts/import_kids_telemach.py
       - scripts/run_epg_extras.sh
       - config/serbia-extra-mts.xml
       - config/serbia-extra-telemach.xml
@@ -76,6 +77,20 @@ jobs:
           git add guide.xml
           if ! git diff --cached --quiet; then
             git commit -m "Update all MTS schedules from v2 feed"
+            git fetch origin main
+            git rebase origin/main
+            git push origin HEAD:main
+          fi
+
+      - name: Restore Telemach kids schedules and logos
+        run: |
+          python3 scripts/import_kids_telemach.py \
+            guide.xml epg/sites/epg.telemach.ba/epg.telemach.ba.config.js logos
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add guide.xml logos/
+          if ! git diff --cached --quiet; then
+            git commit -m "Restore Telemach kids schedules and logos"
             git fetch origin main
             git rebase origin/main
             git push origin HEAD:main
