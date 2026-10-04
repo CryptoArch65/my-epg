@@ -226,6 +226,11 @@ def main(guide_path, logos_dir):
     print(f"TV Podrinje: imported {len(events)} programme blocks")
     print("Added/updated BIH local logos: TV Zivinice, RTV Cazin, TV Podrinje")
 
+    # Smart TV Tešanj has its own official-site importer. It is intentionally
+    # freshness-aware so an archived station page can never be published as current EPG.
+    from import_smart_tesanj import main as import_smart_tesanj
+    import_smart_tesanj(guide_path, logos_dir)
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
