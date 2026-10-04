@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Finalize selected kids channels from canonical Telemach feeds.
 
+Verified Telemach BIH site IDs: Nick Jr. = 922, Pink Super Kids = 1879.
 The grabber stores each Telemach source under a canonical helper ID. This script
 copies that Telemach schedule onto the playlist-facing IDs, downloads the
 source-native Telemach logos, hosts them in this repository, and forces those
