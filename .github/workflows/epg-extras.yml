@@ -17,6 +17,8 @@ on:
       - scripts/import_nova_series_logo.py
       - scripts/import_pikaboo_telemach.py
       - scripts/import_kids_telemach.py
+      - scripts/import_bih_local_channels.py
+      - scripts/import_smart_tesanj.py
       - scripts/run_epg_extras.sh
       - config/serbia-extra-mts.xml
       - config/serbia-extra-telemach.xml
