@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
-"""Finalize selected kids channels with source-native Telemach logos.
+"""Finalize selected kids channels from canonical Telemach feeds.
 
-EPG rows are grabbed by iptv-org from epg.telemach.ba. This script verifies
-that the Telemach schedules are present, downloads the matching Telemach logos,
-hosts them in this repository, and forces those hosted logos into guide.xml.
+The grabber stores each Telemach source under a canonical helper ID. This script
+copies that Telemach schedule onto the playlist-facing IDs, downloads the
+source-native Telemach logos, hosts them in this repository, and forces those
+hosted logos into guide.xml. It is intentionally safe to run again after other
+EPG writers so Telemach remains the final source for these channels.
 """
 
 from __future__ import annotations
 
+import copy
 import io
 import json
 import re
@@ -25,16 +28,19 @@ RAW_BASE = "https://raw.githubusercontent.com/CryptoArch65/my-epg/main/logos"
 
 CHANNELS = {
     "NickJr.hr": {
+        "source_id": "NickJrTelemach.ba",
         "site_id": "922",
         "display": "NICK JR(HR)",
         "logo_file": "telemach-922.png",
     },
     "NickJr.rs": {
+        "source_id": "NickJrTelemach.ba",
         "site_id": "922",
         "display": "NICK JR(SR)",
         "logo_file": "telemach-922.png",
     },
     "PinkSuperKids.rs": {
+        "source_id": "PinkSuperKidsTelemach.ba",
         "site_id": "1879",
         "display": "SUPER KIDS",
         "logo_file": "telemach-1879.png",
@@ -94,20 +100,54 @@ def download_png(url: str, destination: Path) -> None:
         image.convert("RGBA").save(destination, "PNG")
 
 
+def copy_schedule(root, source_id: str, target_id: str, display: str) -> int:
+    channels = {c.get("id"): c for c in root.findall("channel")}
+    source = channels.get(source_id)
+    if source is None:
+        raise ValueError(f"Missing Telemach source channel {source_id}")
+
+    source_programmes = [
+        p for p in root.findall("programme") if p.get("channel") == source_id
+    ]
+    if not source_programmes:
+        raise ValueError(f"{source_id} has 0 Telemach programmes")
+
+    target = channels.get(target_id)
+    if target is None:
+        target = copy.deepcopy(source)
+        target.set("id", target_id)
+        root.insert(len(root.findall("channel")), target)
+    else:
+        for child in list(target):
+            target.remove(child)
+        for child in source:
+            target.append(copy.deepcopy(child))
+
+    for programme in list(root.findall("programme")):
+        if programme.get("channel") == target_id:
+            root.remove(programme)
+
+    for programme in source_programmes:
+        clone = copy.deepcopy(programme)
+        clone.set("channel", target_id)
+        root.append(clone)
+
+    names = {(n.text or "").strip() for n in target.findall("display-name")}
+    if display not in names:
+        ET.SubElement(target, "display-name").text = display
+
+    return len(source_programmes)
+
+
 def main(guide_path: Path, config_path: Path, logos_dir: Path) -> None:
     tree = ET.parse(guide_path)
     root = tree.getroot()
-    channels = {c.get("id"): c for c in root.findall("channel")}
-    counts = Counter(p.get("channel") for p in root.findall("programme"))
     catalog = telemach_catalog(config_path)
     hosted = {}
 
     for channel_id, cfg in CHANNELS.items():
-        channel = channels.get(channel_id)
-        if channel is None:
-            raise ValueError(f"Missing {channel_id} after Telemach grab")
-        if counts[channel_id] == 0:
-            raise ValueError(f"{channel_id} has 0 Telemach programmes")
+        count = copy_schedule(root, cfg["source_id"], channel_id, cfg["display"])
+        channel = next(c for c in root.findall("channel") if c.get("id") == channel_id)
 
         site_id = cfg["site_id"]
         logo_file = cfg["logo_file"]
@@ -121,13 +161,9 @@ def main(guide_path: Path, config_path: Path, logos_dir: Path) -> None:
             channel.remove(icon)
         ET.SubElement(channel, "icon", {"src": raw_logo})
 
-        names = {(n.text or "").strip() for n in channel.findall("display-name")}
-        if cfg["display"] not in names:
-            ET.SubElement(channel, "display-name").text = cfg["display"]
-
         print(
-            f"Telemach kids {channel_id}: site_id={site_id}, "
-            f"programmes={counts[channel_id]}, source_logo={hosted[site_id]}, "
+            f"Telemach kids {channel_id}: source={cfg['source_id']}, "
+            f"site_id={site_id}, programmes={count}, source_logo={hosted[site_id]}, "
             f"hosted_logo={raw_logo}"
         )
 
