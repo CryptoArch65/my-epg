@@ -4,7 +4,7 @@
 import re
 import sys
 import xml.etree.ElementTree as ET
-from datetime import datetime
+from datetime import datetime, timedelta
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
@@ -15,7 +15,7 @@ LOGO = "https://supertelevizija.com/wp-content/uploads/2023/09/cropped-cropped-S
 CID = "supermediatelevizija.ba"
 DISPLAY = "|BIH| SUPER TV MEDIA"
 TZ = ZoneInfo("Europe/Sarajevo")
-TIME_RE = re.compile(r"^(\d{1,2}:\d{2})\s*-\s*(\d{1,2}:\d{2})$")
+TIME_RE = re.compile(r"(\d{1,2}:\d{2})\s*[-–—]\s*(\d{1,2}:\d{2})")
 
 
 def fetch():
@@ -30,40 +30,54 @@ def fetch():
         return r.read(3_000_000)
 
 
+def clean_title(segment):
+    value = " ".join(segment.replace("\xa0", " ").split()).strip()
+    if not value:
+        return ""
+    # The page repeats the schedule and then continues into footer/navigation text.
+    # Keep only the programme title that immediately follows each time range.
+    for marker in (
+        "Pregled programa",
+        "All Events",
+        "Main Menu",
+        "Gledaj uzivo",
+        "Copyright ©",
+        "Copyright",
+    ):
+        pos = value.find(marker)
+        if pos > 0:
+            value = value[:pos].strip()
+        elif pos == 0:
+            value = ""
+    return value.strip(" -|–—")
+
+
 def parse_events(raw):
     doc = html.fromstring(raw)
-    tokens = [" ".join(t.split()) for t in doc.xpath("//body//text()")]
-    tokens = [t for t in tokens if t]
+    # Parse the complete rendered text instead of individual text nodes because
+    # Super TV splits the start/end clock across nested HTML elements.
+    body = doc.text_content().replace("\xa0", " ")
+    matches = list(TIME_RE.finditer(body))
     today = datetime.now(TZ).date()
     events = []
 
-    for i, token in enumerate(tokens):
-        m = TIME_RE.fullmatch(token)
-        if not m:
-            continue
-        title = ""
-        for candidate in tokens[i + 1 : i + 8]:
-            if TIME_RE.fullmatch(candidate):
-                break
-            low = candidate.casefold()
-            if low in {
-                "pregled programa", "all events", "super tv", "main menu",
-                "search", "gledaj uzivo", "pocetna", "super vijesti",
-                "zabava", "sport", "vjerski program", "marketing",
-            }:
-                continue
-            title = candidate.strip()
-            break
+    for i, match in enumerate(matches):
+        end_of_segment = matches[i + 1].start() if i + 1 < len(matches) else len(body)
+        title = clean_title(body[match.end() : end_of_segment])
         if not title:
             continue
-        start = datetime.strptime(f"{today} {m.group(1)}", "%Y-%m-%d %H:%M").replace(tzinfo=TZ)
-        stop = datetime.strptime(f"{today} {m.group(2)}", "%Y-%m-%d %H:%M").replace(tzinfo=TZ)
+
+        start = datetime.strptime(
+            f"{today} {match.group(1)}", "%Y-%m-%d %H:%M"
+        ).replace(tzinfo=TZ)
+        stop = datetime.strptime(
+            f"{today} {match.group(2)}", "%Y-%m-%d %H:%M"
+        ).replace(tzinfo=TZ)
         if stop <= start:
-            stop = stop.replace(day=stop.day)  # keep explicit before rollover adjustment
-            from datetime import timedelta
             stop += timedelta(days=1)
         events.append((start, stop, title))
 
+    # The website currently renders the programme block twice; de-duplicate it.
     unique = {}
     for start, stop, title in events:
         unique[(start, stop, title)] = (start, stop, title)
@@ -85,9 +99,14 @@ def ensure_channel(root):
 
 
 def main(path):
-    events = parse_events(fetch())
+    raw = fetch()
+    events = parse_events(raw)
     if len(events) < 3:
-        raise SystemExit(f"SUPER TV source returned only {len(events)} usable programmes")
+        text_sample = " ".join(html.fromstring(raw).text_content().split())[:700]
+        raise SystemExit(
+            f"SUPER TV source returned only {len(events)} usable programmes; "
+            f"page sample={text_sample!r}"
+        )
 
     tree = ET.parse(path)
     root = tree.getroot()
@@ -111,7 +130,12 @@ def main(path):
 
     ET.indent(tree, space="  ")
     tree.write(path, encoding="utf-8", xml_declaration=True)
-    print(f"SUPER TV MEDIA: programmes={len(events)}, logo={LOGO}, source={SOURCE}")
+    print(
+        f"SUPER TV MEDIA: programmes={len(events)}, "
+        f"first={events[0][0].isoformat()} {events[0][2]!r}, "
+        f"last={events[-1][0].isoformat()} {events[-1][2]!r}, "
+        f"logo={LOGO}, source={SOURCE}"
+    )
 
 
 if __name__ == "__main__":
