@@ -1,0 +1,116 @@
+name: Refresh Prva Plus clean-v2
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/refresh-prva-plus-clean-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Grab Prva Plus from Telemach
+        run: |
+          git clone --depth 1 https://github.com/iptv-org/epg.git epg-engine
+          cd epg-engine
+          npm ci
+          cat > ../prva-plus.channels.xml <<'EOF'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <channels>
+            <channel site="epg.telemach.ba" site_id="1584" lang="hr" xmltv_id="PrvaPlus.rs">Prva Plus</channel>
+          </channels>
+          EOF
+          npm run grab -- --channels=../prva-plus.channels.xml --output=../prva-plus.xml --days=3 --maxConnections=1
+
+      - name: Patch public clean-v2 guide
+        run: |
+          python - <<'PY'
+          import copy
+          import xml.etree.ElementTree as ET
+          from pathlib import Path
+
+          target = Path('guide-clean-v2.xml')
+          source = Path('prva-plus.xml')
+          canonical = 'PrvaPlus.rs'
+          alias = 'prva-plus'
+          logo = 'https://raw.githubusercontent.com/CryptoArch65/my-epg/main/logos/telemach-1584.png'
+
+          ttree = ET.parse(target)
+          troot = ttree.getroot()
+          sroot = ET.parse(source).getroot()
+
+          sch = next((c for c in sroot.findall('channel') if c.get('id') == canonical), None)
+          sprogs = [p for p in sroot.findall('programme') if p.get('channel') == canonical]
+          if sch is None or not sprogs:
+              raise SystemExit('Telemach Prva Plus 1584 returned no usable EPG')
+
+          for cid in (canonical, alias):
+              for c in list(troot.findall('channel')):
+                  if c.get('id') == cid:
+                      troot.remove(c)
+              for p in list(troot.findall('programme')):
+                  if p.get('channel') == cid:
+                      troot.remove(p)
+
+          new_channel = copy.deepcopy(sch)
+          new_channel.set('id', canonical)
+          icons = new_channel.findall('icon')
+          if icons:
+              icons[0].set('src', logo)
+              for extra in icons[1:]:
+                  new_channel.remove(extra)
+          else:
+              ET.SubElement(new_channel, 'icon', src=logo)
+          displays = new_channel.findall('display-name')
+          if displays:
+              displays[0].text = 'Prva Plus'
+          else:
+              ET.SubElement(new_channel, 'display-name').text = 'Prva Plus'
+
+          channels = list(troot.findall('channel'))
+          insert_at = len(channels)
+          troot.insert(insert_at, new_channel)
+
+          alias_channel = copy.deepcopy(new_channel)
+          alias_channel.set('id', alias)
+          troot.insert(insert_at + 1, alias_channel)
+
+          for p in sprogs:
+              cp = copy.deepcopy(p)
+              cp.set('channel', canonical)
+              troot.append(cp)
+              ap = copy.deepcopy(p)
+              ap.set('channel', alias)
+              troot.append(ap)
+
+          ttree.write(target, encoding='utf-8', xml_declaration=True)
+          print(f'Prva Plus Telemach 1584: {len(sprogs)} programmes copied to {canonical} and {alias}')
+          print(f'Logo forced: {logo}')
+          PY
+
+      - name: Commit refreshed guide
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add guide-clean-v2.xml
+          if git diff --cached --quiet; then
+            echo "No guide change"
+          else
+            git commit -m "Refresh Prva Plus clean-v2 from Telemach"
+            git push
+          fi
