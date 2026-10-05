@@ -1,0 +1,51 @@
+name: Import provider-compatible clean-v2 guide
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/import-clean-v2-test.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import-guide:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download clean-v2 guide artifact
+        env:
+          GUIDE_ARTIFACT_URL: 'https://sdmntprwestus.oaiusercontent.com/files/00000000-d98c-8230-80e5-eb5afd072508/raw?se=2026-10-05T06%3A20%3A30Z&sp=r&sv=2026-02-06&sr=b&scid=d917daeb-b240-597f-a1ff-22f24cd138ea&skoid=f5e14fda-2af7-44a3-9d18-d372ffcad871&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-05T01%3A54%3A47Z&ske=2026-10-06T01%3A54%3A47Z&sks=b&skv=2026-02-06&sig=W0zG0vRFWQS1JSo/PnyzF8bB2VPR5K5%2BNqmapwXK/K0%3D'
+        run: |
+          curl --fail --location --retry 3 "$GUIDE_ARTIFACT_URL" --output /tmp/clean-v2-guide.zip
+          rm -rf /tmp/clean-v2-guide
+          mkdir -p /tmp/clean-v2-guide
+          unzip -o /tmp/clean-v2-guide.zip guide.xml -d /tmp/clean-v2-guide
+          cp /tmp/clean-v2-guide/guide.xml guide-clean-v2.xml
+          python - <<'PY'
+          import xml.etree.ElementTree as ET
+          root = ET.parse('guide-clean-v2.xml').getroot()
+          channels = {c.get('id') for c in root.findall('channel') if c.get('id')}
+          if root.tag != 'tv' or len(channels) < 500:
+              raise SystemExit(f'Invalid provider-compatible XMLTV: {len(channels)} channels')
+          for required in ('BHT1.ba', 'bht1', 'Federalnatelevizija.ba', 'ftv', 'HRT1.hr', 'HRTTV1.hr'):
+              if required not in channels:
+                  raise SystemExit(f'Missing expected XMLTV ID: {required}')
+          print(f'Validated provider-compatible guide: {len(channels)} channels')
+          PY
+
+      - name: Publish test guide
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add guide-clean-v2.xml
+          if git diff --cached --quiet; then
+            echo "guide-clean-v2.xml already current"
+            exit 0
+          fi
+          git commit -m "Publish provider-compatible clean-v2 guide"
+          git push
