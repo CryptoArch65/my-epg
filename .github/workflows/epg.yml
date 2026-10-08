@@ -61,7 +61,7 @@ on:
       - .github/workflows/croatia-logos.yml
       - .github/workflows/bih-local-epg.yml
   schedule:
-    - cron: "0 4 * * *"
+    - cron: "17 4 * * *"
 
 permissions:
   contents: write
