@@ -9,7 +9,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 # All configured sources must produce programmes before the guide is published.
-KNOWN_EMPTY_SITES = {"m1film.hr/family", "superstartv.rs", "tvprogramdanas.net", "tvprogram24.rs"}  # Broadcasters may publish short schedules.
+KNOWN_EMPTY_SITES = {"m1film.hr/family", "superstartv.rs", "tvprogramdanas.net", "tvprogram24.rs", "mymedia.ba"}  # Broadcasters may publish short or temporarily unavailable schedules.
 DEFAULT_ACTIVE_IDS = Path("config/active_playlist_tvg_ids.txt")
 
 
