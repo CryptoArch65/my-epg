@@ -282,7 +282,11 @@ def main(guide_path, config_path, logos_csv, logos_dir):
     schedules = {id: parse_tvprogram(pages[slug], id) for id, slug in REGIONAL.items()}
     schedules["RTVHB.ba"] = parse_rtvhb()
     schedules["TVSlonExtra.ba"] = parse_slon(download("https://www.rtvslon.ba/tv-program/"))
-    schedules["MYTV.ba"] = fetch_mytv()
+    try:
+        schedules["MYTV.ba"] = fetch_mytv()
+    except (OSError, ValueError) as exc:
+        print(f"Warning: MY TV source unavailable: {exc}")
+        schedules["MYTV.ba"] = []
     try:
         schedules["RTLCroatiaWorld.hr"] = fetch_rtl_world()
     except (OSError, ValueError) as exc:
