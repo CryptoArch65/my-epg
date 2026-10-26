@@ -61,8 +61,21 @@ jobs:
             --output=../guide.new.xml \
             --maxConnections=4
 
+      - name: Install custom channel importer dependencies
+        run: python3 -m pip install lxml cairosvg pillow
+
+      - name: Import MTS Pink programmes
+        run: python3 scripts/import_mts_pink_epg.py guide.new.xml config/pink-mts-channels.csv
+
+      - name: Import film channels before playlist alias validation
+        continue-on-error: true
+        run: python3 scripts/import_film_epg.py guide.new.xml config/film-channels.xml config/bih-source-logos.csv logos
+
+      - name: Import regional channels before playlist alias validation
+        run: python3 scripts/import_regional_epg.py guide.new.xml config/regional-channels.xml config/bih-source-logos.csv logos
+
       - name: Validate proposed guide
         run: |
           python3 scripts/add_channel_logos.py guide.new.xml config/bih-source-logos.csv
-          python3 scripts/add_playlist_aliases.py guide.new.xml config/playlist_aliases.csv
-          python3 scripts/validate_guide.py config/channels.xml guide.new.xml config/playlist_aliases.csv
+          python3 scripts/add_playlist_aliases.py guide.new.xml config/playlist_aliases.csv config/playlist-alias-logos.csv
+          python3 scripts/validate_guide.py config/channels.xml guide.new.xml config/playlist_aliases.csv config/film-channels.xml config/regional-channels.xml
