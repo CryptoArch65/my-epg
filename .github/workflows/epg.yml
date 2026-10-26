@@ -229,15 +229,41 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: |
           mv guide.new.xml guide.xml
+
+          # Keep the validated outputs outside the checkout. Other workflows or
+          # merges may advance main while a long EPG grab is running.
+          generated_dir="$(mktemp -d)"
+          trap 'rm -rf "$generated_dir"' EXIT
+          cp guide.xml "$generated_dir/guide.xml"
+          cp config/bih-source-logos.csv "$generated_dir/bih-source-logos.csv"
+          mkdir -p "$generated_dir/logos"
+          cp -a logos/. "$generated_dir/logos/"
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add guide.xml config/bih-source-logos.csv logos/
-          if git diff --cached --quiet; then
-            echo "Guide has not changed"
-            exit 0
-          fi
-          git commit -m "Update EPG"
-          git push
+          for attempt in 1 2 3; do
+            # Publish only generated outputs on top of the latest main.
+            # Never force-push or overwrite newer source/workflow commits.
+            git fetch --no-tags origin +refs/heads/main:refs/remotes/origin/main
+            git reset --hard refs/remotes/origin/main
+            cp "$generated_dir/guide.xml" guide.xml
+            cp "$generated_dir/bih-source-logos.csv" config/bih-source-logos.csv
+            cp -a "$generated_dir/logos/." logos/
+            git add guide.xml config/bih-source-logos.csv logos/
+            if git diff --cached --quiet; then
+              echo "Guide has not changed"
+              exit 0
+            fi
+            git commit -m "Update EPG"
+            if git push origin HEAD:main; then
+              echo "Published guide.xml successfully"
+              exit 0
+            fi
+            echo "::warning::EPG push raced with another main update (attempt $attempt/3)"
+            sleep 5
+          done
+          echo "::error::EPG publish failed after 3 attempts"
+          exit 1
 
       - name: Diagnose Arena Sport EPG in published guide
         run: |
